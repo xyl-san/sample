@@ -9,7 +9,6 @@
             <form action="#" >
                 <div class="modal-body">
                     <div class="col-lg-6">
-                        
                       	<label for="firstname" class="control-label">First name</label>
                         <input type="text" class="form-control" id="firstName" name="firstname" required>
                     </div>
@@ -19,7 +18,7 @@
                     </div>
                     <div class="form-group">
                         <label for="lastname" class="control-label">Address</label>
-                        <textarea class="form-control" style="resize: none" rows="2" id="addressInfo" name="address" required></textarea>
+                        <textarea class="form-control tArea" rows="2" id="addressInfo" name="address" required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="lastname" class="control-label">Birthdate</label>
