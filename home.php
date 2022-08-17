@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <?php include 'includes/scripts.php';?>
+    <!-- https://colorhunt.co/palette/effffdb8fff985f4ff42c2ff -->
 </head>
 
 <body>
@@ -22,7 +23,7 @@
                         data-bs-target="#newEmployee"><span><i class="fa fa-plus"></i> New</span></button>
                 </div>
                 <div class="box-body">
-                    <table id="example1" class="table table-striped">
+                    <table id="example1" class="table table-bordered dataTable" style="width:100%">
                         <thead>
                             <tr>
                                 <th scope="col">Photo</th>
@@ -37,6 +38,17 @@
                         <tbody>
                             <?php employeetable();?>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th scope="col">Photo</th>
+                                <th scope="col">Employee ID</th>
+                                <th scope="col">First</th>
+                                <th scope="col">Last</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Birthdate</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
