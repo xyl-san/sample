@@ -14,7 +14,7 @@
         <div class="container col-lg-8">
             <div class="box">
                 <div class="box-header with-border">
-                   <button type="button" class="btn btn-primary btn-sm btn-flat" data-toggle="modal" data-target="#newEmployee"><span><i class="fa fa-plus"></i> New</span></button>
+                   <button type="button" class="btn btn-primary btn-sm btn-flat" data-bs-toggle="modal" data-bs-target="#newEmployee"><span><i class="fa fa-plus"></i> New</span></button>
                 </div>
                 <div class="box-body">
                     <table id="example1" class="table table-striped">
