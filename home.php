@@ -12,18 +12,21 @@
 </head>
 
 <body>
-    <?php include 'header.php'; ?>
-    <?php include 'sidebar.php'; ?>
-
-    <div class="row">
-        <div class="container col-lg-8">
-            <div class="box">
+    <div class="wrapper">
+        <?php include 'sidebar.php'; ?>
+        <div class="content">
+            <?php include 'header.php'; ?>
+            <!-- <div class="box">
                 <div class="box-header with-border">
-                    <button type="button" class="btn btn-primary btn-sm btn-flat" data-bs-toggle="modal"
-                        data-bs-target="#newEmployee"><span><i class="fa fa-plus"></i> New</span></button>
+                    <button type="button" class="btn btn-primary btn-sm btn-flat" data-bs-toggle="modal" data-bs-target="#newEmployee">
+                        <span>
+                            <i class="fa fa-plus"></i>
+                             New
+                        </span>
+                    </button>
                 </div>
                 <div class="box-body">
-                    <table id="example1" class="table table-bordered dataTable" style="width:100%">
+                    <table id="example1" class="table table" style="width:100%">
                         <thead>
                             <tr>
                                 <th scope="col">Photo</th>
@@ -32,6 +35,8 @@
                                 <th scope="col">Last</th>
                                 <th scope="col">Address</th>
                                 <th scope="col">Birthdate</th>
+                                <th scope="col">Job</th>
+                                <th scope="col">Schedule</th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
@@ -46,16 +51,24 @@
                                 <th scope="col">Last</th>
                                 <th scope="col">Address</th>
                                 <th scope="col">Birthdate</th>
+                                <th scope="col">Job</th>
+                                <th scope="col">Schedule</th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </tfoot>
                     </table>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
-
     <?php include 'modals.php'; ?>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
 </body>
 
 </html>

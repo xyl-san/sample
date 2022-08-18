@@ -1,3 +1,4 @@
+<!-- Start Add Employee -->
 <div class="modal fade" id="newEmployee" tabindex="-1" role="dialog" aria-labelledby="employeeTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
@@ -6,10 +7,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
-            <form action="#" >
+            <form action="#">
                 <div class="modal-body">
                     <div class="col-lg-6">
-                      	<label for="firstname" class="control-label">First name</label>
+                        <label for="firstname" class="control-label">First name</label>
                         <input type="text" class="form-control" id="firstName" name="firstname" required>
                     </div>
                     <div class="col-lg-6">
@@ -18,7 +19,8 @@
                     </div>
                     <div class="form-group">
                         <label for="lastname" class="control-label">Address</label>
-                        <textarea class="form-control tArea" rows="2" id="addressInfo" name="address" required></textarea>
+                        <textarea class="form-control tArea" rows="2" id="addressInfo" name="address"
+                            required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="lastname" class="control-label">Birthdate</label>
@@ -35,6 +37,22 @@
                             <option value="female">Female</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="job">Job </label>
+                        <select class="form-control" id="jobSelection" name="job" aria-label="Select job">
+                            <option value="" selected>- Select -</option>
+                            <?php
+                                $sql = "SELECT job_id, description FROM job";
+                                $query = $conn->query($sql);
+                                while($prow = $query->fetch_assoc()){
+                                    echo "
+                                    <option value='".$prow['job_id']."'>".$prow['description']."</option>
+                                    ";
+                                }
+                            ?>
+                        </select>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -43,3 +61,4 @@
         </div>
     </div>
 </div>
+<!-- End Add Employee -->
