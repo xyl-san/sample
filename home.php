@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <?php include 'includes/scripts.php';?>
+    <?php include 'includes/styles.php'; ?>
     <!-- https://colorhunt.co/palette/effffdb8fff985f4ff42c2ff -->
 </head>
 
@@ -16,7 +16,7 @@
         <?php include 'sidebar.php'; ?>
         <div class="content">
             <?php include 'header.php'; ?>
-            <!-- <div class="box">
+            <div class="box">
                 <div class="box-header with-border">
                     <button type="button" class="btn btn-primary btn-sm btn-flat" data-bs-toggle="modal" data-bs-target="#newEmployee">
                         <span>
@@ -41,7 +41,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php employeetable();?>
+                            <?php employeeTable();?>
                         </tbody>
                         <tfoot>
                             <tr>
@@ -58,10 +58,13 @@
                         </tfoot>
                     </table>
                 </div>
-            </div> -->
+            </div>
         </div>
     </div>
-    <?php include 'modals.php'; ?>
+
+    <?php include 'modals.php';?>
+    <?php include 'includes/scripts.php';?>
+    
     <script type="text/javascript">
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {

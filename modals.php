@@ -41,15 +41,7 @@
                         <label for="job">Job </label>
                         <select class="form-control" id="jobSelection" name="job" aria-label="Select job">
                             <option value="" selected>- Select -</option>
-                            <?php
-                                $sql = "SELECT job_id, description FROM job";
-                                $query = $conn->query($sql);
-                                while($prow = $query->fetch_assoc()){
-                                    echo "
-                                    <option value='".$prow['job_id']."'>".$prow['description']."</option>
-                                    ";
-                                }
-                            ?>
+                            <?php employeePosition();?>
                         </select>
                     </div>
 

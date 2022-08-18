@@ -1,5 +1,5 @@
 <?php 
-function employeetable(){
+function employeeTable(){
   include 'conn.php';
   $sql = "SELECT e.employee_id, e.photo, e.employee_code, e.employee_id, e.firstname, e.lastname, e.address, e.birthdate, e.contact_info, e.gender, e.delete_flag, d.department_name, j.description, s.time_in, s.time_out FROM employees e INNER JOIN department as d on e.department_id=d.department_id INNER JOIN job as j on e.job_id=j.job_id INNER JOIN schedules as s on e.schedule_id=s.schedule_id WHERE e.delete_flag = false;";
   $query = $conn->query($sql);
@@ -20,6 +20,17 @@ function employeetable(){
         </td>
       </tr>
     <?php
+  }
+}
+
+function employeePosition(){
+  include 'conn.php';
+  $sql = "SELECT job_id, description FROM job";
+  $query = $conn->query($sql);
+  while($prow = $query->fetch_assoc()){
+      echo "
+      <option value='".$prow['job_id']."'>".$prow['description']."</option>
+      ";
   }
 }
 
