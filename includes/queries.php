@@ -34,4 +34,15 @@ function employeePosition(){
   }
 }
 
+function employeeDepartment(){
+  include 'conn.php';
+  $sql = "SELECT department_id, department_name FROM department";
+  $query = $conn->query($sql);
+  while($prow = $query->fetch_assoc()){
+      echo "
+      <option value='".$prow['department_id']."'>".$prow['department_name']."</option>
+      ";
+  }
+}
+
 ?>

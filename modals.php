@@ -18,7 +18,8 @@
                         <label for="lastName">Last name</label>
                     </div>
                     <div class="col form-floating">
-                        <textarea class="form-control tArea" rows="2" id="addressInfo" name="address" required></textarea>
+                        <textarea class="form-control tArea" rows="2" id="addressInfo" name="address"
+                            required></textarea>
                         <label for="addressInfo">Address</label>
                     </div>
                     <div class="col-md-6 form-floating">
@@ -31,10 +32,18 @@
                     </div>
                     <div class="col-md-6 form-floating">
                         <select class="form-select" id="genderSelection" name="gender" aria-label="Select gender">
+                            <option value="" selected>- Select -</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
                         <label for="genderSelection">Gender</label>
+                    </div>
+                    <div class="col-12 form-floating">
+                        <select class="form-control" id="departmentSelection" name="department" aria-label="Select department">
+                            <option value="" selected>- Select -</option>
+                            <?php employeeDepartment();?>
+                        </select>
+                        <label for="departmentSelection">Department</label>
                     </div>
                     <div class="col-12 form-floating">
                         <select class="form-control" id="jobSelection" name="job" aria-label="Select job">
@@ -43,7 +52,6 @@
                         </select>
                         <label for="jobSelection">Job</label>
                     </div>
-                    
                     <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
                         <button type="submit" class="btn btn-primary float-end">Submit</button>
