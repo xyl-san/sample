@@ -16,7 +16,6 @@
         <div id="content" class="w-100">
             <?php include 'header.php'; ?>
 
-            </div>
         </div>
     </div>
 

@@ -19,7 +19,6 @@
 <!-- Bootstrap -->
 <script src="css/bootstrap/js/bootstrap.js"></script>
 
-
 <script>
 $(function() {
     $.fn.dataTable.moment('MMM DD, YYYY');
