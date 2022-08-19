@@ -69,6 +69,16 @@
     <?php include 'modals.php';?>
 
     <script>
+    
+    </script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#sidebarCollapse').on('click', function() {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+
     $(function() {
         $('#example1').on('click', '.edit', function(e) {
             e.preventDefault();
@@ -90,14 +100,6 @@
             getRow(id);
         });
     });
-    </script>
-
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $('#sidebarCollapse').on('click', function() {
-            $('#sidebar').toggleClass('active');
-        });
-    });
 
     function getRow(id) {
         $(document).ready(function(){
@@ -108,11 +110,14 @@
             dataType: 'json',
             success: function(response) {
                 $('.employeeId').val(response.employee_id);
-                $('#firstName').val(response.firstname);
-                $('#lastName').val(response.lastname);
-                $('#addressInfo').val(response.address);
-                $('#birthDate').val(response.birthdate);
-                $('#contactInfo').val(response.contact_info);
+                $('.firstName').val(response.firstname);
+                $('.lastName').val(response.lastname);
+                $('.addressInfo').val(response.address);
+                $('.birthDate').val(response.birthdate);
+                $('.contactInfo').val(response.contact_info);
+                $('.genderSelection').html(response.gender);
+                $('.jobSelection').html(response.description);
+                $('.departmentSelection').html(response.department_name);
             }
             });
 
