@@ -17,10 +17,11 @@
             <?php include 'header.php'; ?>
             <div class="card">
                 <div class="card-header">
-                    <button type="button" class="btn btn-primary btn-sm btn-flat" data-bs-toggle="modal" data-bs-target="#newEmployee">
+                    <button type="button" class="btn btn-primary btn-sm btn-flat" data-bs-toggle="modal"
+                        data-bs-target="#newEmployee">
                         <span>
                             <i class="fa fa-plus"></i>
-                             New
+                            New
                         </span>
                     </button>
                 </div>
@@ -59,20 +60,64 @@
                 </div>
             </div>
 
-            </div>
         </div>
+    </div>
     </div>
 
 
     <?php include 'includes/scripts.php';?>
     <?php include 'modals.php';?>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
+    <script>
+    $(function() {
+        $('#example1').on('click', '.edit', function(e) {
+            e.preventDefault();
+            $('#editEmployee').modal('show');
+            var id = $(this).data('id');
+            getRow(id);
         });
+
+        $('#example1').on('click', '.delete', function(e) {
+            e.preventDefault();
+            $('#delete').modal('show');
+            var id = $(this).data('id');
+            getRow(id);
+        });
+
+        $('#example1').on('click', '.photo', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            getRow(id);
+        });
+    });
+    </script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#sidebarCollapse').on('click', function() {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+
+    function getRow(id) {
+        $(document).ready(function(){
+            $.ajax({
+            type: 'POST',
+            url: 'employee_row.php',
+            data: {id: id},
+            dataType: 'json',
+            success: function(response) {
+                $('.employeeId').val(response.employee_id);
+                $('#firstName').val(response.firstname);
+                $('#lastName').val(response.lastname);
+                $('#addressInfo').val(response.address);
+                $('#birthDate').val(response.birthdate);
+                $('#contactInfo').val(response.contact_info);
+            }
+            });
+
+        }) 
+    }
     </script>
 </body>
 
