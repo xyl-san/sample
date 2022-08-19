@@ -142,3 +142,51 @@ function employeeAttendance(){
  
 ?>
 
+
+
+<?php 
+function departmentTable(){
+  include 'conn.php';
+  $sql = "SELECT department_id, department_name, created_on, updated_on FROM department";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    ?>
+  <tr>
+      <td><?php echo $row['department_id']; ?></td>
+      <td><?php echo $row['department_name']?></td>
+      <td><?php echo $row['created_on']; ?></td>
+      <td><?php echo $row['updated_on'] ?></td>
+      <td>
+          <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['department_id']; ?>"><i
+                  class="fa fa-edit"></i> Edit</button>
+          <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['department_id']; ?>"><i
+                  class="fa fa-trash"></i> Delete</button>
+      </td>
+  </tr>
+<?php
+  }
+}
+
+
+function jobTable(){
+  include 'conn.php';
+  $sql = "SELECT job_id, description, rate, created_on, updated_on FROM job";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    ?>
+  <tr>
+      <td><?php echo $row['job_id']; ?></td>
+      <td><?php echo $row['description']; ?></td>
+      <td><?php echo $row['rate']; ?></td>
+      <td><?php echo $row['created_on']; ?></td>
+      <td><?php echo $row['updated_on']; ?></td>
+      <td>
+          <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['job_id']; ?>"><i
+                  class="fa fa-edit"></i> Edit</button>
+          <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['job_id']; ?>"><i
+                  class="fa fa-trash"></i> Delete</button>
+      </td>
+  </tr>
+<?php
+  }
+}
