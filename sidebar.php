@@ -18,10 +18,11 @@
             </a>
             <ul class="collapse list-unstyled" id="employeeSubmenu">
                 <li>
-                    <a href="#"><i class="fa-solid fa-user-tie"></i> Employees</a>
+                    <a href="employees_list.php"><i class="fa-solid fa-user-tie"></i> Employees</a>
                     <a href="#"><i class="fa-regular fa-calendar-days"></i> Attendance</a>
                     <a href="#"><i class="fa-solid fa-money-bill-1-wave"></i> Cash Advance</a>
                     <a href="#"><i class="fa-regular fa-calendar-days"></i> Schedules</a>
+                    <a href="#"><i class="fa-solid fa-building"></i> Department</a>
                     <a href="#"><i class="fa-regular fa-id-card"></i> Positions</a>
                     <a href="#"><i class="fa-solid fa-money-bill-1-wave"></i> Deductions</a>
                 </li>

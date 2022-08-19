@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="#">
+                <form class="row g-3" action="#" autocomplete="off">
                     <div class="col-md-6 form-floating">
                         <input type="text" class="form-control" id="firstName" name="firstname" required>
                         <label for="firstName">First name</label>
@@ -29,7 +29,7 @@
                         <input type="number" class="form-control" id="contactInfo" name="contactinfo" required>
                         <label for="contactInfo">Contact Info</label>
                     </div>
-                    <div class="col-md-4 form-floating">
+                    <div class="col-md-6 form-floating">
                         <select class="form-select" id="genderSelection" name="gender" aria-label="Select gender">
                             <option value="male">Male</option>
                             <option value="female">Female</option>
@@ -43,8 +43,13 @@
                         </select>
                         <label for="jobSelection">Job</label>
                     </div>
+                    
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end">Submit</button>
+                    </div>
                 </form>
-                <button type="submit" class="btn btn-primary">Submit</button>
+
             </div>
         </div>
     </div>
