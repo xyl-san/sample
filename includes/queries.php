@@ -30,7 +30,7 @@ function attendanceTable(){
   $sql = "SELECT a.attendance_id, a.status, a.date, a.time_in, a.time_out, e.employee_code,e.firstname, e.lastname from attendance a INNER JOIN employees as e on  e.employee_id=a.employee_id ORDER BY date desc;";
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
-  $status = ($row['status'])?'<span class="label label-warning pull-right">ontime</span>':'<span class="label label-danger pull-right">late</span>';
+  $status = ($row['status'])?'<span class="badge text-bg-success pull-right">ontime</span>':'<span class="badge text-bg-danger pull-right">late</span>';
     ?>
   <tr>
       <td><?php echo date('M d, Y', strtotime($row['date'])); ?></td>
@@ -49,7 +49,6 @@ function attendanceTable(){
 <?php
   }
 }
-
  
 function employeePosition(){
   include 'conn.php';
