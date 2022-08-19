@@ -18,8 +18,7 @@
                         <label for="lastName">Last name</label>
                     </div>
                     <div class="col form-floating">
-                        <textarea class="form-control tArea addressInfo" rows="2" name="address"
-                            required></textarea>
+                        <textarea class="form-control tArea addressInfo" rows="2" name="address" required></textarea>
                         <label for="addressInfo">Address</label>
                     </div>
                     <div class="col-md-6 form-floating">
@@ -39,7 +38,8 @@
                         <label for="genderSelection">Gender</label>
                     </div>
                     <div class="col-12 form-floating">
-                        <select class="form-control departmentSelection" name="department" aria-label="Select department">
+                        <select class="form-control departmentSelection" name="department"
+                            aria-label="Select department">
                             <option value="" selected>- Select -</option>
                             <?php employeeDepartment();?>
                         </select>
@@ -65,7 +65,8 @@
 <!-- End Add Employee -->
 
 <!-- Start Edit Employee -->
-<div class="modal fade" id="editEmployee" tabindex="-1" role="dialog" aria-labelledby="employeeTitle" aria-hidden="true">
+<div class="modal fade" id="editEmployee" tabindex="-1" role="dialog" aria-labelledby="employeeTitle"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -85,8 +86,7 @@
                         <label for="lastName">Last name</label>
                     </div>
                     <div class="col-md-12 form-floating">
-                        <textarea class="form-control tArea addressInfo" rows="2" name="address"
-                            required></textarea>
+                        <textarea class="form-control tArea addressInfo" rows="2" name="address" required></textarea>
                         <label for="addressInfo">Address</label>
                     </div>
                     <div class="col-md-6 form-floating">
@@ -130,3 +130,113 @@
     </div>
 </div>
 <!-- End Edit Employee -->
+
+<!-- Start Delete Employee -->
+<div class="modal fade" id="deleteEmployee" tabindex="-1" role="dialog" aria-labelledby="employeeTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="employeeTitle">Deleting....</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" autocomplete="off">
+                    <div class="text-center col-md-12 form-floating">
+                        <input type="hidden" class="employeeId" name="employee_id">
+                        <p class=" fs-4">Delete </p>
+                        <h4 class="text-center del_employee_name"></h4>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Delete Employee -->
+
+<!-- Start Add Attendance Employee -->
+<div class="modal fade" id="newAttendance" tabindex="-1" role="dialog" aria-labelledby="attendanceTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="attendanceTitle">Add Attendance</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" autocomplete="off">
+                    <div class="col-md-6 form-floating">
+                        <select class="form-control" name="employee" aria-label="Select employee">
+                            <option value="" class="employeeSelection" selected>- Select -</option>
+                            <?php employeeAttendance();?>
+                        </select>
+                        <label for="employeeSelection">Employee</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="date" class="form-control dateInfo" name="date" required>
+                        <label for="date">Date</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="time" class="form-control timeIn" name="time_in" required>
+                        <label for="time_in">Time In</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="time" class="form-control timeOut" name="time_out" required>
+                        <label for="time_out">Time Out</label>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Add Attendance Employee -->
+
+
+<!-- Start Edit Attendance Employee -->
+<div class="modal fade" id="editAttendance" tabindex="-1" role="dialog" aria-labelledby="attendanceTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="attendanceTitle">Edit Attendance</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" autocomplete="off">
+                    <input type="hidden" class="attendanceId" name="attendance_Id">
+                    <div class="col-md-12 form-floating">
+                        <input type="date" class="form-control dateInfo" name="date" required>
+                        <label for="date">Date</label>
+                    </div>
+                    <div class="col-md-12 form-floating">
+                        <input type="time" class="form-control timeIn" name="time_in" required>
+                        <label for="time_in">Time In</label>
+                    </div>
+                    <div class="col-md-12 form-floating">
+                        <input type="time" class="form-control timeOut" name="time_out" required>
+                        <label for="time_out">Time Out</label>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Edit Attendance Employee -->

@@ -25,6 +25,28 @@ function employeeTable(){
   }
 }
 
+function employeePosition(){
+  include 'conn.php';
+  $sql = "SELECT job_id, description FROM job";
+  $query = $conn->query($sql);
+  while($prow = $query->fetch_assoc()){
+      echo "
+      <option value='".$prow['job_id']."'>".$prow['description']."</option>
+      ";
+  }
+}
+
+function employeeDepartment(){
+  include 'conn.php';
+  $sql = "SELECT department_id, department_name FROM department";
+  $query = $conn->query($sql);
+  while($prow = $query->fetch_assoc()){
+      echo "
+      <option value='".$prow['department_id']."'>".$prow['department_name']."</option>
+      ";
+  }
+}
+
 function attendanceTable(){
   include 'conn.php';
   $sql = "SELECT a.attendance_id, a.status, a.date, a.time_in, a.time_out, e.employee_code,e.firstname, e.lastname from attendance a INNER JOIN employees as e on  e.employee_id=a.employee_id ORDER BY date desc;";
@@ -49,28 +71,17 @@ function attendanceTable(){
 <?php
   }
 }
+
+function employeeAttendance(){
+  include 'conn.php';
+  $sql = "SELECT employee_id, firstname, lastname FROM employees";
+  $query = $conn->query($sql);
+  while($prow = $query->fetch_assoc()){
+      echo "
+      <option value='".$prow['employee_id']."'>".$prow['firstname'].' ' .$prow['lastname']."</option>
+      ";
+  }
+}
  
-function employeePosition(){
-  include 'conn.php';
-  $sql = "SELECT job_id, description FROM job";
-  $query = $conn->query($sql);
-  while($prow = $query->fetch_assoc()){
-      echo "
-      <option value='".$prow['job_id']."'>".$prow['description']."</option>
-      ";
-  }
-}
-
-function employeeDepartment(){
-  include 'conn.php';
-  $sql = "SELECT department_id, department_name FROM department";
-  $query = $conn->query($sql);
-  while($prow = $query->fetch_assoc()){
-      echo "
-      <option value='".$prow['department_id']."'>".$prow['department_name']."</option>
-      ";
-  }
-}
-
 ?>
 

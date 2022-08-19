@@ -15,50 +15,56 @@
         <?php include 'sidebar.php'; ?>
         <div id="content" class="w-100">
             <?php include 'header.php'; ?>
-            <div class="card">
-                <div class="card-header">
-                    <button type="button" class="btn btn-primary btn-sm btn-flat" data-bs-toggle="modal"
-                        data-bs-target="#newEmployee">
-                        <span>
-                            <i class="fa fa-plus"></i>
-                            New
-                        </span>
-                    </button>
-                </div>
-                <div class="card-body">
-                    <table id="example1" class="table" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th scope="col">Photo</th>
-                                <th scope="col">Employee ID</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Address</th>
-                                <th scope="col">Birthdate</th>
-                                <th scope="col">Job</th>
-                                <th scope="col">Schedule</th>
-                                <th scope="col">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php employeeTable();?>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th scope="col">Photo</th>
-                                <th scope="col">Employee ID</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Address</th>
-                                <th scope="col">Birthdate</th>
-                                <th scope="col">Job</th>
-                                <th scope="col">Schedule</th>
-                                <th scope="col">Actions</th>
-                            </tr>
-                        </tfoot>
-                    </table>
+            <div class="container-fluid"></div>
+                <div class="table-responsive">
+                    <div class="card">
+                        <div class="card-header">
+                            <button type="button" class="btn btn-primary btn-sm btn-flat" data-bs-toggle="modal"
+                                data-bs-target="#newEmployee">
+                                <span>
+                                    <i class="fa fa-plus"></i>
+                                    New
+                                </span>
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <table id="example1" class="table" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Photo</th>
+                                        <th scope="col">Employee ID</th>
+                                        <th scope="col">First</th>
+                                        <th scope="col">Last</th>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">Birthdate</th>
+                                        <th scope="col">Job</th>
+                                        <th scope="col">Schedule</th>
+                                        <th scope="col">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php employeeTable();?>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th scope="col">Photo</th>
+                                        <th scope="col">Employee ID</th>
+                                        <th scope="col">First</th>
+                                        <th scope="col">Last</th>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">Birthdate</th>
+                                        <th scope="col">Job</th>
+                                        <th scope="col">Schedule</th>
+                                        <th scope="col">Actions</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
                 </div>
             </div>
+
 
         </div>
     </div>
@@ -69,7 +75,7 @@
     <?php include 'modals.php';?>
 
     <script>
-    
+
     </script>
 
     <script type="text/javascript">
@@ -89,7 +95,7 @@
 
         $('#example1').on('click', '.delete', function(e) {
             e.preventDefault();
-            $('#delete').modal('show');
+            $('#deleteEmployee').modal('show');
             var id = $(this).data('id');
             getRow(id);
         });
@@ -102,26 +108,30 @@
     });
 
     function getRow(id) {
-        $(document).ready(function(){
+        $(document).ready(function() {
             $.ajax({
-            type: 'POST',
-            url: 'employee_row.php',
-            data: {id: id},
-            dataType: 'json',
-            success: function(response) {
-                $('.employeeId').val(response.employee_id);
-                $('.firstName').val(response.firstname);
-                $('.lastName').val(response.lastname);
-                $('.addressInfo').val(response.address);
-                $('.birthDate').val(response.birthdate);
-                $('.contactInfo').val(response.contact_info);
-                $('.genderSelection').html(response.gender);
-                $('.jobSelection').html(response.description);
-                $('.departmentSelection').html(response.department_name);
-            }
+                type: 'POST',
+                url: 'employee_row.php',
+                data: {
+                    id: id
+                },
+                dataType: 'json',
+                success: function(response) {
+                    $('.employeeId').val(response.employee_id);
+                    $('.firstName').val(response.firstname);
+                    $('.lastName').val(response.lastname);
+                    $('.addressInfo').val(response.address);
+                    $('.birthDate').val(response.birthdate);
+                    $('.contactInfo').val(response.contact_info);
+                    $('.genderSelection').html(response.gender);
+                    $('.jobSelection').html(response.description);
+                    $('.departmentSelection').html(response.department_name);
+                    $('.del_employee_name').html(response.firstname + ' ' + response.lastname);
+
+                }
             });
 
-        }) 
+        })
     }
     </script>
 </body>

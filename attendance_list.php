@@ -18,7 +18,7 @@
             <div class="card">
                 <div class="card-header">
                     <button type="button" class="btn btn-primary btn-sm btn-flat" data-bs-toggle="modal"
-                        data-bs-target="#newEmployee">
+                        data-bs-target="#newAttendance">
                         <span>
                             <i class="fa fa-plus"></i>
                             New
@@ -59,6 +59,7 @@
     </div>
 
 
+
     <?php include 'includes/scripts.php';?>
     <?php include 'modals.php';?>
 
@@ -68,6 +69,48 @@
             $('#sidebar').toggleClass('active');
         });
     });
+
+    $(function() {
+        $('#example1').on('click', '.edit', function(e) {
+            e.preventDefault();
+            $('#editAttendance').modal('show');
+            var id = $(this).data('id');
+            getRow(id);
+        });
+
+        $('#example1').on('click', '.delete', function(e) {
+            e.preventDefault();
+            $('#delete').modal('show');
+            var id = $(this).data('id');
+            getRow(id);
+        });
+
+        $('#example1').on('click', '.photo', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            getRow(id);
+        });
+    });
+
+    function getRow(id) {
+        $(document).ready(function(){
+            $.ajax({
+            type: 'POST',
+            url: 'attendance_row.php',
+            data: {id: id},
+            dataType: 'json',
+            success: function(response) {
+                $('.attendance_id').val(response.attendance_id);
+                $('.firstName').val(response.firstname);
+                $('.lastName').val(response.lastname);
+                $('.dateInfo').val(response.date);
+                $('.timeOut').val(response.time_out);
+                $('.timeIn').val(response.time_in);
+            }
+            });
+
+        }) 
+    }
     </script>
 </body>
 
