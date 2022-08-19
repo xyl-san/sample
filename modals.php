@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="#" autocomplete="off">
+                <form class="row g-3" action="<?php employeeAdd()?>" method="POST" autocomplete="off">
                     <div class="col-md-6 form-floating">
                         <input type="text" class="form-control firstName" name="firstname" required>
                         <label for="firstName">First name</label>
@@ -54,7 +54,7 @@
                     </div>
                     <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
-                        <button type="submit" class="btn btn-primary float-end">Submit</button>
+                        <button type="submit" class="btn btn-primary float-end" name="add">Submit</button>
                     </div>
                 </form>
 
