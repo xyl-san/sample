@@ -5,7 +5,7 @@
     </div>
     <ul class="list-unstyled components">
         <h5>Manage</h5>
-        <li class="active">
+        <li>
             <a href="home.php">
                 <i class="fa-solid fa-house"></i>
                  Home
