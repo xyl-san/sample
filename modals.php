@@ -414,33 +414,29 @@
 <!-- End Delete Job -->
 
 <!--Start Add Deductions-->
-<div class="modal fade" id="newDeductions" tabindex="-1" role="dialog" aria-labelledby="deductionsTitle"
+<div class="modal fade" id="newDeduction" tabindex="-1" role="dialog" aria-labelledby="deductionTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deductionsTitle">Add Deductions</h5>
+                <h5 class="modal-title" id="deductionTitle">Add Deduction</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
             <div class="modal-body">
                 <form class="row g-3" action="#" autocomplete="off">
-                    <div class="col-md-6 form-floating">
-                        <select class="form-control" name="employeeDeductions" aria-label="Select employee">
+                    <div class="col-md-12 form-floating">
+                        <select class="form-control" name="employeeDeduction" aria-label="Select employee">
                             <option value="" class="employeeSelection" selected>- Select -</option>
-                            <?php employeeDeductions();?>
+                            <?php employeeDeduction();?>
                         </select>
                         <label for="employeeSelection">Employee</label>
                     </div>
-                    <div class="col-md-6 form-floating">
-                        <input type="date" class="form-control dateInfo" name="date" required>
-                        <label for="date">Date</label>
-                    </div>
-                    <div class="col-md-6 form-floating">
+                    <div class="col-md-12 form-floating">
                         <input type="text" class="form-control deductions" name="deductions" required>
                         <label for="deductions">Description</label>        
                     </div>
-                    <div class="col-md-6 form-floating">
+                    <div class="col-md-12 form-floating">
                         <input type="number" class="form-control deductionsAmount" name="deductionsAmount" required>
                         <label for="deductionsAmount">Amount</label>
                     </div>
@@ -455,3 +451,69 @@
     </div>
 </div>
 <!--End Add Deductions-->
+
+<!-- Start Edit Deduction -->
+<div class="modal fade" id="editDeduction" tabindex="-1" role="dialog" aria-labelledby="deductionTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deductionTitle">Edit Deduction</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" autocomplete="off">
+                    <div class="col-md-12 form-floating">
+                        <select class="form-control" name="employeeDeduction" aria-label="Select employee">
+                        <?php employeeDeduction();?>
+                            <option value="" class="employeeSelection" selected>- Select -</option>
+                        </select>
+                        <label for="employeeSelection">Employee</label>
+                    </div>
+                    <div class="col-md-12 form-floating">
+                        <input type="text" class="form-control deductionDescription" name="deductionDescription" required>
+                        <label for="deductionDescription">Description</label>        
+                    </div>
+                    <div class="col-md-12 form-floating">
+                        <input type="number" class="form-control deductionAmount" name="deductionAmount" required>
+                        <label for="deductionAmount">Amount</label>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Edit Deduction -->
+
+<!-- Start Delete Deduction -->
+<div class="modal fade" id="deleteDeduction" tabindex="-1" role="dialog" aria-labelledby="deductionTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deductionTitle">Deleting....</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" autocomplete="off">
+                    <div class="text-center col-md-12 form-floating">
+                        <input type="hidden" class="deduction_id" name="deduction_id">
+                        <p class=" fs-4">Delete </p>
+                        <h4 class="text-center delete_deduction"></h4>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Delete Deduction -->
