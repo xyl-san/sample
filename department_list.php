@@ -24,6 +24,12 @@
                             New
                         </span>
                     </button>
+                    <nav aria-label="breadcrumb" class="float-end">
+                        <ol class="breadcrumb ">
+                            <li class="breadcrumb-item"><a href="home.php">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Department</li>
+                        </ol>
+                    </nav>
                 </div>
                 <div class="card-body">
                     <table id="example1" class="table" style="width:100%">
