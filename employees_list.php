@@ -122,6 +122,7 @@
                     $('.jobSelection').html(response.description);
                     $('.departmentSelection').html(response.department_name);
                     $('.del_employee_name').html(response.firstname + ' ' + response.lastname);
+                    $('.scheduleSelection').html(response.time_in + ' ' + response.time_out);
 
                 }
             });

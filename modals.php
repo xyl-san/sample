@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="<?php employeeAdd()?>" method="POST" autocomplete="off">
+                <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
                     <div class="col-md-6 form-floating">
                         <input type="text" class="form-control firstName" name="firstname" required>
                         <label for="firstName">First name</label>
@@ -26,7 +26,7 @@
                         <label for="birthDate">Birthdate</label>
                     </div>
                     <div class="col-md-6 form-floating">
-                        <input type="number" class="form-control contactInfo" name="contactinfo" required>
+                        <input type="number" class="form-control contactInfo" name="contact" required>
                         <label for="contactInfo">Contact Info</label>
                     </div>
                     <div class="col-md-6 form-floating">
@@ -52,9 +52,20 @@
                         </select>
                         <label for="jobSelection">Job</label>
                     </div>
+                    <div class="col-12 form-floating">
+                        <select class="form-control scheduleSelection" name="schedule" aria-label="Select schedule">
+                            <option value="" selected>- Select -</option>
+                            <?php employeeSchedule();?>
+                        </select>
+                        <label for="scheduleSelection">Schedule</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="file" class="form-control fileName" name="photo" required>
+                        <label for="fileName">Photo</label>
+                    </div>
                     <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
-                        <button type="submit" class="btn btn-primary float-end" name="add">Submit</button>
+                        <button type="submit" class="btn btn-primary float-end" name="addEmployee">Submit</button>
                     </div>
                 </form>
 
@@ -75,7 +86,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="#" autocomplete="off">
+                <form class="row g-3" action="includes/queries.php" autocomplete="off">
                     <input type="hidden" class="employeeId" name="employee_id">
                     <div class="col-md-6 form-floating">
                         <input type="text" class="form-control firstName" name="firstname" required>
@@ -94,7 +105,7 @@
                         <label for="birthDate">Birthdate</label>
                     </div>
                     <div class="col-md-6 form-floating">
-                        <input type="number" class="form-control contactInfo" name="contactinfo" required>
+                        <input type="number" class="form-control contactInfo" name="contact_info" required>
                         <label for="contactInfo">Contact Info</label>
                     </div>
                     <div class="col-md-6 form-floating">
@@ -119,9 +130,16 @@
                         </select>
                         <label for="jobSelection">Job</label>
                     </div>
+                    <div class="col-12 form-floating">
+                        <select class="form-control" name="schedule" aria-label="Select schedule">
+                            <option value="" class="scheduleSelection" selected>- Select -</option>
+                            <?php employeeSchedule();?>
+                        </select>
+                        <label for="scheduleSelection">Schedule</label>
+                    </div>
                     <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
-                        <button type="submit" class="btn btn-primary float-end">Submit</button>
+                        <button type="submit" class="btn btn-primary float-end" name="editEmployee">Submit</button>
                     </div>
                 </form>
 
