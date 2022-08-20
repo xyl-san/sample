@@ -17,36 +17,32 @@
             <?php include 'header.php'; ?>
             <div class="card">
                 <div class="card-header">
-                    <button type="button" class="btn btn-primary btn-sm btn-flat mt-2" data-bs-toggle="modal"
-                        data-bs-target="#newDepartment">
+                    <button type="button" class="btn btn-primary btn-sm btn-flat" data-bs-toggle="modal"
+                        data-bs-target="#newSchedule">
                         <span>
                             <i class="fa fa-plus"></i>
                             New
                         </span>
                     </button>
-                    <nav aria-label="breadcrumb" class="float-end mt-2">
-                        <ol class="breadcrumb ">
-                            <li class="breadcrumb-item"><a href="home.php">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Department</li>
-                        </ol>
-                    </nav>
                 </div>
                 <div class="card-body">
                     <table id="example1" class="table" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Department ID</th>
-                                <th>Department</th>
+                                <th>Employee Code</th>
+                                <th>Name</th>
+                                <th>Schedule</th>
                                 <th>Tools</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php departmentTable();?>
+                            <?php scheduleTable();?>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Department ID</th>
-                                <th>Department</th>
+                                <th>Employee Code</th>
+                                <th>Name</th>
+                                <th>Schedule</th>
                                 <th>Tools</th>
                             </tr>
                         </tfoot>
@@ -73,14 +69,14 @@
     $(function() {
         $('#example1').on('click', '.edit', function(e) {
             e.preventDefault();
-            $('#editDepartment').modal('show');
+            $('#editSchedule').modal('show');
             var id = $(this).data('id');
             getRow(id);
         });
 
         $('#example1').on('click', '.delete', function(e) {
             e.preventDefault();
-            $('#deleteDepartment').modal('show');
+            $('#deleteSchedule').modal('show');
             var id = $(this).data('id');
             getRow(id);
         });
@@ -90,13 +86,14 @@
         $(document).ready(function(){
             $.ajax({
             type: 'POST',
-            url: 'department_row.php',
+            url: 'schedule_row.php',
             data: {id: id},
             dataType: 'json',
             success: function(response) {
-                $('.department_id').val(response.department_id);
-                $('.department').val(response.department_name);
-                $('.delete_department_name').html(response.department_name);
+                $('.schedule_id').val(response.schedule_id);
+                $('.employeeSelection').val(response.firstname+ ' ' +response.lastname);
+                $('.scheduleSelection').val(response.time_in+ ' ' +response.time_out);
+                $('.delete_schedule').html(response.employee_code+ ' ' +response.time_in+ ' ' +response.time_out);
                
             }
             });
