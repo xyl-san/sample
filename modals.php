@@ -86,7 +86,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="includes/queries.php" autocomplete="off">
+                <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
                     <input type="hidden" class="employeeId" name="employee_id">
                     <div class="col-md-6 form-floating">
                         <input type="text" class="form-control firstName" name="firstname" required>
@@ -160,7 +160,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="#" autocomplete="off">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
                     <div class="text-center col-md-12 form-floating">
                         <input type="hidden" class="employeeId" name="employee_id">
                         <p class=" fs-4">Delete </p>
@@ -189,7 +189,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="#" autocomplete="off">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
                     <div class="col-md-6 form-floating">
                         <select class="form-control" name="employee" aria-label="Select employee">
                             <option value="" class="employeeSelection" selected>- Select -</option>
@@ -233,7 +233,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="#" autocomplete="off">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
                     <input type="hidden" class="attendanceId" name="attendance_Id">
                     <div class="col-md-12 form-floating">
                         <input type="date" class="form-control dateInfo" name="date" required>
@@ -324,7 +324,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="#" autocomplete="off">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
                     <div class="text-center col-md-12 form-floating">
                         <input type="hidden" class="departmentId" name="department_id">
                         <p class=" fs-4">Delete </p>
@@ -382,7 +382,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="#" autocomplete="off">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
                     <input type="hidden" class="joId" name="job_id">
                     <div class="col-md-12 form-floating">
                         <input type="text" class="form-control jobDescription" name="jobDescription" required>
@@ -414,7 +414,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="#" autocomplete="off">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
                     <div class="text-center col-md-12 form-floating">
                         <input type="hidden" class="jobId" name="job_id">
                         <p class=" fs-4">Delete </p>
@@ -442,7 +442,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="#" autocomplete="off">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
                     <div class="col-md-12 form-floating">
                         <select class="form-control" name="employeeDeduction" aria-label="Select employee">
                             <option value="" class="employeeSelection" selected>- Select -</option>
@@ -481,7 +481,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="#" autocomplete="off">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
                     <div class="col-md-12 form-floating">
                         <select class="form-control" name="employeeDeduction" aria-label="Select employee">
                         <?php employeeDeduction();?>
@@ -519,11 +519,112 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="#" autocomplete="off">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
                     <div class="text-center col-md-12 form-floating">
                         <input type="hidden" class="deduction_id" name="deduction_id">
                         <p class=" fs-4">Delete </p>
                         <h4 class="text-center delete_deduction"></h4>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Delete Deduction -->
+
+<!--Start Add Schedule-->
+<div class="modal fade" id="newSchedule" tabindex="-1" role="dialog" aria-labelledby="scheduleTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="scheduleTitle">Add Schedule</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
+                    <div class="col-md-12 form-floating">
+                        <select class="form-control" name="employeeSchedule" aria-label="Select employee">
+                            <option value="" class="employeeSelection" selected>- Select -</option>
+                            <?php employee();?>
+                        </select>
+                        <label for="employeeSelection">Employee</label>
+                    </div>
+                    <div class="col-md-12 form-floating">
+                        <select class="form-control" name="employeeSchedule" aria-label="Select employee">
+                            <option value="" class="scheduleSelection" selected>- Select -</option>
+                            <?php employeeSchedule();?>
+                        </select>
+                        <label for="scheduleSelection">Schedule</label>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Add Schedule-->
+<!-- Start Edit schedule -->
+<div class="modal fade" id="editSchedule" tabindex="-1" role="dialog" aria-labelledby="scheduleTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="scheduleTitle">Edit Schedule</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
+                    <div class="col-md-12 form-floating">
+                        <select class="form-control" name="employeeSchedule" aria-label="Select employee">
+                            <option value="" class="employeeSelection" selected>- Select -</option>
+                            <?php employee();?>
+                        </select>
+                        <label for="employeeSelection">Employee</label>
+                    </div>
+                    <div class="col-md-12 form-floating">
+                        <select class="form-control" name="employeeSchedule" aria-label="Select employee">
+                            <option value="" class="scheduleSelection" selected>- Select -</option>
+                            <?php employeeSchedule();?>
+                        </select>
+                        <label for="scheduleSelection">Schedule</label>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Edit Schedule -->
+<!-- Start Delete Deduction -->
+<div class="modal fade" id="deleteSchedule" tabindex="-1" role="dialog" aria-labelledby="scheduleTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="scheduleTitle">Deleting....</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
+                    <div class="text-center col-md-12 form-floating">
+                        <input type="hidden" class="schedule_id" name="schedule_id">
+                        <p class=" fs-4">Delete </p>
+                        <h4 class="text-center delete_schedule"></h4>
                     </div>
                     <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>

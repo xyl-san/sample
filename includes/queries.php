@@ -144,7 +144,16 @@ if (isset($_POST['editEmployee'])) {
 
 
 
-
+    function employee(){
+      include 'conn.php';
+      $sql = "SELECT employee_id, firstname, lastname FROM employees";
+      $query = $conn->query($sql);
+      while($prow = $query->fetch_assoc()){
+          echo "
+          <option value='".$prow['employee_id']."'>".$prow['firstname'].' ' .$prow['lastname']."</option>
+          ";
+      }
+    }
 
 function attendanceTable(){
   include 'conn.php';
@@ -266,19 +275,18 @@ function employeeDeduction(){
  
 function scheduleTable(){
   include 'conn.php';
-  $sql = "SELECT d.deduction_id, d.description, d.amount, e.firstname, e.lastname FROM deductions d INNER JOIN employees as e on d.deduction_id=e.employee_id";
+  $sql = "SELECT s.schedule_id, s.time_in, s.time_out, e.employee_code, e.firstname, e.lastname FROM schedules s INNER JOIN employees as e on s.schedule_id=e.schedule_id";
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
     ?>
   <tr>
-      <td><?php echo $row['deduction_id']; ?></td>
+      <td><?php echo $row['employee_code']; ?></td>
       <td><?php echo $row['firstname']. ' ' .$row['lastname'];?></td> 
-      <td><?php echo $row['description']; ?></td>
-      <td><?php echo $row['amount']; ?></td>
+      <td><?php echo $row['time_in']. ' ' .$row['time_out'];?></td> 
       <td>
-          <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['deduction_id']; ?>"><i
+          <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['schedule_id']; ?>"><i
                   class="fa fa-edit"></i> Edit</button>
-          <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['deduction_id']; ?>"><i
+          <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['schedule_id']; ?>"><i
                   class="fa fa-trash"></i> Delete</button>
       </td>
   </tr>
@@ -286,3 +294,4 @@ function scheduleTable(){
 <?php
   }
 }
+?>

@@ -18,7 +18,7 @@
             <div class="card">
                 <div class="card-header">
                     <button type="button" class="btn btn-primary btn-sm btn-flat" data-bs-toggle="modal"
-                        data-bs-target="#newDeduction">
+                        data-bs-target="#newSchedule">
                         <span>
                             <i class="fa fa-plus"></i>
                             New
@@ -69,14 +69,14 @@
     $(function() {
         $('#example1').on('click', '.edit', function(e) {
             e.preventDefault();
-            $('#editDeduction').modal('show');
+            $('#editSchedule').modal('show');
             var id = $(this).data('id');
             getRow(id);
         });
 
         $('#example1').on('click', '.delete', function(e) {
             e.preventDefault();
-            $('#deleteDeduction').modal('show');
+            $('#deleteSchedule').modal('show');
             var id = $(this).data('id');
             getRow(id);
         });
@@ -86,15 +86,14 @@
         $(document).ready(function(){
             $.ajax({
             type: 'POST',
-            url: 'deduction_row.php',
+            url: 'schedule_row.php',
             data: {id: id},
             dataType: 'json',
             success: function(response) {
-                $('.deduction_id').val(response.deduction_id);
-                $('.deductionDescription').val(response.description);
-                $('.deductionAmount').val(response.amount);
-                $('.employeeSelection').val(response.employee_id);
-                $('.delete_deduction').html(response.firstname+ ' ' +response.lastname+ ' ' +response.description);
+                $('.schedule_id').val(response.schedule_id);
+                $('.employeeSelection').val(response.firstname+ ' ' +response.lastname);
+                $('.scheduleSelection').val(response.time_in+ ' ' +response.time_out);
+                $('.delete_schedule').html(response.employee_code+ ' ' +response.time_in+ ' ' +response.time_out);
                
             }
             });
