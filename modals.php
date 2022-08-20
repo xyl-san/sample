@@ -636,3 +636,106 @@
     </div>
 </div>
 <!-- End Delete Deduction -->
+<!-- Start Add Cashadvance -->
+<div class="modal fade" id="newCashadvance" tabindex="-1" role="dialog" aria-labelledby="cashadvanceTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cashadvanceTitle">Add Cashadavance</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
+                <div class="col-md-12 form-floating">
+                        <input type="date" class="form-control cashadvanceDate" name="cashadvanceDate" required>
+                        <label for="cashadvanceDate">Date</label>
+                    </div>
+                    <div class="col-md-12 form-floating">
+                        <select class="form-control" name="employeeSchedule" aria-label="Select employee">
+                            <option value="" class="employeeSelection" selected>- Select -</option>
+                            <?php employee();?>
+                        </select>
+                        <label for="employeeSelection">Employee</label>
+                    </div>
+                    <div class="col-md-12 form-floating">
+                        <input type="number" class="form-control cashadvanceAmount" name="cashadvanceAmount" required>
+                        <label for="cashadvanceAmount">Amount</label>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Add Cashadvance -->
+<!-- Start Edit Cashadvance -->
+<div class="modal fade" id="editCashadvance" tabindex="-1" role="dialog" aria-labelledby="cashadvanceTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cashadvanceTitle">Edit Schedule</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
+                <input type="hidden" class="cashadvanceId" name="cashadvance_id">
+                <div class="col-md-12 form-floating">
+                        <input type="date" class="form-control cashadvanceDate" name="cashadvanceDate" required>
+                        <label for="cashadvanceDate">Date</label>
+                    </div>
+                    <div class="col-md-12 form-floating">
+                        <select class="form-control" name="employeeCashadvance" aria-label="Select employee">
+                            <option value="" class="employeeCashadvance" selected>- Select -</option>
+                            <?php employee();?>
+                        </select>
+                        <label for="scheduleSelection">Employee</label>
+                    </div>
+                    <div class="col-md-12 form-floating">
+                        <input type="number" class="form-control cashadvanceAmount" name="cashadvanceAmount" required>
+                        <label for="cashadvanceAmount">Amount</label>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Edit Cashadvance -->
+<!-- Start Delete Cashadvance -->
+<div class="modal fade" id="deleteCashadvance" tabindex="-1" role="dialog" aria-labelledby="cashadvanceTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cashadvanceTitle">Deleting....</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
+                    <div class="text-center col-md-12 form-floating">
+                        <input type="hidden" class="cashadvanceID" name="cashadvance_id">
+                        <p class=" fs-4">Delete </p>
+                        <h4 class="text-center delete_cashadvance"></h4>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Delete Cashadvance -->

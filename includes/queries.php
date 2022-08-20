@@ -294,4 +294,26 @@ function scheduleTable(){
 <?php
   }
 }
+function cashadvanceTable(){
+  include 'conn.php';
+  $sql = "SELECT c.cashadvance_id, c.date_advance, c.amount, e.firstname, e.lastname FROM cashadvance c INNER JOIN employees as e on c.employee_id = e.employee_id";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    ?>
+  <tr>
+
+      <td><?php echo $row['date_advance']; ?></td>
+      <td><?php echo $row['firstname']. ' ' .$row['lastname'];?></td> 
+      <td><?php echo $row['amount']; ?></td>
+
+      <td>
+          <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['cashadvance_id']; ?>"><i
+                  class="fa fa-edit"></i> Edit</button>
+          <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['cashadvance_id']; ?>"><i
+                  class="fa fa-trash"></i> Delete</button>
+      </td>
+  </tr>
+<?php
+  }
+}
 ?>
