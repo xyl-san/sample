@@ -8,7 +8,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
+                <form class="row g-3" action="includes/queries.php" method="POST" enctype="multipart/form-data"
+                    autocomplete="off">
                     <div class="col-md-6 form-floating">
                         <input type="text" class="form-control firstName" name="firstname" required>
                         <label for="firstName">First name</label>
@@ -59,9 +60,10 @@
                         </select>
                         <label for="scheduleSelection">Schedule</label>
                     </div>
-                    <div class="col-md-6 form-floating">
+                    <div class="col-md-12">
+                        <label for="filename">Photo</label>
                         <input type="file" class="form-control fileName" name="photo" required>
-                        <label for="fileName">Photo</label>
+
                     </div>
                     <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
@@ -86,7 +88,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="includes/queries.php" autocomplete="off">
+                <form class="row g-3" action="includes/queries.php" method="POST" enctype="multipart/form-data" autocomplete="off">
                     <input type="hidden" class="employeeId" name="employee_id">
                     <div class="col-md-6 form-floating">
                         <input type="text" class="form-control firstName" name="firstname" required>
@@ -119,21 +121,21 @@
                     <div class="col-12 form-floating">
                         <select class="form-control" name="department" aria-label="Select department">
                             <option value="" class="departmentSelection" selected>- Select -</option>
-                            <?php employeeDepartment();?>
+
                         </select>
                         <label for="departmentSelection">Department</label>
                     </div>
                     <div class="col-12 form-floating">
                         <select class="form-control" name="job" aria-label="Select job">
                             <option value="" class="jobSelection" selected>- Select -</option>
-                            <?php employeePosition();?>
+
                         </select>
                         <label for="jobSelection">Job</label>
                     </div>
                     <div class="col-12 form-floating">
                         <select class="form-control" name="schedule" aria-label="Select schedule">
                             <option value="" class="scheduleSelection" selected>- Select -</option>
-                            <?php employeeSchedule();?>
+
                         </select>
                         <label for="scheduleSelection">Schedule</label>
                     </div>
@@ -149,6 +151,42 @@
 </div>
 <!-- End Edit Employee -->
 
+
+
+<!-- Start Edit Photo Employee -->
+
+<div class="modal fade" id="editEmployeePhoto" tabindex="-1" role="dialog" aria-labelledby="employeeTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="employeeTitle">Edit Employee Photo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="includes/queries.php" method="POST" enctype="multipart/form-data" autocomplete="off">
+                    <input type="hidden" class="employeeId" name="employee_id">
+
+                    <div class="col-md-12">
+                        <label for="filename">Photo</label>
+                        <input type="file" class="form-control fileName" name="photo" required>
+                    </div>
+
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end" name="editEmployeePhoto">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Edit Photo Employee -->
+
+
 <!-- Start Delete Employee -->
 <div class="modal fade" id="deleteEmployee" tabindex="-1" role="dialog" aria-labelledby="employeeTitle"
     aria-hidden="true">
@@ -160,7 +198,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="#" autocomplete="off">
+                <form class="row g-3" action="includes/queries.php" method="POST" enctype="multipart/form-data"  autocomplete="off">
                     <div class="text-center col-md-12 form-floating">
                         <input type="hidden" class="employeeId" name="employee_id">
                         <p class=" fs-4">Delete </p>
@@ -168,7 +206,7 @@
                     </div>
                     <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
-                        <button type="submit" class="btn btn-primary float-end">Submit</button>
+                        <button type="submit" class="btn btn-primary float-end" name="deleteEmployee">Submit</button>
                     </div>
                 </form>
 
@@ -260,7 +298,8 @@
 <!-- End Edit Attendance Employee -->
 
 <!-- Start Add Department -->
-<div class="modal fade" id="newDepartment" tabindex="-1" role="dialog" aria-labelledby="departmentTitle" aria-hidden="true">
+<div class="modal fade" id="newDepartment" tabindex="-1" role="dialog" aria-labelledby="departmentTitle"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -282,7 +321,7 @@
                         <input type="date" class="form-control updatedOn" name="updatedOn" required>
                         <label for="updatedOn">Updated On</label>
                     </div>
-                    <div  class="mb-2">
+                    <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
                         <button type="submit" class="btn btn-primary float-end" name="add">Submit</button>
                     </div>
@@ -396,8 +435,7 @@
 <!-- End Add Job -->
 
 <!-- Start Edit Job -->
-<div class="modal fade" id="editJob" tabindex="-1" role="dialog" aria-labelledby="jobTitle"
-    aria-hidden="true">
+<div class="modal fade" id="editJob" tabindex="-1" role="dialog" aria-labelledby="jobTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -436,8 +474,7 @@
 <!-- End Edit Job -->
 
 <!-- Start Delete Job -->
-<div class="modal fade" id="deleteJob" tabindex="-1" role="dialog" aria-labelledby="jobTitle"
-    aria-hidden="true">
+<div class="modal fade" id="deleteJob" tabindex="-1" role="dialog" aria-labelledby="jobTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">

@@ -38,8 +38,7 @@
                                 <tr>
                                     <th scope="col">Photo</th>
                                     <th scope="col">Employee ID</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
+                                    <th scope="col">Name</th>
                                     <th scope="col">Address</th>
                                     <th scope="col">Birthdate</th>
                                     <th scope="col">Job</th>
@@ -54,8 +53,7 @@
                                 <tr>
                                     <th scope="col">Photo</th>
                                     <th scope="col">Employee ID</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
+                                    <th scope="col">Name</th>
                                     <th scope="col">Address</th>
                                     <th scope="col">Birthdate</th>
                                     <th scope="col">Job</th>
@@ -104,6 +102,7 @@
         $('#example1').on('click', '.photo', function(e) {
             e.preventDefault();
             var id = $(this).data('id');
+            $('#editEmployeePhoto').modal('show');
             getRow(id);
         });
     });
