@@ -7,6 +7,7 @@
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
+    font-size: 14px;
 }
 
 p {
@@ -25,7 +26,7 @@ a, a:hover, a:focus {
 
 .navbar {
     padding: 15px 10px;
-    background: #fff;
+    background: darkslategrey;
     border: none;
     border-radius: 0;
     margin-bottom: 40px;
@@ -56,8 +57,8 @@ a, a:hover, a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #58b9fd;
-    color: #000;
+    background: #1a2226;
+    color: #fff;
     transition: all 0.3s;
 }
 
@@ -67,7 +68,7 @@ a, a:hover, a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background: #1a2226;
 }
 
 #sidebar ul.components {
@@ -87,12 +88,12 @@ a, a:hover, a:focus {
 }
 #sidebar ul li a:hover {
     color: #ffffff;
-    background: #129cff;
+    background: #1e282c;
 }
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
-    color: #000;
-    background: #2fa9ff;
+    color: #FFF;
+    background: #1e282c;
 }
 
 
@@ -116,7 +117,7 @@ a[aria-expanded="true"]::before {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #2fa9ff;
+    background: #2c3b41;
 }
 
 ul.CTAs {
@@ -137,7 +138,7 @@ a.download {
 }
 
 a.article, a.article:hover {
-    background: #6d7fcc !important;
+    background: #1e282c !important;
     color: #fff !important;
 }
 
@@ -172,4 +173,8 @@ a.article, a.article:hover {
 
 .tArea{
     resize: none;
+}
+.breadcrumbs{
+    text-align:center;
+    line-height:20px;
 }
