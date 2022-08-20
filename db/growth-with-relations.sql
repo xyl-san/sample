@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 20, 2022 at 05:14 AM
+-- Generation Time: Aug 20, 2022 at 05:22 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -190,7 +190,8 @@ INSERT INTO `employees` (`employee_id`, `employee_code`, `firstname`, `lastname`
 (77, 'BRL547690812', '1', '1', '1', '0011-01-11', '1', 'male', 17, 1, 8, '', '2022-08-20 10:07:42', '2022-08-20 10:07:42', 0),
 (78, 'YCB027846531', '1', '1', '1', '0001-01-12', '1', 'male', 18, 1, 8, '', '2022-08-20 10:09:39', '2022-08-20 10:09:39', 0),
 (79, 'ZEA684915073', '1', '1', '1', '0001-11-11', '1', 'male', 17, 2, 8, '', '2022-08-20 10:13:12', '2022-08-20 10:13:12', 0),
-(81, 'MEG517068439', '1', '1', '1', '0001-11-11', '1', 'male', 18, 1, 8, '', '2022-08-20 10:51:09', '2022-08-20 10:51:09', 0);
+(81, 'MEG517068439', '1', '1', '1', '0001-11-11', '1', 'male', 18, 1, 8, '', '2022-08-20 10:51:09', '2022-08-20 10:51:09', 0),
+(82, 'VJQ531986742', 'ASD', 'Cadugyot', 'Gloria III Tandang Sora Quezon City', '0000-00-00', '023', 'male', 2, 2, 8, '', '2022-08-20 11:18:53', '2022-08-20 11:18:53', 0);
 
 -- --------------------------------------------------------
 
@@ -626,7 +627,7 @@ ALTER TABLE `department`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `inventory`
