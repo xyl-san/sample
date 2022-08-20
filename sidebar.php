@@ -1,5 +1,5 @@
 <nav id="sidebar" class="flex-shrink-0 p-3" style="width: 280px;">
-    <div class="sidebar-header">
+    <div class="sidebar-header rounded">
         <h3>Growth</h3>
         <strong>VPD</strong>
     </div>

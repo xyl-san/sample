@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar rounded navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
 
         <div type="button" id="sidebarCollapse" class="btn btn-info">
