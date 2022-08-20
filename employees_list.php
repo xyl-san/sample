@@ -17,19 +17,19 @@
             <?php include 'header.php'; ?>
             <div class="card">
                 <div class="card-header">
-                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                    <button type="button" class="btn btn-primary btn-sm mt-2" data-bs-toggle="modal"
                         data-bs-target="#newEmployee">
                         <span>
                             <i class="fa fa-plus"></i>
                             New
                         </span>
                     </button>
-                    <nav aria-label="breadcrumb" class="float-end">
-                        <ol class="breadcrumb ">
+                    <div aria-label="breadcrumb" class="breadcrumbs float-end mt-2">
+                        <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="home.php">Home</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Employees</li>
                         </ol>
-                    </nav>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
