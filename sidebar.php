@@ -31,7 +31,7 @@
         <li>
             <a href="#pmSystem" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-wrap">
                 <i class="fa-solid fa-warehouse"></i>
-                 Purchase Management System
+                 Purchase Management
             </a>
             <ul class="collapse list-unstyled" id="pmSystem">
                 <li>
@@ -49,35 +49,39 @@
             </ul>
         </li>
         <li>
-            <a href="#cmSystem" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-wrap">Customer Management System</a>
+            <a href="#cmSystem" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-wrap">
+                <i class="fa-solid fa-people-group"></i>
+                 Customer Management</a>
             <ul class="collapse list-unstyled" id="cmSystem">
                 <li>
-                    <a href="#">Customer</a>
+                    <a href="#"><i class="fa-solid fa-person"></i> Customer</a>
                 </li>
                 <li>
-                    <a href="#">Transactions</a>
+                    <a href="#"><i class="fa-solid fa-list"></i> Transactions</a>
                 </li>
             </ul>
         </li>
         <li>
-            <a href="#paySystem" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-wrap">Payroll/Payslip System</a>
+            <a href="#paySystem" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-wrap">
+            <i class="fa-solid fa-file-invoice"></i>
+             Payroll/Payslip</a>
             <ul class="collapse list-unstyled" id="paySystem">
                 <li>
-                    <a href="#">Payroll</a>
+                    <a href="#"><i class="fa-solid fa-file-invoice"></i> Payroll</a>
                 </li>
                 <li>
-                    <a href="#">Payslip</a>
+                    <a href="#"><i class="fa-solid fa-file-invoice"></i> Payslip</a>
                 </li>
             </ul>
         </li>
         <li>
-            <a href="#">Accounting</a>
+            <a href="#"><i class="fa-solid fa-file-invoice-dollar"></i> Accounting</a>
         </li>
         <li>
-            <a href="#">Point of Sales</a>
+            <a href="#"><i class="fa-solid fa-store"></i> Point of Sales</a>
         </li>
         <li>
-            <a href="#">Account Settings</a>
+            <a href="#"><i class="fa-solid fa-gear"></i> Account Settings</a>
         </li>
     </ul>
 </nav>
