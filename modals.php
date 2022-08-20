@@ -251,20 +251,12 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="" method="POST" autocomplete="off">
+                <form class="row g-3" action="<?php employeeAdd()?>" method="POST" autocomplete="off">
                     <div class="col-md-12 form-floating">
-                        <input type="text" class="form-control department" name="departmentName" required>
-                        <label for="department">Department</label>
+                        <input type="text" class="form-control department" name="department" required>
+                        <label for="department">Description</label>
                     </div>
-                    <div class="col-md-12 form-floating">
-                        <input type="date" class="form-control createdOn" name="createdOn" required>
-                        <label for="createdOn">Created On</label>
-                    </div>
-                    <div class="col-md-12 form-floating">
-                        <input type="date" class="form-control updatedOn" name="updatedOn" required>
-                        <label for="updatedOn">Updated On</label>
-                    </div>
-                    <div  class="mb-2">
+                    <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
                         <button type="submit" class="btn btn-primary float-end" name="add">Submit</button>
                     </div>
@@ -290,14 +282,6 @@
                     <div class="col-md-12 form-floating">
                         <input type="text" class="form-control department" name="department" required>
                         <label for="department">Department</label>
-                    </div>
-                    <div class="col-md-12 form-floating">
-                        <input type="date" class="form-control createdOn" name="createdOn" required>
-                        <label for="createdOn">Created On</label>
-                    </div>
-                    <div class="col-md-12 form-floating">
-                        <input type="date" class="form-control updatedOn" name="updatedOn" required>
-                        <label for="updatedOn">Updated On</label>
                     </div>
                     <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
@@ -344,27 +328,19 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="jobTitle">Add employee</h5>
+                <h5 class="modal-title" id="jobTitle">Add Job</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
             <div class="modal-body">
                 <form class="row g-3" action="<?php employeeAdd()?>" method="POST" autocomplete="off">
-                    <div class="col-md-6 form-floating">
+                    <div class="col-md-12 form-floating">
                         <input type="text" class="form-control jobDescription" name="jobDescription" required>
                         <label for="jobDescription">Description</label>
                     </div>
-                    <div class="col-md-6 form-floating">
+                    <div class="col-md-12 form-floating">
                         <input type="number" class="form-control jobRate" name="jobRate" required>
                         <label for="jobRate">Rate</label>
-                    </div>
-                    <div class="col-md-6 form-floating">
-                        <input type="date" class="form-control jobCreatedon" name="jobCreateon" required>
-                        <label for="jobCreatedon">Created On</label>
-                    </div>
-                    <div class="col-md-6 form-floating">
-                        <input type="date" class="form-control jobUpdatedon" name="jobUpdatedon" required>
-                        <label for="jobUpdatedon">Created On</label>
                     </div>
                     <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
@@ -390,21 +366,13 @@
             <div class="modal-body">
                 <form class="row g-3" action="#" autocomplete="off">
                     <input type="hidden" class="joId" name="job_id">
-                    <div class="col-md-6 form-floating">
+                    <div class="col-md-12 form-floating">
                         <input type="text" class="form-control jobDescription" name="jobDescription" required>
                         <label for="jobDescription">Description</label>
                     </div>
-                    <div class="col-md-6 form-floating">
+                    <div class="col-md-12 form-floating">
                         <input type="number" class="form-control jobRate" name="jobRate" required>
                         <label for="jobRate">Rate</label>
-                    </div>
-                    <div class="col-md-6 form-floating">
-                        <input type="date" class="form-control jobCreatedOn" name="jobCreatedon" required>
-                        <label for="jobCreatedon">Created On</label>
-                    </div>
-                    <div class="col-md-6 form-floating">
-                        <input type="date" class="form-control jobUpdatedon" name="jobUpdatedon" required>
-                        <label for="jobUpdatedon">Created On</label>
                     </div>
                     <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
@@ -444,3 +412,46 @@
     </div>
 </div>
 <!-- End Delete Job -->
+
+<!--Start Add Deductions-->
+<div class="modal fade" id="newDeductions" tabindex="-1" role="dialog" aria-labelledby="deductionsTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deductionsTitle">Add Deductions</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" autocomplete="off">
+                    <div class="col-md-6 form-floating">
+                        <select class="form-control" name="employeeDeductions" aria-label="Select employee">
+                            <option value="" class="employeeSelection" selected>- Select -</option>
+                            <?php employeeDeductions();?>
+                        </select>
+                        <label for="employeeSelection">Employee</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="date" class="form-control dateInfo" name="date" required>
+                        <label for="date">Date</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control deductions" name="deductions" required>
+                        <label for="deductions">Description</label>        
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="number" class="form-control deductionsAmount" name="deductionsAmount" required>
+                        <label for="deductionsAmount">Amount</label>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Add Deductions-->

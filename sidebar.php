@@ -24,7 +24,7 @@
                     <a href="schudule_list"><i class="fa-regular fa-calendar-days"></i> Schedules</a>
                     <a href="department_list.php"><i class="fa-solid fa-building"></i> Department</a>
                     <a href="job_list.php"><i class="fa-regular fa-id-card"></i> Jobs</a>
-                    <a href="deduction_list"><i class="fa-solid fa-money-bill-1-wave"></i> Deductions</a>
+                    <a href="deduction_list.php"><i class="fa-solid fa-money-bill-1-wave"></i> Deductions</a>
                 </li>
             </ul>
         </li>

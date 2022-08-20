@@ -32,8 +32,6 @@
                                 <th scope="col">Job ID</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Rate</th>
-                                <th scope="col">Create On</th>
-                                <th scope="col">Updated On</th>
                                 <th scope="col">Tools</th>
                             </tr>
                         </thead>
@@ -45,8 +43,6 @@
                                 <th scope="col">Job ID</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Rate</th>
-                                <th scope="col">Create On</th>
-                                <th scope="col">Updated On</th>
                                 <th scope="col">Tools</th>
                             </tr>
                         </tfoot>

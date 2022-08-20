@@ -152,10 +152,8 @@ function departmentTable(){
   while($row = $query->fetch_assoc()){
     ?>
   <tr>
-      <td><?php echo $row['department_id']; ?></td>
+      <td><?php echo $row['department_id']?></td>
       <td><?php echo $row['department_name']?></td>
-      <td><?php echo $row['created_on']; ?></td>
-      <td><?php echo $row['updated_on'] ?></td>
       <td>
           <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['department_id']; ?>"><i
                   class="fa fa-edit"></i> Edit</button>
@@ -178,8 +176,6 @@ function jobTable(){
       <td><?php echo $row['job_id']; ?></td>
       <td><?php echo $row['description']; ?></td>
       <td><?php echo $row['rate']; ?></td>
-      <td><?php echo $row['created_on']; ?></td>
-      <td><?php echo $row['updated_on']; ?></td>
       <td>
           <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['job_id']; ?>"><i
                   class="fa fa-edit"></i> Edit</button>
@@ -190,3 +186,6 @@ function jobTable(){
 <?php
   }
 }
+
+
+//SELECT d.deduction_id, d.description, d.amount, e.firstname, e.lastname FROM deductions d INNER JOIN employees as e on d.deduction_id=e.employee_id//

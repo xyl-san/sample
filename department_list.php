@@ -31,8 +31,6 @@
                             <tr>
                                 <th>Department ID</th>
                                 <th>Department</th>
-                                <th>Created On</th>
-                                <th>Updated On</th>
                                 <th>Tools</th>
                             </tr>
                         </thead>
@@ -43,8 +41,6 @@
                             <tr>
                                 <th>Department ID</th>
                                 <th>Department</th>
-                                <th>Created On</th>
-                                <th>Updated On</th>
                                 <th>Tools</th>
                             </tr>
                         </tfoot>
@@ -94,8 +90,6 @@
             success: function(response) {
                 $('.department_id').val(response.department_id);
                 $('.department').val(response.department_name);
-                $('.createdOn').val(response.created_on);
-                $('.updatedOn').val(response.updated_on);
                 $('.delete_department_name').html(response.department_name);
                
             }
