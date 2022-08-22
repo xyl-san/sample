@@ -60,11 +60,9 @@ function employeeSchedule(){
 }
 
 
-if (isset($_POST['addEmployee'])) {
-  employeeAdd();
-}
-
-
+  if (isset($_POST['addEmployee'])) {
+    employeeAdd();
+  }
   function employeeAdd(){
     include 'conn.php';
     if(isset($_POST['addEmployee'])){
@@ -133,6 +131,24 @@ if (isset($_POST['addEmployee'])) {
       header('location: ../employees_list.php');
     }
 
+  if(isset($_POST['deleteEmployee'])){
+    employeeDelete();
+  }
+  function employeeDelete(){
+    include 'conn.php';
+    if(isset($_POST['deleteEmployee'])){
+      $employee_id = $_POST['employee_id'];
+      $sql = "DELETE FROM employees WHERE employee_id = '$employee_id'";
+    }
+    if($conn->query($sql)){
+      $_SESSION['success'] = 'Employee deleted successfully';
+    }
+    else{
+      $_SESSION['error'] = $conn->error;
+    }
+    header('location: ../employees_list.php');
+  }
+
 
   if (isset($_POST['editEmployeePhoto'])) {
       employeeEditPhoto();
@@ -162,44 +178,6 @@ if (isset($_POST['addEmployee'])) {
     }
         header('location: ../employees_list.php');
   }
-
-  if (isset($_POST['deleteEmployee'])) {
-      employeeDelete();
-    }
-    function employeeDelete(){
-      include 'conn.php';
-      if(isset($_POST['employeeDelete'])){
-        $employee_id = $_POST['employee_id'];
-        $sql = "DELETE e.employee_id, e.photo, e.employee_code, e.firstname, e.lastname, e.address, e.birthdate, e.contact_info, e.gender, e.photo, e.delete_flag, d.department_name, j.description, s.time_in, s.time_out FROM employees e INNER JOIN department as d on e.department_id=d.department_id INNER JOIN job as j on e.job_id=j.job_id INNER JOIN schedules as s on e.schedule_id=s.schedule_id WHERE employee_id='$employee_id'";
-    
-        if($conn->query($sql)){
-          $_SESSION['success'] = 'Employee deleted successfully';
-        }
-        else{
-          $_SESSION['error'] = $conn->error;
-        }
-      }
-      else{
-        $_SESSION['error'] = 'Select item to delete first';
-      }
-    
-      header('location: ../employees_list.php');
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function attendanceTable(){
