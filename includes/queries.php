@@ -120,7 +120,7 @@ function employeeSchedule(){
         $departmentSelection= $_POST['department'];
         $scheduleSelection = $_POST['schedule'];
        
-        $sql = "UPDATE employees SET firstname = '$firstName', lastname = '$lastName', address = '$addressInfo', birthdate = '$birthDate', contact_info = '$contactInfo', gender = '$genderSelection' WHERE employee_id = '$employee_id'";
+        $sql = "UPDATE employees SET firstname = '$firstName', lastname = '$lastName', address = '$addressInfo', birthdate = '$birthDate', contact_info = '$contactInfo', gender = '$genderSelection', job_id = '$jobSelection', department_id = '$departmentSelection', schedule_id = '$scheduleSelection' WHERE employee_id = '$employee_id'";
         if($conn->query($sql)){
           echo "success";
         }
@@ -265,5 +265,31 @@ function jobTable(){
 <?php
   }
 }
+
+
+// Accounting queries
+
+function accountSelection(){
+  include 'conn.php';
+  $sql = "SELECT account_id, description FROM account_list";
+  $query = $conn->query($sql);
+  while($prow = $query->fetch_assoc()){
+      echo "
+      <option value='".$prow['account_id']."'>".$prow['description'];"</option>
+      ";
+  }
+}
+
+function accountGroupSelection(){
+  include 'conn.php';
+  $sql = "SELECT accountgroup_id , name FROM group_list";
+  $query = $conn->query($sql);
+  while($prow = $query->fetch_assoc()){
+      echo "
+      <option value='".$prow['accountgroup_id']."'>".$prow['name'];"</option>
+      ";
+  }
+}
+
 
 ?>

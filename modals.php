@@ -1,3 +1,5 @@
+<?php include 'includes/scripts.php'; ?>
+
 <!-- Start Add Employee -->
 <div class="modal fade" id="newEmployee" tabindex="-1" role="dialog" aria-labelledby="employeeTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -88,7 +90,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="includes/queries.php" method="POST" enctype="multipart/form-data" autocomplete="off">
+                <form class="row g-3" action="includes/queries.php" method="POST" enctype="multipart/form-data"
+                    autocomplete="off">
                     <input type="hidden" class="employeeId" name="employee_id">
                     <div class="col-md-6 form-floating">
                         <input type="text" class="form-control firstName" name="firstname" required>
@@ -124,7 +127,7 @@
                             <?php employeeDepartment();?>
                         </select>
                         <label for="departmentSelection">Department</label>
-                     
+
                     </div>
                     <div class="col-12 form-floating">
                         <select class="form-control" name="job" aria-label="Select job">
@@ -133,7 +136,7 @@
 
                         </select>
                         <label for="jobSelection">Job</label>
-                      
+
                     </div>
                     <div class="col-12 form-floating">
                         <select class="form-control" name="schedule" aria-label="Select schedule">
@@ -141,7 +144,7 @@
                             <?php employeeSchedule();?>
                         </select>
                         <label for="scheduleSelection">Schedule</label>
-    
+
                     </div>
                     <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
@@ -166,7 +169,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="includes/queries.php" method="POST" enctype="multipart/form-data" autocomplete="off">
+                <form class="row g-3" action="includes/queries.php" method="POST" enctype="multipart/form-data"
+                    autocomplete="off">
                     <input type="hidden" class="employeeId" name="employee_id">
                     <div class="text-center">
                         <p>
@@ -198,7 +202,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="includes/queries.php" method="POST" enctype="multipart/form-data" autocomplete="off">
+                <form class="row g-3" action="includes/queries.php" method="POST" enctype="multipart/form-data"
+                    autocomplete="off">
                     <input type="hidden" class="employeeId" name="employee_id">
 
                     <div class="col-md-12">
@@ -329,3 +334,78 @@
     </div>
 </div>
 <!-- End Edit Attendance Employee -->
+
+
+<!-- Start of Accounting Add new Journal -->
+<div class="modal fade" id="addNewJournal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollabl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="JourneyTitle">Add New Journal Entry</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
+                    <div class="col-md-6 form-floating">
+                        <input type="date" class="form-control date" name="date" id="datepicker_add" required>
+                        <label for="date">Entry Date</label>
+                    </div>
+
+                    <div class="col-md-12 form-floating">
+                        <textarea class="form-control tArea entryDescription" rows="2" name="entrydescription"
+                            required></textarea>
+                        <label for="entrydescription">Entry Description</label>
+                    </div>
+
+                    <div class="col-md-6 form-floating">
+                        <select class="form-control" name="account" aria-label="Select account">
+                            <option value="" class="accountSelection" selected>- Select -</option>
+                            <?php accountSelection();?>
+                        </select>
+                        <label for="account">Account</label>
+                    </div>
+
+                    <div class="col-md-6 form-floating">
+                        <select class="form-control" name="accountgroup" aria-label="Select accountgroup">
+                            <option value="" class="accountgroupSelection" selected>- Select -</option>
+                            <?php accountGroupSelection();?>
+                        </select>
+                        <label for="accountgroup">Account Group</label>
+                    </div>
+
+                    <div class="col-md-6 form-floating">
+                        <input type="number" class="form-control amount" name="amount" required>
+                        <label for="amount">Amount</label>
+                    </div>
+
+                    <div class="col-md-6 form-floating py-2">
+                        <button type="button" class="btn btn-secondary">Add Account</button>
+                    </div>
+
+                    <table id="example1" class="table" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Account</th>
+                                <th>Group</th>
+                                <th>Debit</th>
+                                <th>Credit</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    
+
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Accounting Add new Journal -->
