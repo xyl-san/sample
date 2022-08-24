@@ -46,8 +46,6 @@
                         </thead>
                         <tbody>
 
-                            <!-- Function for the datatables -->
-
                         </tbody>
                         <tfoot>
                             <tr>
@@ -63,9 +61,7 @@
                     </table>
                 </div>
             </div>
-
         </div>
-    </div>
     </div>
 
 
