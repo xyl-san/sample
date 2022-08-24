@@ -256,10 +256,8 @@ function jobTable(){
     <td><?php echo $row['created_on']; ?></td>
     <td><?php echo $row['updated_on']; ?></td>
     <td>
-        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['job_id']; ?>"><i
-                class="fa fa-edit"></i> Edit</button>
-        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['job_id']; ?>"><i
-                class="fa fa-trash"></i> Delete</button>
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['job_id']; ?>"><i class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['job_id']; ?>"><i class="fa fa-trash"></i> Delete</button>
     </td>
 </tr>
 <?php
@@ -282,7 +280,7 @@ function accountSelection(){
 
 function accountGroupSelection(){
   include 'conn.php';
-  $sql = "SELECT accountgroup_id , name FROM group_list";
+  $sql = "SELECT accountgroup_id, name FROM group_list";
   $query = $conn->query($sql);
   while($prow = $query->fetch_assoc()){
       echo "
@@ -290,6 +288,4 @@ function accountGroupSelection(){
       ";
   }
 }
-
-
 ?>

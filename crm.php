@@ -18,7 +18,7 @@
             <div class="card">
                 <div class="card-header">
                     <button type="button" class="btn btn-primary btn-sm mt-2" data-bs-toggle="modal"
-                        data-bs-target="#newOpportunity">
+                        data-bs-target="#newLead">
                         <span>
                             <i class="fa fa-plus"></i>
                             New
