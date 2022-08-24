@@ -178,3 +178,12 @@ a.article, a.article:hover {
     text-align:center;
     line-height:20px;
 }
+
+#bodyStyle{
+    background-image: linear-gradient(to top right,#002e09,#038551);
+}
+
+.o_caption {
+    color: #f0f0f0;
+    
+}

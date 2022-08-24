@@ -63,7 +63,6 @@
                             </tfoot>
                         </table>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -106,6 +105,10 @@
             getRow(id);
         });
     });
+    // DRAGGABLE MODAL
+    // $('.modal-dialog').draggable({
+    // 	"handle":".modal-header"
+    //   });
 
     function getRow(id) {
         $(document).ready(function() {
