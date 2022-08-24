@@ -75,7 +75,7 @@
             </ul>
         </li>
         <li>
-            <a href="#"><i class="fa-solid fa-file-invoice-dollar"></i> Accounting</a>
+            <a href="accounting_list.php"><i class="fa-solid fa-file-invoice-dollar"></i> Accounting</a>
         </li>
         <li>
             <a href="#"><i class="fa-solid fa-store"></i> Point of Sales</a>
