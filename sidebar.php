@@ -75,7 +75,15 @@
             </ul>
         </li>
         <li>
-            <a href="accounting_list.php"><i class="fa-solid fa-file-invoice-dollar"></i> Accounting</a>
+            <a href="#accountingSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-wrap">
+                <i class="fa-solid fa-file-invoice-dollar"></i>
+                 Accounting
+            </a>
+            <ul class="collapse list-unstyled" id="accountingSubmenu">
+                <li>
+                    <a href="accounting_list.php"><i class="fa-solid fa-book"></i> Journal Entries</a>
+                </li>
+            </ul>
         </li>
         <li>
             <a href="#"><i class="fa-solid fa-store"></i> Point of Sales</a>
