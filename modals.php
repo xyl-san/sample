@@ -363,7 +363,7 @@
                     <div class="col-md-6 form-floating">
                         <select class="form-control" name="account" aria-label="Select account">
                             <option value="" class="accountSelection" selected>- Select -</option>
-                            <?php accountSelection();?>
+                         
                         </select>
                         <label for="account">Account</label>
                     </div>
@@ -371,7 +371,7 @@
                     <div class="col-md-6 form-floating">
                         <select class="form-control" name="accountgroup" aria-label="Select accountgroup">
                             <option value="" class="accountgroupSelection" selected>- Select -</option>
-                            <?php accountGroupSelection();?>
+                      
                         </select>
                         <label for="accountgroup">Account Group</label>
                     </div>
@@ -388,6 +388,24 @@
                         <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cancel</button>
                         <button type="submit" class="btn btn-primary float-end">Submit</button>
                     </div>
+                    <table>
+                        <colgroup>
+                            <col width="5%">
+                            <col width="35%">
+                            <col width="20%">
+                            <col width="20%">
+                            <col width="20%">
+                        </colgroup>
+                        <thead>
+                            <tr class="bg-gradient-primary">
+                                <th class="text-center"></th>
+                                <th class="text-center">Account</th>
+                                <th class="text=center">Group</th>
+                                <th class="text-center">Debit</th>
+                                <th class="tetx-center">Credit</th>
+                            </tr>
+                        </thead>
+                    <table>
                 </form>
 
             </div>
