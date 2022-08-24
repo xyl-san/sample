@@ -384,20 +384,6 @@
                     <div class="col-md-6 form-floating py-2">
                         <button type="button" class="btn btn-secondary">Add Account</button>
                     </div>
-
-                    <table id="example1" class="table" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Account</th>
-                                <th>Group</th>
-                                <th>Debit</th>
-                                <th>Credit</th>
-                            </tr>
-                        </thead>
-                    </table>
-                    
-
                     <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cancel</button>
                         <button type="submit" class="btn btn-primary float-end">Submit</button>
