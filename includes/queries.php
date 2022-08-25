@@ -5,23 +5,23 @@ function employeeTable(){
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
     ?>
-  <tr>
-      <td><img src="<?php echo (!empty($row['photo']))? './images/'.$row['photo']:'./images/profile.jpg'; ?>" width="30px"
-              height="30px"> <a href="#edit_photo" data-toggle="modal" class="pull-right photo"
-              data-id="<?php echo $row['employee_id']; ?>"><span class="fa fa-edit"></span></a></td>
-      <td><?php echo $row['employee_code']; ?></td>
-      <td><?php echo $row['firstname'] . ' ' .$row['lastname'];?></td>
-      <td><?php echo $row['address'] ?></td>
-      <td><?php echo $row['birthdate'] ?></td>
-      <td><?php echo $row['description'] ?></td>
-      <td><?php echo date('h:i A', strtotime($row['time_in'])).' - '.date('h:i A', strtotime($row['time_out'])); ?></td>
-      <td>
-          <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['employee_id']; ?>"><i
-                  class="fa fa-edit"></i> Edit</button>
-          <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['employee_id']; ?>"><i
-                  class="fa fa-trash"></i> Delete</button>
-      </td>
-  </tr>
+<tr>
+    <td><img src="<?php echo (!empty($row['photo']))? './images/'.$row['photo']:'./images/profile.jpg'; ?>" width="30px"
+            height="30px"> <a href="#edit_photo" data-toggle="modal" class="pull-right photo"
+            data-id="<?php echo $row['employee_id']; ?>"><span class="fa fa-edit"></span></a></td>
+    <td><?php echo $row['employee_code']; ?></td>
+    <td><?php echo $row['firstname'] . ' ' .$row['lastname'];?></td>
+    <td><?php echo $row['address'] ?></td>
+    <td><?php echo $row['birthdate'] ?></td>
+    <td><?php echo $row['description'] ?></td>
+    <td><?php echo date('h:i A', strtotime($row['time_in'])).' - '.date('h:i A', strtotime($row['time_out'])); ?></td>
+    <td>
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['employee_id']; ?>"><i
+                class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['employee_id']; ?>"><i
+                class="fa fa-trash"></i> Delete</button>
+    </td>
+</tr>
 <?php
   } 
 }
@@ -256,8 +256,10 @@ function jobTable(){
     <td><?php echo $row['created_on']; ?></td>
     <td><?php echo $row['updated_on']; ?></td>
     <td>
-        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['job_id']; ?>"><i class="fa fa-edit"></i> Edit</button>
-        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['job_id']; ?>"><i class="fa fa-trash"></i> Delete</button>
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['job_id']; ?>"><i
+                class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['job_id']; ?>"><i
+                class="fa fa-trash"></i> Delete</button>
     </td>
 </tr>
 <?php
@@ -288,33 +290,59 @@ function accountGroupSelection(){
       ";
   }
 }
-
-function journalSelection(){
-
-}
-
-if(isset($_POST['leadAdd'])){
-  addLead();
-}
-
-function addLead(){
+function addToList(){
   include 'conn.php';
-  if(isset($_POST['leadAdd'])){
-    $name = $_POST['leadname'];
-    $email = $_POST['leademail'];
-    $contact = $_POST['leadcontact'];
-    $description = $_POST['leaddescription'];
+  $sql = "INSERT INTO employees (employee_code, firstname, lastname, address, birthdate, contact_info, gender, job_id, department_id, schedule_id, photo, created_on) VALUES ('$employee_code','$firstName', '$lastName', '$addressInfo', '$birthDate', '$contactInfo', '$genderSelection', '$jobSelection', '$departmentSelection', '$scheduleSelection', '$filename', NOW() )";
+  $query = $conn->query($sql);
+  while($prow = $query->fetch_assoc()){
+      echo "
+      <option value='".$prow['accountgroup_id']."'>".$prow['name'];"</option>
+      ";
+  }
+}
+function accountListTable(){
+  include 'conn.php';
+  $sql = "SELECT account_id, name, description, status, date_created FROM account_list";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    $status = ($row['status'])?'<span class="badge text-bg-success pull-right">Active</span>':'<span class="badge text-bg-danger pull-right">Inactive</span>';
+    ?>
+<tr>
+    <td><?php echo $row['account_id']; ?></td>
+    <td><?php echo $row['date_created']; ?></td>
+    <td><?php echo $row['name']; ?></td>
+    <td><?php echo $row['description']; ?></td>
+    <td><?php echo $status; ?></td>
+    <td>
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['account_id']; ?>"><i
+                class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['account_id']; ?>"><i
+                class="fa fa-trash"></i> Delete</button>
+    </td>
+</tr>
+<?php
+  }
+}
 
-    $sql = "INSERT INTO leads (name, email, contact_number, description) VALUES ('$name', '$email', '$contact', '$description')";
+if (isset($_POST['addAccountList'])) {
+  addAccountList();
+}
+function addAccountList(){
+  include 'conn.php';
+  if(isset($_POST['addAccountList'])){
+    $accountName = $_POST['accountName'];
+    $accountDescription = $_POST['accountDescription'];
+    $accountStatus = $_POST['accountStatus'];
+   
+    $sql = "INSERT INTO account_list (name, description, status, date_created) VALUES ('$accountName','$accountDescription','$accountStatus', NOW() )";
     if($conn->query($sql)){
-      $_SESSION['success'] = 'A new lead has been added!';
+      echo "success";
     }
     else{
-      $_SESSION['error'] = $conn->error;
+      echo "error";
     }
   }
-  header('location: ../crm.php');
+
+  header('location:account_list.php');
 }
 ?>
-
-
