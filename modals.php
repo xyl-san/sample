@@ -339,13 +339,13 @@
 <!-- Start of Accounting Add new Journal -->
 <div class="modal fade" id="addNewJournal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollabl">
-        <div class="modal-content">
-            <div class="modal-header">
+        <div class="modal-content rounded-0">
+            <div class="modal-header rounded-0">
                 <h5 class="modal-title" id="JourneyTitle">Add New Journal Entry</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body rounded-0">
                 <form class="row g-3" action="#" method="POST" autocomplete="off">
                     <div class="col-md-6 form-floating">
                         <input type="date" class="form-control date" name="date" id="datepicker_add" required>
@@ -380,32 +380,34 @@
                     </div>
 
                     <div class="col-md-6 form-floating py-2">
-                        <button type="button" class="btn btn-secondary">Add Account</button>
+                        <button type="button" class="btn btn-secondary"><i class="fa-solid fa-plus"></i>Add Account</button>
                     </div>
-                    <div class="mb-2">
-                        <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cancel</button>
-                        <button type="submit" class="btn btn-primary float-end">Submit</button>
-                    </div>
-                    <table>
+                    <table id="account_list" class="table table-info table-stripped table-bordered">
                         <colgroup>
-                            <col width="5%">
-                            <col width="35%">
+                            <col width="40%">
                             <col width="20%">
                             <col width="20%">
                             <col width="20%">
                         </colgroup>
                         <thead>
                             <tr class="bg-gradient-primary">
-                                <th class="text-center"></th>
                                 <th class="text-center">Account</th>
                                 <th class="text=center">Group</th>
                                 <th class="text-center">Debit</th>
                                 <th class="tetx-center">Credit</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            <?php
+                            
+                            ?>
+                        </tbody>
                     <table>
                 </form>
-
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end">Submit</button>
+                    </div>
             </div>
         </div>
     </div>
