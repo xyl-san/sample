@@ -343,6 +343,47 @@ function addAccountList(){
     }
   }
 
-  header('location:account_list.php');
+  header('location:../account_list.php');
 }
+
+if (isset($_POST['editAccountList'])) {
+editAccountList();
+}
+  function editAccountList(){
+    include 'conn.php';
+    if(isset($_POST['editAccountList'])){
+      $account_id = $_POST['account_id'];
+      $accountName = $_POST['name'];
+      $accountDescription = $_POST['description'];
+      $accountStatusSelection = $_POST['status'];
+      $sql = "UPDATE account_list SET name = '$accountName', description = '$accountDescription', status = '$accountStatusSelection' WHERE account_id = '$account_id'";
+      if($conn->query($sql)){
+        echo "success";
+      }
+      else{
+        echo "error";
+      }
+    }
+    header('location:../account_list.php');
+  }
+
+  if(isset($_POST['deleteAccountList'])){
+    accountListDelete();
+  }
+  function accountListDelete(){
+    include 'conn.php';
+    if(isset($_POST['deleteAccountList'])){
+      $account_id = $_POST['account_id'];
+      $sql = "DELETE FROM account_list WHERE account_id = '$account_id'";
+    }
+    if($conn->query($sql)){
+      $_SESSION['success'] = 'Account list deleted successfully';
+    }
+    else{
+      $_SESSION['error'] = $conn->error;
+    }
+    header('location: ../account_list.php');
+  }
+
+
 ?>
