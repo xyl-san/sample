@@ -379,35 +379,29 @@
                         <label for="amount">Amount</label>
                     </div>
 
-                    <div class="col-md-6 form-floating py-2">
+                    <div class="col-md-6 form-floating">
                         <button type="button" class="btn btn-secondary"><i class="fa-solid fa-plus"></i>Add Account</button>
                     </div>
-                    <table id="account_list" class="table table-info table-stripped table-bordered">
-                        <colgroup>
-                            <col width="40%">
-                            <col width="20%">
-                            <col width="20%">
-                            <col width="20%">
-                        </colgroup>
-                        <thead>
-                            <tr class="bg-gradient-primary">
-                                <th class="text-center">Account</th>
-                                <th class="text=center">Group</th>
-                                <th class="text-center">Debit</th>
-                                <th class="tetx-center">Credit</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            
-                            ?>
-                        </tbody>
-                    <table>
-                </form>
+                    <div class="col-md-12 form-floating">
+                        <table class="table table-stripped table-bordered">
+                            <thead class="table-info">
+                                <tr>
+                                    <th>Account</th>
+                                    <th>Group</th>
+                                    <th>Debit</th>
+                                    <th>Credit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cancel</button>
                         <button type="submit" class="btn btn-primary float-end">Submit</button>
                     </div>
+                </form>
             </div>
         </div>
     </div>
