@@ -35,25 +35,25 @@
                     <table id="example1" class="table" style="width:100%">
                         <thead>
                             <tr>
-                             <th>#</th>
-                             <th>Date Created</th>
-                             <th>Account</th>
-                             <th>Description</th>
-                             <th>Status</th>
-                             <th>Action</th>
+                                <th>#</th>
+                                <th>Date Created</th>
+                                <th>Account</th>
+                                <th>Description</th>
+                                <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <?php accountListTable();?>
+                            <?php accountListTable();?>
                         </tbody>
                         <tfoot>
                             <tr>
-                            <th>#</th>
-                             <th>Date Created</th>
-                             <th>Account</th>
-                             <th>Description</th>
-                             <th>Status</th>
-                             <th>Action</th>
+                                <th>#</th>
+                                <th>Date Created</th>
+                                <th>Account</th>
+                                <th>Description</th>
+                                <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -107,11 +107,6 @@
 
         })
     }
-
-    
-
-
-
     </script>
 </body>
 

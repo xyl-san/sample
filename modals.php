@@ -1,5 +1,3 @@
-<?php include 'includes/scripts.php'; ?>
-
 <!-- Start Add Employee -->
 <div class="modal fade" id="newEmployee" tabindex="-1" role="dialog" aria-labelledby="employeeTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -376,13 +374,10 @@
                         <label for="amount">Amount</label>
                     </div>
                     <div class="col-md-6 form-floating">
-<<<<<<< HEAD
                         <button type="button" class="btn btn-secondary " id="addToList"><i
                                 class="fa-solid fa-plus"></i>Add Account</button>
-=======
                         <button type="button" class="btn btn-secondary"><i class="fa-solid fa-plus"></i>Add Account
                         </button>
->>>>>>> 3a48a212dc1f9c4a9d4b62cc45790a3feabc2856
                     </div>
                     <div class="col-md-12 form-floating">
                         <table id="example1" class="table table-stripped table-bordered">
@@ -423,7 +418,6 @@
     </div>
 </div>
 <!-- End of Accounting Add new Journal -->
-<<<<<<< HEAD
 <!--Start Adding Account List-->
 <div class="modal fade" id="addAccountList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -449,9 +443,12 @@
                     <div class="col-md-12 form-floating">
                         <select class="form-control" name="accountStatus" aria-label="Select account"
                             id="accountStatus">
-                            <option value="" class="accoutStatus" selected>- Select -</option>
+                            <option value="" class="accoutStatus" selected>--Select--</option>  
+                            <option value="0" class="accoutStatus" selected>Inactive</option>
+                            <option value="1" class="accoutStatus" selected>Active</option>   
                         </select>
                         <label for="account">Status</label>
+                    </div>
                         <div class="mb-2">
                             <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cancel</button>
                             <button type="submit" class="btn btn-primary float-end">Submit</button>
