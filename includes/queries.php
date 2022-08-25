@@ -267,7 +267,7 @@ function jobTable(){
 
 // Accounting queries
 
-function accountSelection(){
+function accountListSelection(){
   include 'conn.php';
   $sql = "SELECT account_id, description FROM account_list";
   $query = $conn->query($sql);

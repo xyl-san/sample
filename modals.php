@@ -351,34 +351,29 @@
                         <input type="date" class="form-control date" name="date" id="datepicker_add" required>
                         <label for="date">Entry Date</label>
                     </div>
-
                     <div class="col-md-12 form-floating">
                         <textarea class="form-control tArea entryDescription" rows="2" name="entrydescription"
                             required></textarea>
                         <label for="entrydescription">Entry Description</label>
                     </div>
-
                     <div class="col-md-6 form-floating">
-                        <select class="form-control" name="account" aria-label="Select account">
-                            <option value="" class="accountSelection" selected>- Select -</option>
-                         
+                        <select class="form-control" name="accountList" aria-label="Select account" id="account_id">
+                            <option value="" class="accounListSelection" selected>- Select -</option>
+                            <?php accountListSelection();?>
                         </select>
-                        <label for="account">Account</label>
+                        <label for="account">Account List</label>
                     </div>
-
                     <div class="col-md-6 form-floating">
-                        <select class="form-control" name="accountgroup" aria-label="Select accountgroup">
-                            <option value="" class="accountgroupSelection" selected>- Select -</option>
-                      
+                        <select class="form-control" name="accountgroup" aria-label="Select accountgroup" id="group_id">
+                            <option value="" class="accountGroupSelection" selected>- Select -</option>
+                            <?php accountGroupSelection();?>
                         </select>
                         <label for="accountgroup">Account Group</label>
                     </div>
-
                     <div class="col-md-6 form-floating">
-                        <input type="number" class="form-control amount" name="amount" required>
+                        <input type="number" class="form-control amount" name="amount" id="amount" required>
                         <label for="amount">Amount</label>
                     </div>
-
                     <div class="col-md-6 form-floating">
                         <button type="button" class="btn btn-secondary"><i class="fa-solid fa-plus"></i>Add Account
                         </button>
@@ -387,6 +382,7 @@
                         <table id="example1" class="table table-stripped table-bordered">
                             <thead class="table-info">
                                 <tr>
+                                    <th width="10%">Tool</th>
                                     <th>Account</th>
                                     <th>Group</th>
                                     <th>Debit</th>
@@ -394,8 +390,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                               
+                                
                             </tbody>
+                            <tfoot>
+                                <tr class="bg-gradient-secondary">
+                                    <tr>
+                                        <th colspan="3" class="text-center">Total</th>
+                                        <th class="text-right total_debit">0.00</th>
+                                        <th class="text-right total_credit">0.00</th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="3" class="text-center"></th>
+                                        <th colspan="3" class="text-center total-balance">0</th>
+                                    </tr>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                     <div class="mb-2">
@@ -408,6 +417,7 @@
     </div>
 </div>
 <!-- End of Accounting Add new Journal -->
+
 
 <!-- Add lead -->
 <div class="modal fade" id="newLead" tabindex="-1" role="dialog" aria-labelledby="leadTitle"
