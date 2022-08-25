@@ -120,7 +120,7 @@ function employeeSchedule(){
         $departmentSelection= $_POST['department'];
         $scheduleSelection = $_POST['schedule'];
        
-        $sql = "UPDATE employees SET firstname = '$firstName', lastname = '$lastName', address = '$addressInfo', birthdate = '$birthDate', contact_info = '$contactInfo', gender = '$genderSelection', job_id = '$jobSelection', department_id = '$departmentSelection', schedule_id = '$scheduleSelection' WHERE employee_id = '$employee_id'";
+        $sql = "UPDATE employees SET firstname = '$firstName', lastname = '$lastName', address = '$addressInfo', birthdate = '$birthDate', contact_info = '$contactInfo', gender = '$genderSelection', department_id = '$departmentSelection', job_id = '$jobSelection', schedule_id = '$scheduleSelection' WHERE employee_id = '$employee_id'";
         if($conn->query($sql)){
           echo "success";
         }
@@ -138,7 +138,7 @@ function employeeSchedule(){
     include 'conn.php';
     if(isset($_POST['deleteEmployee'])){
       $employee_id = $_POST['employee_id'];
-      $sql = "DELETE FROM employees WHERE employee_id = '$employee_id'";
+      $sql = "UPDATE employees SET delete_flag = 1 WHERE employee_id = '$employee_id'";
     }
     if($conn->query($sql)){
       $_SESSION['success'] = 'Employee deleted successfully';

@@ -671,15 +671,8 @@
                         <label for="leadlastname">Last name</label>
                     </div>
                     <div class="col-xs-12 form-floating">
-                        <input type="email" class="form-control leadEmail" name="leademail"
-                            placeholder="example@email.com" required>
-                        <label for="leadcontact">E-mail Address</label>
-                        <input type="text" class="form-control leadName" name="leadname" placeholder="John" required>
-                        <label for="leadfirstname">Lead name</label>
-                    </div>
-                    <div class="col-xs-12 form-floating">
                         <input type="email" class="form-control leadEmail" name="leademail" placeholder="example@email.com" required>
-                        <label for="leademail">E-mail Address</label>
+                        <label for="leadcontact">E-mail Address</label>
                     </div>
                     <div class="col-xs-12 form-floating">
                         <input type="number" class="form-control leadContact" name="leadcontact"

@@ -21,7 +21,7 @@
                         data-bs-target="#newLead">
                         <span>
                             <i class="fa fa-plus"></i>
-                            New 
+                            New
                         </span>
                     </button>
                     <div aria-label="breadcrumb" class="breadcrumbs float-end mt-2">
@@ -32,7 +32,28 @@
                     </div>
                 </div>
                 <div class="card-body">
-
+                    <div class="row">
+                        <div class="col">
+                            <span>
+                                New leads
+                            </span>
+                        </div>
+                        <div class="col">
+                            <span>
+                                Qualified Opportunity
+                            </span>
+                        </div>
+                        <div class="col">
+                            <span>
+                                Proposition
+                            </span>
+                        </div>
+                        <div class="col">
+                            <span>
+                                Won
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -43,62 +64,62 @@
     <?php include 'modals.php'; ?>
 
     <script type="text/javascript">
+    $(document).ready(function() {
+        $('#sidebarCollapse').on('click', function() {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+
+    $(function() {
+        $('#example1').on('click', '.edit', function(e) {
+            e.preventDefault();
+            $('#editEmployee').modal('show');
+            var id = $(this).data('id');
+            getRow(id);
+        });
+
+        $('#example1').on('click', '.delete', function(e) {
+            e.preventDefault();
+            $('#deleteEmployee').modal('show');
+            var id = $(this).data('id');
+            getRow(id);
+        });
+
+        $('#example1').on('click', '.photo', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            $('#editEmployeePhoto').modal('show');
+            getRow(id);
+        });
+    });
+
+    function getRow(id) {
         $(document).ready(function() {
-            $('#sidebarCollapse').on('click', function() {
-                $('#sidebar').toggleClass('active');
+            $.ajax({
+                type: 'POST',
+                url: 'employee_row.php',
+                data: {
+                    id: id
+                },
+                dataType: 'json',
+                success: function(response) {
+                    $('.employeeId').val(response.employee_id);
+                    $('.firstName').val(response.firstname);
+                    $('.lastName').val(response.lastname);
+                    $('.addressInfo').val(response.address);
+                    $('.birthDate').val(response.birthdate);
+                    $('.contactInfo').val(response.contact_info);
+                    $('.genderSelection').html(response.gender);
+                    $('.jobSelection').html(response.description);
+                    $('.departmentSelection').html(response.department_name);
+                    $('.del_employee_name').html(response.firstname + ' ' + response.lastname);
+                    $('.scheduleSelection').html(response.time_in + ' ' + response.time_out);
+
+                }
             });
-        });
-    
-        $(function() {
-            $('#example1').on('click', '.edit', function(e) {
-                e.preventDefault();
-                $('#editEmployee').modal('show');
-                var id = $(this).data('id');
-                getRow(id);
-            });
-        
-            $('#example1').on('click', '.delete', function(e) {
-                e.preventDefault();
-                $('#deleteEmployee').modal('show');
-                var id = $(this).data('id');
-                getRow(id);
-            });
-        
-            $('#example1').on('click', '.photo', function(e) {
-                e.preventDefault();
-                var id = $(this).data('id');
-                $('#editEmployeePhoto').modal('show');
-                getRow(id);
-            });
-        });
-    
-        function getRow(id) {
-            $(document).ready(function() {
-                $.ajax({
-                    type: 'POST',
-                    url: 'employee_row.php',
-                    data: {
-                        id: id
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        $('.employeeId').val(response.employee_id);
-                        $('.firstName').val(response.firstname);
-                        $('.lastName').val(response.lastname);
-                        $('.addressInfo').val(response.address);
-                        $('.birthDate').val(response.birthdate);
-                        $('.contactInfo').val(response.contact_info);
-                        $('.genderSelection').html(response.gender);
-                        $('.jobSelection').html(response.description);
-                        $('.departmentSelection').html(response.department_name);
-                        $('.del_employee_name').html(response.firstname + ' ' + response.lastname);
-                        $('.scheduleSelection').html(response.time_in + ' ' + response.time_out);
-                    
-                    }
-                });
-            
-            })
-        }
+
+        })
+    }
     </script>
 </body>
 
