@@ -337,7 +337,8 @@
 
 
 <!-- Start of Accounting Add new Journal -->
-<div class="modal fade" id="addNewJournal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="addNewJournal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollabl">
         <div class="modal-content rounded-0">
             <div class="modal-header rounded-0">
@@ -375,7 +376,8 @@
                         <label for="amount">Amount</label>
                     </div>
                     <div class="col-md-6 form-floating">
-                        <button type="button" class="btn btn-secondary " id="addToList"><i class="fa-solid fa-plus"></i>Add Account</button>
+                        <button type="button" class="btn btn-secondary " id="addToList"><i
+                                class="fa-solid fa-plus"></i>Add Account</button>
                     </div>
                     <div class="col-md-12 form-floating">
                         <table class="table table-stripped table-bordered">
@@ -389,19 +391,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
+
                             </tbody>
                             <tfoot>
                                 <tr class="bg-gradient-secondary">
-                                    <tr>
-                                        <th colspan="3" class="text-center">Total</th>
-                                        <th class="text-right total_debit">0.00</th>
-                                        <th class="text-right total_credit">0.00</th>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="3" class="text-center"></th>
-                                        <th colspan="3" class="text-center total-balance">0</th>
-                                    </tr>
+                                <tr>
+                                    <th colspan="3" class="text-center">Total</th>
+                                    <th class="text-right total_debit">0.00</th>
+                                    <th class="text-right total_credit">0.00</th>
+                                </tr>
+                                <tr>
+                                    <th colspan="3" class="text-center"></th>
+                                    <th colspan="3" class="text-center total-balance">0</th>
+                                </tr>
                                 </tr>
                             </tfoot>
                         </table>
@@ -416,12 +418,72 @@
     </div>
 </div>
 <!-- End of Accounting Add new Journal -->
-<script>
+<!--Start Adding Account List-->
+<div class="modal fade" id="addAccountList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollabl">
+        <div class="modal-content rounded-0">
+            <div class="modal-header rounded-0">
+                <h5 class="modal-title" id="JourneyTitle">Add Account List</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body rounded-0">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
+                    <div class="col-md-12 form-floating">
+                        <textarea class="form-control tArea entryDescription" rows="2" name="accountName"
+                            required></textarea>
+                        <label for="accountName">Name</label>
+                    </div>
+                    <div class="col-md-12 form-floating">
+                        <textarea class="form-control tArea entryDescription" rows="2" name="accountDescription"
+                            required></textarea>
+                        <label for="accountDescription">Description</label>
+                    </div>
+                    <div class="col-md-12 form-floating">
+                        <select class="form-control" name="accountStatus" aria-label="Select account"
+                            id="accountStatus">
+                            <option value="" class="accoutStatus" selected>- Select -</option>
+                        </select>
+                        <label for="account">Status</label>
+                        <div class="mb-2">
+                            <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cancel</button>
+                            <button type="submit" class="btn btn-primary float-end">Submit</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- Add CRM -->
-<div class="modal fade" id="newLead" tabindex="-1" role="dialog" aria-labelledby="leadTitle"
-    aria-hidden="true">
+<div class="modal fade" id="newLead" tabindex="-1" role="dialog" aria-labelledby="leadTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -432,19 +494,23 @@
             <div class="modal-body">
                 <form class="row g-3" action="#" method="POST" autocomplete="off">
                     <div class="col-xs-12 form-floating">
-                        <input type="text" class="form-control leadFirstName" name="leadfirstname" placeholder="John" required>
+                        <input type="text" class="form-control leadFirstName" name="leadfirstname" placeholder="John"
+                            required>
                         <label for="leadfirstname">First name</label>
                     </div>
                     <div class="col-xs-12 form-floating">
-                        <input type="text" class="form-control leadLastName" name="leadlastname" placeholder="Smith" required>
+                        <input type="text" class="form-control leadLastName" name="leadlastname" placeholder="Smith"
+                            required>
                         <label for="leadlastname">Last name</label>
                     </div>
                     <div class="col-xs-12 form-floating">
-                        <input type="email" class="form-control leadEmail" name="leademail" placeholder="example@email.com" required>
+                        <input type="email" class="form-control leadEmail" name="leademail"
+                            placeholder="example@email.com" required>
                         <label for="leadcontact">E-mail Address</label>
                     </div>
                     <div class="col-xs-12 form-floating">
-                        <input type="number" class="form-control leadContact" name="leadcontact" placeholder="09123456789" required>
+                        <input type="number" class="form-control leadContact" name="leadcontact"
+                            placeholder="09123456789" required>
                         <label for="leadcontact">Contact Number</label>
                     </div>
                     <div class="mb-2">
@@ -458,4 +524,3 @@
     </div>
 </div>
 <!-- End add CRM -->
-

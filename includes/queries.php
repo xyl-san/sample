@@ -298,6 +298,27 @@ function addToList(){
       ";
   }
 }
+function accountListTable(){
+  include 'conn.php';
+  $sql = "SELECT account_id, name, description, status, date_created FROM account_list";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    $status = ($row['status'])?'<span class="badge text-bg-success pull-right">Active</span>':'<span class="badge text-bg-danger pull-right">Inactive</span>';
+    ?>
+<tr>
+    <td><?php echo $row['account_id']; ?></td>
+    <td><?php echo $row['date_created']; ?></td>
+    <td><?php echo $row['name']; ?></td>
+    <td><?php echo $row['description']; ?></td>
+    <td><?php echo $status; ?></td>
+    <td>
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['account_id']; ?>"><i class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['account_id']; ?>"><i class="fa fa-trash"></i> Delete</button>
+    </td>
+</tr>
+<?php
+  }
+}
 
 ?>
 
