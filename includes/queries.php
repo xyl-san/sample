@@ -288,15 +288,9 @@ function accountGroupSelection(){
       ";
   }
 }
-function addToList(){
-  include 'conn.php';
-  $sql = "INSERT INTO employees (employee_code, firstname, lastname, address, birthdate, contact_info, gender, job_id, department_id, schedule_id, photo, created_on) VALUES ('$employee_code','$firstName', '$lastName', '$addressInfo', '$birthDate', '$contactInfo', '$genderSelection', '$jobSelection', '$departmentSelection', '$scheduleSelection', '$filename', NOW() )";
-  $query = $conn->query($sql);
-  while($prow = $query->fetch_assoc()){
-      echo "
-      <option value='".$prow['accountgroup_id']."'>".$prow['name'];"</option>
-      ";
-  }
+
+function journalSelection(){
+
 }
 function accountListTable(){
   include 'conn.php';
@@ -320,6 +314,28 @@ function accountListTable(){
   }
 }
 
+if(isset($_POST['leadAdd'])){
+  addLead();
+}
+
+function addLead(){
+  include 'conn.php';
+  if(isset($_POST['leadAdd'])){
+    $name = $_POST['leadname'];
+    $email = $_POST['leademail'];
+    $contact = $_POST['leadcontact'];
+    $description = $_POST['leaddescription'];
+
+    $sql = "INSERT INTO leads (name, email, contact_number, description) VALUES ('$name', '$email', '$contact', '$description')";
+    if($conn->query($sql)){
+      $_SESSION['success'] = 'A new lead has been added!';
+    }
+    else{
+      $_SESSION['error'] = $conn->error;
+    }
+  }
+  header('location: ../crm.php');
+}
 ?>
 
 

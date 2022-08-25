@@ -376,11 +376,16 @@
                         <label for="amount">Amount</label>
                     </div>
                     <div class="col-md-6 form-floating">
+<<<<<<< HEAD
                         <button type="button" class="btn btn-secondary " id="addToList"><i
                                 class="fa-solid fa-plus"></i>Add Account</button>
+=======
+                        <button type="button" class="btn btn-secondary"><i class="fa-solid fa-plus"></i>Add Account
+                        </button>
+>>>>>>> 3a48a212dc1f9c4a9d4b62cc45790a3feabc2856
                     </div>
                     <div class="col-md-12 form-floating">
-                        <table class="table table-stripped table-bordered">
+                        <table id="example1" class="table table-stripped table-bordered">
                             <thead class="table-info">
                                 <tr>
                                     <th width="10%">Tool</th>
@@ -418,6 +423,7 @@
     </div>
 </div>
 <!-- End of Accounting Add new Journal -->
+<<<<<<< HEAD
 <!--Start Adding Account List-->
 <div class="modal fade" id="addAccountList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -484,6 +490,13 @@
 
 <!-- Add CRM -->
 <div class="modal fade" id="newLead" tabindex="-1" role="dialog" aria-labelledby="leadTitle" aria-hidden="true">
+=======
+
+
+<!-- Add lead -->
+<div class="modal fade" id="newLead" tabindex="-1" role="dialog" aria-labelledby="leadTitle"
+    aria-hidden="true">
+>>>>>>> 3a48a212dc1f9c4a9d4b62cc45790a3feabc2856
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -492,8 +505,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="#" method="POST" autocomplete="off">
+                <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
                     <div class="col-xs-12 form-floating">
+<<<<<<< HEAD
                         <input type="text" class="form-control leadFirstName" name="leadfirstname" placeholder="John"
                             required>
                         <label for="leadfirstname">First name</label>
@@ -507,20 +521,35 @@
                         <input type="email" class="form-control leadEmail" name="leademail"
                             placeholder="example@email.com" required>
                         <label for="leadcontact">E-mail Address</label>
+=======
+                        <input type="text" class="form-control leadName" name="leadname" placeholder="John" required>
+                        <label for="leadfirstname">Lead name</label>
+                    </div>
+                    <div class="col-xs-12 form-floating">
+                        <input type="email" class="form-control leadEmail" name="leademail" placeholder="example@email.com" required>
+                        <label for="leademail">E-mail Address</label>
+>>>>>>> 3a48a212dc1f9c4a9d4b62cc45790a3feabc2856
                     </div>
                     <div class="col-xs-12 form-floating">
                         <input type="number" class="form-control leadContact" name="leadcontact"
                             placeholder="09123456789" required>
                         <label for="leadcontact">Contact Number</label>
                     </div>
+                    <div class="col-xs-12 form-floating">
+                        <textarea class="tArea form-control leadDescription" name="leaddescription" placeholder="Description"></textarea>
+                        <label for="leaddescription">Description (Optional)</label>
+                    </div>
                     <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
-                        <button type="submit" class="btn btn-primary float-end">Submit</button>
+                        <button type="submit" class="btn btn-primary float-end" name="leadAdd">Submit</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
 </div>
+<<<<<<< HEAD
 <!-- End add CRM -->
+=======
+<!-- End add lead -->
+>>>>>>> 3a48a212dc1f9c4a9d4b62cc45790a3feabc2856
