@@ -324,14 +324,25 @@ function accountListTable(){
   }
 }
 
-function groupStatusSelection(){
+if (isset($_POST['addAccountList'])) {
+  addAccountList();
+}
+function addAccountList(){
   include 'conn.php';
-  $sql = "SELECT accountgroup_id, status FROM group_list";
-  $query = $conn->query($sql);
-  while($prow = $query->fetch_assoc()){
-      echo "
-      <option value='".$prow['accountgroup_id']."'>".$prow['status'];"</option>
-      ";
+  if(isset($_POST['addAccountList'])){
+    $accountName = $_POST['accountName'];
+    $accountDescription = $_POST['accountDescription'];
+    $accountStatus = $_POST['accountStatus'];
+   
+    $sql = "INSERT INTO account_list (name, description, status, date_created) VALUES ('$accountName','$accountDescription','$accountStatus', NOW() )";
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
   }
+
+  header('location:account_list.php');
 }
 ?>

@@ -431,13 +431,11 @@
             <div class="modal-body rounded-0">
                 <form class="row g-3" action="#" method="POST" autocomplete="off">
                     <div class="col-md-12 form-floating">
-                        <textarea class="form-control tArea entryDescription" rows="2" name="accountName"
-                            required></textarea>
+                        <textarea class="form-control tArea entryDescription" rows="2" name="accountName" required></textarea>
                         <label for="accountName">Name</label>
                     </div>
                     <div class="col-md-12 form-floating">
-                        <textarea class="form-control tArea entryDescription" rows="2" name="accountDescription"
-                            required></textarea>
+                        <textarea class="form-control tArea entryDescription" rows="2" name="accountDescription" required></textarea>
                         <label for="accountDescription">Description</label>
                     </div>
                     <div class="col-md-12 form-floating">
@@ -451,13 +449,92 @@
                     </div>
                         <div class="mb-2">
                             <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cancel</button>
-                            <button type="submit" class="btn btn-primary float-end">Submit</button>
+                            <button type="submit" class="btn btn-primary float-end" name="addAccountList">Submit</button>
                         </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+<!--End Adding Account List-->
+<!--Start edit Account List-->
+<div class="modal fade" id="editAccountList" tabindex="-1" role="dialog" aria-labelledby="accountListTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="accountListTitle">Edit account information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="includes/queries.php" method="POST" enctype="multipart/form-data"
+                    autocomplete="off">
+                    <input type="hidden" class="employeeId" name="employee_id">
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control firstName" name="firstname" required>
+                        <label for="firstName">First name</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control lastName" name="lastname" required>
+                        <label for="lastName">Last name</label>
+                    </div>
+                    <div class="col-md-12 form-floating">
+                        <textarea class="form-control tArea addressInfo" rows="2" name="address" required></textarea>
+                        <label for="addressInfo">Address</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="date" class="form-control birthDate" name="birthdate" required>
+                        <label for="birthDate">Birthdate</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="number" class="form-control contactInfo" name="contact_info" required>
+                        <label for="contactInfo">Contact Info</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <select class="form-select" name="gender" aria-label="Select gender">
+                            <option value="" class="genderSelection" selected>- Select -</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                        <label for="genderSelection">Gender</label>
+                    </div>
+                    <div class="col-12 form-floating">
+                        <select class="form-control" name="department" aria-label="Select department">
+                            <option value="" class="departmentSelection" selected>- Select -</option>
+                            <?php employeeDepartment();?>
+                        </select>
+                        <label for="departmentSelection">Department</label>
+
+                    </div>
+                    <div class="col-12 form-floating">
+                        <select class="form-control" name="job" aria-label="Select job">
+                            <option value="" class="jobSelection" selected>- Select -</option>
+                            <?php employeePosition();?>
+
+                        </select>
+                        <label for="jobSelection">Job</label>
+
+                    </div>
+                    <div class="col-12 form-floating">
+                        <select class="form-control" name="schedule" aria-label="Select schedule">
+                            <option value="" class="scheduleSelection" selected>- Select -</option>
+                            <?php employeeSchedule();?>
+                        </select>
+                        <label for="scheduleSelection">Schedule</label>
+
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end" name="editEmployee">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--End edit Account List-->
 
 
 
@@ -481,19 +558,11 @@
 
 
 
-
-
-
-
-<!-- Add CRM -->
-<div class="modal fade" id="newLead" tabindex="-1" role="dialog" aria-labelledby="leadTitle" aria-hidden="true">
-=======
 
 
 <!-- Add lead -->
 <div class="modal fade" id="newLead" tabindex="-1" role="dialog" aria-labelledby="leadTitle"
     aria-hidden="true">
->>>>>>> 3a48a212dc1f9c4a9d4b62cc45790a3feabc2856
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -504,7 +573,6 @@
             <div class="modal-body">
                 <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
                     <div class="col-xs-12 form-floating">
-<<<<<<< HEAD
                         <input type="text" class="form-control leadFirstName" name="leadfirstname" placeholder="John"
                             required>
                         <label for="leadfirstname">First name</label>
@@ -518,14 +586,12 @@
                         <input type="email" class="form-control leadEmail" name="leademail"
                             placeholder="example@email.com" required>
                         <label for="leadcontact">E-mail Address</label>
-=======
                         <input type="text" class="form-control leadName" name="leadname" placeholder="John" required>
                         <label for="leadfirstname">Lead name</label>
                     </div>
                     <div class="col-xs-12 form-floating">
                         <input type="email" class="form-control leadEmail" name="leademail" placeholder="example@email.com" required>
                         <label for="leademail">E-mail Address</label>
->>>>>>> 3a48a212dc1f9c4a9d4b62cc45790a3feabc2856
                     </div>
                     <div class="col-xs-12 form-floating">
                         <input type="number" class="form-control leadContact" name="leadcontact"
@@ -545,8 +611,4 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD
-<!-- End add CRM -->
-=======
 <!-- End add lead -->
->>>>>>> 3a48a212dc1f9c4a9d4b62cc45790a3feabc2856
