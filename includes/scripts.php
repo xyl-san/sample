@@ -26,9 +26,4 @@ $(document).ready((function() {
     $('#example1').DataTable();
 })
 )
-$('#datepicker_add').datepicker({
-        autoclose: true,
-        format: 'yyyy-mm-dd'
-    })
-
 </script>
