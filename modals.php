@@ -528,13 +528,14 @@
     </div>
 </div>
 <!--End Delete Account List-->
+
 <!--Start Adding Group List-->
-<div class="modal fade" id="addAccountList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade" id="addGroupList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollabl">
         <div class="modal-content rounded-0">
             <div class="modal-header rounded-0">
-                <h5 class="modal-title" id="JourneyTitle">Add Account List</h5>
+                <h5 class="modal-title" id="groupListTitle">Add Group List</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
@@ -542,16 +543,23 @@
                 <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
               
                     <div class="col-md-12 form-floating">
-                        <textarea class="form-control tArea entryName" rows="2" name="accountName" required></textarea>
+                        <textarea class="form-control tArea entryName" rows="2" name="name" required></textarea>
                         <label for="accountName">Name</label>
                     </div>
                     <div class="col-md-12 form-floating">
-                        <textarea class="form-control tArea entryDescription" rows="2" name="accountDescription" required></textarea>
+                        <textarea class="form-control tArea entryDescription" rows="2" name="description" required></textarea>
                         <label for="accountDescription">Description</label>
                     </div>
                     <div class="col-md-12 form-floating">
-                        <select class="form-control" name="accountStatus" aria-label="Select account"
-                            id="accountStatus">
+                        <select class="form-control" name="type" aria-label="Select type" id="accountType">
+                            <option value="" class="accoutType" selected>--Select--</option>  
+                            <option value="0" class="accoutType" selected>Debit</option>
+                            <option value="1" class="accoutType" selected>Credit</option>   
+                        </select>
+                        <label for="account">Status</label>
+                    </div>
+                    <div class="col-md-12 form-floating">
+                        <select class="form-control" name="status" aria-label="Select status" id="accountStatus">
                             <option value="" class="accoutStatus" selected>--Select--</option>  
                             <option value="0" class="accoutStatus" selected>Inactive</option>
                             <option value="1" class="accoutStatus" selected>Active</option>   
@@ -560,7 +568,7 @@
                     </div>
                         <div class="mb-2">
                             <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cancel</button>
-                            <button type="submit" class="btn btn-primary float-end" name="addAccountList">Submit</button>
+                            <button type="submit" class="btn btn-primary float-end" name="addGroupList">Submit</button>
                         </div>
                 </form>
             </div>
@@ -569,6 +577,54 @@
 </div>
 <!--End Adding Group List-->
 
+<!--Start edit Group List-->
+<div class="modal fade" id="editGroupList" tabindex="-1" role="dialog" aria-labelledby="accountListTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="accountListTitle">Edit group list information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
+                    <input type="hidden" class="groupId" name="group_id">
+                    <div class="col-md-12 form-floating">
+                        <input type="text" class="form-control groupName" name="name" required>
+                        <label for="accountName">Name</label>
+                    </div>
+                    <div class="col-md-12 form-floating">
+                        <input type="text" class="form-control groupDescription" name="description" required>
+                        <label for="accountDescription">Description</label>
+                    </div>
+                    <div class="col-md-12 form-floating">
+                        <select class="form-control groupTypeSelection" name="type" aria-label="Select account">
+                            <option value="" class="groupTypeSelection" selected>--Select--</option>  
+                            <option value="0" class="groupTypeSelection" selected>Debit</option>
+                            <option value="1" class="groupTypeSelection" selected>Credit</option>   
+                        </select>
+                        <label for="accountStatus">Status</label>
+                    </div>
+                    <div class="col-md-12 form-floating">
+                        <select class="form-control groupStatusSelection" name="status" aria-label="Select account">
+                            <option value="" class="groupStatusSelection" selected>--Select--</option>  
+                            <option value="0" class="groupStatusSelection" selected>Inactive</option>
+                            <option value="1" class="groupStatusSelection" selected>Active</option>   
+                        </select>
+                        <label for="accountStatus">Status</label>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end" name="editGroupList">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--End edit Group List-->
 
 
 
