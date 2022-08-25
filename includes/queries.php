@@ -288,4 +288,10 @@ function accountGroupSelection(){
       ";
   }
 }
+
+function journalSelection(){
+
+}
 ?>
+
+
