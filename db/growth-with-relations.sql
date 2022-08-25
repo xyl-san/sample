@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 22, 2022 at 11:52 AM
+-- Generation Time: Aug 25, 2022 at 04:09 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -398,6 +398,67 @@ INSERT INTO `job` (`job_id`, `department_id`, `description`, `rate`, `created_on
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `journal_entries`
+--
+
+CREATE TABLE `journal_entries` (
+  `journal_id` int(30) NOT NULL,
+  `code` varchar(100) NOT NULL,
+  `journal_date` date NOT NULL,
+  `description` text NOT NULL,
+  `date_created` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `journal_entries`
+--
+
+INSERT INTO `journal_entries` (`journal_id`, `code`, `journal_date`, `description`, `date_created`, `date_updated`) VALUES
+(3, '202202-00001', '2022-02-01', 'Capital', '2022-02-01 14:08:50', NULL),
+(4, '202202-00002', '2022-02-01', 'Sample', '2022-02-01 15:55:46', NULL),
+(5, '202202-00003', '2022-02-01', 'Sample 102', '2022-02-01 15:59:34', NULL),
+(6, '202208-00001', '2022-01-08', 'warranty', '2022-08-22 14:02:49', NULL),
+(7, '202208-00002', '2022-08-02', '', '2022-08-22 15:03:46', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `journal_items`
+--
+
+CREATE TABLE `journal_items` (
+  `journal_id` int(30) NOT NULL,
+  `account_id` int(30) NOT NULL,
+  `accountgroup_id` int(30) NOT NULL,
+  `amount` float NOT NULL DEFAULT 0,
+  `date_created` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `journal_items`
+--
+
+INSERT INTO `journal_items` (`journal_id`, `account_id`, `accountgroup_id`, `amount`, `date_created`) VALUES
+(3, 1, 1, 15000, '2022-02-01 14:52:56'),
+(3, 14, 5, 15000, '2022-02-01 14:52:56'),
+(4, 42, 3, 5000, '2022-02-01 15:55:46'),
+(4, 11, 4, 5000, '2022-02-01 15:55:46'),
+(5, 31, 2, 5000, '2022-02-01 15:59:34'),
+(5, 31, 2, 3000, '2022-02-01 15:59:34'),
+(5, 4, 1, 8000, '2022-02-01 15:59:34'),
+(6, 13, 3, 150000, '2022-08-22 14:02:49'),
+(6, 4, 2, 15000000, '2022-08-22 14:02:49'),
+(6, 46, 3, 50000, '2022-08-22 14:02:49'),
+(6, 7, 1, 14800000, '2022-08-22 14:02:49'),
+(7, 7, 1, 100, '2022-08-22 15:03:46'),
+(7, 4, 1, 100, '2022-08-22 15:03:46'),
+(7, 4, 6, 100, '2022-08-22 15:03:46'),
+(7, 37, 2, 300, '2022-08-22 15:03:46');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `order`
 --
 
@@ -691,6 +752,20 @@ ALTER TABLE `job`
   ADD KEY `deparment_id` (`department_id`);
 
 --
+-- Indexes for table `journal_entries`
+--
+ALTER TABLE `journal_entries`
+  ADD PRIMARY KEY (`journal_id`);
+
+--
+-- Indexes for table `journal_items`
+--
+ALTER TABLE `journal_items`
+  ADD KEY `journal_id` (`journal_id`),
+  ADD KEY `account_id` (`account_id`),
+  ADD KEY `group_id` (`accountgroup_id`);
+
+--
 -- Indexes for table `order`
 --
 ALTER TABLE `order`
@@ -850,6 +925,12 @@ ALTER TABLE `job`
   MODIFY `job_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
+-- AUTO_INCREMENT for table `journal_entries`
+--
+ALTER TABLE `journal_entries`
+  MODIFY `journal_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `overtime`
 --
 ALTER TABLE `overtime`
@@ -942,6 +1023,14 @@ ALTER TABLE `inventory`
 --
 ALTER TABLE `job`
   ADD CONSTRAINT `job_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `journal_items`
+--
+ALTER TABLE `journal_items`
+  ADD CONSTRAINT `journal_items_ibfk_1` FOREIGN KEY (`journal_id`) REFERENCES `journal_entries` (`journal_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `journal_items_ibfk_2` FOREIGN KEY (`accountgroup_id`) REFERENCES `group_list` (`accountgroup_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `journal_items_ibfk_3` FOREIGN KEY (`account_id`) REFERENCES `account_list` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `order`
