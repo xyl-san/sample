@@ -292,6 +292,29 @@ function accountGroupSelection(){
 function journalSelection(){
 
 }
+
+if(isset($_POST['leadAdd'])){
+  addLead();
+}
+
+function addLead(){
+  include 'conn.php';
+  if(isset($_POST['leadAdd'])){
+    $name = $_POST['leadname'];
+    $email = $_POST['leademail'];
+    $contact = $_POST['leadcontact'];
+    $description = $_POST['leaddescription'];
+
+    $sql = "INSERT INTO leads (name, email, contact_number, description) VALUES ('$name', '$email', '$contact', '$description')";
+    if($conn->query($sql)){
+      $_SESSION['success'] = 'A new lead has been added!';
+    }
+    else{
+      $_SESSION['error'] = $conn->error;
+    }
+  }
+  header('location: ../crm.php');
+}
 ?>
 
 

@@ -21,7 +21,7 @@
                         data-bs-target="#newLead">
                         <span>
                             <i class="fa fa-plus"></i>
-                            New
+                            New 
                         </span>
                     </button>
                     <div aria-label="breadcrumb" class="breadcrumbs float-end mt-2">
