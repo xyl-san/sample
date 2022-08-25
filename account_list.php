@@ -75,14 +75,14 @@
     $(function() {
         $('#example1').on('click', '.edit', function(e) {
             e.preventDefault();
-            $('#editDepartment').modal('show');
+            $('#editAccountList').modal('show');
             var id = $(this).data('id');
             getRow(id);
         });
 
         $('#example1').on('click', '.delete', function(e) {
             e.preventDefault();
-            $('#deleteDepartment').modal('show');
+            $('#deleteAccountList').modal('show');
             var id = $(this).data('id');
             getRow(id);
         });
@@ -98,9 +98,10 @@
                 },
                 dataType: 'json',
                 success: function(response) {
-                    $('.department_id').val(response.department_id);
-                    $('.department').val(response.department_name);
-                    $('.delete_department_name').html(response.department_name);
+                    $('.accountId').val(response.account_id);
+                    $('.accountName').val(response.name);
+                    $('.accountDescription').val(response.description);
+                    $('.accountStatus').val(response.status);
 
                 }
             });

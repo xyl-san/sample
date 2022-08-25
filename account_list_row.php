@@ -2,8 +2,8 @@
 	include 'includes/conn.php';
 
 	if(isset($_POST['id'])){
-		$journal_id = $_POST['id'];
-		$sql = "SELECT j.journal_id, j.account_id, j.accountgroup_id, j.amount,j.date_created, al.description, ag.name,ag.type FROM journal_items j INNER JOIN account_list AS al ON j.journal_id=al.account_id INNER JOIN group_list AS ag ON j.journal_id=ag.accountgroup_id WHERE a.journal_id = '$journal_id'";
+		$account_id = $_POST['id'];
+		$sql = "SELECT account_id, name, description, status FROM account_list WHERE account_id = '$account_id'";
 		$query = $conn->query($sql);
 		$row = $query->fetch_assoc();
 
