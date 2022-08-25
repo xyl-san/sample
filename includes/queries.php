@@ -267,7 +267,7 @@ function jobTable(){
 
 // Accounting queries
 
-function accountSelection(){
+function accountListSelection(){
   include 'conn.php';
   $sql = "SELECT account_id, description FROM account_list";
   $query = $conn->query($sql);
@@ -288,10 +288,17 @@ function accountGroupSelection(){
       ";
   }
 }
-
-function journalSelection(){
-
+function addToList(){
+  include 'conn.php';
+  $sql = "INSERT INTO employees (employee_code, firstname, lastname, address, birthdate, contact_info, gender, job_id, department_id, schedule_id, photo, created_on) VALUES ('$employee_code','$firstName', '$lastName', '$addressInfo', '$birthDate', '$contactInfo', '$genderSelection', '$jobSelection', '$departmentSelection', '$scheduleSelection', '$filename', NOW() )";
+  $query = $conn->query($sql);
+  while($prow = $query->fetch_assoc()){
+      echo "
+      <option value='".$prow['accountgroup_id']."'>".$prow['name'];"</option>
+      ";
+  }
 }
+
 ?>
 
 
