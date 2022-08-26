@@ -83,7 +83,7 @@
                 <li>
                     <a href="accounting_list.php"><i class="fa-solid fa-book"></i> Journal Entries</a>
                     <a href="account_list.php"><i class="fa-solid fa-file-invoice"></i></i> Account List</a>
-                    <a href="groupList.php"><i class="fa-solid fa-layer-group"></i></i> Group List</a>
+                    <a href="account_group.php"><i class="fa-solid fa-layer-group"></i></i> Group List</a>
                 </li>
             </ul>
         </li>
