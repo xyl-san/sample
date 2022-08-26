@@ -130,7 +130,7 @@
                     <div class="col-12 form-floating">
                         <select class="form-control" name="job" aria-label="Select job">
                             <option value="" class="jobSelection" selected>- Select -</option>
-                            <?php employeePosition();?>
+                            
 
                         </select>
                         <label for="jobSelection">Job</label>
@@ -589,7 +589,7 @@
             </div>
             <div class="modal-body">
                 <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
-                    <input type="hidden" class="groupId" name="group_id">
+                    <input type="hidden" class="groupId" name="accountgroup_id">
                     <div class="col-md-12 form-floating">
                         <input type="text" class="form-control groupName" name="name" required>
                         <label for="accountName">Name</label>
@@ -600,17 +600,17 @@
                     </div>
                     <div class="col-md-12 form-floating">
                         <select class="form-control groupTypeSelection" name="type" aria-label="Select account">
-                            <option value="" class="groupTypeSelection" selected>--Select--</option>  
-                            <option value="0" class="groupTypeSelection" selected>Debit</option>
-                            <option value="1" class="groupTypeSelection" selected>Credit</option>   
+                            <option value="" class="typeSelection" selected>--Select--</option>  
+                            <option value="0" class="typeSelection" selected>Debit</option>
+                            <option value="1" class="typeSelection" selected>Credit</option>   
                         </select>
-                        <label for="accountStatus">Status</label>
+                        <label for="accountStatus">Type</label>
                     </div>
                     <div class="col-md-12 form-floating">
                         <select class="form-control groupStatusSelection" name="status" aria-label="Select account">
-                            <option value="" class="groupStatusSelection" selected>--Select--</option>  
-                            <option value="0" class="groupStatusSelection" selected>Inactive</option>
-                            <option value="1" class="groupStatusSelection" selected>Active</option>   
+                            <option value="" class="statusSelection" selected>--Select--</option>  
+                            <option value="0" class="statusSelection" selected>Inactive</option>
+                            <option value="1" class="statusSelection" selected>Active</option>   
                         </select>
                         <label for="accountStatus">Status</label>
                     </div>
@@ -625,6 +625,34 @@
     </div>
 </div>
 <!--End edit Group List-->
+<!--Start Delete Account List-->
+<div class="modal fade" id="deleteGroupList" tabindex="-1" role="dialog" aria-labelledby="groupListTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="groupListTitle">Edit account information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
+                    <input type="hidden" class="groupId" name="accountgroup_id">
+                    <div class="text-center">
+                        <p>
+                            Delete group list?
+                        </p>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end" name="deleteGroupList">Yes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Delete Account List-->
 
 
 

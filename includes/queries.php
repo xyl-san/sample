@@ -439,18 +439,36 @@ editAccountList();
       function editGroupList(){
         include 'conn.php';
         if(isset($_POST['editGroupList'])){
-          $group_id = $_POST['group_id'];
+          $groupId = $_POST['accountgroup_id'];
           $groupName = $_POST['name'];
           $groupDescription = $_POST['description'];
           $groupTypeSelection = $_POST['type'];
           $groupStatusSelection = $_POST['status'];
-          $sql = "UPDATE group_list SET name = '$groupName', description = '$groupDescription',type='$groupTypeSelection', status = '$groupStatusSelection' WHERE accountgroup_id = '$group_id'";
+          $sql = "UPDATE group_list SET name = '$groupName', description = '$groupDescription',type='$groupTypeSelection', status = '$groupStatusSelection' WHERE accountgroup_id = '$groupId'";
           if($conn->query($sql)){
             echo "success";
           }
           else{
             echo "error";
           }
+        }
+        header('location:../account_group.php');
+      }
+
+      if (isset($_POST['deleteGroupList'])) {
+        groupListDelete();
+      }
+      function groupListDelete(){
+        include 'conn.php';
+        if(isset($_POST['deleteGroupList'])){
+          $groupId = $_POST['accountgroup_id'];
+          $sql = "DELETE FROM group_list WHERE accountgroup_id = '$groupId'";
+        }
+        if($conn->query($sql)){
+          $_SESSION['success'] = 'Group list deleted successfully';
+        }
+        else{
+          $_SESSION['error'] = $conn->error;
         }
         header('location:../account_group.php');
       }
