@@ -31,7 +31,7 @@
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                 <a href="pointofsale.php">
                     <button class="btn" id="crm">
-                        <img src="assets/icons/pos.png" alt="" style="height:120px;">
+                        <img src="assets/icons/POS.png" alt="" style="height:120px;">
                         <div class="o_caption">Point of Sale</div>
                     </button>
                 </a>
@@ -67,7 +67,7 @@
             </div>
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                 <button class="btn" id="crm">
-                    <img src="assets/icons/customer.png" alt="" style="height:120px">
+                    <img src="assets/icons/customers.png" alt="" style="height:120px">
                     <div class="o_caption">Employees</div>
                 </button>
             </div>
@@ -86,14 +86,14 @@
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                 <button class="btn" id="crm">
                     <a href="crm.php">
-                    <img src="assets/icons/crm.png" alt="" style="height:120px">
+                    <img src="assets/icons/CRM.png" alt="" style="height:120px">
                     <div class="o_caption">CRM</div>
                     </a>
                 </button>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                 <button class="btn" id="crm">
-                    <img src="assets/icons/accounts.png" alt="" style="height:120px">
+                    <img src="assets/icons/account.png" alt="" style="height:120px">
                     <div class="o_caption">Accounts</div>
                 </button>
             </div>

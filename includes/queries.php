@@ -393,21 +393,21 @@ editAccountList();
       $status = ($row['status'])?'<span class="badge text-bg-success pull-right">Active</span>':'<span class="badge text-bg-danger pull-right">Inactive</span>';
       $type = ($row['type'])?'<span class="badge text-bg-warning pull-right">Credit</span>':'<span class="badge text-bg-info pull-right">Debit</span>';
       ?>
-  <tr>
-      <td><?php echo $row['accountgroup_id']; ?></td>
-      <td><?php echo $row['date_created']; ?></td>
-      <td><?php echo $row['name']; ?></td>
-      <td><?php echo $row['description']; ?></td>
-      <td><?php echo $type; ?></td>
-      <td><?php echo $status; ?></td>
-      <td>
-          <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['accountgroup_id']; ?>"><i
-                  class="fa fa-edit"></i> Edit</button>
-          <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['accountgroup_id']; ?>"><i
-                  class="fa fa-trash"></i> Delete</button>
-      </td>
-  </tr>
-  <?php
+        <tr>
+            <td><?php echo $row['accountgroup_id']; ?></td>
+            <td><?php echo $row['date_created']; ?></td>
+            <td><?php echo $row['name']; ?></td>
+            <td><?php echo $row['description']; ?></td>
+            <td><?php echo $type; ?></td>
+            <td><?php echo $status; ?></td>
+            <td>
+                <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['accountgroup_id']; ?>"><i
+                        class="fa fa-edit"></i> Edit</button>
+                <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['accountgroup_id']; ?>"><i
+                        class="fa fa-trash"></i> Delete</button>
+            </td>
+        </tr>
+<?php
     }
   }
   if (isset($_POST['addGroupList'])) {
@@ -472,4 +472,34 @@ editAccountList();
         }
         header('location:../account_group.php');
       }
+
+
+    if(isset($_POST['addJournalEntry'])){
+        journalEntryNew();
+    }
+    function journalEntryNew(){
+      include 'conn.php';
+      if(isset($_POST['addJorunalList'])){
+        $groupId = $_POST['accountgroup_id'];
+        $groupName = $_POST['name'];
+        $groupDescription = $_POST['description'];
+        $groupTypeSelection = $_POST['type'];
+        $groupStatusSelection = $_POST['status'];
+
+        $sql = "INSERT INTO journal_items (journal_id, account_id, accountgroup_id, amount, date_created) VALUES ('$journal_id','$account_id','$accountgroup_id','$amount',NOW())";
+        
+      }
+      if($conn->query($sql)){
+        $_SESSION['success'] = 'Added New Journal Entry!';
+      }
+      else{
+        $_SESSION['error'] = $conn->error;
+      }
+      header('location: ../account_list.php');
+
+    }
+
+
+
+    
 ?>

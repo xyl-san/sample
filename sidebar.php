@@ -8,13 +8,14 @@
         <li>
             <a href="home.php">
                 <i class="fa-solid fa-house"></i>
-                 Home
+                Home
             </a>
         </li>
         <li>
-            <a href="#employeeSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-wrap">
+            <a href="#employeeSubmenu" data-bs-toggle="collapse" aria-expanded="false"
+                class="dropdown-toggle text-wrap">
                 <i class="fa-solid fa-users"></i>
-                 Human Resource
+                Human Resource
             </a>
             <ul class="collapse list-unstyled" id="employeeSubmenu">
                 <li>
@@ -31,7 +32,7 @@
         <li>
             <a href="#pmSystem" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-wrap">
                 <i class="fa-solid fa-warehouse"></i>
-                 Purchase Management
+                Purchase Management
             </a>
             <ul class="collapse list-unstyled" id="pmSystem">
                 <li>
@@ -51,7 +52,7 @@
         <li>
             <a href="#cmSystem" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-wrap">
                 <i class="fa-solid fa-people-group"></i>
-                 Customer Management</a>
+                Customer Management</a>
             <ul class="collapse list-unstyled" id="cmSystem">
                 <li>
                     <a href="#"><i class="fa-solid fa-person"></i> Customer</a>
@@ -63,8 +64,8 @@
         </li>
         <li>
             <a href="#paySystem" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-wrap">
-            <i class="fa-solid fa-file-invoice"></i>
-             Payroll/Payslip</a>
+                <i class="fa-solid fa-file-invoice"></i>
+                Payroll/Payslip</a>
             <ul class="collapse list-unstyled" id="paySystem">
                 <li>
                     <a href="#"><i class="fa-solid fa-file-invoice"></i> Payroll</a>
@@ -75,9 +76,10 @@
             </ul>
         </li>
         <li>
-            <a href="#accountingSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-wrap">
+            <a href="#accountingSubmenu" data-bs-toggle="collapse" aria-expanded="false"
+                class="dropdown-toggle text-wrap">
                 <i class="fa-solid fa-file-invoice-dollar"></i>
-                 Accounting
+                Accounting
             </a>
             <ul class="collapse list-unstyled" id="accountingSubmenu">
                 <li>

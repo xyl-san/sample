@@ -333,7 +333,6 @@
 </div>
 <!-- End Edit Attendance Employee -->
 
-
 <!-- Start of Accounting Add new Journal -->
 <div class="modal fade" id="addNewJournal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -347,7 +346,7 @@
             <div class="modal-body rounded-0">
                 <form class="row g-3" action="#" method="POST" autocomplete="off">
                     <div class="col-md-6 form-floating">
-                        <input type="date" class="form-control date" name="date" id="datepicker_add" required>
+                        <input type="date" class="form-control date" name="date" id="date" required>
                         <label for="date">Entry Date</label>
                     </div>
                     <div class="col-md-12 form-floating">
@@ -376,8 +375,6 @@
                     <div class="col-md-6 form-floating">
                         <button type="button" class="btn btn-secondary " id="addToList"><i
                                 class="fa-solid fa-plus"></i>Add Account</button>
-                        <button type="button" class="btn btn-secondary"><i class="fa-solid fa-plus"></i>Add Account
-                        </button>
                     </div>
                     <div class="col-md-12 form-floating">
                         <table id="example1" class="table table-stripped table-bordered">
@@ -418,6 +415,7 @@
     </div>
 </div>
 <!-- End of Accounting Add new Journal -->
+
 <!--Start Adding Account List-->
 <div class="modal fade" id="addAccountList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
