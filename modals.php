@@ -689,14 +689,9 @@
             <div class="modal-body">
                 <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
                     <div class="col-xs-12 form-floating">
-                        <input type="text" class="form-control leadFirstName" name="leadfirstname" placeholder="John"
+                        <input type="text" class="form-control leadName" name="leadname" placeholder="John"
                             required>
-                        <label for="leadfirstname">First name</label>
-                    </div>
-                    <div class="col-xs-12 form-floating">
-                        <input type="text" class="form-control leadLastName" name="leadlastname" placeholder="Smith"
-                            required>
-                        <label for="leadlastname">Last name</label>
+                        <label for="leadname">Name</label>
                     </div>
                     <div class="col-xs-12 form-floating">
                         <input type="email" class="form-control leadEmail" name="leademail" placeholder="example@email.com" required>

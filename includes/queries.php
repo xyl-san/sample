@@ -474,6 +474,29 @@ editAccountList();
         header('location:../account_group.php');
       }
 
+
+      if (isset($_POST['leadAdd'])) {
+        leadAdd();
+      }
+      function leadAdd(){
+        include 'conn.php';
+        if(isset($_POST['leadAdd'])){
+          $name = $_POST['leadname'];
+          $email = $_POST['leademail'];
+          $contact_number = $_POST['leadcontact'];
+          $description = $_POST['leaddescription'];
+
+          $sql = "INSERT INTO leads (name, email, contact_number, description) VALUES('$name', '$email', '$contact_number', '$description')";
+          if($conn->query($sql)){
+            echo 'success';
+          }
+          else{
+            echo "error";
+          }
+        }
+        header('location: ../crm.php');
+      }
+
   //CRM Change Stage
   if(isset($_POST['action']) && !empty($_POST['action'])) {
     $action = $_POST['action'];

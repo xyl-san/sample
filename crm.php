@@ -61,7 +61,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div id="leads" class="col list_containers">
+                        <div id="leads" class="col border rounded list_containers">
                             <h5>Leads</h5>
                             <?php 
                                 foreach($leadList as $key => $li){
@@ -76,7 +76,7 @@
                                 }
                             ?>
                         </div>
-                        <div id="opportunity" class="col list_containers">
+                        <div id="opportunity" class="col border rounded list_containers">
                             <h5>Qualified Opportunity</h5>
                             <?php 
                                 foreach($opportunityList as $key => $oi){
@@ -91,7 +91,7 @@
                                 }
                             ?>
                         </div>
-                        <div id="proposition" class="col list_containers">
+                        <div id="proposition" class="col border rounded list_containers">
                             <h5>Proposition</h5>
                             <?php 
                                 foreach($propositionList as $key => $pi){
@@ -106,7 +106,7 @@
                                 }
                             ?>
                         </div>
-                        <div id="won" class="col list_containers">
+                        <div id="won" class="col border rounded list_containers">
                             <h5>Won</h5>
                             <?php 
                                 foreach($wonList as $key => $wi){
@@ -121,7 +121,7 @@
                                 }
                             ?>
                         </div>
-                        <div id="lost" class="col list_containers">
+                        <div id="lost" class="col border rounded list_containers">
                             <h5>Lost</h5>
                             <?php 
                                 foreach($lostList as $key => $loi){
@@ -149,179 +149,124 @@
     <?php include 'modals.php'; ?>
 
     <script type="text/javascript">
-    $(".listitems").draggable();
+        $(".listitems").draggable();
 
-    $("#leads").droppable({
+        $("#leads").droppable({
 
-        drop: function(event, ui) {
+            drop: function(event, ui) {
 
-            $(this).addClass("ui-state-highlight");
+                $(this).addClass("ui-state-highlight");
 
-            var lead_id = ui.draggable.attr('data-itemid')
+                var lead_id = ui.draggable.attr('data-itemid')
 
-            $.ajax({
-                method: "POST",
+                $.ajax({
+                    method: "POST",
 
-                url: "includes/queries.php",
-                data: {
-                    'action': 1,
-                    'lead_id': lead_id,
-                },
-            }).done(function(data) {
-                var result = $.parseJSON(data);
+                    url: "includes/queries.php",
+                    data: {
+                        'action': 1,
+                        'lead_id': lead_id,
+                    },
+                }).done(function(data) {
+                    var result = $.parseJSON(data);
 
-            });
-        }
-    });
-    $("#opportunity").droppable({
-
-        drop: function(event, ui) {
-
-            $(this).addClass("ui-state-highlight");
-
-            var lead_id = ui.draggable.attr('data-itemid')
-
-            $.ajax({
-                method: "POST",
-
-                url: "includes/queries.php",
-                data: {
-                    'lead_id': lead_id,
-                    'action': 2,
-                },
-            }).done(function(data) {
-                var result = $.parseJSON(data);
-
-            });
-        }
-    });
-    $("#proposition").droppable({
-
-        drop: function(event, ui) {
-
-            $(this).addClass("ui-state-highlight");
-
-            var lead_id = ui.draggable.attr('data-itemid')
-
-            $.ajax({
-                method: "POST",
-
-                url: "includes/queries.php",
-                data: {
-                    'lead_id': lead_id,
-                    'action': 3,
-                },
-            }).done(function(data) {
-                var result = $.parseJSON(data);
-
-            });
-        }
-    });
-    $("#won").droppable({
-
-        drop: function(event, ui) {
-
-            $(this).addClass("ui-state-highlight");
-
-            var lead_id = ui.draggable.attr('data-itemid')
-
-            $.ajax({
-                method: "POST",
-
-                url: "includes/queries.php",
-                data: {
-                    'lead_id': lead_id,
-                    'action': 4,
-                },
-            }).done(function(data) {
-                var result = $.parseJSON(data);
-
-            });
-        }
-    });
-    $("#lost").droppable({
-
-        drop: function(event, ui) {
-
-            $(this).addClass("ui-state-highlight");
-
-            var lead_id = ui.draggable.attr('data-itemid')
-
-            $.ajax({
-                method: "POST",
-
-                url: "includes/queries.php",
-                data: {
-                    'lead_id': lead_id,
-                    'action': 5,
-                },
-            }).done(function(data) {
-                var result = $.parseJSON(data);
-
-            });
-        }
-    });
-
-
-
-
-
-    $(document).ready(function() {
-        $('#sidebarCollapse').on('click', function() {
-            $('#sidebar').toggleClass('active');
+                });
+            }
         });
-    });
+        $("#opportunity").droppable({
 
-    $(function() {
-        $('#example1').on('click', '.edit', function(e) {
-            e.preventDefault();
-            $('#editEmployee').modal('show');
-            var id = $(this).data('id');
-            getRow(id);
+            drop: function(event, ui) {
+
+                $(this).addClass("ui-state-highlight");
+
+                var lead_id = ui.draggable.attr('data-itemid')
+
+                $.ajax({
+                    method: "POST",
+
+                    url: "includes/queries.php",
+                    data: {
+                        'lead_id': lead_id,
+                        'action': 2,
+                    },
+                }).done(function(data) {
+                    var result = $.parseJSON(data);
+
+                });
+            }
+        });
+        $("#proposition").droppable({
+
+            drop: function(event, ui) {
+
+                $(this).addClass("ui-state-highlight");
+
+                var lead_id = ui.draggable.attr('data-itemid')
+
+                $.ajax({
+                    method: "POST",
+
+                    url: "includes/queries.php",
+                    data: {
+                        'lead_id': lead_id,
+                        'action': 3,
+                    },
+                }).done(function(data) {
+                    var result = $.parseJSON(data);
+
+                });
+            }
+        });
+        $("#won").droppable({
+
+            drop: function(event, ui) {
+
+                $(this).addClass("ui-state-highlight");
+
+                var lead_id = ui.draggable.attr('data-itemid')
+
+                $.ajax({
+                    method: "POST",
+
+                    url: "includes/queries.php",
+                    data: {
+                        'lead_id': lead_id,
+                        'action': 4,
+                    },
+                }).done(function(data) {
+                    var result = $.parseJSON(data);
+
+                });
+            }
+        });
+        $("#lost").droppable({
+
+            drop: function(event, ui) {
+
+                $(this).addClass("ui-state-highlight");
+
+                var lead_id = ui.draggable.attr('data-itemid')
+
+                $.ajax({
+                    method: "POST",
+
+                    url: "includes/queries.php",
+                    data: {
+                        'lead_id': lead_id,
+                        'action': 5,
+                    },
+                }).done(function(data) {
+                    var result = $.parseJSON(data);
+
+                });
+            }
         });
 
-        $('#example1').on('click', '.delete', function(e) {
-            e.preventDefault();
-            $('#deleteEmployee').modal('show');
-            var id = $(this).data('id');
-            getRow(id);
-        });
-
-        $('#example1').on('click', '.photo', function(e) {
-            e.preventDefault();
-            var id = $(this).data('id');
-            $('#editEmployeePhoto').modal('show');
-            getRow(id);
-        });
-    });
-
-    function getRow(id) {
         $(document).ready(function() {
-            $.ajax({
-                type: 'POST',
-                url: 'employee_row.php',
-                data: {
-                    id: id
-                },
-                dataType: 'json',
-                success: function(response) {
-                    $('.employeeId').val(response.employee_id);
-                    $('.firstName').val(response.firstname);
-                    $('.lastName').val(response.lastname);
-                    $('.addressInfo').val(response.address);
-                    $('.birthDate').val(response.birthdate);
-                    $('.contactInfo').val(response.contact_info);
-                    $('.genderSelection').html(response.gender);
-                    $('.jobSelection').html(response.description);
-                    $('.departmentSelection').html(response.department_name);
-                    $('.del_employee_name').html(response.firstname + ' ' + response.lastname);
-                    $('.scheduleSelection').html(response.time_in + ' ' + response.time_out);
-
-                }
+            $('#sidebarCollapse').on('click', function() {
+                $('#sidebar').toggleClass('active');
             });
-
-        })
-    }
+        });
     </script>
 </body>
 
