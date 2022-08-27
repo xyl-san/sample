@@ -61,80 +61,113 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div id="leads" class="col border rounded list_containers">
+                        <div class="col border rounded">
                             <h5>Leads</h5>
-                            <?php 
-                                foreach($leadList as $key => $li){
-                            ?>
-                            <div class="ui-widget-content listitems" data-itemid=<?php echo $li['lead_id'] ?>>
-                                <p><?php echo $li['name'] ?></p>
-                                <p><?php echo $li['email'] ?></p>
-                                <p><?php echo $li['contact_number'] ?></p>
-                                <p><?php echo $li['description'] ?></p>
+                            <div id="leads" class="list_containers h-100">
+                                <?php 
+                                    foreach($leadList as $key => $li){
+                                ?>
+                                <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $li['lead_id'] ?>>
+                                    <div class="card-header">
+                                        <p class="fw-bolder"><?php echo $li['name'] ?></p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><?php echo $li['email'] ?></p>
+                                        <p><?php echo $li['contact_number'] ?></p>
+                                        <p><?php echo $li['description'] ?></p>
+                                    </div>
+                                </div>
+                                <?php
+                                    }
+                                ?>
                             </div>
-                            <?php
-                                }
-                            ?>
+                            
                         </div>
-                        <div id="opportunity" class="col border rounded list_containers">
+                        <div class="col border rounded">
                             <h5>Qualified Opportunity</h5>
-                            <?php 
-                                foreach($opportunityList as $key => $oi){
-                            ?>
-                            <div class="ui-widget-content listitems" data-itemid=<?php echo $oi['lead_id'] ?>>
-                                <p><?php echo $oi['name'] ?></p>
-                                <p><?php echo $oi['email'] ?></p>
-                                <p><?php echo $oi['contact_number'] ?></p>
-                                <p><?php echo $oi['description'] ?></p>
+                            <div id="opportunity" class="list_containers h-100">
+                                <?php 
+                                    foreach($opportunityList as $key => $oi){
+                                ?>
+                                <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $oi['lead_id'] ?>>
+                                    <div class="card-header">
+                                        <p class="fw-bolder"><?php echo $oi['name'] ?></p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><?php echo $oi['email'] ?></p>
+                                        <p><?php echo $oi['contact_number'] ?></p>
+                                        <p><?php echo $oi['description'] ?></p>
+                                    </div>
+                                </div>
+                                <?php
+                                    }
+                                ?>
                             </div>
-                            <?php
-                                }
-                            ?>
+                            
                         </div>
-                        <div id="proposition" class="col border rounded list_containers">
+                        <div class="col border rounded">
                             <h5>Proposition</h5>
-                            <?php 
-                                foreach($propositionList as $key => $pi){
-                            ?>
-                            <div class="ui-widget-content listitems" data-itemid=<?php echo $pi['lead_id'] ?>>
-                                <p><?php echo $pi['name'] ?></p>
-                                <p><?php echo $pi['email'] ?></p>
-                                <p><?php echo $pi['contact_number'] ?></p>
-                                <p><?php echo $pi['description'] ?></p>
+                            <div id="proposition" class="list_containers h-100">
+                                <?php 
+                                    foreach($propositionList as $key => $pi){
+                                ?>
+                                <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $pi['lead_id'] ?>>
+                                    <div class="card-header">
+                                        <p class="fw-bolder"><?php echo $pi['name'] ?></p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><?php echo $pi['email'] ?></p>
+                                        <p><?php echo $pi['contact_number'] ?></p>
+                                        <p><?php echo $pi['description'] ?></p>
+                                    </div>
+                                </div>
+                                <?php
+                                    }
+                                ?>
                             </div>
-                            <?php
-                                }
-                            ?>
                         </div>
-                        <div id="won" class="col border rounded list_containers">
+                        <div class="col border rounded">
                             <h5>Won</h5>
-                            <?php 
-                                foreach($wonList as $key => $wi){
-                            ?>
-                            <div class="ui-widget-content listitems" data-itemid=<?php echo $wi['lead_id'] ?>>
-                                <p><?php echo $wi['name'] ?></p>
-                                <p><?php echo $wi['email'] ?></p>
-                                <p><?php echo $wi['contact_number'] ?></p>
-                                <p><?php echo $wi['description'] ?></p>
+                            <div id="won" class="list_containers h-100">
+                                <?php 
+                                    foreach($wonList as $key => $wi){
+                                ?>
+                                <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $wi['lead_id'] ?>>
+                                    <div class="card-header">
+                                        <p class="fw-bolder"><?php echo $wi['name'] ?></p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><?php echo $wi['email'] ?></p>
+                                        <p><?php echo $wi['contact_number'] ?></p>
+                                        <p><?php echo $wi['description'] ?></p>
+                                    </div>
+                                </div>
+                                <?php
+                                    }
+                                ?>
                             </div>
-                            <?php
-                                }
-                            ?>
                         </div>
-                        <div id="lost" class="col border rounded list_containers">
+                        <div class="col border rounded">
                             <h5>Lost</h5>
-                            <?php 
-                                foreach($lostList as $key => $loi){
-                            ?>
-                            <div class="ui-widget-content listitems" data-itemid=<?php echo $loi['lead_id'] ?>>
-                                <p><?php echo $loi['name'] ?></p>
-                                <p><?php echo $loi['email'] ?></p>
-                                <p><?php echo $loi['contact_number'] ?></p>
-                                <p><?php echo $loi['description'] ?></p>
+                            <div id="lost" class="list_containers h-100">
+                                <?php 
+                                    foreach($lostList as $key => $loi){
+                                ?>
+                                <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $loi['lead_id'] ?>>
+                                    <div class="card-header">
+                                        <p class="fw-bolder"><?php echo $loi['name'] ?></p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><?php echo $loi['email'] ?></p>
+                                        <p><?php echo $loi['contact_number'] ?></p>
+                                        <p><?php echo $loi['description'] ?></p>
+                                    </div>
+                                </div>
+                                <?php
+                                    }
+                                ?>
                             </div>
-                            <?php
-                                }
-                            ?>
+                            
                         </div>
 
                     </div>
@@ -149,7 +182,13 @@
     <?php include 'modals.php'; ?>
 
     <script type="text/javascript">
-        $(".listitems").draggable();
+        
+        $(".list_containers").sortable({
+            connectWith: ".list_containers"
+        })
+        $("listitems").draggable({
+            connectToSortable: ".list_containers"
+        });
 
         $("#leads").droppable({
 
