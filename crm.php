@@ -29,7 +29,8 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
- <!-- asd -->
+<!-- asd -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -67,10 +68,12 @@
                                 <?php 
                                     foreach($leadList as $key => $li){
                                 ?>
-                                <div class="card ui-widget-content border m-3 listitems " data-itemid=<?php echo $li['lead_id'] ?>>
+                                <div class="card ui-widget-content border m-3 listitems "
+                                    data-itemid=<?php echo $li['lead_id'] ?>>
                                     <div class="card-header crm-header">
                                         <p class="fw-bolder d-inline-block mx-auto"><?php echo $li['name'] ?></p>
-                                        <button data-itemid=<?php echo $li['lead_id'] ?> class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
+                                        <button data-itemid=<?php echo $li['lead_id'] ?>
+                                            class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
                                     </div>
@@ -84,7 +87,7 @@
                                     }
                                 ?>
                             </div>
-                            
+
                         </div>
                         <div class="col border rounded">
                             <h5>Qualified Opportunity</h5>
@@ -92,10 +95,12 @@
                                 <?php 
                                     foreach($opportunityList as $key => $oi){
                                 ?>
-                                <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $oi['lead_id'] ?>>
+                                <div class="card ui-widget-content border m-3 listitems"
+                                    data-itemid=<?php echo $oi['lead_id'] ?>>
                                     <div class="card-header crm-header">
                                         <p class="fw-bolder d-inline-block mx-auto"><?php echo $oi['name'] ?></p>
-                                        <button data-itemid=<?php echo $oi['lead_id'] ?> class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
+                                        <button data-itemid=<?php echo $oi['lead_id'] ?>
+                                            class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
                                     </div>
@@ -109,7 +114,7 @@
                                     }
                                 ?>
                             </div>
-                            
+
                         </div>
                         <div class="col border rounded">
                             <h5>Proposition</h5>
@@ -117,10 +122,12 @@
                                 <?php 
                                     foreach($propositionList as $key => $pi){
                                 ?>
-                                <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $pi['lead_id'] ?>>
+                                <div class="card ui-widget-content border m-3 listitems"
+                                    data-itemid=<?php echo $pi['lead_id'] ?>>
                                     <div class="card-header crm-header">
                                         <p class="fw-bolder d-inline-block mx-auto"><?php echo $pi['name'] ?></p>
-                                        <button data-itemid=<?php echo $pi['lead_id'] ?> class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
+                                        <button data-itemid=<?php echo $pi['lead_id'] ?>
+                                            class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
                                     </div>
@@ -141,10 +148,12 @@
                                 <?php 
                                     foreach($wonList as $key => $wi){
                                 ?>
-                                <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $wi['lead_id'] ?>>
+                                <div class="card ui-widget-content border m-3 listitems"
+                                    data-itemid=<?php echo $wi['lead_id'] ?>>
                                     <div class="card-header crm-header">
                                         <p class="fw-bolder d-inline-block mx-auto"><?php echo $wi['name'] ?></p>
-                                        <button data-itemid=<?php echo $wi['lead_id'] ?> class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
+                                        <button data-itemid=<?php echo $wi['lead_id'] ?>
+                                            class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
                                     </div>
@@ -165,10 +174,12 @@
                                 <?php 
                                     foreach($lostList as $key => $loi){
                                 ?>
-                                <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $loi['lead_id'] ?>>
+                                <div class="card ui-widget-content border m-3 listitems"
+                                    data-itemid=<?php echo $loi['lead_id'] ?>>
                                     <div class="card-header crm-header">
                                         <p class="fw-bolder d-inline-block mx-auto"><?php echo $loi['name'] ?></p>
-                                        <button data-itemid=<?php echo $loi['lead_id'] ?> class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
+                                        <button data-itemid=<?php echo $loi['lead_id'] ?>
+                                            class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
                                     </div>
@@ -194,145 +205,145 @@
     <?php include 'modals.php'; ?>
 
     <script type="text/javascript">
-        
-        $(".list_containers").sortable({
-            connectWith: ".list_containers"
-        })
-        $(".listitems").draggable({
-            connectToSortable: ".list_containers"
-        });
+    $(".list_containers").sortable({
+        connectWith: ".list_containers"
+    })
+    $(".listitems").draggable({
+        connectToSortable: ".list_containers",
+        containment: '.stages',
+    });
 
-        $("#leads").droppable({
+    $("#leads").droppable({
 
-            drop: function(event, ui) {
+        drop: function(event, ui) {
 
-                $(this).addClass("ui-state-highlight");
+            $(this).addClass("ui-state-highlight");
 
-                var lead_id = ui.draggable.attr('data-itemid')
+            var lead_id = ui.draggable.attr('data-itemid')
 
-                $.ajax({
-                    method: "POST",
-
-                    url: "includes/queries.php",
-                    data: {
-                        'action': 1,
-                        'lead_id': lead_id,
-                    },
-                }).done(function(data) {
-                    var result = $.parseJSON(data);
-
-                });
-            }
-        });
-        $("#opportunity").droppable({
-
-            drop: function(event, ui) {
-
-                $(this).addClass("ui-state-highlight");
-
-                var lead_id = ui.draggable.attr('data-itemid')
-
-                $.ajax({
-                    method: "POST",
-
-                    url: "includes/queries.php",
-                    data: {
-                        'lead_id': lead_id,
-                        'action': 2,
-                    },
-                }).done(function(data) {
-                    var result = $.parseJSON(data);
-
-                });
-            }
-        });
-        $("#proposition").droppable({
-
-            drop: function(event, ui) {
-
-                $(this).addClass("ui-state-highlight");
-
-                var lead_id = ui.draggable.attr('data-itemid')
-
-                $.ajax({
-                    method: "POST",
-
-                    url: "includes/queries.php",
-                    data: {
-                        'lead_id': lead_id,
-                        'action': 3,
-                    },
-                }).done(function(data) {
-                    var result = $.parseJSON(data);
-
-                });
-            }
-        });
-        $("#won").droppable({
-
-            drop: function(event, ui) {
-
-                $(this).addClass("ui-state-highlight");
-
-                var lead_id = ui.draggable.attr('data-itemid')
-
-                $.ajax({
-                    method: "POST",
-
-                    url: "includes/queries.php",
-                    data: {
-                        'lead_id': lead_id,
-                        'action': 4,
-                    },
-                }).done(function(data) {
-                    var result = $.parseJSON(data);
-
-                });
-            }
-        });
-        $("#lost").droppable({
-
-            drop: function(event, ui) {
-
-                $(this).addClass("ui-state-highlight");
-
-                var lead_id = ui.draggable.attr('data-itemid')
-
-                $.ajax({
-                    method: "POST",
-
-                    url: "includes/queries.php",
-                    data: {
-                        'lead_id': lead_id,
-                        'action': 5,
-                    },
-                }).done(function(data) {
-                    var result = $.parseJSON(data);
-
-                });
-            }
-        });
-
-        $('.deleteLead').on('click', function(){
-            var lead_id = ui.draggable.attr('data-itemid');
             $.ajax({
-                method: 'POST',
-                url: 'includes/queries.php',
+                method: "POST",
+
+                url: "includes/queries.php",
                 data: {
+                    'action': 1,
                     'lead_id': lead_id,
-                    'delete': 'delete',
                 },
             }).done(function(data) {
-                    var result = $.parseJSON(data);
+                var result = $.parseJSON(data);
 
-                });
-        })
-
-        $(document).ready(function() {
-            $('#sidebarCollapse').on('click', function() {
-                $('#sidebar').toggleClass('active');
             });
+        }
+    });
+    $("#opportunity").droppable({
+
+        drop: function(event, ui) {
+
+            $(this).addClass("ui-state-highlight");
+
+            var lead_id = ui.draggable.attr('data-itemid')
+
+            $.ajax({
+                method: "POST",
+
+                url: "includes/queries.php",
+                data: {
+                    'lead_id': lead_id,
+                    'action': 2,
+                },
+            }).done(function(data) {
+                var result = $.parseJSON(data);
+
+            });
+        }
+    });
+    $("#proposition").droppable({
+
+        drop: function(event, ui) {
+
+            $(this).addClass("ui-state-highlight");
+
+            var lead_id = ui.draggable.attr('data-itemid')
+
+            $.ajax({
+                method: "POST",
+
+                url: "includes/queries.php",
+                data: {
+                    'lead_id': lead_id,
+                    'action': 3,
+                },
+            }).done(function(data) {
+                var result = $.parseJSON(data);
+
+            });
+        }
+    });
+    $("#won").droppable({
+
+        drop: function(event, ui) {
+
+            $(this).addClass("ui-state-highlight");
+
+            var lead_id = ui.draggable.attr('data-itemid')
+
+            $.ajax({
+                method: "POST",
+
+                url: "includes/queries.php",
+                data: {
+                    'lead_id': lead_id,
+                    'action': 4,
+                },
+            }).done(function(data) {
+                var result = $.parseJSON(data);
+
+            });
+        }
+    });
+    $("#lost").droppable({
+
+        drop: function(event, ui) {
+
+            $(this).addClass("ui-state-highlight");
+
+            var lead_id = ui.draggable.attr('data-itemid')
+
+            $.ajax({
+                method: "POST",
+
+                url: "includes/queries.php",
+                data: {
+                    'lead_id': lead_id,
+                    'action': 5,
+                },
+            }).done(function(data) {
+                var result = $.parseJSON(data);
+
+            });
+        }
+    });
+
+    $('.deleteLead').on('click', function() {
+        var lead_id = $(this).data('itemid');
+        $.ajax({
+            method: 'POST',
+            url: 'includes/queries.php',
+            data: {
+                'lead_id': lead_id,
+                'delete': 'delete',
+            },
         });
+        $(document).ajaxStop(function() {
+            window.location.reload();
+        });
+    })
+
+    $(document).ready(function() {
+        $('#sidebarCollapse').on('click', function() {
+            $('#sidebar').toggleClass('active');
+        });
+    });
     </script>
 </body>
 

@@ -613,7 +613,7 @@ editAccountList();
   function deleteLead(){
     require_once('conn.php');
     $lead_id = intval($_POST['lead_id']);
-    $sql = "UPDATE leads SET delete_flag = '1' where lead_id = '$lead_id'";
+    $sql = "UPDATE leads SET delete_flag = '1' where lead_id = $lead_id";
     $conn->query($sql);
 
     $conn->close();
