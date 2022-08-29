@@ -59,7 +59,7 @@
                         </ol>
                     </div>
                 </div>
-                <div class="card-body stages">
+                <div class="card-body stages ">
                     <div class="row row-cols-5">
                         <div class="col border rounded">
                             <h5>Leads</h5>
@@ -67,14 +67,14 @@
                                 <?php 
                                     foreach($leadList as $key => $li){
                                 ?>
-                                <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $li['lead_id'] ?>>
-                                    <div class="card-header">
+                                <div class="card ui-widget-content border m-3 listitems " data-itemid=<?php echo $li['lead_id'] ?>>
+                                    <div class="card-header crm-header">
                                         <p class="fw-bolder d-inline-block mx-auto"><?php echo $li['name'] ?></p>
                                         <button data-itemid=<?php echo $li['lead_id'] ?> class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
                                     </div>
-                                    <div class="card-body">
+                                    <div class="card-body crm-body">
                                         <p><?php echo $li['email'] ?></p>
                                         <p><?php echo $li['contact_number'] ?></p>
                                         <p><?php echo $li['description'] ?></p>
@@ -93,13 +93,13 @@
                                     foreach($opportunityList as $key => $oi){
                                 ?>
                                 <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $oi['lead_id'] ?>>
-                                    <div class="card-header">
+                                    <div class="card-header crm-header">
                                         <p class="fw-bolder d-inline-block mx-auto"><?php echo $oi['name'] ?></p>
                                         <button data-itemid=<?php echo $oi['lead_id'] ?> class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
                                     </div>
-                                    <div class="card-body">
+                                    <div class="card-body crm-body">
                                         <p><?php echo $oi['email'] ?></p>
                                         <p><?php echo $oi['contact_number'] ?></p>
                                         <p><?php echo $oi['description'] ?></p>
@@ -118,13 +118,13 @@
                                     foreach($propositionList as $key => $pi){
                                 ?>
                                 <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $pi['lead_id'] ?>>
-                                    <div class="card-header">
+                                    <div class="card-header crm-header">
                                         <p class="fw-bolder d-inline-block mx-auto"><?php echo $pi['name'] ?></p>
                                         <button data-itemid=<?php echo $pi['lead_id'] ?> class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
                                     </div>
-                                    <div class="card-body">
+                                    <div class="card-body crm-body">
                                         <p><?php echo $pi['email'] ?></p>
                                         <p><?php echo $pi['contact_number'] ?></p>
                                         <p><?php echo $pi['description'] ?></p>
@@ -142,13 +142,13 @@
                                     foreach($wonList as $key => $wi){
                                 ?>
                                 <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $wi['lead_id'] ?>>
-                                    <div class="card-header">
+                                    <div class="card-header crm-header">
                                         <p class="fw-bolder d-inline-block mx-auto"><?php echo $wi['name'] ?></p>
                                         <button data-itemid=<?php echo $wi['lead_id'] ?> class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
                                     </div>
-                                    <div class="card-body">
+                                    <div class="card-body crm-body">
                                         <p><?php echo $wi['email'] ?></p>
                                         <p><?php echo $wi['contact_number'] ?></p>
                                         <p><?php echo $wi['description'] ?></p>
@@ -166,13 +166,13 @@
                                     foreach($lostList as $key => $loi){
                                 ?>
                                 <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $loi['lead_id'] ?>>
-                                    <div class="card-header">
+                                    <div class="card-header crm-header">
                                         <p class="fw-bolder d-inline-block mx-auto"><?php echo $loi['name'] ?></p>
                                         <button data-itemid=<?php echo $loi['lead_id'] ?> class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
                                     </div>
-                                    <div class="card-body">
+                                    <div class="card-body crm-body">
                                         <p><?php echo $loi['email'] ?></p>
                                         <p><?php echo $loi['contact_number'] ?></p>
                                         <p><?php echo $loi['description'] ?></p>
