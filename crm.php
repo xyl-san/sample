@@ -2,15 +2,15 @@
     include 'includes/queries.php';
     require_once('includes/conn.php');
 
-    $sqlLead = "SELECT lead_id, name, email, contact_number, description, stage_id FROM leads WHERE stage_id = '1' ORDER BY lead_id ASC";
+    $sqlLead = "SELECT lead_id, name, email, contact_number, description, stage_id FROM leads WHERE stage_id = '1' AND delete_flag = '0' ORDER BY lead_id ASC";
     $leadResult = mysqli_query($conn, $sqlLead);
-    $sqlOpportunity = "SELECT lead_id, name, email, contact_number, description, stage_id FROM leads WHERE stage_id = '2' ORDER BY lead_id ASC";
+    $sqlOpportunity = "SELECT lead_id, name, email, contact_number, description, stage_id FROM leads WHERE stage_id = '2' AND delete_flag = '0' ORDER BY lead_id ASC";
     $opportunityResult = mysqli_query($conn, $sqlOpportunity);
-    $sqlProposition = "SELECT lead_id, name, email, contact_number, description, stage_id FROM leads WHERE stage_id = '3' ORDER BY lead_id ASC";
+    $sqlProposition = "SELECT lead_id, name, email, contact_number, description, stage_id FROM leads WHERE stage_id = '3' AND delete_flag = '0' ORDER BY lead_id ASC";
     $propositionResult = mysqli_query($conn, $sqlProposition);
-    $sqlWon = "SELECT lead_id, name, email, contact_number, description, stage_id FROM leads WHERE stage_id = '4' ORDER BY lead_id ASC";
+    $sqlWon = "SELECT lead_id, name, email, contact_number, description, stage_id FROM leads WHERE stage_id = '4' AND delete_flag = '0' ORDER BY lead_id ASC";
     $wonResult = mysqli_query($conn, $sqlWon);
-    $sqlLost = "SELECT lead_id, name, email, contact_number, description, stage_id FROM leads WHERE stage_id = '5' ORDER BY lead_id ASC";
+    $sqlLost = "SELECT lead_id, name, email, contact_number, description, stage_id FROM leads WHERE stage_id = '5' AND delete_flag = '0' ORDER BY lead_id ASC";
     $lostResult = mysqli_query($conn, $sqlLost);
 
     $leadList = mysqli_fetch_all($leadResult, MYSQLI_ASSOC);
@@ -59,8 +59,8 @@
                         </ol>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="row">
+                <div class="card-body stages">
+                    <div class="row row-cols-5">
                         <div class="col border rounded">
                             <h5>Leads</h5>
                             <div id="leads" class="list_containers h-100">
@@ -69,7 +69,10 @@
                                 ?>
                                 <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $li['lead_id'] ?>>
                                     <div class="card-header">
-                                        <p class="fw-bolder"><?php echo $li['name'] ?></p>
+                                        <p class="fw-bolder d-inline-block mx-auto"><?php echo $li['name'] ?></p>
+                                        <button class="btn btn-danger btn-sm float-end d-inline-block">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </button>
                                     </div>
                                     <div class="card-body">
                                         <p><?php echo $li['email'] ?></p>
@@ -91,7 +94,10 @@
                                 ?>
                                 <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $oi['lead_id'] ?>>
                                     <div class="card-header">
-                                        <p class="fw-bolder"><?php echo $oi['name'] ?></p>
+                                        <p class="fw-bolder d-inline-block mx-auto"><?php echo $oi['name'] ?></p>
+                                        <button class="btn btn-danger btn-sm float-end d-inline-block">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </button>
                                     </div>
                                     <div class="card-body">
                                         <p><?php echo $oi['email'] ?></p>
@@ -113,7 +119,10 @@
                                 ?>
                                 <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $pi['lead_id'] ?>>
                                     <div class="card-header">
-                                        <p class="fw-bolder"><?php echo $pi['name'] ?></p>
+                                        <p class="fw-bolder d-inline-block mx-auto"><?php echo $pi['name'] ?></p>
+                                        <button class="btn btn-danger btn-sm float-end d-inline-block">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </button>
                                     </div>
                                     <div class="card-body">
                                         <p><?php echo $pi['email'] ?></p>
@@ -134,7 +143,10 @@
                                 ?>
                                 <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $wi['lead_id'] ?>>
                                     <div class="card-header">
-                                        <p class="fw-bolder"><?php echo $wi['name'] ?></p>
+                                        <p class="fw-bolder d-inline-block mx-auto"><?php echo $wi['name'] ?></p>
+                                        <button class="btn btn-danger btn-sm float-end d-inline-block">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </button>
                                     </div>
                                     <div class="card-body">
                                         <p><?php echo $wi['email'] ?></p>
@@ -155,7 +167,10 @@
                                 ?>
                                 <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $loi['lead_id'] ?>>
                                     <div class="card-header">
-                                        <p class="fw-bolder"><?php echo $loi['name'] ?></p>
+                                        <p class="fw-bolder d-inline-block mx-auto"><?php echo $loi['name'] ?></p>
+                                        <button class="btn btn-danger btn-sm float-end d-inline-block">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </button>
                                     </div>
                                     <div class="card-body">
                                         <p><?php echo $loi['email'] ?></p>
@@ -167,11 +182,8 @@
                                     }
                                 ?>
                             </div>
-                            
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>
@@ -300,6 +312,8 @@
                 });
             }
         });
+
+        
 
         $(document).ready(function() {
             $('#sidebarCollapse').on('click', function() {
