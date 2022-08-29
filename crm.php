@@ -1,4 +1,32 @@
-<?php include 'includes/queries.php';?>
+<?php 
+    include 'includes/queries.php';
+    require_once('includes/conn.php');
+
+    $sqlLead = "SELECT lead_id, name, email, contact_number, description, stage_id FROM leads WHERE stage_id = '1' ORDER BY lead_id ASC";
+    $leadResult = mysqli_query($conn, $sqlLead);
+    $sqlOpportunity = "SELECT lead_id, name, email, contact_number, description, stage_id FROM leads WHERE stage_id = '2' ORDER BY lead_id ASC";
+    $opportunityResult = mysqli_query($conn, $sqlOpportunity);
+    $sqlProposition = "SELECT lead_id, name, email, contact_number, description, stage_id FROM leads WHERE stage_id = '3' ORDER BY lead_id ASC";
+    $propositionResult = mysqli_query($conn, $sqlProposition);
+    $sqlWon = "SELECT lead_id, name, email, contact_number, description, stage_id FROM leads WHERE stage_id = '4' ORDER BY lead_id ASC";
+    $wonResult = mysqli_query($conn, $sqlWon);
+    $sqlLost = "SELECT lead_id, name, email, contact_number, description, stage_id FROM leads WHERE stage_id = '5' ORDER BY lead_id ASC";
+    $lostResult = mysqli_query($conn, $sqlLost);
+
+    $leadList = mysqli_fetch_all($leadResult, MYSQLI_ASSOC);
+    $opportunityList = mysqli_fetch_all($opportunityResult, MYSQLI_ASSOC);
+    $propositionList = mysqli_fetch_all($propositionResult, MYSQLI_ASSOC);
+    $wonList = mysqli_fetch_all($wonResult, MYSQLI_ASSOC);
+    $lostList = mysqli_fetch_all($lostResult, MYSQLI_ASSOC);
+
+    mysqli_free_result($leadResult);
+    mysqli_free_result($opportunityResult);
+    mysqli_free_result($propositionResult);
+    mysqli_free_result($wonResult);
+    mysqli_free_result($lostResult);
+
+    mysqli_close($conn);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,27 +61,117 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col">
-                            <span>
-                                New leads
-                            </span>
+                        <div class="col border rounded">
+                            <h5>Leads</h5>
+                            <div id="leads" class="list_containers h-100">
+                                <?php 
+                                    foreach($leadList as $key => $li){
+                                ?>
+                                <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $li['lead_id'] ?>>
+                                    <div class="card-header">
+                                        <p class="fw-bolder"><?php echo $li['name'] ?></p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><?php echo $li['email'] ?></p>
+                                        <p><?php echo $li['contact_number'] ?></p>
+                                        <p><?php echo $li['description'] ?></p>
+                                    </div>
+                                </div>
+                                <?php
+                                    }
+                                ?>
+                            </div>
+                            
                         </div>
-                        <div class="col">
-                            <span>
-                                Qualified Opportunity
-                            </span>
+                        <div class="col border rounded">
+                            <h5>Qualified Opportunity</h5>
+                            <div id="opportunity" class="list_containers h-100">
+                                <?php 
+                                    foreach($opportunityList as $key => $oi){
+                                ?>
+                                <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $oi['lead_id'] ?>>
+                                    <div class="card-header">
+                                        <p class="fw-bolder"><?php echo $oi['name'] ?></p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><?php echo $oi['email'] ?></p>
+                                        <p><?php echo $oi['contact_number'] ?></p>
+                                        <p><?php echo $oi['description'] ?></p>
+                                    </div>
+                                </div>
+                                <?php
+                                    }
+                                ?>
+                            </div>
+                            
                         </div>
-                        <div class="col">
-                            <span>
-                                Proposition
-                            </span>
+                        <div class="col border rounded">
+                            <h5>Proposition</h5>
+                            <div id="proposition" class="list_containers h-100">
+                                <?php 
+                                    foreach($propositionList as $key => $pi){
+                                ?>
+                                <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $pi['lead_id'] ?>>
+                                    <div class="card-header">
+                                        <p class="fw-bolder"><?php echo $pi['name'] ?></p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><?php echo $pi['email'] ?></p>
+                                        <p><?php echo $pi['contact_number'] ?></p>
+                                        <p><?php echo $pi['description'] ?></p>
+                                    </div>
+                                </div>
+                                <?php
+                                    }
+                                ?>
+                            </div>
                         </div>
-                        <div class="col">
-                            <span>
-                                Won
-                            </span>
+                        <div class="col border rounded">
+                            <h5>Won</h5>
+                            <div id="won" class="list_containers h-100">
+                                <?php 
+                                    foreach($wonList as $key => $wi){
+                                ?>
+                                <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $wi['lead_id'] ?>>
+                                    <div class="card-header">
+                                        <p class="fw-bolder"><?php echo $wi['name'] ?></p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><?php echo $wi['email'] ?></p>
+                                        <p><?php echo $wi['contact_number'] ?></p>
+                                        <p><?php echo $wi['description'] ?></p>
+                                    </div>
+                                </div>
+                                <?php
+                                    }
+                                ?>
+                            </div>
                         </div>
+                        <div class="col border rounded">
+                            <h5>Lost</h5>
+                            <div id="lost" class="list_containers h-100">
+                                <?php 
+                                    foreach($lostList as $key => $loi){
+                                ?>
+                                <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $loi['lead_id'] ?>>
+                                    <div class="card-header">
+                                        <p class="fw-bolder"><?php echo $loi['name'] ?></p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><?php echo $loi['email'] ?></p>
+                                        <p><?php echo $loi['contact_number'] ?></p>
+                                        <p><?php echo $loi['description'] ?></p>
+                                    </div>
+                                </div>
+                                <?php
+                                    }
+                                ?>
+                            </div>
+                            
+                        </div>
+
                     </div>
+
                 </div>
             </div>
         </div>
@@ -64,62 +182,130 @@
     <?php include 'modals.php'; ?>
 
     <script type="text/javascript">
-    $(document).ready(function() {
-        $('#sidebarCollapse').on('click', function() {
-            $('#sidebar').toggleClass('active');
-        });
-    });
-
-    $(function() {
-        $('#example1').on('click', '.edit', function(e) {
-            e.preventDefault();
-            $('#editEmployee').modal('show');
-            var id = $(this).data('id');
-            getRow(id);
-        });
-
-        $('#example1').on('click', '.delete', function(e) {
-            e.preventDefault();
-            $('#deleteEmployee').modal('show');
-            var id = $(this).data('id');
-            getRow(id);
-        });
-
-        $('#example1').on('click', '.photo', function(e) {
-            e.preventDefault();
-            var id = $(this).data('id');
-            $('#editEmployeePhoto').modal('show');
-            getRow(id);
-        });
-    });
-
-    function getRow(id) {
-        $(document).ready(function() {
-            $.ajax({
-                type: 'POST',
-                url: 'employee_row.php',
-                data: {
-                    id: id
-                },
-                dataType: 'json',
-                success: function(response) {
-                    $('.employeeId').val(response.employee_id);
-                    $('.firstName').val(response.firstname);
-                    $('.lastName').val(response.lastname);
-                    $('.addressInfo').val(response.address);
-                    $('.birthDate').val(response.birthdate);
-                    $('.contactInfo').val(response.contact_info);
-                    $('.genderSelection').html(response.gender);
-                    $('.jobSelection').html(response.description);
-                    $('.departmentSelection').html(response.department_name);
-                    $('.del_employee_name').html(response.firstname + ' ' + response.lastname);
-                    $('.scheduleSelection').html(response.time_in + ' ' + response.time_out);
-
-                }
-            });
-
+        
+        $(".list_containers").sortable({
+            connectWith: ".list_containers"
         })
-    }
+        $("listitems").draggable({
+            connectToSortable: ".list_containers"
+        });
+
+        $("#leads").droppable({
+
+            drop: function(event, ui) {
+
+                $(this).addClass("ui-state-highlight");
+
+                var lead_id = ui.draggable.attr('data-itemid')
+
+                $.ajax({
+                    method: "POST",
+
+                    url: "includes/queries.php",
+                    data: {
+                        'action': 1,
+                        'lead_id': lead_id,
+                    },
+                }).done(function(data) {
+                    var result = $.parseJSON(data);
+
+                });
+            }
+        });
+        $("#opportunity").droppable({
+
+            drop: function(event, ui) {
+
+                $(this).addClass("ui-state-highlight");
+
+                var lead_id = ui.draggable.attr('data-itemid')
+
+                $.ajax({
+                    method: "POST",
+
+                    url: "includes/queries.php",
+                    data: {
+                        'lead_id': lead_id,
+                        'action': 2,
+                    },
+                }).done(function(data) {
+                    var result = $.parseJSON(data);
+
+                });
+            }
+        });
+        $("#proposition").droppable({
+
+            drop: function(event, ui) {
+
+                $(this).addClass("ui-state-highlight");
+
+                var lead_id = ui.draggable.attr('data-itemid')
+
+                $.ajax({
+                    method: "POST",
+
+                    url: "includes/queries.php",
+                    data: {
+                        'lead_id': lead_id,
+                        'action': 3,
+                    },
+                }).done(function(data) {
+                    var result = $.parseJSON(data);
+
+                });
+            }
+        });
+        $("#won").droppable({
+
+            drop: function(event, ui) {
+
+                $(this).addClass("ui-state-highlight");
+
+                var lead_id = ui.draggable.attr('data-itemid')
+
+                $.ajax({
+                    method: "POST",
+
+                    url: "includes/queries.php",
+                    data: {
+                        'lead_id': lead_id,
+                        'action': 4,
+                    },
+                }).done(function(data) {
+                    var result = $.parseJSON(data);
+
+                });
+            }
+        });
+        $("#lost").droppable({
+
+            drop: function(event, ui) {
+
+                $(this).addClass("ui-state-highlight");
+
+                var lead_id = ui.draggable.attr('data-itemid')
+
+                $.ajax({
+                    method: "POST",
+
+                    url: "includes/queries.php",
+                    data: {
+                        'lead_id': lead_id,
+                        'action': 5,
+                    },
+                }).done(function(data) {
+                    var result = $.parseJSON(data);
+
+                });
+            }
+        });
+
+        $(document).ready(function() {
+            $('#sidebarCollapse').on('click', function() {
+                $('#sidebar').toggleClass('active');
+            });
+        });
     </script>
 </body>
 

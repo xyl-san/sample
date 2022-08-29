@@ -32,4 +32,11 @@ $(document).ready((function() {
     $('#example1').DataTable();
 })
 )
+$(document).ready((function() {
+    $.fn.dataTable.moment('MMM DD, YYYY');
+    $('#crm').DataTable({
+        "searching": false
+    });
+})
+)
 </script>

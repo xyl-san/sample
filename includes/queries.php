@@ -385,6 +385,7 @@ editAccountList();
     header('location: ../account_list.php');
   }
 
+  
   function groupListTable(){
     include 'conn.php';
     $sql = "SELECT accountgroup_id, name, description, type, status, date_created FROM group_list";
@@ -499,7 +500,111 @@ editAccountList();
 
     }
 
+      if (isset($_POST['leadAdd'])) {
+        leadAdd();
+      }
+      function leadAdd(){
+        include 'conn.php';
+        if(isset($_POST['leadAdd'])){
+          $name = $_POST['leadname'];
+          $email = $_POST['leademail'];
+          $contact_number = $_POST['leadcontact'];
+          $description = $_POST['leaddescription'];
 
+          $sql = "INSERT INTO leads (name, email, contact_number, description) VALUES('$name', '$email', '$contact_number', '$description')";
+          if($conn->query($sql)){
+            echo 'success';
+          }
+          else{
+            echo "error";
+          }
+        }
+        header('location: ../crm.php');
+      }
 
-    
+  //CRM Change Stage
+  if(isset($_POST['action']) && !empty($_POST['action'])) {
+    $action = $_POST['action'];
+    switch($action) {
+        case 1 : lead(); break;
+        case 2 : opportunity(); break;
+        case 3 : proposition(); break;
+        case 4 : won(); break;
+        case 5 : lost(); break;
+    }
+}
+
+  function lead(){
+    require_once('conn.php');
+    $lead_id  = intval($_POST['lead_id']);
+
+     //SQL query to get results from database
+    $sql = "UPDATE leads SET stage_id = '1' where lead_id = $lead_id";
+    $conn->query($sql);
+
+    $conn->close();
+    //send a JSON encded array to client
+
+    echo json_encode(array('success'=>1));
+
+  }
+  function opportunity(){
+    require_once('conn.php');
+    $lead_id  = intval($_POST['lead_id']);
+
+     //SQL query to get results from database
+    $sql = "UPDATE leads SET stage_id = '2' where lead_id = $lead_id";
+    $conn->query($sql);
+
+    $conn->close();
+    //send a JSON encded array to client
+
+    echo json_encode(array('success'=>1));
+
+  }
+  function proposition(){
+    require_once('conn.php');
+    $lead_id  = intval($_POST['lead_id']);
+
+     //SQL query to get results from database
+    $sql = "UPDATE leads SET stage_id = '3' where lead_id = $lead_id";
+    $conn->query($sql);
+
+    $conn->close();
+    //send a JSON encded array to client
+
+    echo json_encode(array('success'=>1));
+
+  }
+  function won(){
+    require_once('conn.php');
+    $lead_id  = intval($_POST['lead_id']);
+
+     //SQL query to get results from database
+    $sql = "UPDATE leads SET stage_id = '4' where lead_id = $lead_id";
+    $conn->query($sql);
+
+    $conn->close();
+    //send a JSON encded array to client
+
+    echo json_encode(array('success'=>1));
+
+  }
+  function lost(){
+    require_once('conn.php');
+    $lead_id  = intval($_POST['lead_id']);
+
+     //SQL query to get results from database
+    $sql = "UPDATE leads SET stage_id = '5' where lead_id = $lead_id";
+    $conn->query($sql);
+
+    $conn->close();
+    //send a JSON encded array to client
+
+    echo json_encode(array('success'=>1));
+
+  }
+
+   //CRM Change Stage
+
 ?>
