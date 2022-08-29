@@ -31,7 +31,7 @@
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                 <a href="pointofsale.php">
                     <button class="btn" id="crm">
-                        <img src="assets/icons/POS.png" alt="" style="height:100px;">
+                        <img src="assets/icons/POS.png" alt="" style="height:100px; border-radius: 15px;">
                         <div class="o_caption">Point of Sale</div>
                     </button>
                 </a>
@@ -40,7 +40,7 @@
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                 <a href="inventory.php">
                     <button class="btn" id="crm">
-                        <img src="assets/icons/inventory.png" alt="" style="height:100px">
+                        <img src="assets/icons/inventory.png" alt="" style="height:100px; border-radius: 15px;">
                         <div class="o_caption">Inventory</div>
                     </button>
                 </a>
@@ -48,64 +48,64 @@
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                 <a href="attendance_list.php">
                     <button class="btn" id="crm">
-                        <img src="assets/icons/attendance.png" alt="" style="height:100px">
+                        <img src="assets/icons/attendance.png" alt="" style="height:100px; border-radius: 15px;">
                         <div class="o_caption">Attendance</div>
                     </button>
                 </a>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                 <button class="btn" id="crm">
-                    <img src="assets/icons/accounting.png" alt="" style="height:100px">
+                    <img src="assets/icons/accounting.png" alt="" style="height:100px; border-radius: 15px;">
                     <div class="o_caption">Accounting</div>
                 </button>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                 <button class="btn" id="crm">
-                    <img src="assets/icons/payroll.png" alt="" style="height:100px">
+                    <img src="assets/icons/payroll.png" alt="" style="height:100px; border-radius: 15px;">
                     <div class="o_caption">Payroll</div>
                 </button>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                 <button class="btn" id="crm">
-                    <img src="assets/icons/employees.png" alt="" style="height:100px">
+                    <img src="assets/icons/employees.png" alt="" style="height:100px; border-radius: 15px;">
                     <div class="o_caption">Employees</div>
                 </button>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                 <button class="btn" id="crm">
-                    <img src="assets/icons/sales.png" alt="" style="height:100px">
+                    <img src="assets/icons/sales.png" alt="" style="height:100px; border-radius: 15px;">
                     <div class="o_caption">Sales</div>
                 </button>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                 <button class="btn" id="crm">
-                    <img src="assets/icons/customers.png" alt="" style="height:100px">
+                    <img src="assets/icons/customers.png" alt="" style="height:100px; border-radius: 15px;">
                     <div class="o_caption">Customer</div>
                 </button>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                 <button class="btn" id="crm">
                     <a href="crm.php">
-                    <img src="assets/icons/CRM.png" alt="" style="height:100px">
+                    <img src="assets/icons/CRM.png" alt="" style="height:100px; border-radius: 15px;">
                     <div class="o_caption">CRM</div>
                     </a>
                 </button>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                 <button class="btn" id="crm">
-                    <img src="assets/icons/account.png" alt="" style="height:100px">
+                    <img src="assets/icons/account.png" alt="" style="height:100px; border-radius: 15px;">
                     <div class="o_caption">Accounts</div>
                 </button>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                 <button class="btn" id="crm">
-                    <img src="assets/icons/invoices.png" alt="" style="height:100px">
+                    <img src="assets/icons/invoices.png" alt="" style="height:100px; border-radius: 15px;">
                     <div class="o_caption">Invoices</div>
                 </button>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                 <button href="#" class="btn" id="crm">
-                    <img src="assets/icons/purchase.png" alt="" style="height:100px">
+                    <img src="assets/icons/purchase.png" alt="" style="height:100px; border-radius: 15px;">
                     <div class="o_caption">Purchase</div>
                 </button>
             </div>
