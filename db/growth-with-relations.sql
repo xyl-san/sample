@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 29, 2022 at 05:25 AM
+-- Generation Time: Aug 29, 2022 at 10:12 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -346,13 +346,14 @@ CREATE TABLE `group_list` (
 --
 
 INSERT INTO `group_list` (`accountgroup_id`, `name`, `description`, `type`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
-(1, 'Assets', 'The cash, inventory, and other resources you owned.', 1, 1, 0, '2022-02-01 09:56:35', '2022-02-01 09:56:58'),
+(1, 'Assets', 'The cash, inventory, and other resources you owned.', 0, 1, 0, '2022-02-01 09:56:35', '2022-08-29 13:33:53'),
 (2, 'Revenue', 'Cash coming into your business through sales and other types of payments', 2, 1, 0, '2022-02-01 09:57:45', NULL),
 (3, 'Expenses', 'The amount you’re spending on services and other items, like payroll, utility bills, and fees for contractors.', 1, 1, 0, '2022-02-01 09:58:09', '2022-02-01 09:59:13'),
 (4, 'Liabilities', 'The money you still owe on loans, debts, and other obligations.', 2, 1, 0, '2022-02-01 09:58:34', NULL),
 (5, 'Equity', 'How much is remaining after you subtract liabilities from assets.', 2, 1, 0, '2022-02-01 09:59:05', NULL),
 (6, 'Dividend', 'Form of income that shareholders of corporations receive for each share of stock that they hold.', 1, 1, 0, '2022-02-01 10:00:13', NULL),
-(7, 'Sample101', 'Sample', 1, 0, 1, '2022-02-01 10:01:35', '2022-02-01 10:03:28');
+(7, 'Sample101', 'Sample', 1, 0, 1, '2022-02-01 10:01:35', '2022-02-01 10:03:28'),
+(8, 'dfgsdfsdfeasf', 'sfsdfsdfsdfd', 0, 1, 0, '2022-08-29 13:41:49', NULL);
 
 -- --------------------------------------------------------
 
@@ -471,12 +472,13 @@ CREATE TABLE `leads` (
 --
 
 INSERT INTO `leads` (`lead_id`, `name`, `email`, `contact_number`, `description`, `stage_id`, `delete_flag`) VALUES
-(6, 'Roge Hardware Supplies', 'roge123@gmail.com', 2147483647, 'Hardware supplies of offices and home', 5, 0),
-(7, 'Sam Boutique', 'sambal2022@gmail.com', 2147483647, 'Food and Drugs Supplies', 4, 0),
-(8, 'Mondragon Pet shop', 'donmondragon050@gmail.com', 2147483647, 'Nationwide Pets Breed', 4, 0),
+(6, 'Roge Hardware Supplies', 'roge123@gmail.com', 2147483647, 'Hardware supplies of offices and home', 4, 0),
+(7, 'Sam Boutique', 'sambal2022@gmail.com', 2147483647, 'Food and Drugs Supplies', 2, 0),
+(8, 'Mondragon Pet shop', 'donmondragon050@gmail.com', 2147483647, 'Nationwide Pets Breed', 3, 0),
 (9, 'Awesome Appliances ', 'awesomeappliances0808@gmail.com', 2147483647, 'Branded of all Appliances', 1, 0),
-(10, 'Coffee Shop', 'miyacalifacoffeeshop@gmail.com', 2147483647, 'We serves coffee of various types, notably espresso, latte, and cappuccino.', 5, 0),
-(12, 'Amazing Super Market', 'amazingsupermarket@gmail.com', 2147483647, '', 1, 0);
+(10, 'Coffee Shop', 'miyacalifacoffeeshop@gmail.com', 2147483647, 'We serves coffee of various types, notably espresso, latte, and cappuccino.', 2, 0),
+(12, 'Amazing Super Market', 'amazingsupermarket@gmail.com', 2147483647, '', 1, 0),
+(13, 'Huawei', 'a@g.com', 423, '', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -672,11 +674,11 @@ CREATE TABLE `stage` (
 --
 
 INSERT INTO `stage` (`stage_id`, `stage_status`) VALUES
-(1, 'New'),
-(2, 'Qualified Opportunity'),
+(1, 'Prospect'),
+(2, 'Access'),
 (3, 'Proposition'),
-(4, 'Won'),
-(5, 'Lost');
+(4, 'Award'),
+(5, 'Delivered');
 
 -- --------------------------------------------------------
 
@@ -1030,7 +1032,7 @@ ALTER TABLE `employees`
 -- AUTO_INCREMENT for table `group_list`
 --
 ALTER TABLE `group_list`
-  MODIFY `accountgroup_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `accountgroup_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `inventory`
@@ -1054,7 +1056,7 @@ ALTER TABLE `job`
 -- AUTO_INCREMENT for table `leads`
 --
 ALTER TABLE `leads`
-  MODIFY `lead_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `lead_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `opportunity`
