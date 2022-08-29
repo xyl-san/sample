@@ -63,8 +63,8 @@
                 <div class="card-body stages ">
                     <div class="row row-cols-5">
                         <div class="col border rounded">
-                            <h5>Leads</h5>
-                            <div id="leads" class="list_containers h-100">
+                            <h5>Prospect</h5>
+                            <div id="prospect" class="list_containers h-100">
                                 <?php 
                                     foreach($leadList as $key => $li){
                                 ?>
@@ -90,8 +90,8 @@
 
                         </div>
                         <div class="col border rounded">
-                            <h5>Qualified Opportunity</h5>
-                            <div id="opportunity" class="list_containers h-100">
+                            <h5>Access</h5>
+                            <div id="access" class="list_containers h-100">
                                 <?php 
                                     foreach($opportunityList as $key => $oi){
                                 ?>
@@ -117,7 +117,7 @@
 
                         </div>
                         <div class="col border rounded">
-                            <h5>Proposition</h5>
+                            <h5>Proposal and Negotiation</h5>
                             <div id="proposition" class="list_containers h-100">
                                 <?php 
                                     foreach($propositionList as $key => $pi){
@@ -143,8 +143,8 @@
                             </div>
                         </div>
                         <div class="col border rounded">
-                            <h5>Won</h5>
-                            <div id="won" class="list_containers h-100">
+                            <h5>Award</h5>
+                            <div id="award" class="list_containers h-100">
                                 <?php 
                                     foreach($wonList as $key => $wi){
                                 ?>
@@ -169,8 +169,8 @@
                             </div>
                         </div>
                         <div class="col border rounded">
-                            <h5>Lost</h5>
-                            <div id="lost" class="list_containers h-100">
+                            <h5>Delivered</h5>
+                            <div id="delivered" class="list_containers h-100">
                                 <?php 
                                     foreach($lostList as $key => $loi){
                                 ?>
@@ -213,7 +213,7 @@
         containment: '.stages',
     });
 
-    $("#leads").droppable({
+    $("#prospect").droppable({
 
         drop: function(event, ui) {
 
@@ -235,7 +235,7 @@
             });
         }
     });
-    $("#opportunity").droppable({
+    $("#access").droppable({
 
         drop: function(event, ui) {
 
@@ -279,7 +279,7 @@
             });
         }
     });
-    $("#won").droppable({
+    $("#award").droppable({
 
         drop: function(event, ui) {
 
@@ -301,7 +301,7 @@
             });
         }
     });
-    $("#lost").droppable({
+    $("#delivered").droppable({
 
         drop: function(event, ui) {
 

@@ -526,15 +526,15 @@ editAccountList();
   if(isset($_POST['action']) && !empty($_POST['action'])) {
     $action = $_POST['action'];
     switch($action) {
-        case 1 : lead(); break;
-        case 2 : opportunity(); break;
+        case 1 : prospect(); break;
+        case 2 : access(); break;
         case 3 : proposition(); break;
-        case 4 : won(); break;
-        case 5 : lost(); break;
+        case 4 : award(); break;
+        case 5 : delivered(); break;
     }
 }
 
-  function lead(){
+  function prospect(){
     require_once('conn.php');
     $lead_id  = intval($_POST['lead_id']);
 
@@ -548,7 +548,7 @@ editAccountList();
     echo json_encode(array('success'=>1));
 
   }
-  function opportunity(){
+  function access(){
     require_once('conn.php');
     $lead_id  = intval($_POST['lead_id']);
 
@@ -576,7 +576,7 @@ editAccountList();
     echo json_encode(array('success'=>1));
 
   }
-  function won(){
+  function award(){
     require_once('conn.php');
     $lead_id  = intval($_POST['lead_id']);
 
@@ -590,7 +590,7 @@ editAccountList();
     echo json_encode(array('success'=>1));
 
   }
-  function lost(){
+  function delivered(){
     require_once('conn.php');
     $lead_id  = intval($_POST['lead_id']);
 
