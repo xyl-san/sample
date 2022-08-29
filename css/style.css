@@ -180,8 +180,8 @@ a.article, a.article:hover {
 }
 
 body {
-    background: rgb(4,210,253);
-    background: linear-gradient(159deg, rgba(4,210,253,1) 1%, rgba(4,210,253,1) 14%, rgba(0,140,255,1) 31%, rgba(86,230,81,1) 60%, rgba(1,204,120,1) 91%);
+      background: rgb(255,230,188);
+      background: linear-gradient(180deg, rgba(255,230,188,1) 0%, rgba(142,128,106,1) 100%);
       color: #333;
       font-family: 'Poppins', sans-serif;
       font-size: 14px;
@@ -189,7 +189,6 @@ body {
       margin: 0;
       padding: 0;
       overflow-x: hidden;
-      overflow-y: hidden;
   }
   
   #background-wrap {
