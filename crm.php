@@ -70,7 +70,7 @@
                                 <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $li['lead_id'] ?>>
                                     <div class="card-header">
                                         <p class="fw-bolder d-inline-block mx-auto"><?php echo $li['name'] ?></p>
-                                        <button class="btn btn-danger btn-sm float-end d-inline-block">
+                                        <button data-itemid=<?php echo $li['lead_id'] ?> class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
                                     </div>
@@ -95,7 +95,7 @@
                                 <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $oi['lead_id'] ?>>
                                     <div class="card-header">
                                         <p class="fw-bolder d-inline-block mx-auto"><?php echo $oi['name'] ?></p>
-                                        <button class="btn btn-danger btn-sm float-end d-inline-block">
+                                        <button data-itemid=<?php echo $oi['lead_id'] ?> class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
                                     </div>
@@ -120,7 +120,7 @@
                                 <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $pi['lead_id'] ?>>
                                     <div class="card-header">
                                         <p class="fw-bolder d-inline-block mx-auto"><?php echo $pi['name'] ?></p>
-                                        <button class="btn btn-danger btn-sm float-end d-inline-block">
+                                        <button data-itemid=<?php echo $pi['lead_id'] ?> class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
                                     </div>
@@ -144,7 +144,7 @@
                                 <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $wi['lead_id'] ?>>
                                     <div class="card-header">
                                         <p class="fw-bolder d-inline-block mx-auto"><?php echo $wi['name'] ?></p>
-                                        <button class="btn btn-danger btn-sm float-end d-inline-block">
+                                        <button data-itemid=<?php echo $wi['lead_id'] ?> class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
                                     </div>
@@ -168,7 +168,7 @@
                                 <div class="card ui-widget-content border m-3 listitems" data-itemid=<?php echo $loi['lead_id'] ?>>
                                     <div class="card-header">
                                         <p class="fw-bolder d-inline-block mx-auto"><?php echo $loi['name'] ?></p>
-                                        <button class="btn btn-danger btn-sm float-end d-inline-block">
+                                        <button data-itemid=<?php echo $loi['lead_id'] ?> class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
                                     </div>
@@ -198,7 +198,7 @@
         $(".list_containers").sortable({
             connectWith: ".list_containers"
         })
-        $("listitems").draggable({
+        $(".listitems").draggable({
             connectToSortable: ".list_containers"
         });
 
@@ -313,7 +313,20 @@
             }
         });
 
-        
+        $('.deleteLead').on('click', function(){
+            var lead_id = ui.draggable.attr('data-itemid');
+            $.ajax({
+                method: 'POST',
+                url: 'includes/queries.php',
+                data: {
+                    'lead_id': lead_id,
+                    'delete': 'delete',
+                },
+            }).done(function(data) {
+                    var result = $.parseJSON(data);
+
+                });
+        })
 
         $(document).ready(function() {
             $('#sidebarCollapse').on('click', function() {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 25, 2022 at 04:09 AM
+-- Generation Time: Aug 29, 2022 at 05:25 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -20,6 +20,19 @@ SET time_zone = "+00:00";
 --
 -- Database: `growth-with-relations`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `account`
+--
+
+CREATE TABLE `account` (
+  `account_id` int(11) NOT NULL,
+  `account_name` varchar(50) NOT NULL,
+  `account_description` varchar(100) NOT NULL,
+  `account_contactnumber` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -135,13 +148,32 @@ CREATE TABLE `attendance` (
   `delete_flag` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `attendance`
+-- Table structure for table `campaign`
 --
 
-INSERT INTO `attendance` (`attendance_id`, `employee_id`, `date`, `time_in`, `status`, `time_out`, `num_hr`, `created_on`, `updated_on`, `delete_flag`) VALUES
-(5, 5, '2022-08-19', '09:05:59', 0, '09:00:00', 8, '2022-08-18 11:53:04', '2022-08-18 11:53:04', 0),
-(6, 6, '2022-08-22', '06:00:00', 0, '09:00:00', 8, '2022-08-18 11:53:43', '2022-08-18 11:53:43', 0);
+CREATE TABLE `campaign` (
+  `campaign_id` int(11) NOT NULL,
+  `campaignmember_id` int(11) NOT NULL,
+  `campaign_objectives` varchar(50) NOT NULL,
+  `campaign_startdate` datetime NOT NULL,
+  `campaign_enddate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `campaign_member`
+--
+
+CREATE TABLE `campaign_member` (
+  `campaignmember_id` int(11) NOT NULL,
+  `campaign_id` int(11) NOT NULL,
+  `lead_id` int(11) NOT NULL,
+  `contact_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -173,6 +205,32 @@ CREATE TABLE `category` (
   `updated_on` datetime NOT NULL DEFAULT current_timestamp(),
   `delete_flag` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact`
+--
+
+CREATE TABLE `contact` (
+  `contact_id` int(11) NOT NULL,
+  `account_id` int(11) NOT NULL,
+  `contact_address` varchar(50) NOT NULL,
+  `contract_contact_details` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contract`
+--
+
+CREATE TABLE `contract` (
+  `contract_id` int(11) NOT NULL,
+  `account_id` int(11) NOT NULL,
+  `contract_status` varchar(20) NOT NULL,
+  `contract_approval` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -264,9 +322,7 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`employee_id`, `employee_code`, `firstname`, `lastname`, `address`, `birthdate`, `contact_info`, `gender`, `job_id`, `department_id`, `schedule_id`, `photo`, `created_on`, `updated_on`, `delete_flag`) VALUES
-(5, '882253424', 'Ann', 'Leyco', 'Muños QC', '1996-07-11', '09454576138', 'Female', 11, 5, 5, '', '2022-08-18 11:48:17', '2022-08-18 11:48:17', 0),
-(6, '651121892', 'Rose', 'Velasco', 'Sampaloc Manila', '1996-08-13', '09264106540', 'Female', 12, 2, 6, '', '2022-08-18 11:48:17', '2022-08-18 11:48:17', 0),
-(73, 'ZHS549038271', 'Lovely Ann', 'Viado', 'Mangan-Vaca Subic Zambales', '1997-11-15', '09096154782', 'Female', 29, 3, 5, 'COst.pdf', '2022-08-22 15:38:42', '2022-08-22 15:38:42', 0);
+(75, 'LAV00202208', 'Lovely Anne', 'Viado', 'Mangan-Vaca Subic Zambales', '1997-12-12', '0909090909', '', 26, 2, 8, '', '2022-08-25 17:09:18', '2022-08-25 17:09:18', 0);
 
 -- --------------------------------------------------------
 
@@ -345,7 +401,6 @@ CREATE TABLE `items` (
 
 CREATE TABLE `job` (
   `job_id` int(11) NOT NULL,
-  `department_id` int(11) NOT NULL,
   `description` varchar(150) NOT NULL,
   `rate` double NOT NULL,
   `created_on` datetime NOT NULL DEFAULT current_timestamp(),
@@ -357,104 +412,84 @@ CREATE TABLE `job` (
 -- Dumping data for table `job`
 --
 
-INSERT INTO `job` (`job_id`, `department_id`, `description`, `rate`, `created_on`, `updated_on`, `delete_flag`) VALUES
-(11, 2, 'Accounting Manager', 850, '2022-08-18 10:48:54', '2022-08-18 10:48:54', 0),
-(12, 2, 'Accounting officer', 650, '2022-08-18 10:48:54', '2022-08-18 10:48:54', 0),
-(13, 2, 'Accounting Clerk', 537, '2022-08-18 10:48:54', '2022-08-18 10:48:54', 0),
-(14, 2, 'General accountant', 750, '2022-08-18 10:48:54', '2022-08-18 10:48:54', 0),
-(15, 2, 'Auditor', 537, '2022-08-18 10:48:54', '2022-08-18 10:48:54', 0),
-(16, 3, 'Treasurer', 537, '2022-08-18 10:48:54', '2022-08-18 10:48:54', 0),
-(17, 3, 'Financial Analyst', 537, '2022-08-18 10:48:54', '2022-08-18 10:48:54', 0),
-(18, 3, 'Billing Manager', 850, '2022-08-18 10:52:18', '2022-08-18 10:52:18', 0),
-(19, 3, 'Billing Specialist', 650, '2022-08-18 10:52:18', '2022-08-18 10:52:18', 0),
-(20, 3, 'Billing Clerk', 0, '2022-08-18 10:52:18', '2022-08-18 10:52:18', 0),
-(21, 3, 'Billing Officer', 0, '2022-08-18 10:52:18', '2022-08-18 10:52:18', 0),
-(22, 3, 'Chief Marketing Officer (CMO)', 950, '2022-08-18 10:56:15', '2022-08-18 10:56:15', 0),
-(23, 3, 'Financial Analyst', 750, '2022-08-18 10:56:15', '2022-08-18 10:56:15', 0),
-(24, 3, 'Digital Marketing Manager', 650, '2022-08-18 10:56:15', '2022-08-18 10:56:15', 0),
-(25, 3, 'Communications Manager', 537, '2022-08-18 10:56:15', '2022-08-18 10:56:15', 0),
-(26, 3, 'Content Marketing Specialist', 537, '2022-08-18 10:56:15', '2022-08-18 10:56:15', 0),
-(27, 3, 'Production Manager', 950, '2022-08-18 11:08:52', '2022-08-18 11:08:52', 0),
-(28, 3, 'Production Supervisor', 850, '2022-08-18 11:08:52', '2022-08-18 11:08:52', 0),
-(29, 3, 'Production Operator', 650, '2022-08-18 11:08:52', '2022-08-18 11:08:52', 0),
-(30, 3, 'Production Monitoring', 650, '2022-08-18 11:08:52', '2022-08-18 11:08:52', 0),
-(31, 4, 'Production Officer', 537, '2022-08-18 11:08:52', '2022-08-18 11:08:52', 0),
-(32, 4, 'Chief Engineering', 1500, '2022-08-18 11:14:03', '2022-08-18 11:14:03', 0),
-(33, 4, 'VP Engineering', 1000, '2022-08-18 11:14:03', '2022-08-18 11:14:03', 0),
-(34, 4, 'Director Of Engineering', 950, '2022-08-18 11:14:03', '2022-08-18 11:14:03', 0),
-(35, 4, 'Engineering Manager', 850, '2022-08-18 11:14:03', '2022-08-18 11:14:03', 0),
-(36, 4, 'Individual Contributors ', 750, '2022-08-18 11:14:03', '2022-08-18 11:14:03', 0),
-(37, 4, ' Environmental Compliance Specialist', 2500, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
-(38, 5, 'Loss Control Consultant', 2000, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
-(39, 5, ' Compliance Consultant', 1800, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
-(40, 5, ' Compliance Officer', 1500, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
-(41, 5, 'Risk Analyst', 1300, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
-(42, 5, 'Risk and Compliance Investigator', 1000, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
-(43, 5, ' Model Risk Specialist', 850, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
-(44, 5, 'Regulatory Affairs Managers', 750, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
-(47, 5, 'Risk Manager', 650, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
-(48, 5, 'Chief Risk Officer', 537, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0);
+INSERT INTO `job` (`job_id`, `description`, `rate`, `created_on`, `updated_on`, `delete_flag`) VALUES
+(11, 'Accounting Manager', 850, '2022-08-18 10:48:54', '2022-08-18 10:48:54', 0),
+(12, 'Accounting officer', 650, '2022-08-18 10:48:54', '2022-08-18 10:48:54', 0),
+(13, 'Accounting Clerk', 537, '2022-08-18 10:48:54', '2022-08-18 10:48:54', 0),
+(14, 'General accountant', 750, '2022-08-18 10:48:54', '2022-08-18 10:48:54', 0),
+(15, 'Auditor', 537, '2022-08-18 10:48:54', '2022-08-18 10:48:54', 0),
+(16, 'Treasurer', 537, '2022-08-18 10:48:54', '2022-08-18 10:48:54', 0),
+(17, 'Financial Analyst', 537, '2022-08-18 10:48:54', '2022-08-18 10:48:54', 0),
+(18, 'Billing Manager', 850, '2022-08-18 10:52:18', '2022-08-18 10:52:18', 0),
+(19, 'Billing Specialist', 650, '2022-08-18 10:52:18', '2022-08-18 10:52:18', 0),
+(20, 'Billing Clerk', 0, '2022-08-18 10:52:18', '2022-08-18 10:52:18', 0),
+(21, 'Billing Officer', 0, '2022-08-18 10:52:18', '2022-08-18 10:52:18', 0),
+(22, 'Chief Marketing Officer (CMO)', 950, '2022-08-18 10:56:15', '2022-08-18 10:56:15', 0),
+(23, 'Financial Analyst', 750, '2022-08-18 10:56:15', '2022-08-18 10:56:15', 0),
+(24, 'Digital Marketing Manager', 650, '2022-08-18 10:56:15', '2022-08-18 10:56:15', 0),
+(25, 'Communications Manager', 537, '2022-08-18 10:56:15', '2022-08-18 10:56:15', 0),
+(26, 'Content Marketing Specialist', 537, '2022-08-18 10:56:15', '2022-08-18 10:56:15', 0),
+(27, 'Production Manager', 950, '2022-08-18 11:08:52', '2022-08-18 11:08:52', 0),
+(28, 'Production Supervisor', 850, '2022-08-18 11:08:52', '2022-08-18 11:08:52', 0),
+(29, 'Production Operator', 650, '2022-08-18 11:08:52', '2022-08-18 11:08:52', 0),
+(30, 'Production Monitoring', 650, '2022-08-18 11:08:52', '2022-08-18 11:08:52', 0),
+(31, 'Production Officer', 537, '2022-08-18 11:08:52', '2022-08-18 11:08:52', 0),
+(32, 'Chief Engineering', 1500, '2022-08-18 11:14:03', '2022-08-18 11:14:03', 0),
+(33, 'VP Engineering', 1000, '2022-08-18 11:14:03', '2022-08-18 11:14:03', 0),
+(34, 'Director Of Engineering', 950, '2022-08-18 11:14:03', '2022-08-18 11:14:03', 0),
+(35, 'Engineering Manager', 850, '2022-08-18 11:14:03', '2022-08-18 11:14:03', 0),
+(36, 'Individual Contributors ', 750, '2022-08-18 11:14:03', '2022-08-18 11:14:03', 0),
+(37, ' Environmental Compliance Specialist', 2500, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
+(38, 'Loss Control Consultant', 2000, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
+(39, ' Compliance Consultant', 1800, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
+(40, ' Compliance Officer', 1500, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
+(41, 'Risk Analyst', 1300, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
+(42, 'Risk and Compliance Investigator', 1000, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
+(43, ' Model Risk Specialist', 850, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
+(44, 'Regulatory Affairs Managers', 750, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
+(47, 'Risk Manager', 650, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
+(48, 'Chief Risk Officer', 537, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `journal_entries`
+-- Table structure for table `leads`
 --
 
-CREATE TABLE `journal_entries` (
-  `journal_id` int(30) NOT NULL,
-  `code` varchar(100) NOT NULL,
-  `journal_date` date NOT NULL,
-  `description` text NOT NULL,
-  `date_created` datetime NOT NULL DEFAULT current_timestamp(),
-  `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
+CREATE TABLE `leads` (
+  `lead_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `contact_number` int(11) NOT NULL,
+  `description` varchar(200) NOT NULL,
+  `stage_id` int(11) NOT NULL DEFAULT 1,
+  `delete_flag` int(2) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `journal_entries`
+-- Dumping data for table `leads`
 --
 
-INSERT INTO `journal_entries` (`journal_id`, `code`, `journal_date`, `description`, `date_created`, `date_updated`) VALUES
-(3, '202202-00001', '2022-02-01', 'Capital', '2022-02-01 14:08:50', NULL),
-(4, '202202-00002', '2022-02-01', 'Sample', '2022-02-01 15:55:46', NULL),
-(5, '202202-00003', '2022-02-01', 'Sample 102', '2022-02-01 15:59:34', NULL),
-(6, '202208-00001', '2022-01-08', 'warranty', '2022-08-22 14:02:49', NULL),
-(7, '202208-00002', '2022-08-02', '', '2022-08-22 15:03:46', NULL);
+INSERT INTO `leads` (`lead_id`, `name`, `email`, `contact_number`, `description`, `stage_id`, `delete_flag`) VALUES
+(6, 'Roge Hardware Supplies', 'roge123@gmail.com', 2147483647, 'Hardware supplies of offices and home', 5, 0),
+(7, 'Sam Boutique', 'sambal2022@gmail.com', 2147483647, 'Food and Drugs Supplies', 4, 0),
+(8, 'Mondragon Pet shop', 'donmondragon050@gmail.com', 2147483647, 'Nationwide Pets Breed', 4, 0),
+(9, 'Awesome Appliances ', 'awesomeappliances0808@gmail.com', 2147483647, 'Branded of all Appliances', 1, 0),
+(10, 'Coffee Shop', 'miyacalifacoffeeshop@gmail.com', 2147483647, 'We serves coffee of various types, notably espresso, latte, and cappuccino.', 5, 0),
+(12, 'Amazing Super Market', 'amazingsupermarket@gmail.com', 2147483647, '', 1, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `journal_items`
+-- Table structure for table `opportunity`
 --
 
-CREATE TABLE `journal_items` (
-  `journal_id` int(30) NOT NULL,
-  `account_id` int(30) NOT NULL,
-  `accountgroup_id` int(30) NOT NULL,
-  `amount` float NOT NULL DEFAULT 0,
-  `date_created` datetime NOT NULL DEFAULT current_timestamp()
+CREATE TABLE `opportunity` (
+  `opportunity_id` int(11) NOT NULL,
+  `account_id` int(11) NOT NULL,
+  `opportunity_description` varchar(100) NOT NULL,
+  `opportunity_stage` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `journal_items`
---
-
-INSERT INTO `journal_items` (`journal_id`, `account_id`, `accountgroup_id`, `amount`, `date_created`) VALUES
-(3, 1, 1, 15000, '2022-02-01 14:52:56'),
-(3, 14, 5, 15000, '2022-02-01 14:52:56'),
-(4, 42, 3, 5000, '2022-02-01 15:55:46'),
-(4, 11, 4, 5000, '2022-02-01 15:55:46'),
-(5, 31, 2, 5000, '2022-02-01 15:59:34'),
-(5, 31, 2, 3000, '2022-02-01 15:59:34'),
-(5, 4, 1, 8000, '2022-02-01 15:59:34'),
-(6, 13, 3, 150000, '2022-08-22 14:02:49'),
-(6, 4, 2, 15000000, '2022-08-22 14:02:49'),
-(6, 46, 3, 50000, '2022-08-22 14:02:49'),
-(6, 7, 1, 14800000, '2022-08-22 14:02:49'),
-(7, 7, 1, 100, '2022-08-22 15:03:46'),
-(7, 4, 1, 100, '2022-08-22 15:03:46'),
-(7, 4, 6, 100, '2022-08-22 15:03:46'),
-(7, 37, 2, 300, '2022-08-22 15:03:46');
 
 -- --------------------------------------------------------
 
@@ -608,7 +643,6 @@ CREATE TABLE `schedules` (
   `schedule_id` int(11) NOT NULL,
   `time_in` time NOT NULL,
   `time_out` time NOT NULL,
-  `employee_id` int(11) NOT NULL,
   `created_on` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_on` datetime NOT NULL DEFAULT current_timestamp(),
   `delete_flag` tinyint(1) NOT NULL
@@ -618,9 +652,31 @@ CREATE TABLE `schedules` (
 -- Dumping data for table `schedules`
 --
 
-INSERT INTO `schedules` (`schedule_id`, `time_in`, `time_out`, `employee_id`, `created_on`, `updated_on`, `delete_flag`) VALUES
-(5, '07:00:00', '16:00:00', 5, '2022-08-18 11:51:34', '2022-08-18 11:51:34', 0),
-(6, '06:00:00', '09:00:00', 6, '2022-08-18 11:52:04', '2022-08-18 11:52:04', 0);
+INSERT INTO `schedules` (`schedule_id`, `time_in`, `time_out`, `created_on`, `updated_on`, `delete_flag`) VALUES
+(8, '09:00:00', '18:00:00', '2022-08-25 17:06:07', '2022-08-25 17:06:07', 0),
+(9, '07:00:00', '16:00:00', '2022-08-25 17:06:29', '2022-08-25 17:06:29', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `stage`
+--
+
+CREATE TABLE `stage` (
+  `stage_id` int(11) NOT NULL,
+  `stage_status` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `stage`
+--
+
+INSERT INTO `stage` (`stage_id`, `stage_status`) VALUES
+(1, 'New'),
+(2, 'Qualified Opportunity'),
+(3, 'Proposition'),
+(4, 'Won'),
+(5, 'Lost');
 
 -- --------------------------------------------------------
 
@@ -664,6 +720,12 @@ CREATE TABLE `supplier_product` (
 --
 
 --
+-- Indexes for table `account`
+--
+ALTER TABLE `account`
+  ADD PRIMARY KEY (`account_id`);
+
+--
 -- Indexes for table `account_list`
 --
 ALTER TABLE `account_list`
@@ -683,6 +745,22 @@ ALTER TABLE `attendance`
   ADD KEY `employee_id` (`employee_id`);
 
 --
+-- Indexes for table `campaign`
+--
+ALTER TABLE `campaign`
+  ADD PRIMARY KEY (`campaign_id`),
+  ADD KEY `campaignmember_id` (`campaignmember_id`) USING BTREE;
+
+--
+-- Indexes for table `campaign_member`
+--
+ALTER TABLE `campaign_member`
+  ADD PRIMARY KEY (`campaignmember_id`),
+  ADD KEY `campaign_id` (`campaign_id`),
+  ADD KEY `lead_id` (`lead_id`),
+  ADD KEY `contact_id` (`contact_id`);
+
+--
 -- Indexes for table `cashadvance`
 --
 ALTER TABLE `cashadvance`
@@ -695,6 +773,20 @@ ALTER TABLE `cashadvance`
 ALTER TABLE `category`
   ADD PRIMARY KEY (`category_id`),
   ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `contact`
+--
+ALTER TABLE `contact`
+  ADD PRIMARY KEY (`contact_id`),
+  ADD KEY `account_id` (`account_id`);
+
+--
+-- Indexes for table `contract`
+--
+ALTER TABLE `contract`
+  ADD PRIMARY KEY (`contract_id`),
+  ADD KEY `account_id` (`account_id`);
 
 --
 -- Indexes for table `customer`
@@ -748,22 +840,21 @@ ALTER TABLE `items`
 -- Indexes for table `job`
 --
 ALTER TABLE `job`
-  ADD PRIMARY KEY (`job_id`),
-  ADD KEY `deparment_id` (`department_id`);
+  ADD PRIMARY KEY (`job_id`);
 
 --
--- Indexes for table `journal_entries`
+-- Indexes for table `leads`
 --
-ALTER TABLE `journal_entries`
-  ADD PRIMARY KEY (`journal_id`);
+ALTER TABLE `leads`
+  ADD PRIMARY KEY (`lead_id`),
+  ADD KEY `stage_id` (`stage_id`);
 
 --
--- Indexes for table `journal_items`
+-- Indexes for table `opportunity`
 --
-ALTER TABLE `journal_items`
-  ADD KEY `journal_id` (`journal_id`),
-  ADD KEY `account_id` (`account_id`),
-  ADD KEY `group_id` (`accountgroup_id`);
+ALTER TABLE `opportunity`
+  ADD PRIMARY KEY (`opportunity_id`),
+  ADD KEY `account_id` (`account_id`);
 
 --
 -- Indexes for table `order`
@@ -826,8 +917,13 @@ ALTER TABLE `sales`
 -- Indexes for table `schedules`
 --
 ALTER TABLE `schedules`
-  ADD PRIMARY KEY (`schedule_id`),
-  ADD KEY `employee_id` (`employee_id`);
+  ADD PRIMARY KEY (`schedule_id`);
+
+--
+-- Indexes for table `stage`
+--
+ALTER TABLE `stage`
+  ADD PRIMARY KEY (`stage_id`);
 
 --
 -- Indexes for table `supplier`
@@ -845,6 +941,12 @@ ALTER TABLE `supplier_product`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `account`
+--
+ALTER TABLE `account`
+  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `account_list`
@@ -865,6 +967,18 @@ ALTER TABLE `attendance`
   MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `campaign`
+--
+ALTER TABLE `campaign`
+  MODIFY `campaign_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `campaign_member`
+--
+ALTER TABLE `campaign_member`
+  MODIFY `campaignmember_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `cashadvance`
 --
 ALTER TABLE `cashadvance`
@@ -875,6 +989,18 @@ ALTER TABLE `cashadvance`
 --
 ALTER TABLE `category`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `contact`
+--
+ALTER TABLE `contact`
+  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `contract`
+--
+ALTER TABLE `contract`
+  MODIFY `contract_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -898,7 +1024,7 @@ ALTER TABLE `department`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `group_list`
@@ -925,10 +1051,16 @@ ALTER TABLE `job`
   MODIFY `job_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
--- AUTO_INCREMENT for table `journal_entries`
+-- AUTO_INCREMENT for table `leads`
 --
-ALTER TABLE `journal_entries`
-  MODIFY `journal_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+ALTER TABLE `leads`
+  MODIFY `lead_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `opportunity`
+--
+ALTER TABLE `opportunity`
+  MODIFY `opportunity_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `overtime`
@@ -964,7 +1096,13 @@ ALTER TABLE `sales`
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `stage`
+--
+ALTER TABLE `stage`
+  MODIFY `stage_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `supplier`
@@ -989,10 +1127,36 @@ ALTER TABLE `attendance`
   ADD CONSTRAINT `attendance_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `campaign`
+--
+ALTER TABLE `campaign`
+  ADD CONSTRAINT `campaign_ibfk_1` FOREIGN KEY (`campaignmember_id`) REFERENCES `campaign_member` (`campaignmember_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `campaign_member`
+--
+ALTER TABLE `campaign_member`
+  ADD CONSTRAINT `campaign_member_ibfk_1` FOREIGN KEY (`lead_id`) REFERENCES `leads` (`lead_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `campaign_member_ibfk_2` FOREIGN KEY (`contact_id`) REFERENCES `contact` (`contact_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `campaign_member_ibfk_3` FOREIGN KEY (`campaign_id`) REFERENCES `campaign` (`campaign_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `cashadvance`
 --
 ALTER TABLE `cashadvance`
   ADD CONSTRAINT `cashadvance_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `contact`
+--
+ALTER TABLE `contact`
+  ADD CONSTRAINT `contact_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `account` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `contract`
+--
+ALTER TABLE `contract`
+  ADD CONSTRAINT `contract_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `account` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `customer`
@@ -1010,7 +1174,8 @@ ALTER TABLE `deductions`
 -- Constraints for table `employees`
 --
 ALTER TABLE `employees`
-  ADD CONSTRAINT `employees_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `employees_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `employees_ibfk_2` FOREIGN KEY (`schedule_id`) REFERENCES `schedules` (`schedule_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `inventory`
@@ -1019,18 +1184,16 @@ ALTER TABLE `inventory`
   ADD CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `job`
+-- Constraints for table `leads`
 --
-ALTER TABLE `job`
-  ADD CONSTRAINT `job_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `leads`
+  ADD CONSTRAINT `leads_ibfk_1` FOREIGN KEY (`stage_id`) REFERENCES `stage` (`stage_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `journal_items`
+-- Constraints for table `opportunity`
 --
-ALTER TABLE `journal_items`
-  ADD CONSTRAINT `journal_items_ibfk_1` FOREIGN KEY (`journal_id`) REFERENCES `journal_entries` (`journal_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `journal_items_ibfk_2` FOREIGN KEY (`accountgroup_id`) REFERENCES `group_list` (`accountgroup_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `journal_items_ibfk_3` FOREIGN KEY (`account_id`) REFERENCES `account_list` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `opportunity`
+  ADD CONSTRAINT `opportunity_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `account` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `order`
@@ -1065,12 +1228,6 @@ ALTER TABLE `product`
 ALTER TABLE `purchase_order`
   ADD CONSTRAINT `purchase_order_ibfk_1` FOREIGN KEY (`supplier_id`) REFERENCES `supplier` (`supplier_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `purchase_order_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `schedules`
---
-ALTER TABLE `schedules`
-  ADD CONSTRAINT `schedules_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `supplier`
