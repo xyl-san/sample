@@ -447,4 +447,138 @@ body {
 .listitems{
   cursor: grab;
 }
+/*CRM HOVER*/
 
+.prospect-btn-delete {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 10%;
+    left: 86%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .prospect-dropdown {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 10%;
+    left: 95%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .prospect-col:hover .prospect-dropdown{
+    opacity: 1;  
+}
+.prospect-col:hover .prospect-btn-delete{
+    opacity: 1;  
+}
+.access-btn-delete {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 10%;
+    left: 86%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .access-dropdown {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 10%;
+    left: 95%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .access-col:hover .access-dropdown{
+    opacity: 1;  
+}
+.access-col:hover .access-btn-delete{
+    opacity: 1;  
+}
+
+.proposition-btn-delete {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 10%;
+    left: 86%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .proposition-dropdown {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 10%;
+    left: 95%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .proposition-col:hover .proposition-dropdown{
+    opacity: 1;  
+}
+.proposition-col:hover .proposition-btn-delete{
+    opacity: 1;  
+}
+
+.award-btn-delete {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 10%;
+    left: 86%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .award-dropdown {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 10%;
+    left: 95%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .award-col:hover .award-dropdown{
+    opacity: 1;  
+}
+.award-col:hover .award-btn-delete{
+    opacity: 1;  
+}
+
+.delivered-btn-delete {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 10%;
+    left: 86%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .delivered-dropdown {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 10%;
+    left: 95%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .delivered-col:hover .delivered-dropdown{
+    opacity: 1;  
+}
+.delivered-col:hover .delivered-btn-delete{
+    opacity: 1;  
+}
