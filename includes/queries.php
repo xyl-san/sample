@@ -195,10 +195,7 @@ function attendanceTable(){
     <td><?php echo date('h:i A', strtotime($row['time_out'])) ?></td>
 
     <td>
-        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['attendance_id']; ?>"><i
-                class="fa fa-edit"></i> Edit</button>
-        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['attendance_id']; ?>"><i
-                class="fa fa-trash"></i> Delete</button>
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['attendance_id']; ?>"><i class="fa fa-edit"></i> Edit</button>
     </td>
 </tr>
 <?php
@@ -215,6 +212,54 @@ function employeeAttendance(){
       ";
   }
 }
+
+if (isset($_POST['addAttendance'])) {
+  attendanceAdd();
+}
+function attendanceAdd(){
+  include 'conn.php';
+  if(isset($_POST['addAttendance'])){
+    $employee_id = $_POST['employeeId'];
+    $date = $_POST['date'];
+    $time_in = $_POST['time_in'];
+    $time_out = $_POST['time_out'];
+
+    $sql = "INSERT INTO attendance (employee_id, date, time_in, time_out, created_on) VALUES ('$employee_id','$date', '$time_in', '$time_out', NOW() )";
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+  }
+  $conn->close();
+  header('location: attendance_list.php');
+}
+
+if (isset($_POST['editAttendance'])) {
+  attendanceEdit();
+}
+
+function attendanceEdit(){
+  include 'conn.php';
+  if(isset($_POST['editAttendance'])){
+    $attendance_id = $_POST['attendance_id'];
+    $date = $_POST['date'];
+    $time_in = $_POST['time_in'];
+    $time_out = $_POST['time_out'];
+
+    $sql = "UPDATE attendance SET date = '$date', time_in = '$time_in', time_out = '$time_out', updated_on = NOW() WHERE attendance_id = '$attendance_id'";
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+  }
+  $conn->close();
+  header('location: attendance_list.php');
+}
+
  
 ?>
 

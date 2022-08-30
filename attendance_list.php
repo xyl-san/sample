@@ -102,11 +102,14 @@
         $(document).ready(function(){
             $.ajax({
             type: 'POST',
-            url: 'attendance_row.php',
-            data: {id: id},
+            url: 'get_rows.php',
+            data: {
+                id: id,
+                attRow: true,
+            },
             dataType: 'json',
             success: function(response) {
-                $('.attendance_id').val(response.attendance_id);
+                $('.attendanceId').val(response.attendance_id);
                 $('.firstName').val(response.firstname);
                 $('.lastName').val(response.lastname);
                 $('.dateInfo').val(response.date);

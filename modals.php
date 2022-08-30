@@ -265,7 +265,7 @@
             <div class="modal-body">
                 <form class="row g-3" action="#" method="POST" autocomplete="off">
                     <div class="col-md-6 form-floating">
-                        <select class="form-control" name="employee" aria-label="Select employee">
+                        <select class="form-control" name="employeeId" aria-label="Select employee">
                             <option value="" class="employeeSelection" selected>- Select -</option>
                             <?php employeeAttendance();?>
                         </select>
@@ -285,7 +285,7 @@
                     </div>
                     <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
-                        <button type="submit" class="btn btn-primary float-end">Submit</button>
+                        <button type="submit" class="btn btn-primary float-end" name="addAttendance">Submit</button>
                     </div>
                 </form>
 
@@ -294,7 +294,6 @@
     </div>
 </div>
 <!-- End Add Attendance Employee -->
-
 
 <!-- Start Edit Attendance Employee -->
 <div class="modal fade" id="editAttendance" tabindex="-1" role="dialog" aria-labelledby="attendanceTitle"
@@ -307,8 +306,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="#" method="POST" autocomplete="off">
-                    <input type="hidden" class="attendanceId" name="attendance_Id">
+                <form class="row g-3" action="" method="POST" autocomplete="off">
+                    <input type="hidden" class="attendanceId" name="attendance_id">
                     <div class="col-md-12 form-floating">
                         <input type="date" class="form-control dateInfo" name="date" required>
                         <label for="date">Date</label>
@@ -323,7 +322,7 @@
                     </div>
                     <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
-                        <button type="submit" class="btn btn-primary float-end">Submit</button>
+                        <button type="submit" class="btn btn-primary float-end" name="editAttendance">Submit</button>
                     </div>
                 </form>
 

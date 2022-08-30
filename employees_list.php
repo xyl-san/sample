@@ -105,18 +105,15 @@
             getRow(id);
         });
     });
-    // DRAGGABLE MODAL
-    // $('.modal-dialog').draggable({
-    // 	"handle":".modal-header"
-    //   });
 
     function getRow(id) {
         $(document).ready(function() {
             $.ajax({
                 type: 'POST',
-                url: 'employee_row.php',
+                url: 'get_rows.php',
                 data: {
-                    id: id
+                    id: id,
+                    empRow: true,
                 },
                 dataType: 'json',
                 success: function(response) {
