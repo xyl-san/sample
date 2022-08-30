@@ -90,14 +90,15 @@
         $(document).ready(function(){
             $.ajax({
             type: 'POST',
-            url: 'department_row.php',
-            data: {id: id},
+            url: 'get_rows.php',
+            data: {
+                id: id, 
+                deptRow: true,
+            },
             dataType: 'json',
             success: function(response) {
-                $('.department_id').val(response.department_id);
-                $('.department').val(response.department_name);
-                $('.delete_department_name').html(response.department_name);
-               
+                $('.departmentId').val(response.department_id);
+                $('.departmentName').val(response.department_name);
             }
             });
 
