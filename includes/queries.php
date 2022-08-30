@@ -179,7 +179,7 @@ function employeeSchedule(){
         header('location: ../employees_list.php');
   }
 
-
+// Attendance
 function attendanceTable(){
   include 'conn.php';
   $sql = "SELECT a.attendance_id, a.status, a.date, a.time_in, a.time_out, e.employee_code,e.firstname, e.lastname from attendance a INNER JOIN employees as e on  e.employee_id=a.employee_id ORDER BY date desc;";
@@ -260,22 +260,20 @@ function attendanceEdit(){
   header('location: attendance_list.php');
 }
 
- 
+// Attendance 
 ?>
 
-
+<!-- Department -->
 <?php 
 function departmentTable(){
   include 'conn.php';
-  $sql = "SELECT department_id, department_name, created_on, updated_on FROM department";
+  $sql = "SELECT department_id, department_name, created_on, updated_on FROM department WHERE delete_flag = '0'";
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
     ?>
 <tr>
     <td><?php echo $row['department_id']; ?></td>
     <td><?php echo $row['department_name']?></td>
-    <td><?php echo $row['created_on']; ?></td>
-    <td><?php echo $row['updated_on'] ?></td>
     <td>
         <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['department_id']; ?>"><i
                 class="fa fa-edit"></i> Edit</button>
@@ -286,6 +284,74 @@ function departmentTable(){
 <?php
   }
 }
+
+if(isset($_POST['departmentAdd'])){
+  departmentAdd();
+}
+
+function departmentAdd(){
+  include 'conn.php';
+  if(isset($_POST['departmentAdd'])){
+    $department_name = $_POST['departmentname'];
+
+    $sql = "INSERT INTO department (department_name, created_on) VALUES ('$department_name', NOW())";
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+  }
+  $conn->close();
+  header('location: department_list.php');
+}
+
+if(isset($_POST['departmentEdit'])){
+  departmentEdit();
+}
+
+function departmentEdit(){
+  include 'conn.php';
+  if(isset($_POST['departmentEdit'])){
+    $department_id = $_POST['department_id'];
+    $department_name = $_POST['department_name'];
+
+    $sql = "UPDATE department SET department_name = '$department_name', updated_on = NOW() WHERE department_id = '$department_id'";
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+  }
+  $conn->close();
+  header('location: department_list.php');
+}
+
+if(isset($_POST['departmentDelete'])){
+  departmentDelete();
+}
+
+function departmentDelete(){
+  include 'conn.php';
+  if(isset($_POST['departmentDelete'])){
+    $department_id = $_POST['department_id'];
+
+    $sql = "UPDATE department SET delete_flag = '1', updated_on = NOW() WHERE department_id = '$department_id'";
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+  }
+  $conn->close();
+  header('location: department_list.php');
+}
+
+
+
+// Department
 
 
 function jobTable(){

@@ -651,28 +651,6 @@
 </div>
 <!--End Delete Account List-->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- Add lead -->
 <div class="modal fade" id="newLead" tabindex="-1" role="dialog" aria-labelledby="leadTitle"
     aria-hidden="true">
@@ -713,3 +691,91 @@
     </div>
 </div>
 <!-- End add lead -->
+
+<!-- Add Department -->
+<div class="modal fade" id="newDepartment" tabindex="-1" role="dialog" aria-labelledby="leadTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="leadTitle">New Department</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
+                    <div class="col-xs-12 form-floating">
+                        <input type="text" class="form-control departmentName" name="departmentname" placeholder="IT Department" required>
+                        <label for="departmentname">Name</label>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end" name="departmentAdd">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Add Department -->
+
+<!-- Edit Department -->
+
+<div class="modal fade" id="editDepartment" tabindex="-1" role="dialog" aria-labelledby="departmentTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="departmentTitle">Edit Department</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
+                    <input type="hidden" class="departmentId" name="department_id">
+                    <div class="col-md-12 form-floating">
+                        <input type="text" class="form-control departmentName" name="department_name" required>
+                        <label for="department_name">Department Name</label>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end" name="departmentEdit">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Edit Department -->
+
+<!-- Delete Department -->
+<div class="modal fade" id="deleteDepartment" tabindex="-1" role="dialog" aria-labelledby="employeeTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="departmentTitle">Delete Department</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" method="POST" enctype="multipart/form-data"
+                    autocomplete="off">
+                    <input type="hidden" class="departmentId" name="department_id">
+                    <div class="text-center">
+                        <p>
+                            Delete department?
+                        </p>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end" name="departmentDelete">Yes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Delete Department -->
