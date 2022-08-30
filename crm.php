@@ -62,7 +62,7 @@
                 </div>
                 <div class="card-body stages ">
                     <div class="row row-cols-5">
-                        <div class="col border rounded">
+                        <div class="col border rounded prospect-col">
                             <h5>Prospect</h5>
                             <div id="prospect" class="list_containers h-100">
                                 <?php 
@@ -72,10 +72,29 @@
                                     data-itemid=<?php echo $li['lead_id'] ?>>
                                     <div class="card-header crm-header">
                                         <p class="fw-bolder d-inline-block mx-auto"><?php echo $li['name'] ?></p>
+                                    </div>
+                                    <div class="prospect-btn-delete">
                                         <button data-itemid=<?php echo $li['lead_id'] ?>
                                             class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
+                                    </div>
+                                    <div class="prospect-dropdown">
+                                        <button class="btn btn-sm float-end colordropdown" type="button"
+                                            id="colordropdown" data-bs-toggle="dropdown">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                            <ul class="dropdown-menu" aria-labelledby="colordropdown">
+                                                <li class="red"><img src="assets/icons/red.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                                <li class="blue"><img src="assets/icons/blue.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                                <li class="green"><img src="assets/icons/green.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                                <li class="black"><img src="assets/icons/black.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                                <li class="gold"><img src="assets/icons/gold.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                            </ul>
                                     </div>
                                     <div class="card-body crm-body">
                                         <p><?php echo $li['email'] ?></p>
@@ -87,9 +106,8 @@
                                     }
                                 ?>
                             </div>
-
                         </div>
-                        <div class="col border rounded">
+                        <div class="col border rounded access-col">
                             <h5>Access</h5>
                             <div id="access" class="list_containers h-100">
                                 <?php 
@@ -99,10 +117,29 @@
                                     data-itemid=<?php echo $oi['lead_id'] ?>>
                                     <div class="card-header crm-header">
                                         <p class="fw-bolder d-inline-block mx-auto"><?php echo $oi['name'] ?></p>
+                                    </div>
+                                    <div class="access-btn-delete">
                                         <button data-itemid=<?php echo $oi['lead_id'] ?>
                                             class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
+                                    </div>
+                                    <div class="access-dropdown">
+                                        <button class="btn btn-sm float-end colordropdown" type="button"
+                                            id="colordropdown" data-bs-toggle="dropdown">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                            <ul class="dropdown-menu" aria-labelledby="colordropdown">
+                                                <li class="red"><img src="assets/icons/red.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                                <li class="blue"><img src="assets/icons/blue.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                                <li class="green"><img src="assets/icons/green.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                                <li class="black"><img src="assets/icons/black.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                                <li class="gold"><img src="assets/icons/gold.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                            </ul>
                                     </div>
                                     <div class="card-body crm-body">
                                         <p><?php echo $oi['email'] ?></p>
@@ -116,7 +153,8 @@
                             </div>
 
                         </div>
-                        <div class="col border rounded">
+
+                        <div class="col border rounded proposition-col">
                             <h5>Proposal and Negotiation</h5>
                             <div id="proposition" class="list_containers h-100">
                                 <?php 
@@ -126,10 +164,29 @@
                                     data-itemid=<?php echo $pi['lead_id'] ?>>
                                     <div class="card-header crm-header">
                                         <p class="fw-bolder d-inline-block mx-auto"><?php echo $pi['name'] ?></p>
+                                    </div>
+                                    <div class="proposition-btn-delete">
                                         <button data-itemid=<?php echo $pi['lead_id'] ?>
                                             class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
+                                    </div>
+                                    <div class="proposition-dropdown">
+                                        <button class="btn btn-sm float-end colordropdown" type="button"
+                                            id="colordropdown" data-bs-toggle="dropdown">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                            <ul class="dropdown-menu" aria-labelledby="colordropdown">
+                                                <li class="red"><img src="assets/icons/red.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                                <li class="blue"><img src="assets/icons/blue.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                                <li class="green"><img src="assets/icons/green.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                                <li class="black"><img src="assets/icons/black.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                                <li class="gold"><img src="assets/icons/gold.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                            </ul>
                                     </div>
                                     <div class="card-body crm-body">
                                         <p><?php echo $pi['email'] ?></p>
@@ -142,7 +199,8 @@
                                 ?>
                             </div>
                         </div>
-                        <div class="col border rounded">
+
+                        <div class="col border rounded award-col">
                             <h5>Award</h5>
                             <div id="award" class="list_containers h-100">
                                 <?php 
@@ -152,10 +210,29 @@
                                     data-itemid=<?php echo $wi['lead_id'] ?>>
                                     <div class="card-header crm-header">
                                         <p class="fw-bolder d-inline-block mx-auto"><?php echo $wi['name'] ?></p>
+                                    </div>
+                                    <div class="award-btn-delete">
                                         <button data-itemid=<?php echo $wi['lead_id'] ?>
                                             class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
+                                    </div>
+                                    <div class="award-dropdown">
+                                        <button class="btn btn-sm float-end colordropdown" type="button"
+                                            id="colordropdown" data-bs-toggle="dropdown">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                            <ul class="dropdown-menu" aria-labelledby="colordropdown">
+                                                <li class="red"><img src="assets/icons/red.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                                <li class="blue"><img src="assets/icons/blue.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                                <li class="green"><img src="assets/icons/green.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                                <li class="black"><img src="assets/icons/black.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                                <li class="gold"><img src="assets/icons/gold.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                            </ul>
                                     </div>
                                     <div class="card-body crm-body">
                                         <p><?php echo $wi['email'] ?></p>
@@ -168,7 +245,7 @@
                                 ?>
                             </div>
                         </div>
-                        <div class="col border rounded">
+                        <div class="col border rounded delivered-col">
                             <h5>Delivered</h5>
                             <div id="delivered" class="list_containers h-100">
                                 <?php 
@@ -178,10 +255,29 @@
                                     data-itemid=<?php echo $loi['lead_id'] ?>>
                                     <div class="card-header crm-header">
                                         <p class="fw-bolder d-inline-block mx-auto"><?php echo $loi['name'] ?></p>
-                                        <button data-itemid=<?php echo $loi['lead_id'] ?>
+                                    </div>
+                                    <div class="delivered-btn-delete">
+                                        <button data-itemid=<?php echo $wi['lead_id'] ?>
                                             class="btn deleteLead btn-danger btn-sm float-end d-inline-block">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
+                                    </div>
+                                    <div class="delivered-dropdown">
+                                        <button class="btn btn-sm float-end colordropdown" type="button"
+                                            id="colordropdown" data-bs-toggle="dropdown">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                            <ul class="dropdown-menu" aria-labelledby="colordropdown">
+                                                <li class="red"><img src="assets/icons/red.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                                <li class="blue"><img src="assets/icons/blue.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                                <li class="green"><img src="assets/icons/green.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                                <li class="black"><img src="assets/icons/black.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                                <li class="gold"><img src="assets/icons/gold.png"
+                                                        style="width: 25px;  height: 25px;"></li>
+                                            </ul>
                                     </div>
                                     <div class="card-body crm-body">
                                         <p><?php echo $loi['email'] ?></p>
