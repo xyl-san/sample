@@ -449,6 +449,8 @@ body {
 }
 /*CRM HOVER*/
 
+/*prospect*/
+
 .prospect-btn-delete {
     transition: .5s ease;
     opacity: 0;
@@ -464,7 +466,7 @@ body {
     opacity: 0;
     position: absolute;
     top: 10%;
-    left: 95%;
+    left: 96%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     text-align: center;
@@ -474,6 +476,10 @@ body {
 }
 .prospect-col:hover .prospect-btn-delete{
     opacity: 1;  
+}
+/*access*/
+.access-header{
+    background-color: #C3B091 ;
 }
 .access-btn-delete {
     transition: .5s ease;
@@ -490,7 +496,7 @@ body {
     opacity: 0;
     position: absolute;
     top: 10%;
-    left: 95%;
+    left: 96%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     text-align: center;
@@ -501,7 +507,10 @@ body {
 .access-col:hover .access-btn-delete{
     opacity: 1;  
 }
-
+/*proposition*/
+.proposition-header{
+background-color: #C3B091;
+}
 .proposition-btn-delete {
     transition: .5s ease;
     opacity: 0;
@@ -517,7 +526,7 @@ body {
     opacity: 0;
     position: absolute;
     top: 10%;
-    left: 95%;
+    left: 96%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     text-align: center;
@@ -528,7 +537,10 @@ body {
 .proposition-col:hover .proposition-btn-delete{
     opacity: 1;  
 }
-
+/*award*/
+.award-header{
+    background-color: #C3B091;
+}
 .award-btn-delete {
     transition: .5s ease;
     opacity: 0;
@@ -544,7 +556,7 @@ body {
     opacity: 0;
     position: absolute;
     top: 10%;
-    left: 95%;
+    left: 96%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     text-align: center;
@@ -571,7 +583,7 @@ body {
     opacity: 0;
     position: absolute;
     top: 10%;
-    left: 95%;
+    left: 96%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     text-align: center;
@@ -582,3 +594,5 @@ body {
 .delivered-col:hover .delivered-btn-delete{
     opacity: 1;  
 }
+
+
