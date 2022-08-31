@@ -23,7 +23,7 @@
                         <label for="addressInfo">Address</label>
                     </div>
                     <div class="col-md-6 form-floating">
-                        <input type="date" class="form-control birthDate" name="birthdate" required>
+                        <input type="date" class="form-control birthDate datepicker" name="birthdate" required>
                         <label for="birthDate">Birthdate</label>
                     </div>
                     <div class="col-md-6 form-floating">
@@ -104,7 +104,7 @@
                         <label for="addressInfo">Address</label>
                     </div>
                     <div class="col-md-6 form-floating">
-                        <input type="date" class="form-control birthDate" name="birthdate" required>
+                        <input type="date" class="form-control birthDate datepicker" name="birthdate" required>
                         <label for="birthDate">Birthdate</label>
                     </div>
                     <div class="col-md-6 form-floating">
@@ -138,7 +138,7 @@
                     </div>
                     <div class="col-12 form-floating">
                         <select class="form-control" name="schedule" aria-label="Select schedule">
-                            <option value="" class="scheduleSelection" selected>- Select -</option>
+                            <option value="" class="scheduleSelection timepicker" selected>- Select -</option>
                             <?php employeeSchedule();?>
                         </select>
                         <label for="scheduleSelection">Schedule</label>
@@ -272,11 +272,11 @@
                         <label for="employeeSelection">Employee</label>
                     </div>
                     <div class="col-md-6 form-floating">
-                        <input type="date" class="form-control dateInfo" name="date" required>
+                        <input type="date" class="form-control dateInfo datepicker" name="date" required>
                         <label for="date">Date</label>
                     </div>
                     <div class="col-md-6 form-floating">
-                        <input type="time" class="form-control timeIn" name="time_in" required>
+                        <input type="time" class="form-control timeIn timepicker" name="time_in" required>
                         <label for="time_in">Time In</label>
                     </div>
                     <div class="col-md-6 form-floating">
