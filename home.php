@@ -1,4 +1,7 @@
 <?php include 'includes/queries.php';?>
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 

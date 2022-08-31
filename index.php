@@ -1,116 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <?php include 'includes/styles.php';?>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dream System v.2022.0.1</title>
+    <?php include "includes/styles.php";?>
+
+    <style>
+    .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+    }
+
+    @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+        }
+    }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
 </head>
 
-<body id="bodyStyle" oncontextmenu="return false">
+<body class="text-center" id="bodyLogin">
 
-    <div class="nav float-end">
-        <button class="btn btn-dark">
-            <a href="#"><i class="fa-solid fa-user"></i></a>
-        </button>
-    </div>
-    <div class="bubble x1"></div>
-    <div class="bubble x2"></div>
-    <div class="bubble x3"></div>
-    <div class="bubble x4"></div>
-    <div class="bubble x5"></div>
-    <div class="bubble x6"></div>
-    <div class="bubble x7"></div>
-    <div class="bubble x8"></div>
-    <div class="bubble x9"></div>
-    <div class="bubble x10"></div>
-    <div class="container text-center w-50 h-50 position-absolute top-50 start-50 translate-middle">
-        <div class="row justify-content-start">
-            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                <a href="pointofsale.php">
-                    <button class="btn" id="crm">
-                        <img src="assets/icons/POS.png" alt="" style="height:100px; border-radius: 15px;">
-                        <div class="o_caption">Point of Sale</div>
-                    </button>
-                </a>
+    <main class="form-signin">
+        <form name="frmUser" method="POST" action="login.php">
+            <img class="mb-4" src="./assets/bosspanda.png" alt="" width="100" height="70">
+            <h1 class="h5 mb-3 fw-normal">Sign in to your session</h1>
 
+            <div class="form-floating">
+                <input type="text" class="form-control" id="floatingInput" name="user_name"
+                    placeholder="name@example.com">
+                <label for="floatingInput">Email address</label>
             </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                <a href="inventory.php">
-                    <button class="btn" id="crm">
-                        <img src="assets/icons/inventory.png" alt="" style="height:100px; border-radius: 15px;">
-                        <div class="o_caption">Inventory</div>
-                    </button>
-                </a>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" name="password"
+                    placeholder="Password">
+                <label for="floatingPassword">Password</label>
             </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                <a href="attendance_list.php">
-                    <button class="btn" id="crm">
-                        <img src="assets/icons/attendance.png" alt="" style="height:100px; border-radius: 15px;">
-                        <div class="o_caption">Attendance</div>
-                    </button>
-                </a>
+
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
             </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                <button class="btn" id="crm">
-                    <img src="assets/icons/accounting.png" alt="" style="height:100px; border-radius: 15px;">
-                    <div class="o_caption">Accounting</div>
-                </button>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                <button class="btn" id="crm">
-                    <img src="assets/icons/payroll.png" alt="" style="height:100px; border-radius: 15px;">
-                    <div class="o_caption">Payroll</div>
-                </button>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                <button class="btn" id="crm">
-                    <img src="assets/icons/employees.png" alt="" style="height:100px; border-radius: 15px;">
-                    <div class="o_caption">Employees</div>
-                </button>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                <button class="btn" id="crm">
-                    <img src="assets/icons/sales.png" alt="" style="height:100px; border-radius: 15px;">
-                    <div class="o_caption">Sales</div>
-                </button>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                <button class="btn" id="crm">
-                    <img src="assets/icons/customers.png" alt="" style="height:100px; border-radius: 15px;">
-                    <div class="o_caption">Customer</div>
-                </button>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                <button class="btn" id="crm">
-                    <a href="crm.php">
-                    <img src="assets/icons/CRM.png" alt="" style="height:100px; border-radius: 15px;">
-                    <div class="o_caption">CRM</div>
-                    </a>
-                </button>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                <button class="btn" id="crm">
-                    <img src="assets/icons/account.png" alt="" style="height:100px; border-radius: 15px;">
-                    <div class="o_caption">Accounts</div>
-                </button>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                <button class="btn" id="crm">
-                    <img src="assets/icons/invoices.png" alt="" style="height:100px; border-radius: 15px;">
-                    <div class="o_caption">Invoices</div>
-                </button>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                <button href="#" class="btn" id="crm">
-                    <img src="assets/icons/purchase.png" alt="" style="height:100px; border-radius: 15px;">
-                    <div class="o_caption">Purchase</div>
-                </button>
-            </div>
-        </div>
-    </div>
-    <?php include 'includes/scripts.php';?>
+            <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit" value="Submit">Sign in</a></button>
+            <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
+        </form>
+    </main>
 </body>
-</html> 
+
+</html>
