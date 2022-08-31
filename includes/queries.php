@@ -1,7 +1,7 @@
 <?php 
 function employeeTable(){
   include 'conn.php';
-  $sql = "SELECT e.employee_id, e.photo, e.employee_code, e.firstname, e.lastname, e.address, e.birthdate, e.contact_info, e.gender, e.photo, e.delete_flag, d.department_name, j.description, s.time_in, s.time_out FROM employees e INNER JOIN department as d on e.department_id=d.department_id INNER JOIN job as j on e.job_id=j.job_id INNER JOIN schedules as s on e.schedule_id=s.schedule_id WHERE e.delete_flag = false;";
+  $sql = "SELECT e.employee_id, e.photo, e.employee_code, e.firstname, e.lastname, e.address, e.birthdate, e.contact_info, e.gender, e.photo, e.delete_flag, d.department_name, j.job_name, s.time_in, s.time_out FROM employees e INNER JOIN department as d on d.department_id = e.department_id INNER JOIN job as j on j.job_id = e.job_id INNER JOIN schedules as s on e.schedule_id=s.schedule_id WHERE e.delete_flag = false;";
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
     ?>
@@ -13,7 +13,7 @@ function employeeTable(){
     <td><?php echo $row['firstname'] . ' ' .$row['lastname'];?></td>
     <td><?php echo $row['address'] ?></td>
     <td><?php echo $row['birthdate'] ?></td>
-    <td><?php echo $row['description'] ?></td>
+    <td><?php echo $row['job_name'] ?></td>
     <td><?php echo date('h:i A', strtotime($row['time_in'])).' - '.date('h:i A', strtotime($row['time_out'])); ?></td>
     <td>
         <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['employee_id']; ?>"><i
@@ -29,11 +29,11 @@ function employeeTable(){
 
 function employeePosition(){
   include 'conn.php';
-  $sql = "SELECT job_id, description FROM job";
+  $sql = "SELECT job_id, job_name FROM job";
   $query = $conn->query($sql);
   while($prow = $query->fetch_assoc()){
       echo "
-      <option value='".$prow['job_id']."'>".$prow['description']."</option>
+      <option value='".$prow['job_id']."'>".$prow['job_name']."</option>
       ";
   }
   $conn->close();
@@ -132,7 +132,7 @@ function employeeSchedule(){
           echo "error";
         }
       }
-      $conn->close();
+
       header('location: ../employees_list.php');
     }
 
