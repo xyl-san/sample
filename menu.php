@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,16 +16,6 @@
             <a href=""><i class="fa-solid fa-user"></i></a>
         </button>
     </div>
-    <div class="bubble x1"></div>
-    <div class="bubble x2"></div>
-    <div class="bubble x3"></div>
-    <div class="bubble x4"></div>
-    <div class="bubble x5"></div>
-    <div class="bubble x6"></div>
-    <div class="bubble x7"></div>
-    <div class="bubble x8"></div>
-    <div class="bubble x9"></div>
-    <div class="bubble x10"></div>
     <div class="container text-center w-50 h-50 position-absolute top-50 start-50 translate-middle">
         <div class="row justify-content-start">
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
@@ -56,9 +44,11 @@
                 </a>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                <button class="btn" id="crm">
-                    <img src="assets/icons/accounting.png" alt="" style="height:100px; border-radius: 15px;">
-                    <div class="o_caption">Accounting</div>
+                <button class="btn" id="accounting">
+                    <a href="accounting_list.php">
+                        <img src="assets/icons/accounting.png" alt="" style="height:100px; border-radius: 15px;">
+                        <div class="o_caption">Accounting</div>
+                    </a>
                 </button>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
@@ -68,9 +58,11 @@
                 </button>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                <button class="btn" id="crm">
+                <button class="btn" id="hrms">
+                <a href="employees_list.php">
                     <img src="assets/icons/employees.png" alt="" style="height:100px; border-radius: 15px;">
                     <div class="o_caption">Employees</div>
+                    </a>
                 </button>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
@@ -88,8 +80,8 @@
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                 <button class="btn" id="crm">
                     <a href="crm.php">
-                    <img src="assets/icons/CRM.png" alt="" style="height:100px; border-radius: 15px;">
-                    <div class="o_caption">CRM</div>
+                        <img src="assets/icons/CRM.png" alt="" style="height:100px; border-radius: 15px;">
+                        <div class="o_caption">CRM</div>
                     </a>
                 </button>
             </div>
@@ -115,4 +107,5 @@
     </div>
     <?php include 'includes/scripts.php';?>
 </body>
-</html> 
+
+</html>

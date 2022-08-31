@@ -202,7 +202,8 @@ function attendanceTable(){
     <td><?php echo date('h:i A', strtotime($row['time_out'])) ?></td>
 
     <td>
-        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['attendance_id']; ?>"><i class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['attendance_id']; ?>"><i
+                class="fa fa-edit"></i> Edit</button>
     </td>
 </tr>
 <?php
@@ -394,18 +395,18 @@ function cashadvanceTable(){
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
     ?>
-    <tr>
-        <td><?php echo $row['date_advance']; ?></td>
-        <td><?php echo $row['firstname'] ." ". $row['lastname']; ?></td>
-        <td><?php echo $row['amount']; ?></td>
-        <td>
-            <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['cashadvance_id']; ?>"><i
-                    class="fa fa-edit"></i> Edit</button>
-            <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['cashadvance_id']; ?>"><i
-                    class="fa fa-trash"></i> Delete</button>
-        </td>
-    </tr>
-  <?php
+<tr>
+    <td><?php echo $row['date_advance']; ?></td>
+    <td><?php echo $row['firstname'] ." ". $row['lastname']; ?></td>
+    <td><?php echo $row['amount']; ?></td>
+    <td>
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['cashadvance_id']; ?>"><i
+                class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['cashadvance_id']; ?>"><i
+                class="fa fa-trash"></i> Delete</button>
+    </td>
+</tr>
+<?php
   }
   $conn->close();
 }
@@ -544,20 +545,20 @@ editAccountList();
       $status = ($row['status'])?'<span class="badge text-bg-success pull-right">Active</span>':'<span class="badge text-bg-danger pull-right">Inactive</span>';
       $type = ($row['type'])?'<span class="badge text-bg-warning pull-right">Credit</span>':'<span class="badge text-bg-info pull-right">Debit</span>';
       ?>
-        <tr>
-            <td><?php echo $row['accountgroup_id']; ?></td>
-            <td><?php echo $row['date_created']; ?></td>
-            <td><?php echo $row['name']; ?></td>
-            <td><?php echo $row['description']; ?></td>
-            <td><?php echo $type; ?></td>
-            <td><?php echo $status; ?></td>
-            <td>
-                <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['accountgroup_id']; ?>"><i
-                        class="fa fa-edit"></i> Edit</button>
-                <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['accountgroup_id']; ?>"><i
-                        class="fa fa-trash"></i> Delete</button>
-            </td>
-        </tr>
+<tr>
+    <td><?php echo $row['accountgroup_id']; ?></td>
+    <td><?php echo $row['date_created']; ?></td>
+    <td><?php echo $row['name']; ?></td>
+    <td><?php echo $row['description']; ?></td>
+    <td><?php echo $type; ?></td>
+    <td><?php echo $status; ?></td>
+    <td>
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['accountgroup_id']; ?>"><i
+                class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['accountgroup_id']; ?>"><i
+                class="fa fa-trash"></i> Delete</button>
+    </td>
+</tr>
 <?php
     }
   }
@@ -775,5 +776,36 @@ editAccountList();
     echo json_encode(array('success'=>1));
   }
    //Lead Delete
+
+
+
+
+   // Inventory
+function inventoryTable(){
+  include 'conn.php';
+  $sql = "SELECT inventory_id, photo, product_id, description, quantity, updated_on FROM inventory ORDER BY description ASC;";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+      ?>
+      <tr>
+          <td><img src="<?php echo (!empty($row['photo']))? './images/'.$row['photo']:'./images/profile.jpg'; ?>" width="30px"
+                  height="30px"> <a href="#edit_photo" data-toggle="modal" class="pull-right photo"
+                  data-id="<?php echo $row['inventory_id']; ?>"><span class="fa fa-edit"></span></a></td>
+          <td><?php echo $row['product_id']; ?></td>
+          <td><?php echo $row['description'];?></td>
+          <td><?php echo $row['quantity'];?></td>
+          <td><?php echo date('h:i A', strtotime($row['updated_on'])) ?></td>
+
+          <td>
+              <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['inventory_id']; ?>"><i
+                      class="fa fa-edit"></i> Edit</button>
+              <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['inventory_id']; ?>"><i
+                      class="fa fa-trash"></i> Delete</button>
+          </td>
+      </tr>
+      <?php
+  }
+  $conn->close();
+}
 
 ?>
