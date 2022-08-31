@@ -23,7 +23,8 @@ function employeeTable(){
     </td>
 </tr>
 <?php
-  } 
+  }
+  $conn->close(); 
 }
 
 function employeePosition(){
@@ -35,6 +36,7 @@ function employeePosition(){
       <option value='".$prow['job_id']."'>".$prow['description']."</option>
       ";
   }
+  $conn->close();
 }
 
 function employeeDepartment(){
@@ -46,6 +48,7 @@ function employeeDepartment(){
       <option value='".$prow['department_id']."'>".$prow['department_name']."</option>
       ";
   }
+  $conn->close();
 }
 
 function employeeSchedule(){
@@ -57,6 +60,7 @@ function employeeSchedule(){
       <option value='".$srow['schedule_id']."'>".$srow['time_in']. ' ' .$srow['time_out']."</option>
       ";
   }
+  $conn->close();
 }
 
 
@@ -98,7 +102,7 @@ function employeeSchedule(){
         echo "error";
       }
     }
-
+    $conn->close();
     header('location: ../employees_list.php');
   }
 
@@ -128,6 +132,7 @@ function employeeSchedule(){
           echo "error";
         }
       }
+      $conn->close();
       header('location: ../employees_list.php');
     }
 
@@ -146,6 +151,7 @@ function employeeSchedule(){
     else{
       $_SESSION['error'] = $conn->error;
     }
+    $conn->close();
     header('location: ../employees_list.php');
   }
 
@@ -176,7 +182,8 @@ function employeeSchedule(){
     else{
       $_SESSION['error'] = 'Select employee to update photo first';
     }
-        header('location: ../employees_list.php');
+    $conn->close();
+    header('location: ../employees_list.php');
   }
 
 // Attendance
@@ -200,6 +207,7 @@ function attendanceTable(){
 </tr>
 <?php
   }
+  $conn->close();
 }
 
 function employeeAttendance(){
@@ -211,6 +219,7 @@ function employeeAttendance(){
       <option value='".$prow['employee_id']."'>".$prow['firstname'].' ' .$prow['lastname']."</option>
       ";
   }
+  $conn->close();
 }
 
 if (isset($_POST['addAttendance'])) {
@@ -283,6 +292,7 @@ function departmentTable(){
 </tr>
 <?php
   }
+  $conn->close();
 }
 
 if(isset($_POST['departmentAdd'])){
@@ -348,12 +358,9 @@ function departmentDelete(){
   $conn->close();
   header('location: department_list.php');
 }
-
-
-
 // Department
 
-
+// Job
 function jobTable(){
   include 'conn.php';
   $sql = "SELECT job_id, description, rate, created_on, updated_on FROM job";
@@ -375,7 +382,34 @@ function jobTable(){
 </tr>
 <?php
   }
+  $conn->close();
 }
+// Job
+
+// Cash Advance
+
+function cashadvanceTable(){
+  include 'conn.php';
+  $sql = "SELECT ca.cashadvance_id, ca.date_advance, ca.employee_id, ca.amount, e.firstname, e.lastname FROM cashadvance AS ca INNER JOIN employees AS e ON ca.employee_id = e.employee_id WHERE ca.delete_flag = '0'";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    ?>
+    <tr>
+        <td><?php echo $row['date_advance']; ?></td>
+        <td><?php echo $row['firstname'] ." ". $row['lastname']; ?></td>
+        <td><?php echo $row['amount']; ?></td>
+        <td>
+            <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['cashadvance_id']; ?>"><i
+                    class="fa fa-edit"></i> Edit</button>
+            <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['cashadvance_id']; ?>"><i
+                    class="fa fa-trash"></i> Delete</button>
+        </td>
+    </tr>
+  <?php
+  }
+  $conn->close();
+}
+// Cash Advance
 
 
 // Accounting queries
@@ -400,6 +434,7 @@ function accountGroupSelection(){
       <option value='".$prow['accountgroup_id']."'>".$prow['name'];"</option>
       ";
   }
+  $conn->close();
 }
 function addToList(){
   include 'conn.php';
@@ -410,6 +445,7 @@ function addToList(){
       <option value='".$prow['accountgroup_id']."'>".$prow['name'];"</option>
       ";
   }
+  $conn->close();
 }
 function accountListTable(){
   include 'conn.php';
@@ -433,6 +469,7 @@ function accountListTable(){
 </tr>
 <?php
   }
+  $conn->close();
 }
 
 if (isset($_POST['addAccountList'])) {
@@ -453,7 +490,7 @@ function addAccountList(){
       echo "error";
     }
   }
-
+  $conn->close();
   header('location:../account_list.php');
 }
 
@@ -475,6 +512,7 @@ editAccountList();
         echo "error";
       }
     }
+    $conn->close();
     header('location:../account_list.php');
   }
 
@@ -493,6 +531,7 @@ editAccountList();
     else{
       $_SESSION['error'] = $conn->error;
     }
+    $conn->close();
     header('location: ../account_list.php');
   }
 
@@ -541,7 +580,7 @@ editAccountList();
         echo "error";
       }
     }
-  
+    $conn->close();
     header('location:../account_group.php');
   }
 
@@ -564,6 +603,7 @@ editAccountList();
             echo "error";
           }
         }
+        $conn->close();
         header('location:../account_group.php');
       }
 
@@ -582,6 +622,7 @@ editAccountList();
         else{
           $_SESSION['error'] = $conn->error;
         }
+        $conn->close();
         header('location:../account_group.php');
       }
 
@@ -607,6 +648,7 @@ editAccountList();
       else{
         $_SESSION['error'] = $conn->error;
       }
+      $conn->close();
       header('location: ../account_list.php');
 
     }
@@ -630,6 +672,7 @@ editAccountList();
             echo "error";
           }
         }
+        $conn->close();
         header('location: ../crm.php');
       }
 

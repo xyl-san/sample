@@ -131,7 +131,7 @@
                         <select class="form-control" name="job" aria-label="Select job">
                             <option value="" class="jobSelection" selected>- Select -</option>
                             
-
+                        <?php employeePosition();?>
                         </select>
                         <label for="jobSelection">Job</label>
 
