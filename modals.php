@@ -39,22 +39,21 @@
                         <label for="genderSelection">Gender</label>
                     </div>
                     <div class="col-12 form-floating">
-                        <select class="form-control departmentSelection" name="department"
-                            aria-label="Select department">
+                        <select class="form-control departmentSelection" name="department" aria-label="Select department" required>
                             <option value="" selected>- Select -</option>
                             <?php employeeDepartment();?>
                         </select>
                         <label for="departmentSelection">Department</label>
                     </div>
                     <div class="col-12 form-floating">
-                        <select class="form-control jobSelection" name="job" aria-label="Select job">
+                        <select class="form-control jobSelection" name="job" aria-label="Select job" required>
                             <option value="" selected>- Select -</option>
                             <?php employeePosition();?>
                         </select>
                         <label for="jobSelection">Job</label>
                     </div>
                     <div class="col-12 form-floating">
-                        <select class="form-control scheduleSelection" name="schedule" aria-label="Select schedule">
+                        <select class="form-control scheduleSelection" name="schedule" aria-label="Select schedule" required>
                             <option value="" selected>- Select -</option>
                             <?php employeeSchedule();?>
                         </select>
@@ -62,7 +61,7 @@
                     </div>
                     <div class="col-md-12">
                         <label for="filename">Photo</label>
-                        <input type="file" class="form-control fileName" name="photo" required>
+                        <input type="file" class="form-control fileName" name="photo">
 
                     </div>
                     <div class="mb-2">

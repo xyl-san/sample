@@ -12,7 +12,38 @@
 
 <body>
     <div class="wrapper">
-        <?php include 'sidebar.php'; ?>
+        <nav id="sidebar" class="flex-shrink-0 p-3" style="width: 280px;">
+            <div class="sidebar-header rounded">
+                <h3>Dream System</h3>
+                <strong>Boss Panda</strong>
+            </div>
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="menu.php">
+                        <i class="fa-solid fa-house"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="#employeeSubmenu" data-bs-toggle="collapse" aria-expanded="false"
+                        class="dropdown-toggle text-wrap">
+                        <i class="fa-solid fa-users"></i>
+                        Human Resource
+                    </a>
+                    <ul class="collapse list-unstyled" id="employeeSubmenu">
+                        <li>
+                            <a href="employees_list.php"> Employees</a>
+                            <a href="attendance_list.php">Attendance</a>
+                            <a href="cashadvance_list.php">Cash Advance</a>
+                            <a href="schedule_list.php">Schedules</a>
+                            <a href="department_list.php"> Department</a>
+                            <a href="job_list.php"> Jobs</a>
+                            <a href="deduction_list.php">Deductions</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
         <div id="content" class="w-100">
             <?php include 'header.php'; ?>
             <div class="card">
@@ -87,22 +118,22 @@
     });
 
     function getRow(id) {
-        $(document).ready(function(){
+        $(document).ready(function() {
             $.ajax({
-            type: 'POST',
-            url: 'get_rows.php',
-            data: {
-                id: id, 
-                deptRow: true,
-            },
-            dataType: 'json',
-            success: function(response) {
-                $('.departmentId').val(response.department_id);
-                $('.departmentName').val(response.department_name);
-            }
+                type: 'POST',
+                url: 'get_rows.php',
+                data: {
+                    id: id,
+                    deptRow: true,
+                },
+                dataType: 'json',
+                success: function(response) {
+                    $('.departmentId').val(response.department_id);
+                    $('.departmentName').val(response.department_name);
+                }
             });
 
-        }) 
+        })
     }
     </script>
 </body>
