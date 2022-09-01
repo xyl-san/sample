@@ -10,7 +10,6 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <?php include 'includes/styles.php'; ?>
-    <!-- https://colorhunt.co/palette/effffdb8fff985f4ff42c2ff -->
 </head>
 
 <body>
@@ -18,7 +17,26 @@ session_start();
         <?php include 'sidebar.php'; ?>
         <div id="content" class="w-100">
             <?php include 'header.php'; ?>
-
+            <div class="container">
+                <div class="row">
+                    <div class="card col p-0">
+                        <div class="card-header">
+                            <span>Department Statistics</span>
+                        </div>
+                        <div class="card-body">
+                            <div id="departmentChart"></div>
+                        </div>
+                    </div>
+                    <div class="card col p-0">
+                        <div class="card-header">
+                            <span>Job Statistics</span>
+                        </div>
+                        <div class="card-body">
+                            <div id="jobChart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -27,11 +45,11 @@ session_start();
     <?php include 'modals.php';?>
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
+    $(document).ready(function() {
+        $('#sidebarCollapse').on('click', function() {
+            $('#sidebar').toggleClass('active');
         });
+    });
     </script>
 </body>
 

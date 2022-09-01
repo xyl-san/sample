@@ -60,6 +60,9 @@
                 <li>
                     <a href="#"><i class="fa-solid fa-list"></i> Transactions</a>
                 </li>
+                <li>
+                    <a href="crm.php"><i class="fa-solid fa-person"></i> Customer Relationship Management</a>
+                </li>
             </ul>
         </li>
         <li>

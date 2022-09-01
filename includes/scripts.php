@@ -32,27 +32,87 @@
 <!-- time picker -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
+<!-- Google chart -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <script>
 $(document).ready((function() {
     $.fn.dataTable.moment('MMM DD, YYYY');
     $('#example1').DataTable();
-    
+
 }))
 
 $(document).ready((function() {
-$('.datepicker').datepicker({
-    autoclose: true,
-    format: 'yyyy-mm-dd'
-});
-}))
-
-$(document).ready((function() {
-$('.timepicker').timepicker({
-    timeFormat: 'h:mm p',
-    scrollbar: true,
-    dropdown: true,
+    $('.datepicker').datepicker({
+        autoclose: true,
+        format: 'yyyy-mm-dd',
     });
 }))
 
+$(document).ready((function() {
+    $('.timepicker').timepicker({
+        timeFormat: 'h:mm p',
+        scrollbar: true,
+        dropdown: true,
+    });
+}))
+</script>
+
+
+<script type="text/javascript">
+google.charts.load('current', {
+    'packages': ['corechart']
+});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+        ['Task', 'Hours per Day'],
+        <?php include 'includes/conn.php';
+            $query = "SELECT e.department_id, department_name, COUNT(*) as employees FROM employees e INNER JOIN department d ON d.department_id=e.department_id GROUP BY e.department_id, department_name;";
+                $result = mysqli_query($conn, $query);
+                while($chart = mysqli_fetch_assoc($result)){
+                    echo "['".$chart['department_name']."', ".$chart['employees']."],";
+                }
+            $conn->close();
+            ?>
+    ]);
+    var options = {
+        title: 'Employees per Department',
+        width: 400,
+        height: 240,
+        is3D: true,
+    };
+    var chart = new google.visualization.PieChart(document.getElementById('departmentChart'));
+    chart.draw(data, options);
+}
+</script>
+
+<script type="text/javascript">
+google.charts.load('current', {
+    'packages': ['corechart']
+});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+        ['Task', 'Hours per Day'],
+        <?php include 'includes/conn.php';
+            $query = "SELECT e.job_id, job_name, COUNT(*) as employees FROM employees e INNER JOIN job j ON j.job_id=e.job_id GROUP BY e.job_id, job_name";
+                $result = mysqli_query($conn, $query);
+                while($chart = mysqli_fetch_assoc($result)){
+                    echo "['".$chart['job_name']."', ".$chart['employees']."],";
+                }
+            $conn->close();
+            ?>
+    ]);
+    var options = {
+        title: 'Job per employees',
+        width: 400,
+        height: 240,
+        is3D: true,
+    };
+    var chart = new google.visualization.PieChart(document.getElementById('jobChart'));
+    chart.draw(data, options);
+}
 </script>
