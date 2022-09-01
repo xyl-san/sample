@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 29, 2022 at 10:12 AM
+-- Generation Time: Sep 01, 2022 at 12:01 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -20,19 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `growth-with-relations`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `account`
---
-
-CREATE TABLE `account` (
-  `account_id` int(11) NOT NULL,
-  `account_name` varchar(50) NOT NULL,
-  `account_description` varchar(100) NOT NULL,
-  `account_contactnumber` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -102,8 +89,7 @@ INSERT INTO `account_list` (`account_id`, `name`, `description`, `status`, `dele
 (45, 'Income taxes expense', 'Income taxes expense', 1, 0, '2022-02-01 11:43:44', NULL),
 (46, 'Warranty expense', 'Warranty expense', 1, 0, '2022-02-01 11:44:01', NULL),
 (47, 'Utilities expense', 'Utilities expense', 1, 0, '2022-02-01 11:44:10', NULL),
-(48, 'Selling expense', 'Selling expense', 1, 0, '2022-02-01 11:44:23', NULL),
-(49, 'Sample101', 'Sample101', 0, 1, '2022-02-01 11:45:03', '2022-02-01 11:45:23');
+(48, 'Selling expense', 'Selling expense', 1, 0, '2022-02-01 11:44:23', NULL);
 
 -- --------------------------------------------------------
 
@@ -151,33 +137,6 @@ CREATE TABLE `attendance` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `campaign`
---
-
-CREATE TABLE `campaign` (
-  `campaign_id` int(11) NOT NULL,
-  `campaignmember_id` int(11) NOT NULL,
-  `campaign_objectives` varchar(50) NOT NULL,
-  `campaign_startdate` datetime NOT NULL,
-  `campaign_enddate` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `campaign_member`
---
-
-CREATE TABLE `campaign_member` (
-  `campaignmember_id` int(11) NOT NULL,
-  `campaign_id` int(11) NOT NULL,
-  `lead_id` int(11) NOT NULL,
-  `contact_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `cashadvance`
 --
 
@@ -205,32 +164,6 @@ CREATE TABLE `category` (
   `updated_on` datetime NOT NULL DEFAULT current_timestamp(),
   `delete_flag` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `contact`
---
-
-CREATE TABLE `contact` (
-  `contact_id` int(11) NOT NULL,
-  `account_id` int(11) NOT NULL,
-  `contact_address` varchar(50) NOT NULL,
-  `contract_contact_details` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `contract`
---
-
-CREATE TABLE `contract` (
-  `contract_id` int(11) NOT NULL,
-  `account_id` int(11) NOT NULL,
-  `contract_status` varchar(20) NOT NULL,
-  `contract_approval` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -286,12 +219,9 @@ CREATE TABLE `department` (
 --
 
 INSERT INTO `department` (`department_id`, `department_name`, `created_on`, `updated_on`, `delete_flag`) VALUES
-(2, 'Accounting Department', '2022-08-18 10:29:35', '2022-08-18 10:29:35', 0),
-(3, 'Billing Department', '2022-08-18 10:29:59', '2022-08-18 10:29:59', 0),
-(4, 'Marketing Department', '2022-08-18 10:31:48', '2022-08-18 10:31:48', 0),
-(5, 'Production Department', '2022-08-18 10:32:51', '2022-08-18 10:32:51', 0),
-(6, 'Engineering Department', '2022-08-18 10:33:34', '2022-08-18 10:33:34', 0),
-(7, 'Risk Management Department', '2022-08-18 10:34:57', '2022-08-18 10:34:57', 0);
+(10, 'IT', '2022-09-01 11:30:29', '2022-09-01 11:30:29', 0),
+(11, 'Accounting', '2022-09-01 11:30:38', '2022-09-01 11:30:38', 0),
+(12, 'Sales', '2022-09-01 11:30:45', '2022-09-01 11:30:45', 0);
 
 -- --------------------------------------------------------
 
@@ -301,6 +231,9 @@ INSERT INTO `department` (`department_id`, `department_name`, `created_on`, `upd
 
 CREATE TABLE `employees` (
   `employee_id` int(11) NOT NULL,
+  `department_id` int(11) NOT NULL,
+  `job_id` int(11) NOT NULL,
+  `schedule_id` int(11) NOT NULL,
   `employee_code` varchar(15) NOT NULL,
   `firstname` varchar(50) NOT NULL,
   `lastname` varchar(50) NOT NULL,
@@ -308,9 +241,6 @@ CREATE TABLE `employees` (
   `birthdate` date NOT NULL,
   `contact_info` varchar(100) NOT NULL,
   `gender` varchar(10) NOT NULL,
-  `job_id` int(11) NOT NULL,
-  `department_id` int(11) NOT NULL,
-  `schedule_id` int(11) NOT NULL,
   `photo` varchar(200) NOT NULL,
   `created_on` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_on` datetime NOT NULL DEFAULT current_timestamp(),
@@ -321,8 +251,10 @@ CREATE TABLE `employees` (
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`employee_id`, `employee_code`, `firstname`, `lastname`, `address`, `birthdate`, `contact_info`, `gender`, `job_id`, `department_id`, `schedule_id`, `photo`, `created_on`, `updated_on`, `delete_flag`) VALUES
-(75, 'LAV00202208', 'Lovely Anne', 'Viado', 'Mangan-Vaca Subic Zambales', '1997-12-12', '0909090909', '', 26, 2, 8, '', '2022-08-25 17:09:18', '2022-08-25 17:09:18', 0);
+INSERT INTO `employees` (`employee_id`, `department_id`, `job_id`, `schedule_id`, `employee_code`, `firstname`, `lastname`, `address`, `birthdate`, `contact_info`, `gender`, `photo`, `created_on`, `updated_on`, `delete_flag`) VALUES
+(80, 10, 51, 8, 'ABC000000000', 'Steven Edward', 'Lizada', 'Emerald lane, Culiat Quezon City', '1997-12-12', '09615089172', 'Male', 'pogi.png', '2022-09-01 14:01:45', '2022-09-01 14:01:45', 0),
+(81, 11, 51, 8, 'ABC000000000', 'Edward', 'Collins', 'USA', '1997-12-12', '121231232', 'Male', 'pogi.png', '2022-09-01 14:02:05', '2022-09-01 14:02:05', 0),
+(82, 12, 51, 8, 'ABC000000000', 'Roge', 'Cawaters', 'Gedli gedli', '2022-09-01', '121231212', 'I\'d rather', 'fguck.png', '2022-09-01 14:23:54', '2022-09-01 14:23:54', 0);
 
 -- --------------------------------------------------------
 
@@ -402,6 +334,8 @@ CREATE TABLE `items` (
 
 CREATE TABLE `job` (
   `job_id` int(11) NOT NULL,
+  `department_id` int(11) NOT NULL,
+  `job_name` varchar(20) NOT NULL,
   `description` varchar(150) NOT NULL,
   `rate` double NOT NULL,
   `created_on` datetime NOT NULL DEFAULT current_timestamp(),
@@ -413,43 +347,8 @@ CREATE TABLE `job` (
 -- Dumping data for table `job`
 --
 
-INSERT INTO `job` (`job_id`, `description`, `rate`, `created_on`, `updated_on`, `delete_flag`) VALUES
-(11, 'Accounting Manager', 850, '2022-08-18 10:48:54', '2022-08-18 10:48:54', 0),
-(12, 'Accounting officer', 650, '2022-08-18 10:48:54', '2022-08-18 10:48:54', 0),
-(13, 'Accounting Clerk', 537, '2022-08-18 10:48:54', '2022-08-18 10:48:54', 0),
-(14, 'General accountant', 750, '2022-08-18 10:48:54', '2022-08-18 10:48:54', 0),
-(15, 'Auditor', 537, '2022-08-18 10:48:54', '2022-08-18 10:48:54', 0),
-(16, 'Treasurer', 537, '2022-08-18 10:48:54', '2022-08-18 10:48:54', 0),
-(17, 'Financial Analyst', 537, '2022-08-18 10:48:54', '2022-08-18 10:48:54', 0),
-(18, 'Billing Manager', 850, '2022-08-18 10:52:18', '2022-08-18 10:52:18', 0),
-(19, 'Billing Specialist', 650, '2022-08-18 10:52:18', '2022-08-18 10:52:18', 0),
-(20, 'Billing Clerk', 0, '2022-08-18 10:52:18', '2022-08-18 10:52:18', 0),
-(21, 'Billing Officer', 0, '2022-08-18 10:52:18', '2022-08-18 10:52:18', 0),
-(22, 'Chief Marketing Officer (CMO)', 950, '2022-08-18 10:56:15', '2022-08-18 10:56:15', 0),
-(23, 'Financial Analyst', 750, '2022-08-18 10:56:15', '2022-08-18 10:56:15', 0),
-(24, 'Digital Marketing Manager', 650, '2022-08-18 10:56:15', '2022-08-18 10:56:15', 0),
-(25, 'Communications Manager', 537, '2022-08-18 10:56:15', '2022-08-18 10:56:15', 0),
-(26, 'Content Marketing Specialist', 537, '2022-08-18 10:56:15', '2022-08-18 10:56:15', 0),
-(27, 'Production Manager', 950, '2022-08-18 11:08:52', '2022-08-18 11:08:52', 0),
-(28, 'Production Supervisor', 850, '2022-08-18 11:08:52', '2022-08-18 11:08:52', 0),
-(29, 'Production Operator', 650, '2022-08-18 11:08:52', '2022-08-18 11:08:52', 0),
-(30, 'Production Monitoring', 650, '2022-08-18 11:08:52', '2022-08-18 11:08:52', 0),
-(31, 'Production Officer', 537, '2022-08-18 11:08:52', '2022-08-18 11:08:52', 0),
-(32, 'Chief Engineering', 1500, '2022-08-18 11:14:03', '2022-08-18 11:14:03', 0),
-(33, 'VP Engineering', 1000, '2022-08-18 11:14:03', '2022-08-18 11:14:03', 0),
-(34, 'Director Of Engineering', 950, '2022-08-18 11:14:03', '2022-08-18 11:14:03', 0),
-(35, 'Engineering Manager', 850, '2022-08-18 11:14:03', '2022-08-18 11:14:03', 0),
-(36, 'Individual Contributors ', 750, '2022-08-18 11:14:03', '2022-08-18 11:14:03', 0),
-(37, ' Environmental Compliance Specialist', 2500, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
-(38, 'Loss Control Consultant', 2000, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
-(39, ' Compliance Consultant', 1800, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
-(40, ' Compliance Officer', 1500, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
-(41, 'Risk Analyst', 1300, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
-(42, 'Risk and Compliance Investigator', 1000, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
-(43, ' Model Risk Specialist', 850, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
-(44, 'Regulatory Affairs Managers', 750, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
-(47, 'Risk Manager', 650, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0),
-(48, 'Chief Risk Officer', 537, '2022-08-18 11:24:05', '2022-08-18 11:24:05', 0);
+INSERT INTO `job` (`job_id`, `department_id`, `job_name`, `description`, `rate`, `created_on`, `updated_on`, `delete_flag`) VALUES
+(51, 11, 'Accountant', 'Accountant', 550, '2022-09-01 13:59:38', '2022-09-01 13:59:38', 0);
 
 -- --------------------------------------------------------
 
@@ -472,26 +371,33 @@ CREATE TABLE `leads` (
 --
 
 INSERT INTO `leads` (`lead_id`, `name`, `email`, `contact_number`, `description`, `stage_id`, `delete_flag`) VALUES
-(6, 'Roge Hardware Supplies', 'roge123@gmail.com', 2147483647, 'Hardware supplies of offices and home', 4, 0),
-(7, 'Sam Boutique', 'sambal2022@gmail.com', 2147483647, 'Food and Drugs Supplies', 2, 0),
-(8, 'Mondragon Pet shop', 'donmondragon050@gmail.com', 2147483647, 'Nationwide Pets Breed', 3, 0),
-(9, 'Awesome Appliances ', 'awesomeappliances0808@gmail.com', 2147483647, 'Branded of all Appliances', 1, 0),
+(6, 'Roge Hardware Supplies', 'roge123@gmail.com', 2147483647, 'Hardware supplies of offices and home', 5, 0),
+(7, 'Sam Boutique', 'sambal2022@gmail.com', 2147483647, 'Food and Drugs Supplies', 1, 0),
+(8, 'Mondragon Pet shop', 'donmondragon050@gmail.com', 2147483647, 'Nationwide Pets Breed', 4, 0),
+(9, 'Awesome Appliances ', 'awesomeappliances0808@gmail.com', 2147483647, 'Branded of all Appliances', 3, 0),
 (10, 'Coffee Shop', 'miyacalifacoffeeshop@gmail.com', 2147483647, 'We serves coffee of various types, notably espresso, latte, and cappuccino.', 2, 0),
 (12, 'Amazing Super Market', 'amazingsupermarket@gmail.com', 2147483647, '', 1, 0),
-(13, 'Huawei', 'a@g.com', 423, '', 1, 0);
+(13, 'Huawei', 'a@g.com', 423, '', 5, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `opportunity`
+-- Table structure for table `login_user`
 --
 
-CREATE TABLE `opportunity` (
-  `opportunity_id` int(11) NOT NULL,
-  `account_id` int(11) NOT NULL,
-  `opportunity_description` varchar(100) NOT NULL,
-  `opportunity_stage` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `login_user` (
+  `id` int(11) NOT NULL,
+  `name` varchar(60) NOT NULL,
+  `user_name` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `login_user`
+--
+
+INSERT INTO `login_user` (`id`, `name`, `user_name`, `password`) VALUES
+(1, 'steven', 'test', 'test');
 
 -- --------------------------------------------------------
 
@@ -589,12 +495,19 @@ CREATE TABLE `product` (
   `product_id` int(11) NOT NULL,
   `product_code` varchar(250) NOT NULL,
   `product_name` varchar(250) NOT NULL,
-  `product_description` varchar(250) NOT NULL,
-  `supplier_id` int(11) NOT NULL,
+  `product_description` text NOT NULL,
   `created_on` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_on` datetime NOT NULL DEFAULT current_timestamp(),
   `delete_flag` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`product_id`, `product_code`, `product_name`, `product_description`, `created_on`, `updated_on`, `delete_flag`) VALUES
+(2, 'AACCS32113', 'Beat', 'Entry level scooter', '2022-08-31 18:05:31', '0000-00-00 00:00:00', 0),
+(3, 'MMNDS12331', 'Click 125i', 'Bigger scooter', '2022-08-31 18:05:58', '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -638,6 +551,29 @@ CREATE TABLE `sales` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sample`
+--
+
+CREATE TABLE `sample` (
+  `id` int(11) NOT NULL,
+  `department` varchar(32) NOT NULL,
+  `employees` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `sample`
+--
+
+INSERT INTO `sample` (`id`, `department`, `employees`) VALUES
+(1, 'IT', 5),
+(2, 'Sales', 20),
+(3, 'Technical', 30),
+(4, 'Billing', 50),
+(5, 'Marketing', 30);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `schedules`
 --
 
@@ -656,7 +592,8 @@ CREATE TABLE `schedules` (
 
 INSERT INTO `schedules` (`schedule_id`, `time_in`, `time_out`, `created_on`, `updated_on`, `delete_flag`) VALUES
 (8, '09:00:00', '18:00:00', '2022-08-25 17:06:07', '2022-08-25 17:06:07', 0),
-(9, '07:00:00', '16:00:00', '2022-08-25 17:06:29', '2022-08-25 17:06:29', 0);
+(9, '07:00:00', '16:00:00', '2022-08-25 17:06:29', '2022-08-25 17:06:29', 0),
+(10, '13:00:00', '18:00:00', '2022-09-01 11:29:59', '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -694,11 +631,18 @@ CREATE TABLE `supplier` (
   `address` varchar(200) NOT NULL,
   `email` varchar(200) NOT NULL,
   `phone_number` bigint(100) NOT NULL,
-  `product_id` int(11) NOT NULL,
   `created_on` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_on` datetime NOT NULL DEFAULT current_timestamp(),
   `delete_flag` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `supplier`
+--
+
+INSERT INTO `supplier` (`supplier_id`, `supplier_code`, `photo`, `business_name`, `address`, `email`, `phone_number`, `created_on`, `updated_on`, `delete_flag`) VALUES
+(2, 'SL005704546', '', 'Honda', 'Gilid Gilid', 'honda@gmail.com', 123456789, '2022-08-31 18:04:09', '0000-00-00 00:00:00', 0),
+(3, 'FASD12345', '', 'Suzuki', 'Sa turo turo', 'suzuki@email.com', 123456798, '2022-08-31 18:04:54', '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -707,25 +651,20 @@ CREATE TABLE `supplier` (
 --
 
 CREATE TABLE `supplier_product` (
-  `id` int(11) NOT NULL,
-  `supplier_product_id` varchar(50) NOT NULL,
-  `supplier_product_name` varchar(80) NOT NULL,
-  `supplier_product_description` varchar(80) NOT NULL,
   `supplier_id` int(11) NOT NULL,
-  `created_on` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_on` datetime NOT NULL,
-  `delete_flag` tinyint(1) NOT NULL
+  `product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `supplier_product`
+--
+
+INSERT INTO `supplier_product` (`supplier_id`, `product_id`) VALUES
+(2, 2);
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `account`
---
-ALTER TABLE `account`
-  ADD PRIMARY KEY (`account_id`);
 
 --
 -- Indexes for table `account_list`
@@ -747,22 +686,6 @@ ALTER TABLE `attendance`
   ADD KEY `employee_id` (`employee_id`);
 
 --
--- Indexes for table `campaign`
---
-ALTER TABLE `campaign`
-  ADD PRIMARY KEY (`campaign_id`),
-  ADD KEY `campaignmember_id` (`campaignmember_id`) USING BTREE;
-
---
--- Indexes for table `campaign_member`
---
-ALTER TABLE `campaign_member`
-  ADD PRIMARY KEY (`campaignmember_id`),
-  ADD KEY `campaign_id` (`campaign_id`),
-  ADD KEY `lead_id` (`lead_id`),
-  ADD KEY `contact_id` (`contact_id`);
-
---
 -- Indexes for table `cashadvance`
 --
 ALTER TABLE `cashadvance`
@@ -775,20 +698,6 @@ ALTER TABLE `cashadvance`
 ALTER TABLE `category`
   ADD PRIMARY KEY (`category_id`),
   ADD KEY `product_id` (`product_id`);
-
---
--- Indexes for table `contact`
---
-ALTER TABLE `contact`
-  ADD PRIMARY KEY (`contact_id`),
-  ADD KEY `account_id` (`account_id`);
-
---
--- Indexes for table `contract`
---
-ALTER TABLE `contract`
-  ADD PRIMARY KEY (`contract_id`),
-  ADD KEY `account_id` (`account_id`);
 
 --
 -- Indexes for table `customer`
@@ -842,7 +751,8 @@ ALTER TABLE `items`
 -- Indexes for table `job`
 --
 ALTER TABLE `job`
-  ADD PRIMARY KEY (`job_id`);
+  ADD PRIMARY KEY (`job_id`),
+  ADD KEY `department_id` (`department_id`);
 
 --
 -- Indexes for table `leads`
@@ -850,13 +760,6 @@ ALTER TABLE `job`
 ALTER TABLE `leads`
   ADD PRIMARY KEY (`lead_id`),
   ADD KEY `stage_id` (`stage_id`);
-
---
--- Indexes for table `opportunity`
---
-ALTER TABLE `opportunity`
-  ADD PRIMARY KEY (`opportunity_id`),
-  ADD KEY `account_id` (`account_id`);
 
 --
 -- Indexes for table `order`
@@ -898,8 +801,7 @@ ALTER TABLE `payment_terms`
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
-  ADD PRIMARY KEY (`product_id`),
-  ADD KEY `supplier_id` (`supplier_id`);
+  ADD PRIMARY KEY (`product_id`);
 
 --
 -- Indexes for table `purchase_order`
@@ -914,6 +816,12 @@ ALTER TABLE `purchase_order`
 --
 ALTER TABLE `sales`
   ADD PRIMARY KEY (`sales_id`);
+
+--
+-- Indexes for table `sample`
+--
+ALTER TABLE `sample`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `schedules`
@@ -931,24 +839,18 @@ ALTER TABLE `stage`
 -- Indexes for table `supplier`
 --
 ALTER TABLE `supplier`
-  ADD PRIMARY KEY (`supplier_id`),
-  ADD KEY `product_id` (`product_id`);
+  ADD PRIMARY KEY (`supplier_id`);
 
 --
 -- Indexes for table `supplier_product`
 --
 ALTER TABLE `supplier_product`
-  ADD PRIMARY KEY (`id`);
+  ADD KEY `supplier_id` (`supplier_id`,`product_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `account`
---
-ALTER TABLE `account`
-  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `account_list`
@@ -966,43 +868,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `campaign`
---
-ALTER TABLE `campaign`
-  MODIFY `campaign_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `campaign_member`
---
-ALTER TABLE `campaign_member`
-  MODIFY `campaignmember_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `cashadvance`
 --
 ALTER TABLE `cashadvance`
-  MODIFY `cashadvance_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cashadvance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `contact`
---
-ALTER TABLE `contact`
-  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `contract`
---
-ALTER TABLE `contract`
-  MODIFY `contract_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -1020,13 +898,13 @@ ALTER TABLE `deductions`
 -- AUTO_INCREMENT for table `department`
 --
 ALTER TABLE `department`
-  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `group_list`
@@ -1038,7 +916,7 @@ ALTER TABLE `group_list`
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `inventory_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `inventory_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `items`
@@ -1050,19 +928,13 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `job`
 --
 ALTER TABLE `job`
-  MODIFY `job_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `job_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `leads`
 --
 ALTER TABLE `leads`
   MODIFY `lead_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- AUTO_INCREMENT for table `opportunity`
---
-ALTER TABLE `opportunity`
-  MODIFY `opportunity_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `overtime`
@@ -1080,7 +952,7 @@ ALTER TABLE `payment_terms`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `purchase_order`
@@ -1095,10 +967,16 @@ ALTER TABLE `sales`
   MODIFY `sales_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `sample`
+--
+ALTER TABLE `sample`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `stage`
@@ -1110,13 +988,7 @@ ALTER TABLE `stage`
 -- AUTO_INCREMENT for table `supplier`
 --
 ALTER TABLE `supplier`
-  MODIFY `supplier_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `supplier_product`
---
-ALTER TABLE `supplier_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `supplier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -1129,36 +1001,10 @@ ALTER TABLE `attendance`
   ADD CONSTRAINT `attendance_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `campaign`
---
-ALTER TABLE `campaign`
-  ADD CONSTRAINT `campaign_ibfk_1` FOREIGN KEY (`campaignmember_id`) REFERENCES `campaign_member` (`campaignmember_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `campaign_member`
---
-ALTER TABLE `campaign_member`
-  ADD CONSTRAINT `campaign_member_ibfk_1` FOREIGN KEY (`lead_id`) REFERENCES `leads` (`lead_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `campaign_member_ibfk_2` FOREIGN KEY (`contact_id`) REFERENCES `contact` (`contact_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `campaign_member_ibfk_3` FOREIGN KEY (`campaign_id`) REFERENCES `campaign` (`campaign_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `cashadvance`
 --
 ALTER TABLE `cashadvance`
   ADD CONSTRAINT `cashadvance_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `contact`
---
-ALTER TABLE `contact`
-  ADD CONSTRAINT `contact_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `account` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `contract`
---
-ALTER TABLE `contract`
-  ADD CONSTRAINT `contract_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `account` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `customer`
@@ -1176,26 +1022,21 @@ ALTER TABLE `deductions`
 -- Constraints for table `employees`
 --
 ALTER TABLE `employees`
-  ADD CONSTRAINT `employees_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `employees_ibfk_2` FOREIGN KEY (`schedule_id`) REFERENCES `schedules` (`schedule_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `employees_ibfk_5` FOREIGN KEY (`schedule_id`) REFERENCES `schedules` (`schedule_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `employees_ibfk_6` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `employees_ibfk_7` FOREIGN KEY (`job_id`) REFERENCES `job` (`job_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
--- Constraints for table `inventory`
+-- Constraints for table `job`
 --
-ALTER TABLE `inventory`
-  ADD CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `job`
+  ADD CONSTRAINT `job_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `leads`
 --
 ALTER TABLE `leads`
   ADD CONSTRAINT `leads_ibfk_1` FOREIGN KEY (`stage_id`) REFERENCES `stage` (`stage_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `opportunity`
---
-ALTER TABLE `opportunity`
-  ADD CONSTRAINT `opportunity_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `account` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `order`
@@ -1219,12 +1060,6 @@ ALTER TABLE `overtime`
   ADD CONSTRAINT `overtime_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `product`
---
-ALTER TABLE `product`
-  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`supplier_id`) REFERENCES `supplier` (`supplier_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `purchase_order`
 --
 ALTER TABLE `purchase_order`
@@ -1232,10 +1067,11 @@ ALTER TABLE `purchase_order`
   ADD CONSTRAINT `purchase_order_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `supplier`
+-- Constraints for table `supplier_product`
 --
-ALTER TABLE `supplier`
-  ADD CONSTRAINT `supplier_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `supplier_product`
+  ADD CONSTRAINT `supplier_product_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `supplier_product_ibfk_2` FOREIGN KEY (`supplier_id`) REFERENCES `supplier` (`supplier_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

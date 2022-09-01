@@ -173,6 +173,10 @@ a.article, a.article:hover {
     line-height:20px;
 }
 
+.scheduleTable{
+    width: 575px !important;
+}
+
 
 
 .o_caption {

@@ -808,4 +808,23 @@ function inventoryTable(){
   $conn->close();
 }
 
+function scheduleTable(){
+  include 'conn.php';
+  $sql = "SELECT schedule_id, time_in, time_out FROM schedules WHERE delete_flag = '0'";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+      ?>
+      <tr>
+          <td><?php echo $row['time_in']; ?></td>
+          <td><?php echo $row['time_out'];?></td>
+          <td>
+              <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['schedule_id']; ?>"><i class="fa fa-edit"></i> Edit</button>
+              <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['schedule_id']; ?>"><i class="fa fa-trash"></i> Delete</button>
+          </td>
+      </tr>
+      <?php
+  }
+  $conn->close();
+}
+
 ?>
