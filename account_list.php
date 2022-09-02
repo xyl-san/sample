@@ -18,10 +18,10 @@
             <div class="card">
                 <div class="card-header">
                     <button type="button" class="btn btn-primary btn-sm btn-flat mt-2" data-bs-toggle="modal"
-                        data-bs-target="#addAccountList">
+                        data-bs-target="#newAccountList">
                         <span>
                             <i class="fa-solid fa-pen-to-square"></i>
-                            Add Account List
+                            Add New
                         </span>
                     </button>
                     <nav aria-label="breadcrumb" class="float-end mt-2">
@@ -102,6 +102,7 @@
                     $('.accountName').val(response.name);
                     $('.accountDescription').val(response.description);
                     $('.accountStatus').val(response.status);
+                    $('.deleteAccountList').html(response.name);
 
                 }
             });

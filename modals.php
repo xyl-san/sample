@@ -430,6 +430,8 @@
                         <p>
                             Delete account list?
                         </p>
+                        <p class="deleteAccountList">
+                        </p>
                     </div>
                     <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
