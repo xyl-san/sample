@@ -396,3 +396,7 @@ background-color: #C3B091;
 .ui-timepicker-container{ 
     z-index:1151 !important; 
 }
+.journalEntryAmount{
+    border: 0;
+    box-shadow: none;
+}

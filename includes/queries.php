@@ -481,11 +481,65 @@ function journalEntryTable(){
   }
   $conn->close();
 }
+// Journal Entries Table queries end
+
+// journal entry add queries
+if (isset($_POST['addJournalEntry'])) {
+  journalEntryAdd();
+}
+function journalEntryAdd(){
+  include 'conn.php';
+  if(isset($_POST['addJournalEntry'])){
+    $accountName = $_POST['accountName'];
+    $accountDescription = $_POST['accountDescription'];
+    $accountStatus = $_POST['accountStatus'];
+   
+    $sql = "INSERT INTO account_list (name, description, status, date_created) VALUES ('$accountName','$accountDescription','$accountStatus', NOW() )";
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+  }
+  $conn->close();
+  header('location:../account_list.php');
+}
+// journal entry add queries end
+
+// account list selection in journal queries
+function accountListSelection(){
+  include 'conn.php';
+  $sql = "SELECT account_id, name FROM account_list";
+  $query = $conn->query($sql);
+  while($prow = $query->fetch_assoc()){
+      echo "
+      <option value='".$prow['account_id']."'>".$prow['name']."</option>
+      ";
+  }
+  $conn->close();
+}
+// account list selection in journal end
+
+// account list selection in journal queries
+function groupListSelection(){
+  include 'conn.php';
+  $sql = "SELECT group_id, name FROM group_list";
+  $query = $conn->query($sql);
+  while($prow = $query->fetch_assoc()){
+      echo "
+      <option value='".$prow['group_id']."'>".$prow['name']."</option>
+      ";
+  }
+  $conn->close();
+}
+// account list selection in journal queries end
+
 // account list add new queries
 if (isset($_POST['addAccountList'])) {
-  addAccountList();
+  accountListAdd();
 }
-function addAccountList(){
+function accountListAdd(){
   include 'conn.php';
   if(isset($_POST['addAccountList'])){
     $accountName = $_POST['accountName'];
@@ -503,6 +557,8 @@ function addAccountList(){
   $conn->close();
   header('location:../account_list.php');
 }
+// account list add new queries end
+
 // account list edit queries
 if (isset($_POST['editAccountList'])) {
 editAccountList();
@@ -525,6 +581,8 @@ editAccountList();
     $conn->close();
     header('location:../account_list.php');
   }
+  // account list edit queries end
+
   // account list delete queries
   if(isset($_POST['deleteAccountList'])){
     accountListDelete();
@@ -544,9 +602,9 @@ editAccountList();
     $conn->close();
     header('location: ../account_list.php');
   }
+  // account list delete queries end
 
   // group list table queries
-
   function groupListTable(){
     include 'conn.php';
     $sql = "SELECT group_id, name, description, type, status, date_created FROM group_list";
@@ -572,6 +630,7 @@ editAccountList();
 <?php
     }
   }
+ // group list table queries end
 
 // group list add new queries
   if (isset($_POST['addGroupList'])) {
@@ -595,6 +654,7 @@ editAccountList();
     $conn->close();
     header('location:../group_list.php');
   }
+// group list add new queries end
 
 // group list edit queries
   if (isset($_POST['editGroupList'])) {
@@ -619,6 +679,7 @@ editAccountList();
         $conn->close();
         header('location:../group_list.php');
       }
+// group list edit queries  end
 
 // group list delelte queries
       if (isset($_POST['deleteGroupList'])) {
@@ -639,7 +700,7 @@ editAccountList();
         $conn->close();
         header('location:../group_list.php');
       }
-
+// group list delelte queries end
 
     if(isset($_POST['addJournalEntry'])){
         journalEntryNew();
