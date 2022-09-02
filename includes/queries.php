@@ -414,29 +414,9 @@ function cashadvanceTable(){
 
 
 // Accounting queries
+// journal entries table queries
 
-function accountListSelection(){
-  include 'conn.php';
-  $sql = "SELECT account_id, description FROM account_list";
-  $query = $conn->query($sql);
-  while($prow = $query->fetch_assoc()){
-      echo "
-      <option value='".$prow['account_id']."'>".$prow['description'];"</option>
-      ";
-  }
-}
 
-function accountGroupSelection(){
-  include 'conn.php';
-  $sql = "SELECT accountgroup_id, name FROM group_list";
-  $query = $conn->query($sql);
-  while($prow = $query->fetch_assoc()){
-      echo "
-      <option value='".$prow['accountgroup_id']."'>".$prow['name'];"</option>
-      ";
-  }
-  $conn->close();
-}
 function addToList(){
   include 'conn.php';
   $sql = "INSERT INTO employees (employee_code, firstname, lastname, address, birthdate, contact_info, gender, job_id, department_id, schedule_id, photo, created_on) VALUES ('$employee_code','$firstName', '$lastName', '$addressInfo', '$birthDate', '$contactInfo', '$genderSelection', '$jobSelection', '$departmentSelection', '$scheduleSelection', '$filename', NOW() )";
@@ -473,7 +453,34 @@ function accountListTable(){
   }
   $conn->close();
 }
-
+// Journal Entries Table queries
+function journalEntryTable(){
+  include 'conn.php';
+  $sql = "SELECT j.journal_id, j.account_id, j.group_id,j.amount, j.date_created, je.code, al.description, gl.name, gl.type, gl.status FROM journal_items j INNER JOIN journal_entries AS je ON j.journal_id = je.journal_id INNER JOIN account_list AS al ON j.journal_id=al.account_id INNER JOIN group_list AS gl ON j.journal_id=gl.group_id";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    $status = ($row['status'])?'<span class="badge text-bg-success pull-right">Active</span>':'<span class="badge text-bg-danger pull-right">Inactive</span>';
+    $type = ($row['type'])?'<span class="badge text-bg-warning pull-right">Credit</span>':'<span class="badge text-bg-info pull-right">Debit</span>';
+    ?>
+<tr>
+    <td><?php echo $row['date_created']; ?></td>
+    <td><?php echo $row['code']; ?></td>
+    <td><?php echo $row['name']; ?></td>
+    <td><?php echo $row['description']; ?></td>
+    <td><?php echo $type; ?></td>
+    <td><?php echo $status; ?></td>
+    <td>  </td>
+    <td>
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['journal_id']; ?>"><i
+                class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['journal_id']; ?>"><i
+                class="fa fa-trash"></i> Delete</button>
+    </td>
+</tr>
+<?php
+  }
+  $conn->close();
+}
 // account list add new queries
 if (isset($_POST['addAccountList'])) {
   addAccountList();
@@ -496,7 +503,7 @@ function addAccountList(){
   $conn->close();
   header('location:../account_list.php');
 }
-
+// account list edit queries
 if (isset($_POST['editAccountList'])) {
 editAccountList();
 }
@@ -518,7 +525,7 @@ editAccountList();
     $conn->close();
     header('location:../account_list.php');
   }
-
+  // account list delete queries
   if(isset($_POST['deleteAccountList'])){
     accountListDelete();
   }
