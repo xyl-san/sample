@@ -448,6 +448,7 @@ function addToList(){
   }
   $conn->close();
 }
+// account list table queries
 function accountListTable(){
   include 'conn.php';
   $sql = "SELECT account_id, name, description, status, date_created FROM account_list";
@@ -473,6 +474,7 @@ function accountListTable(){
   $conn->close();
 }
 
+// account list add new queries
 if (isset($_POST['addAccountList'])) {
   addAccountList();
 }
@@ -536,32 +538,35 @@ editAccountList();
     header('location: ../account_list.php');
   }
 
-  
+  // group list table queries
+
   function groupListTable(){
     include 'conn.php';
-    $sql = "SELECT accountgroup_id, name, description, type, status, date_created FROM group_list";
+    $sql = "SELECT group_id, name, description, type, status, date_created FROM group_list";
     $query = $conn->query($sql);
     while($row = $query->fetch_assoc()){
       $status = ($row['status'])?'<span class="badge text-bg-success pull-right">Active</span>':'<span class="badge text-bg-danger pull-right">Inactive</span>';
       $type = ($row['type'])?'<span class="badge text-bg-warning pull-right">Credit</span>':'<span class="badge text-bg-info pull-right">Debit</span>';
       ?>
 <tr>
-    <td><?php echo $row['accountgroup_id']; ?></td>
+    <td><?php echo $row['group_id']; ?></td>
     <td><?php echo $row['date_created']; ?></td>
     <td><?php echo $row['name']; ?></td>
     <td><?php echo $row['description']; ?></td>
     <td><?php echo $type; ?></td>
     <td><?php echo $status; ?></td>
     <td>
-        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['accountgroup_id']; ?>"><i
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['group_id']; ?>"><i
                 class="fa fa-edit"></i> Edit</button>
-        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['accountgroup_id']; ?>"><i
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['group_id']; ?>"><i
                 class="fa fa-trash"></i> Delete</button>
     </td>
 </tr>
 <?php
     }
   }
+
+// group list add new queries
   if (isset($_POST['addGroupList'])) {
     addGroupList();
   }
@@ -572,7 +577,6 @@ editAccountList();
       $description = $_POST['description'];
       $type = $_POST['type'];
       $status = $_POST['status'];
-     
       $sql = "INSERT INTO group_list (name, description,type, status, date_created) VALUES ('$name','$description','$type','$status', NOW() )";
       if($conn->query($sql)){
         echo "success";
@@ -582,21 +586,22 @@ editAccountList();
       }
     }
     $conn->close();
-    header('location:../account_group.php');
+    header('location:../group_list.php');
   }
 
+// group list edit queries
   if (isset($_POST['editGroupList'])) {
-    editGroupList();
+    groupListEdit();
     }
-      function editGroupList(){
+      function groupListEdit(){
         include 'conn.php';
         if(isset($_POST['editGroupList'])){
-          $groupId = $_POST['accountgroup_id'];
+          $groupId = $_POST['group_id'];
           $groupName = $_POST['name'];
           $groupDescription = $_POST['description'];
           $groupTypeSelection = $_POST['type'];
           $groupStatusSelection = $_POST['status'];
-          $sql = "UPDATE group_list SET name = '$groupName', description = '$groupDescription',type='$groupTypeSelection', status = '$groupStatusSelection' WHERE accountgroup_id = '$groupId'";
+          $sql = "UPDATE group_list SET name = '$groupName', description = '$groupDescription',type='$groupTypeSelection', status = '$groupStatusSelection' WHERE group_id = '$groupId'";
           if($conn->query($sql)){
             echo "success";
           }
@@ -605,17 +610,18 @@ editAccountList();
           }
         }
         $conn->close();
-        header('location:../account_group.php');
+        header('location:../group_list.php');
       }
 
+// group list delelte queries
       if (isset($_POST['deleteGroupList'])) {
         groupListDelete();
       }
       function groupListDelete(){
         include 'conn.php';
         if(isset($_POST['deleteGroupList'])){
-          $groupId = $_POST['accountgroup_id'];
-          $sql = "DELETE FROM group_list WHERE accountgroup_id = '$groupId'";
+          $groupId = $_POST['group_id'];
+          $sql = "DELETE FROM group_list WHERE group_id = '$groupId'";
         }
         if($conn->query($sql)){
           $_SESSION['success'] = 'Group list deleted successfully';
@@ -624,7 +630,7 @@ editAccountList();
           $_SESSION['error'] = $conn->error;
         }
         $conn->close();
-        header('location:../account_group.php');
+        header('location:../group_list.php');
       }
 
 

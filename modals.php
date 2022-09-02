@@ -331,91 +331,8 @@
 </div>
 <!-- End Edit Attendance Employee -->
 
-<!-- Start of Accounting Add new Journal -->
-<div class="modal fade" id="addNewJournal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollabl">
-        <div class="modal-content rounded-0">
-            <div class="modal-header rounded-0">
-                <h5 class="modal-title" id="JourneyTitle">Add New Journal Entry</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                </button>
-            </div>
-            <div class="modal-body rounded-0">
-                <form class="row g-3" action="#" method="POST" autocomplete="off">
-                    <div class="col-md-6 form-floating">
-                        <input type="date" class="form-control date" name="date" id="date" required>
-                        <label for="date">Entry Date</label>
-                    </div>
-                    <div class="col-md-12 form-floating">
-                        <textarea class="form-control tArea entryDescription" rows="2" name="entrydescription"
-                            required></textarea>
-                        <label for="entrydescription">Entry Description</label>
-                    </div>
-                    <div class="col-md-6 form-floating">
-                        <select class="form-control" name="accountList" aria-label="Select account" id="account_id">
-                            <option value="" class="accounListSelection" selected>- Select -</option>
-                            <?php accountListSelection();?>
-                        </select>
-                        <label for="account">Account List</label>
-                    </div>
-                    <div class="col-md-6 form-floating">
-                        <select class="form-control" name="accountgroup" aria-label="Select accountgroup" id="group_id">
-                            <option value="" class="accountGroupSelection" selected>- Select -</option>
-                            <?php accountGroupSelection();?>
-                        </select>
-                        <label for="accountgroup">Account Group</label>
-                    </div>
-                    <div class="col-md-6 form-floating">
-                        <input type="number" class="form-control amount" name="amount" id="amount" required>
-                        <label for="amount">Amount</label>
-                    </div>
-                    <div class="col-md-6 form-floating">
-                        <button type="button" class="btn btn-secondary " id="addToList"><i
-                                class="fa-solid fa-plus"></i>Add Account</button>
-                    </div>
-                    <div class="col-md-12 form-floating">
-                        <table id="example1" class="table table-stripped table-bordered">
-                            <thead class="table-info">
-                                <tr>
-                                    <th width="10%">Tool</th>
-                                    <th>Account</th>
-                                    <th>Group</th>
-                                    <th>Debit</th>
-                                    <th>Credit</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-                            <tfoot>
-                                <tr class="bg-gradient-secondary">
-                                <tr>
-                                    <th colspan="3" class="text-center">Total</th>
-                                    <th class="text-right total_debit">0.00</th>
-                                    <th class="text-right total_credit">0.00</th>
-                                </tr>
-                                <tr>
-                                    <th colspan="3" class="text-center"></th>
-                                    <th colspan="3" class="text-center total-balance">0</th>
-                                </tr>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                    <div class="mb-2">
-                        <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cancel</button>
-                        <button type="submit" class="btn btn-primary float-end">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End of Accounting Add new Journal -->
-
 <!--Start Adding Account List-->
-<div class="modal fade" id="addAccountList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade" id="newAccountList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollabl">
         <div class="modal-content rounded-0">
@@ -526,7 +443,7 @@
 <!--End Delete Account List-->
 
 <!--Start Adding Group List-->
-<div class="modal fade" id="addGroupList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade" id="newGroupList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollabl">
         <div class="modal-content rounded-0">
@@ -574,25 +491,25 @@
 <!--End Adding Group List-->
 
 <!--Start edit Group List-->
-<div class="modal fade" id="editGroupList" tabindex="-1" role="dialog" aria-labelledby="accountListTitle"
+<div class="modal fade" id="editGroupList" tabindex="-1" role="dialog" aria-labelledby="groupListTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="accountListTitle">Edit group list information</h5>
+                <h5 class="modal-title" id="groupListTitle">Edit group list information</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
             <div class="modal-body">
                 <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
-                    <input type="hidden" class="groupId" name="accountgroup_id">
+                    <input type="hidden" class="groupId" name="group_id">
                     <div class="col-md-12 form-floating">
-                        <input type="text" class="form-control groupName" name="name" required>
-                        <label for="accountName">Name</label>
+                        <input type="text" class="form-control groupName" name="name">
+                        <label for="groupName">Name</label>
                     </div>
                     <div class="col-md-12 form-floating">
-                        <input type="text" class="form-control groupDescription" name="description" required>
-                        <label for="accountDescription">Description</label>
+                        <input type="text" class="form-control groupDescription" name="description">
+                        <label for="groupDescription">Description</label>
                     </div>
                     <div class="col-md-12 form-floating">
                         <select class="form-control groupTypeSelection" name="type" aria-label="Select account">
@@ -600,7 +517,7 @@
                             <option value="0" class="typeSelection" selected>Debit</option>
                             <option value="1" class="typeSelection" selected>Credit</option>   
                         </select>
-                        <label for="accountStatus">Type</label>
+                        <label for="groupStatus">Type</label>
                     </div>
                     <div class="col-md-12 form-floating">
                         <select class="form-control groupStatusSelection" name="status" aria-label="Select account">
@@ -608,20 +525,20 @@
                             <option value="0" class="statusSelection" selected>Inactive</option>
                             <option value="1" class="statusSelection" selected>Active</option>   
                         </select>
-                        <label for="accountStatus">Status</label>
+                        <label for="groupStatus">Status</label>
                     </div>
                     <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cancel</button>
                         <button type="submit" class="btn btn-primary float-end" name="editGroupList">Submit</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
 </div>
 <!--End edit Group List-->
-<!--Start Delete Account List-->
+
+<!--Start Delete Group List-->
 <div class="modal fade" id="deleteGroupList" tabindex="-1" role="dialog" aria-labelledby="groupListTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -633,10 +550,12 @@
             </div>
             <div class="modal-body">
                 <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
-                    <input type="hidden" class="groupId" name="accountgroup_id">
+                    <input type="hidden" class="groupId" name="group_id">
                     <div class="text-center">
                         <p>
                             Delete group list?
+                        </p>
+                        <p class="deleteGroupName">
                         </p>
                     </div>
                     <div class="mb-2">
@@ -648,7 +567,7 @@
         </div>
     </div>
 </div>
-<!--End Delete Account List-->
+<!--End Delete Group List-->
 
 <!-- Add lead -->
 <div class="modal fade" id="newLead" tabindex="-1" role="dialog" aria-labelledby="leadTitle"

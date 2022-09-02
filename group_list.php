@@ -18,10 +18,10 @@
             <div class="card">
                 <div class="card-header">
                     <button type="button" class="btn btn-primary btn-sm btn-flat mt-2" data-bs-toggle="modal"
-                        data-bs-target="#addGroupList">
+                        data-bs-target="#newGroupList">
                         <span>
                             <i class="fa-solid fa-pen-to-square"></i>
-                            Add Group List
+                            Add New
                         </span>
                     </button>
                     <nav aria-label="breadcrumb" class="float-end mt-2">
@@ -94,17 +94,18 @@
         $(document).ready(function() {
             $.ajax({
                 type: 'POST',
-                url: 'account_group_row.php',
+                url: 'group_list_row.php',
                 data: {
                     id: id
                 },
                 dataType: 'json',
                 success: function(response) {
-                    $('.groupId').val(response.accountgroup_id);
+                    $('.groupId').val(response.group_id);
                     $('.groupName').val(response.name);
                     $('.groupDescription').val(response.description);
                     $('.groupTypeSelection').val(response.type);
                     $('.groupStatusSelection').val(response.status);
+                    $('.deleteGroupName').html(response.name);
 
                 }
             });
