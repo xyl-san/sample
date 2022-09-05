@@ -67,7 +67,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Job ID</th>
-                                <th scope="col">Description</th>
+                                <th scope="col">Job Title</th>
                                 <th scope="col">Rate</th>
                                 <th scope="col">Tools</th>
                             </tr>
@@ -78,7 +78,7 @@
                         <tfoot>
                             <tr>
                                 <th scope="col">Job ID</th>
-                                <th scope="col">Description</th>
+                                <th scope="col">Job Title</th>
                                 <th scope="col">Rate</th>
                                 <th scope="col">Tools</th>
                             </tr>

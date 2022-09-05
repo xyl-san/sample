@@ -132,7 +132,7 @@ function employeeSchedule(){
           echo "error";
         }
       }
-
+      $conn->close();
       header('location: ../employees_list.php');
     }
 
@@ -211,7 +211,7 @@ function attendanceTable(){
   $conn->close();
 }
 
-function employeeAttendance(){
+function employeeSelection(){
   include 'conn.php';
   $sql = "SELECT employee_id, firstname, lastname FROM employees";
   $query = $conn->query($sql);
@@ -364,16 +364,14 @@ function departmentDelete(){
 // Job
 function jobTable(){
   include 'conn.php';
-  $sql = "SELECT job_id, description, rate, created_on, updated_on FROM job";
+  $sql = "SELECT job_id, job_name, description, rate, created_on, updated_on FROM job";
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
     ?>
 <tr>
     <td><?php echo $row['job_id']; ?></td>
-    <td><?php echo $row['description']; ?></td>
+    <td><?php echo $row['job_name']; ?></td>
     <td><?php echo $row['rate']; ?></td>
-    <td><?php echo $row['created_on']; ?></td>
-    <td><?php echo $row['updated_on']; ?></td>
     <td>
         <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['job_id']; ?>"><i
                 class="fa fa-edit"></i> Edit</button>
@@ -387,6 +385,31 @@ function jobTable(){
 }
 // Job
 
+// Deduction
+function deductionTable(){
+  include 'conn.php';
+  $sql = "SELECT d.deduction_id, d.description, d.amount, e.firstname, e.lastname FROM deductions as d INNER JOIN employees as e ON d.employee_id = e.employee_id";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    ?>
+    <tr>
+        <td><?php echo $row['deduction_id']; ?></td>
+        <td><?php echo $row['firstname'] ." ". $row['lastname']; ?></td>
+        <td><?php echo $row['description']; ?></td>
+        <td><?php echo $row['amount']; ?></td>
+        <td>
+            <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['deduction_id']; ?>"><i
+                    class="fa fa-edit"></i> Edit</button>
+            <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['deduction_id']; ?>"><i
+                    class="fa fa-trash"></i> Delete</button>
+        </td>
+    </tr>
+<?php
+  }
+  $conn->close();
+}
+// Deduction
+
 // Cash Advance
 
 function cashadvanceTable(){
@@ -396,20 +419,45 @@ function cashadvanceTable(){
   while($row = $query->fetch_assoc()){
     ?>
 <tr>
-    <td><?php echo $row['date_advance']; ?></td>
     <td><?php echo $row['firstname'] ." ". $row['lastname']; ?></td>
+    <td><?php echo $row['date_advance']; ?></td>
     <td><?php echo $row['amount']; ?></td>
     <td>
-        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['cashadvance_id']; ?>"><i
-                class="fa fa-edit"></i> Edit</button>
-        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['cashadvance_id']; ?>"><i
-                class="fa fa-trash"></i> Delete</button>
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['cashadvance_id']; ?>"><i class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['cashadvance_id']; ?>"><i class="fa fa-trash"></i> Delete</button>
     </td>
 </tr>
 <?php
   }
   $conn->close();
 }
+
+if (isset($_POST['advanceAdd'])) {
+  cashAdvanceAdd();
+}
+
+function cashAdvanceAdd(){
+  include 'conn.php';
+  if(isset($_POST['advanceAdd'])){
+    $employeeID = $_POST['employeeId'];
+    $date = $_POST['date'];
+    $amount = $_POST['amount'];
+
+    $sql = "INSERT INTO cashadvance (date_advance, employee_id, amount, created_on) VALUES ('$date', '$employeeID', '$amount', NOW())";
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+  }
+  $conn->close();
+  header('location: cashadvance_list.php');
+}
+
+
+
+
 // Cash Advance
 
 

@@ -152,21 +152,21 @@
     });
 
     $(function() {
-        $('#example1').on('click', '.edit', function(e) {
+        $('#employeelist').on('click', '.edit', function(e) {
             e.preventDefault();
             $('#editEmployee').modal('show');
             var id = $(this).data('id');
             getRow(id);
         });
 
-        $('#example1').on('click', '.delete', function(e) {
+        $('#employeelist').on('click', '.delete', function(e) {
             e.preventDefault();
             $('#deleteEmployee').modal('show');
             var id = $(this).data('id');
             getRow(id);
         });
 
-        $('#example1').on('click', '.photo', function(e) {
+        $('#employeelist').on('click', '.photo', function(e) {
             e.preventDefault();
             var id = $(this).data('id');
             $('#editEmployeePhoto').modal('show');
