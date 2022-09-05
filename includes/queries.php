@@ -468,7 +468,6 @@ function journalEntryTable(){
     <td><?php echo $row['description']; ?></td>
     <td><?php echo $type; ?></td>
     <td><?php echo $status; ?></td>
-    <td><?php echo $row['amount']; ?></td>
     <td>
         <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['journal_id']; ?>"><i
                 class="fa fa-edit"></i> Edit</button>
@@ -510,6 +509,46 @@ function journalEntryAdd(){
 }
 // journal entry add queries end
 
+// working trial balance table queries
+function workingTrialBalanceTable(){
+  include 'conn.php';
+  $sql = "SELECT ji.journal_id, ji.account_id, ji.group_id, ji.amount,ji.date_created,j.code, al.description, gl.name,gl.status, gl.type FROM journal_entries ji LEFT JOIN journal_entries AS j ON ji.journal_id=j.journal_id LEFT JOIN account_list AS al ON ji.journal_id=al.account_id LEFT JOIN group_list AS gl ON ji.journal_id=gl.group_id";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    $status = ($row['status'])?'<span class="badge text-bg-success pull-right">Active</span>':'<span class="badge text-bg-danger pull-right">Inactive</span>';
+    $type = ($row['type'])?'<span class="badge text-bg-warning pull-right">Credit</span>':'<span class="badge text-bg-info pull-right">Debit</span>';
+    ?>
+<tr>
+    <td><?php echo $row['date_created']; ?></td>
+    <td><?php echo $row['description']; ?></td>
+    <td><?php echo $row['code']; ?></td>
+    <td><?php echo $row['amount']; ?></td>
+</tr>
+<?php
+  }
+  $conn->close();
+}
+// working trial balance table queries end
+
+// trial balance table queries
+function trialBalanceTable(){
+  include 'conn.php';
+  $sql = "SELECT ji.journal_id, ji.account_id, ji.group_id, ji.amount,ji.date_created,j.code, al.description, gl.name,gl.status, gl.type FROM journal_entries ji LEFT JOIN journal_entries AS j ON ji.journal_id=j.journal_id LEFT JOIN account_list AS al ON ji.journal_id=al.account_id LEFT JOIN group_list AS gl ON ji.journal_id=gl.group_id";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    ?>
+<tr>
+    <td><?php echo $row['date_created']; ?></td>
+    <td><?php echo $row['code']; ?></td>
+    <td><?php echo $row['description']; ?></td>
+    <td></td>
+    <td></td>
+</tr>
+<?php
+  }
+  $conn->close();
+}
+// trial balance table queries end
 
 // account list selection in journal queries
 function accountListSelection(){

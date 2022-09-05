@@ -43,6 +43,13 @@ $(document).ready((function() {
 }))
 
 $(document).ready((function() {
+    $.fn.dataTable.moment('MMM DD, YYYY');
+    $('#accounting').DataTable({
+    });
+
+}))
+
+$(document).ready((function() {
     $('.datepicker').datepicker({
         autoclose: true,
         format: 'yyyy-mm-dd',

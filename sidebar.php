@@ -92,8 +92,8 @@
                 </li>
                 <li class="nav-header">Reports</li>
                 <li>
-                    <a href=""><i class="fa-solid fa-book"></i> Working Trial Balance</a>
-                    <a href=""><i class="fa-solid fa-file-invoice"></i></i> Trial Balance</a>
+                    <a href="working_trial_balance.php"><i class="fa-solid fa-book"></i> Working Trial Balance</a>
+                    <a href="trial_balance.php"><i class="fa-solid fa-file-invoice"></i></i> Trial Balance</a>
                 </li>
             </ul>
         </li>
