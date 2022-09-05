@@ -23,8 +23,6 @@
         $conn->close();
 	}
 
-
-
 	if(isset($_POST['deptRow'])){
         include 'includes/conn.php';
 		$department_id = $_POST['id'];
@@ -35,8 +33,6 @@
 		echo json_encode($row);
         $conn->close();
 	}
-
-
 
 	if(isset($_POST['cashRow'])){
 		include 'includes/conn.php';
@@ -49,8 +45,6 @@
 		$conn->close();
 	}
 
-
-
 	if(isset($_POST['empschedRow'])){
 		include 'includes/conn.php';
 		$schedule_id = $_POST['id'];
@@ -61,8 +55,6 @@
 		echo json_encode($row);
 		$conn->close();
 	}
-
-	
 
 	if(isset($_POST['cashRow'])){
 		include 'includes/conn.php';

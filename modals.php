@@ -830,7 +830,7 @@
             </div>
             <div class="modal-body">
                 <form class="row g-3" action="#" method="POST" autocomplete="off">
-                    <input type="hidden" class="cashAdvanceId" name="cashadvanceid">
+                    <input val="" type="hidden" class="cashAdvanceId" name="cashadvanceid">
                     <div class="col-md-6 form-floating">
                         <select class="form-control" name="employeeId" aria-label="Select employee">
                             <option value="" class="employeeSelection" selected>- Select -</option>

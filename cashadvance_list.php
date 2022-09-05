@@ -80,9 +80,7 @@
                     </table>
                 </div>
             </div>
-
         </div>
-    </div>
     </div>
 
 
@@ -130,7 +128,6 @@
                     $('.amountInfo').val(response.amount);
                 }
             });
-
         })
     }
     </script>

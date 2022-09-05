@@ -207,15 +207,11 @@
                     $('.contactInfo').val(response.contact_info);
                     $('.genderSelection').html(response.gender);
                     $('.jobSelection').html(response.job_name).val(response.job_id);
-                    $('.departmentSelection').html(response.department_name).val(response
-                        .department_id);
+                    $('.departmentSelection').html(response.department_name).val(response.department_id);
                     $('.del_employee_name').html(response.firstname + ' ' + response.lastname);
-                    $('.scheduleSelection').html(response.time_in + ' ' + response.time_out).val(
-                        response.schedule_id);
-
+                    $('.scheduleSelection').html(response.time_in + ' ' + response.time_out).val(response.schedule_id);
                 }
             });
-
         })
     }
 
