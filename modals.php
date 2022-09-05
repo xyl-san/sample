@@ -53,7 +53,7 @@
                         <label for="jobSelection">Job</label>
                     </div>
                     <div class="col-12 form-floating">
-                        <select class="form-control scheduleSelection" name="schedule" aria-label="Select schedule" required>
+                        <select class="form-control -Selection" name="schedule" aria-label="Select schedule" required>
                             <option value="" selected>- Select -</option>
                             <?php employeeSchedule();?>
                         </select>

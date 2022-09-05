@@ -35,4 +35,28 @@
 		echo json_encode($row);
         $conn->close();
 	}
+
+
+
+	if(isset($_POST['cashRow'])){
+		include 'includes/conn.php';
+		$cashadvance_id = $_POST['id'];
+		$sql = "SELECT c.cashadvance_id, c.date_advance, c.amount, e.firstname, e.lastname FROM cashadvance c INNER JOIN employees as e on c.employee_id = e.employee_id WHERE cashadvance_id = '$cashadvance_id'";
+		$query = $conn->query($sql);
+		$row = $query->fetch_assoc();
+
+		echo json_encode($row);
+	}
+
+
+
+	if(isset($_POST['empschedRow'])){
+		include 'includes/conn.php';
+		$schedule_id = $_POST['id'];
+		$sql = "SELECT s.schedule_id, s.time_in, s.time_out, e.employee_code, e.firstname, e.lastname FROM schedules s INNER JOIN employees as e on s.schedule_id=e.schedule_id WHERE s.schedule_id = '$schedule_id'";
+		$query = $conn->query($sql);
+		$row = $query->fetch_assoc();
+
+		echo json_encode($row);
+	}
 ?>

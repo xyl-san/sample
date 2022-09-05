@@ -46,45 +46,6 @@
         </nav>
         <div id="content" class="w-100">
             <?php include 'header.php'; ?>
-            <div class="container scheduleTable">
-                <div class="card">
-                    <div class="card-header">
-                        <button type="button" class="btn btn-primary btn-sm btn-flat" data-bs-toggle="modal"
-                            data-bs-target="#newSchedule">
-                            <span>
-                                <i class="fa fa-plus"></i>
-                                New
-                            </span>
-                        </button>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="example1" class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Time In</th>
-                                        <th>Time Out</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php scheduleTable();?>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Time In</th>
-                                        <th>Time Out</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-
         </div>
     </div>
     </div>

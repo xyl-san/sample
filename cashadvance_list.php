@@ -119,7 +119,8 @@
                 type: 'POST',
                 url: 'cashadvance_row.php',
                 data: {
-                    id: id
+                    id: id,
+                    cashRow: true,
                 },
                 dataType: 'json',
                 success: function(response) {
