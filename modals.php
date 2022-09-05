@@ -71,7 +71,6 @@
                         <button type="submit" class="btn btn-primary float-end" name="addEmployee">Submit</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
@@ -347,67 +346,60 @@
                 <form class="row g-3" action="includes/queries.php" method="POST" enctype="multipart/form-data"
                     autocomplete="off">
                     <div class="col-md-6 form-floating">
-                        <input type="date" class="form-control dateCreated" name="date_created" required>
+                        <input type="date" class="form-control journalEntryDate" name="journal_date" required>
                         <label for="dateCreated">Date Created</label>
                     </div>
                     <div class="col-md-12 form-floating">
-                        <input type="text" class="form-control journalEntryDescription" name="description" required>
+                        <input type="text" class="form-control journalDescription" name="description" required>
                         <label for="dateCreated">Entry Description</label>
                     </div>
                     <div class="col-md-6 form-floating">
-                        <select class="form-control" name="accountList" aria-label="Select account" id="account_id">
-                            <option value="" class="accounListSelection" selected>- Select -</option>
-                           <?php accountListSelection();?>
+                        <select class="form-control" name="accountListDebit" aria-label="Select account"
+                            id="account_id">
+                            <option value="" class="accounListDebitSelection" selected>- Select -</option>
+                            <?php accountListSelection();?>
                         </select>
-                        <label for="account">Account Description</label>
+                        <label for="accountDebit">Debit Description</label>
                     </div>
                     <div class="col-md-6 form-floating">
-                        <select class="form-control" name="groupList" aria-label="Select group" id="group_id">
-                            <option value="" class="accountGroupSelection" selected>- Select -</option>
+                        <select class="form-control" name="groupListDebit" aria-label="Select group" id="group_id">
+                            <option value="" class="groupListDebitSelection" selected>- Select -</option>
                             <?php groupListSelection();?>
                         </select>
-                        <label for="group">Group Name</label>
-                    </div>
-                    <div class="col-md-6 form-floating border-bottom">
-                        <input type="number" class="form-control journalEntryAmount" name="amount" required>
-                        <label for="dateCreated">Entry Amount</label>
-                    </div>
-                    <div class="col-md-6 form-floating">
-                        <button type="button" class="btn btn-secondary" id="addToList"><i
-                                class="fa-solid fa-plus"></i>Add Account</button>
+                        <label for="groupDebit">Debit Account</label>
                     </div>
                     <div class="col-md-12 form-floating">
-                        <table id="example1" class="table table-stripped table-bordered">
-                            <thead class="table-info">
-                                <tr>
-                                    <th width="10%">Tool</th>
-                                    <th>Account</th>
-                                    <th>Group</th>
-                                    <th>Debit</th>
-                                    <th>Credit</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- php function -->
-                            </tbody>
-                            <tfoot>
-                                <tr class="bg-gradient-secondary">
-                                    <tr>
-                                        <th colspan="3" class="text-center">Total</th>
-                                        <th class="text-right total_debit">0.00</th>
-                                        <th class="text-right total_credit">0.00</th>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="3" class="text-center"></th>
-                                        <th colspan="3" class="text-center total-balance">0</th>
-                                    </tr>
-                                </tr>
-                            </tfoot>
-                        </table>
+                        <input type="number" class="form-control amount" name="amount" id="debitAmount"
+                            oninput="add()" required>
+                        <label for="debitAmount">Debit Amount</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <select class="form-control" name="accountListDebit" aria-label="Select account"
+                            id="account_id">
+                            <option value="" class="accounListDebitSelection" selected>- Select -</option>
+                            <?php accountListSelection();?>
+                        </select>
+                        <label for="accountDebit">Credit Description</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <select class="form-control" name="groupListDebit" aria-label="Select group" id="group_id">
+                            <option value="" class="groupListDebitSelection" selected>- Select -</option>
+                            <?php groupListSelection();?>
+                        </select>
+                        <label for="groupDebit">Crdit Account</label>
+                    </div>
+                    <div class="col-md-12 form-floating">
+                        <input type="number" class="form-control amount" name="amount" id="debitAmount"
+                            oninput="add()" required>
+                        <label for="debitAmount">Credit Amount</label>
+                    </div>
+                    <div class="col-md-12 form-floating border-bottom">
+                        <input type="number" class="form-control journalEntryAmount" id="amount" name="amount">
+                        <label for="dateCreated">Total</label>
                     </div>
                     <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-danger btn-primary">Cancel</button>
-                        <button type="submit" class="btn btn-primary float-end" name="addJournalEnrty">Submit</button>
+                        <button type="submit" class="btn btn-success float-end" name="addJournalEntry">Save</button>
                     </div>
                 </form>
             </div>
@@ -416,6 +408,9 @@
 </div>
 
 <!-- End of Adding Journal Entry -->
+<!-- Start Edit Journal Entry -->
+
+<!-- End EditJournal Entry -->
 
 <!--Start Adding Account List-->
 <div class="modal fade" id="newAccountList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -442,9 +437,9 @@
                     <div class="col-md-12 form-floating">
                         <select class="form-control" name="accountStatus" aria-label="Select account"
                             id="accountStatus">
-                            <option value="" class="accoutStatus" selected>--Select--</option>
-                            <option value="0" class="accoutStatus" selected>Inactive</option>
-                            <option value="1" class="accoutStatus" selected>Active</option>
+                            <option value="0" class="Status" selected>Inactive</option>
+                            <option value="1" class="Status" selected>Active</option>
+                            <option value="" class="Status" selected>--Select--</option>
                         </select>
                         <label for="account">Status</label>
                     </div>
@@ -554,18 +549,18 @@
                         <label for="accountDescription">Description</label>
                     </div>
                     <div class="col-md-12 form-floating">
-                        <select class="form-control" name="type" aria-label="Select type" id="accountType">
-                            <option value="" class="accoutType" selected>--Select--</option>
+                        <select class="form-control" name="type" aria-label="Select type" id="accountType">                         
                             <option value="0" class="accoutType" selected>Debit</option>
                             <option value="1" class="accoutType" selected>Credit</option>
+                            <option value="" class="accoutType" selected>--Select--</option>
                         </select>
                         <label for="account">Status</label>
                     </div>
                     <div class="col-md-12 form-floating">
                         <select class="form-control" name="status" aria-label="Select status" id="accountStatus">
-                            <option value="" class="accoutStatus" selected>--Select--</option>
                             <option value="0" class="accoutStatus" selected>Inactive</option>
                             <option value="1" class="accoutStatus" selected>Active</option>
+                            <option value="" class="accoutStatus" selected>--Select--</option>
                         </select>
                         <label for="account">Status</label>
                     </div>
@@ -603,17 +598,17 @@
                     </div>
                     <div class="col-md-12 form-floating">
                         <select class="form-control groupTypeSelection" name="type" aria-label="Select account">
-                            <option value="" class="typeSelection" selected>--Select--</option>
                             <option value="0" class="typeSelection" selected>Debit</option>
                             <option value="1" class="typeSelection" selected>Credit</option>
+                            <option value="" class="typeSelection" selected>--Select--</option>
                         </select>
                         <label for="groupStatus">Type</label>
                     </div>
                     <div class="col-md-12 form-floating">
                         <select class="form-control groupStatusSelection" name="status" aria-label="Select account">
-                            <option value="" class="statusSelection" selected>--Select--</option>
                             <option value="0" class="statusSelection" selected>Inactive</option>
                             <option value="1" class="statusSelection" selected>Active</option>
+                            <option value="" class="statusSelection" selected>--Select--</option>
                         </select>
                         <label for="groupStatus">Status</label>
                     </div>
@@ -786,3 +781,6 @@
     </div>
 </div>
 <!-- End of Delete Department -->
+
+
+

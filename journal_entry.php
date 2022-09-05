@@ -41,7 +41,7 @@
                                 <th>Description</th>
                                 <th>Type</th>
                                 <th>Status</th>
-                                <th>Encoded by</th>
+                                <th>Amount</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -56,7 +56,7 @@
                                 <th>Description</th>
                                 <th>Type</th>
                                 <th>Status</th>
-                                <th>Encoded by</th>
+                                <th>Amount</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>

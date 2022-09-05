@@ -49,7 +49,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                            <th>#</th>
+                                <th>#</th>
                                 <th>Date Created</th>
                                 <th>Name</th>
                                 <th>Description</th>

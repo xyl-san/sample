@@ -416,7 +416,6 @@ function cashadvanceTable(){
 // Accounting queries
 // journal entries table queries
 
-
 function addToList(){
   include 'conn.php';
   $sql = "INSERT INTO employees (employee_code, firstname, lastname, address, birthdate, contact_info, gender, job_id, department_id, schedule_id, photo, created_on) VALUES ('$employee_code','$firstName', '$lastName', '$addressInfo', '$birthDate', '$contactInfo', '$genderSelection', '$jobSelection', '$departmentSelection', '$scheduleSelection', '$filename', NOW() )";
@@ -456,7 +455,7 @@ function accountListTable(){
 // Journal Entries Table queries
 function journalEntryTable(){
   include 'conn.php';
-  $sql = "SELECT j.journal_id, j.account_id, j.group_id,j.amount, j.date_created, je.code, al.description, gl.name, gl.type, gl.status FROM journal_items j INNER JOIN journal_entries AS je ON j.journal_id = je.journal_id INNER JOIN account_list AS al ON j.journal_id=al.account_id INNER JOIN group_list AS gl ON j.journal_id=gl.group_id";
+  $sql = "SELECT ji.journal_id, ji.account_id, ji.group_id, ji.amount,ji.date_created,j.code, al.description, gl.name,gl.status, gl.type FROM journal_entries ji LEFT JOIN journal_entries AS j ON ji.journal_id=j.journal_id LEFT JOIN account_list AS al ON ji.journal_id=al.account_id LEFT JOIN group_list AS gl ON ji.journal_id=gl.group_id";
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
     $status = ($row['status'])?'<span class="badge text-bg-success pull-right">Active</span>':'<span class="badge text-bg-danger pull-right">Inactive</span>';
@@ -469,7 +468,7 @@ function journalEntryTable(){
     <td><?php echo $row['description']; ?></td>
     <td><?php echo $type; ?></td>
     <td><?php echo $status; ?></td>
-    <td>  </td>
+    <td><?php echo $row['amount']; ?></td>
     <td>
         <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['journal_id']; ?>"><i
                 class="fa fa-edit"></i> Edit</button>
@@ -490,22 +489,27 @@ if (isset($_POST['addJournalEntry'])) {
 function journalEntryAdd(){
   include 'conn.php';
   if(isset($_POST['addJournalEntry'])){
-    $accountName = $_POST['accountName'];
-    $accountDescription = $_POST['accountDescription'];
-    $accountStatus = $_POST['accountStatus'];
    
-    $sql = "INSERT INTO account_list (name, description, status, date_created) VALUES ('$accountName','$accountDescription','$accountStatus', NOW() )";
-    if($conn->query($sql)){
-      echo "success";
-    }
+    $customer = $_POST['customer'];
+    $type = $_POST['type'];
+    $account = $_POST['account'];
+
+    $sql = "INSERT INTO journal_customer (name) VALUES ('$customer')";
+    $query=mysqli_query($conn,$sql);
+    if($query){
+    $sql2 = "INSERT INTO journal (type, account) VALUES ('$type','$account')";
+    $result=mysqli_query($conn,$sql2);
+    echo 'success';
+    } 
     else{
-      echo "error";
+    echo 'error';
+    }  
     }
-  }
-  $conn->close();
-  header('location:../account_list.php');
+    $conn->close();
+    header('location:../journal_entry.php');
 }
 // journal entry add queries end
+
 
 // account list selection in journal queries
 function accountListSelection(){
@@ -702,32 +706,6 @@ editAccountList();
       }
 // group list delelte queries end
 
-    if(isset($_POST['addJournalEntry'])){
-        journalEntryNew();
-    }
-    function journalEntryNew(){
-      include 'conn.php';
-      if(isset($_POST['addJorunalList'])){
-        $groupId = $_POST['accountgroup_id'];
-        $groupName = $_POST['name'];
-        $groupDescription = $_POST['description'];
-        $groupTypeSelection = $_POST['type'];
-        $groupStatusSelection = $_POST['status'];
-
-        $sql = "INSERT INTO journal_items (journal_id, account_id, accountgroup_id, amount, date_created) VALUES ('$journal_id','$account_id','$accountgroup_id','$amount',NOW())";
-        
-      }
-      if($conn->query($sql)){
-        $_SESSION['success'] = 'Added New Journal Entry!';
-      }
-      else{
-        $_SESSION['error'] = $conn->error;
-      }
-      $conn->close();
-      header('location: ../account_list.php');
-
-    }
-
       if (isset($_POST['leadAdd'])) {
         leadAdd();
       }
@@ -861,23 +839,23 @@ function inventoryTable(){
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
       ?>
-      <tr>
-          <td><img src="<?php echo (!empty($row['photo']))? './images/'.$row['photo']:'./images/profile.jpg'; ?>" width="30px"
-                  height="30px"> <a href="#edit_photo" data-toggle="modal" class="pull-right photo"
-                  data-id="<?php echo $row['inventory_id']; ?>"><span class="fa fa-edit"></span></a></td>
-          <td><?php echo $row['product_id']; ?></td>
-          <td><?php echo $row['description'];?></td>
-          <td><?php echo $row['quantity'];?></td>
-          <td><?php echo date('h:i A', strtotime($row['updated_on'])) ?></td>
+<tr>
+    <td><img src="<?php echo (!empty($row['photo']))? './images/'.$row['photo']:'./images/profile.jpg'; ?>" width="30px"
+            height="30px"> <a href="#edit_photo" data-toggle="modal" class="pull-right photo"
+            data-id="<?php echo $row['inventory_id']; ?>"><span class="fa fa-edit"></span></a></td>
+    <td><?php echo $row['product_id']; ?></td>
+    <td><?php echo $row['description'];?></td>
+    <td><?php echo $row['quantity'];?></td>
+    <td><?php echo date('h:i A', strtotime($row['updated_on'])) ?></td>
 
-          <td>
-              <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['inventory_id']; ?>"><i
-                      class="fa fa-edit"></i> Edit</button>
-              <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['inventory_id']; ?>"><i
-                      class="fa fa-trash"></i> Delete</button>
-          </td>
-      </tr>
-      <?php
+    <td>
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['inventory_id']; ?>"><i
+                class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['inventory_id']; ?>"><i
+                class="fa fa-trash"></i> Delete</button>
+    </td>
+</tr>
+<?php
   }
   $conn->close();
 }
@@ -888,15 +866,17 @@ function scheduleTable(){
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
       ?>
-      <tr>
-          <td><?php echo $row['time_in']; ?></td>
-          <td><?php echo $row['time_out'];?></td>
-          <td>
-              <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['schedule_id']; ?>"><i class="fa fa-edit"></i> Edit</button>
-              <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['schedule_id']; ?>"><i class="fa fa-trash"></i> Delete</button>
-          </td>
-      </tr>
-      <?php
+<tr>
+    <td><?php echo $row['time_in']; ?></td>
+    <td><?php echo $row['time_out'];?></td>
+    <td>
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['schedule_id']; ?>"><i
+                class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['schedule_id']; ?>"><i
+                class="fa fa-trash"></i> Delete</button>
+    </td>
+</tr>
+<?php
   }
   $conn->close();
 }
