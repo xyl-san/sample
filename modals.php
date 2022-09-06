@@ -186,10 +186,7 @@
 </div>
 <!-- End of Delete Employee -->
 
-
-
 <!-- Start Edit Photo Employee -->
-
 <div class="modal fade" id="editEmployeePhoto" tabindex="-1" role="dialog" aria-labelledby="employeeTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -221,7 +218,6 @@
 </div>
 
 <!-- End Edit Photo Employee -->
-
 
 <!-- Start Delete Employee -->
 <div class="modal fade" id="deleteEmployee" tabindex="-1" role="dialog" aria-labelledby="employeeTitle"
@@ -325,7 +321,6 @@
                         <button type="submit" class="btn btn-primary float-end" name="editAttendance">Submit</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
@@ -389,7 +384,7 @@
                         <label for="groupDebit">Crdit Account</label>
                     </div>
                     <div class="col-md-12 form-floating">
-                        <input type="number" class="form-control amount" name="amount" id="debitAmount"
+                        <input type="number" class="form-control amount" name="amount" id="creditAmount"
                             oninput="add()" required>
                         <label for="debitAmount">Credit Amount</label>
                     </div>
@@ -538,7 +533,6 @@
             </div>
             <div class="modal-body rounded-0">
                 <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
-
                     <div class="col-md-12 form-floating">
                         <textarea class="form-control tArea entryName" rows="2" name="name" required></textarea>
                         <label for="accountName">Name</label>

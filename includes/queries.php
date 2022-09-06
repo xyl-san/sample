@@ -430,7 +430,7 @@ function addToList(){
 // account list table queries
 function accountListTable(){
   include 'conn.php';
-  $sql = "SELECT account_id, name, description, status, date_created FROM account_list";
+  $sql = "SELECT account_id, account_name, description, status, date_created FROM account_list";
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
     $status = ($row['status'])?'<span class="badge text-bg-success pull-right">Active</span>':'<span class="badge text-bg-danger pull-right">Inactive</span>';
@@ -438,7 +438,7 @@ function accountListTable(){
 <tr>
     <td><?php echo $row['account_id']; ?></td>
     <td><?php echo $row['date_created']; ?></td>
-    <td><?php echo $row['name']; ?></td>
+    <td><?php echo $row['account_name']; ?></td>
     <td><?php echo $row['description']; ?></td>
     <td><?php echo $status; ?></td>
     <td>
@@ -455,7 +455,7 @@ function accountListTable(){
 // Journal Entries Table queries
 function journalEntryTable(){
   include 'conn.php';
-  $sql = "SELECT ji.journal_id, ji.account_id, ji.group_id, ji.amount,ji.date_created,j.code, al.description, gl.name,gl.status, gl.type FROM journal_entries ji LEFT JOIN journal_entries AS j ON ji.journal_id=j.journal_id LEFT JOIN account_list AS al ON ji.journal_id=al.account_id LEFT JOIN group_list AS gl ON ji.journal_id=gl.group_id";
+  $sql = "SELECT j.journal_id, j.account_id, j.group_id, j.amount, j.date_created ,je.code,je.description, a.account_name, g.group_name,g.status, g.type FROM `journal_items` j inner join account_list a on j.journal_id = a.account_id inner join journal_entries je on j.journal_id = je.journal_id inner join group_list g on j.journal_id = g.group_id";
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
     $status = ($row['status'])?'<span class="badge text-bg-success pull-right">Active</span>':'<span class="badge text-bg-danger pull-right">Inactive</span>';
@@ -464,7 +464,8 @@ function journalEntryTable(){
 <tr>
     <td><?php echo $row['date_created']; ?></td>
     <td><?php echo $row['code']; ?></td>
-    <td><?php echo $row['name']; ?></td>
+    <td><?php echo $row['account_name']; ?></td>
+    <td><?php echo $row['group_name']; ?></td>
     <td><?php echo $row['description']; ?></td>
     <td><?php echo $type; ?></td>
     <td><?php echo $status; ?></td>
@@ -488,38 +489,42 @@ if (isset($_POST['addJournalEntry'])) {
 function journalEntryAdd(){
   include 'conn.php';
   if(isset($_POST['addJournalEntry'])){
-   
-    $customer = $_POST['customer'];
-    $type = $_POST['type'];
-    $account = $_POST['account'];
-
-    $sql = "INSERT INTO journal_customer (name) VALUES ('$customer')";
-    $query=mysqli_query($conn,$sql);
-    if($query){
-    $sql2 = "INSERT INTO journal (type, account) VALUES ('$type','$account')";
-    $result=mysqli_query($conn,$sql2);
-    echo 'success';
-    } 
-    else{
-    echo 'error';
-    }  
+    $journalEntryDate = $_POST['journal_date'];
+    $journalDescription = $_POST['description'];
+    $accounListSelection = $_POST['accountList'];
+    $groupListSelection = $_POST['groupList'];
+    $amount = $_POST['amount'];
+    $letters = '';
+      $numbers = '';
+      foreach (range('A', 'Z') as $char) {
+          $letters .= $char;
+      }
+      for($i = 0; $i < 10; $i++){
+        $numbers .= $i;
+      }
+      $code = substr(str_shuffle($letters), 0, 3).substr(str_shuffle($numbers), 0, 9);
+    $sql = "INSERT INTO journal_entries (code,journal_date, description, date_created) VALUES ('$code','$journalEntryDate','$journalDescription', NOW() )";
+    if($conn->query($sql)){
+      echo "success";
     }
-    $conn->close();
-    header('location:../journal_entry.php');
+    else{
+      echo "error";
+    }
+  }
+  $conn->close();
+  header('location:../journal_entry.php');
 }
 // journal entry add queries end
 
 // working trial balance table queries
 function workingTrialBalanceTable(){
   include 'conn.php';
-  $sql = "SELECT ji.journal_id, ji.account_id, ji.group_id, ji.amount,ji.date_created,j.code, al.description, gl.name,gl.status, gl.type FROM journal_entries ji LEFT JOIN journal_entries AS j ON ji.journal_id=j.journal_id LEFT JOIN account_list AS al ON ji.journal_id=al.account_id LEFT JOIN group_list AS gl ON ji.journal_id=gl.group_id";
+  $sql = "SELECT journal_date, code, description, amount FROM journal_entries, journal_items WHERE journal_entries.journal_id= journal_items.journal_id";
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
-    $status = ($row['status'])?'<span class="badge text-bg-success pull-right">Active</span>':'<span class="badge text-bg-danger pull-right">Inactive</span>';
-    $type = ($row['type'])?'<span class="badge text-bg-warning pull-right">Credit</span>':'<span class="badge text-bg-info pull-right">Debit</span>';
     ?>
 <tr>
-    <td><?php echo $row['date_created']; ?></td>
+    <td><?php echo $row['journal_date']; ?></td>
     <td><?php echo $row['description']; ?></td>
     <td><?php echo $row['code']; ?></td>
     <td><?php echo $row['amount']; ?></td>
@@ -533,16 +538,16 @@ function workingTrialBalanceTable(){
 // trial balance table queries
 function trialBalanceTable(){
   include 'conn.php';
-  $sql = "SELECT ji.journal_id, ji.account_id, ji.group_id, ji.amount,ji.date_created,j.code, al.description, gl.name,gl.status, gl.type FROM journal_entries ji LEFT JOIN journal_entries AS j ON ji.journal_id=j.journal_id LEFT JOIN account_list AS al ON ji.journal_id=al.account_id LEFT JOIN group_list AS gl ON ji.journal_id=gl.group_id";
+  $sql = "SELECT journal_date, code, account_id, group_id, description, amount FROM journal_entries, journal_items WHERE journal_entries.journal_id= journal_items.journal_id";
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
     ?>
 <tr>
-    <td><?php echo $row['date_created']; ?></td>
+    <td><?php echo $row['journal_date']; ?></td>
     <td><?php echo $row['code']; ?></td>
     <td><?php echo $row['description']; ?></td>
-    <td></td>
-    <td></td>
+    <td><?php echo $row['amount']; ?></td>
+    <td><?php echo $row['amount']; ?></td>
 </tr>
 <?php
   }
@@ -553,11 +558,11 @@ function trialBalanceTable(){
 // account list selection in journal queries
 function accountListSelection(){
   include 'conn.php';
-  $sql = "SELECT account_id, name FROM account_list";
+  $sql = "SELECT account_id, account_name FROM account_list";
   $query = $conn->query($sql);
   while($prow = $query->fetch_assoc()){
       echo "
-      <option value='".$prow['account_id']."'>".$prow['name']."</option>
+      <option value='".$prow['account_id']."'>".$prow['account_name']."</option>
       ";
   }
   $conn->close();
@@ -567,11 +572,11 @@ function accountListSelection(){
 // account list selection in journal queries
 function groupListSelection(){
   include 'conn.php';
-  $sql = "SELECT group_id, name FROM group_list";
+  $sql = "SELECT group_id, group_name FROM group_list";
   $query = $conn->query($sql);
   while($prow = $query->fetch_assoc()){
       echo "
-      <option value='".$prow['group_id']."'>".$prow['name']."</option>
+      <option value='".$prow['group_id']."'>".$prow['group_name']."</option>
       ";
   }
   $conn->close();
@@ -589,7 +594,7 @@ function accountListAdd(){
     $accountDescription = $_POST['accountDescription'];
     $accountStatus = $_POST['accountStatus'];
    
-    $sql = "INSERT INTO account_list (name, description, status, date_created) VALUES ('$accountName','$accountDescription','$accountStatus', NOW() )";
+    $sql = "INSERT INTO account_list (account_name, description, status, date_created) VALUES ('$accountName','$accountDescription','$accountStatus', NOW() )";
     if($conn->query($sql)){
       echo "success";
     }
@@ -613,7 +618,7 @@ editAccountList();
       $accountName = $_POST['name'];
       $accountDescription = $_POST['description'];
       $accountStatusSelection = $_POST['status'];
-      $sql = "UPDATE account_list SET name = '$accountName', description = '$accountDescription', status = '$accountStatusSelection' WHERE account_id = '$account_id'";
+      $sql = "UPDATE account_list SET account_name = '$accountName', description = '$accountDescription', status = '$accountStatusSelection' WHERE account_id = '$account_id'";
       if($conn->query($sql)){
         echo "success";
       }
@@ -650,7 +655,7 @@ editAccountList();
   // group list table queries
   function groupListTable(){
     include 'conn.php';
-    $sql = "SELECT group_id, name, description, type, status, date_created FROM group_list";
+    $sql = "SELECT group_id, group_name, description, type, status, date_created FROM group_list";
     $query = $conn->query($sql);
     while($row = $query->fetch_assoc()){
       $status = ($row['status'])?'<span class="badge text-bg-success pull-right">Active</span>':'<span class="badge text-bg-danger pull-right">Inactive</span>';
@@ -659,7 +664,7 @@ editAccountList();
 <tr>
     <td><?php echo $row['group_id']; ?></td>
     <td><?php echo $row['date_created']; ?></td>
-    <td><?php echo $row['name']; ?></td>
+    <td><?php echo $row['group_name']; ?></td>
     <td><?php echo $row['description']; ?></td>
     <td><?php echo $type; ?></td>
     <td><?php echo $status; ?></td>
@@ -686,7 +691,7 @@ editAccountList();
       $description = $_POST['description'];
       $type = $_POST['type'];
       $status = $_POST['status'];
-      $sql = "INSERT INTO group_list (name, description,type, status, date_created) VALUES ('$name','$description','$type','$status', NOW() )";
+      $sql = "INSERT INTO group_list (group_name, description,type, status, date_created) VALUES ('$name','$description','$type','$status', NOW() )";
       if($conn->query($sql)){
         echo "success";
       }
@@ -711,7 +716,7 @@ editAccountList();
           $groupDescription = $_POST['description'];
           $groupTypeSelection = $_POST['type'];
           $groupStatusSelection = $_POST['status'];
-          $sql = "UPDATE group_list SET name = '$groupName', description = '$groupDescription',type='$groupTypeSelection', status = '$groupStatusSelection' WHERE group_id = '$groupId'";
+          $sql = "UPDATE group_list SET group_name = '$groupName', description = '$groupDescription',type='$groupTypeSelection', status = '$groupStatusSelection' WHERE group_id = '$groupId'";
           if($conn->query($sql)){
             echo "success";
           }

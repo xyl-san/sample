@@ -12,7 +12,7 @@
 
 <body>
     <div class="wrapper">
-        <?php include 'sidebar.php'; ?>
+        <?php include 'accounting_sidebar.php'; ?>
         <div id="content" class="w-100">
             <?php include 'header.php'; ?>
             <div class="card">

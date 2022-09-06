@@ -1,7 +1,6 @@
 <?php include 'includes/queries.php';?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +11,7 @@
 
 <body>
     <div class="wrapper">
-        <?php include 'sidebar.php'; ?>
+        <?php include 'accounting_sidebar.php'; ?>
         <div id="content" class="w-100">
             <?php include 'header.php'; ?>
             <div class="card">
@@ -37,7 +36,8 @@
                             <tr>
                                 <th>Date</th>
                                 <th>Journal Code</th>
-                                <th>Name</th>
+                                <th>Account</th>
+                                <th>Group</th>
                                 <th>Description</th>
                                 <th>Type</th>
                                 <th>Status</th>
@@ -51,7 +51,8 @@
                             <tr>
                                 <th>Date</th>
                                 <th>Journal Code</th>
-                                <th>Name</th>
+                                <th>Account</th>
+                                <th>Group</th>
                                 <th>Description</th>
                                 <th>Type</th>
                                 <th>Status</th>

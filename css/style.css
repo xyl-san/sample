@@ -400,3 +400,22 @@ background-color: #C3B091;
     border: 0;
     box-shadow: none;
 }
+
+.image-container .image{
+    padding: 15px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: -1;
+    width: 2000px;
+    height: 300px;
+}
+  #cardbgcolor  {
+    background-color:  #FFE6BC;
+  }
+  .card-title{
+    text-align: center;
+  }
+.card-text{
+    text-align: center;
+}

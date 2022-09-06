@@ -122,15 +122,6 @@ function drawChart() {
     var chart = new google.visualization.PieChart(document.getElementById('jobChart'));
     chart.draw(data, options);
 }
-</script>
 
-<!-- debit and credit entry -->
-<script>
-    function add() {
-    var debit = document.getElementById("debitAmount").value;
-    var credit = document.getElementById("creditAmount").value;
-    var amount = debit - credit;
-    document.getElementById("amount").value = amount;
 
-}
 </script>

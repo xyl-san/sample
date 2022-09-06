@@ -86,14 +86,14 @@
             </a>
             <ul class="collapse list-unstyled" id="accountingSubmenu">
                 <li>
-                    <a href="journal_entry.php"><i class="fa-solid fa-book"></i> Journal Entries</a>
-                    <a href="account_list.php"><i class="fa-solid fa-file-invoice"></i></i> Account List</a>
-                    <a href="group_list.php"><i class="fa-solid fa-layer-group"></i></i> Group List</a>
+                    <a href=""><i class="fa-solid fa-book"></i> Journal Entries</a>
+                    <a href=""><i class="fa-solid fa-file-invoice"></i></i> Account List</a>
+                    <a href=""><i class="fa-solid fa-layer-group"></i></i> Group List</a>
                 </li>
                 <li class="nav-header">Reports</li>
                 <li>
-                    <a href="working_trial_balance.php"><i class="fa-solid fa-book"></i> Working Trial Balance</a>
-                    <a href="trial_balance.php"><i class="fa-solid fa-file-invoice"></i></i> Trial Balance</a>
+                    <a href=""><i class="fa-solid fa-book"></i> Working Trial Balance</a>
+                    <a href=""><i class="fa-solid fa-file-invoice"></i></i> Trial Balance</a>
                 </li>
             </ul>
         </li>
