@@ -66,4 +66,22 @@
 		echo json_encode($row);
 		$conn->close();
 	}
+
+	if(isset($_POST['getJobs'])){
+		include 'includes/conn.php';
+		$depart_id = $_POST['depart_id'];
+		$users_arr = array();
+		$sql = "SELECT job_id, job_name FROM job WHERE department_id = '$depart_id' AND delete_flag = '0'";
+
+		$result = mysqli_query($conn,$sql);
+		while( $row = mysqli_fetch_array($result) ){
+			$userid = $row['job_id'];
+			$name = $row['job_name'];
+	  
+			$users_arr[] = array("id" => $userid, "name" => $name);
+		 }
+		 // encoding array to json format
+		echo json_encode($users_arr);
+		$conn->close();
+	}
 ?>

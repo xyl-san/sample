@@ -364,12 +364,15 @@ function departmentDelete(){
 // Job
 function jobTable(){
   include 'conn.php';
-  $sql = "SELECT job_id, job_name, description, rate, created_on, updated_on FROM job";
+  $sql = "SELECT j.job_id, j.job_name, j.description, j.rate, d.department_id, d.department_name FROM job AS j INNER JOIN department AS d ON j.department_id = d.department_id";
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
+    $j_id = $row['job_id'];
     ?>
 <tr>
     <td><?php echo $row['job_id']; ?></td>
+    <td><table class="table table-bordered"><?php employeeJobs($j_id); ?></table></td>
+    <td><?php echo $row['department_name']; ?></td>
     <td><?php echo $row['job_name']; ?></td>
     <td><?php echo $row['rate']; ?></td>
     <td>
@@ -379,6 +382,45 @@ function jobTable(){
                 class="fa fa-trash"></i> Delete</button>
     </td>
 </tr>
+<?php
+  }
+  $conn->close();
+}
+
+if(isset($_POST['jobAdd'])){
+  jobAdd();
+}
+
+function jobAdd(){
+  include 'conn.php';
+  if(isset($_POST['jobAdd'])){
+    $dept_id = $_POST['departmentId'];
+    $job_name = $_POST['jobname'];
+    $job_desc = $_POST['jobdesc'];
+    $rate = $_POST['rate'];
+
+    $sql = "INSERT INTO job (department_id, job_name, description, rate, created_on) VALUES ('$dept_id', '$job_name', '$job_desc', '$rate', NOW())";
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+  }
+  $conn->close();
+  header('location: job_list.php');
+}
+
+function employeeJobs($j_id){
+  $job_id = $j_id;
+  include 'conn.php';
+  $sql = "SELECT `job_id`, `firstname`, `lastname` FROM `employees` WHERE job_id = '$job_id'";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    ?>
+      <tr>
+          <td><?php echo $row['firstname'] . ' ' .$row['lastname']; ?></td>
+      </tr>
 <?php
   }
   $conn->close();
