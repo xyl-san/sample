@@ -529,7 +529,28 @@ function cashAdvanceAdd(){
   header('location: cashadvance_list.php');
 }
 
+if (isset($_POST['advanceEdit'])) {
+  cashAdvanceEdit();
+}
+function cashAdvanceEdit(){
+  include "conn.php";
+  if (isset($_POST['advanceEdit'])){
+    $cash_id = $_POST['cashadvanceid'];
+    $employee_id = $_POST['employeeId'];
+    $date = $_POST['date'];
+    $amount = $_POST['amount'];
 
+    $sql = "UPDATE cashadvance SET date_advance = '$date', employee_id = '$employee_id', amount = '$amount', updated_on = NOW()";
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+  }
+  $conn->close();
+  header('location: cashadvance_list.php');
+}
 
 
 // Cash Advance

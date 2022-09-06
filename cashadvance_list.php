@@ -118,7 +118,7 @@
                 url: 'get_rows.php',
                 data: {
                     id: id,
-                    cashRow: true,
+                    cashRow: 1,
                 },
                 dataType: 'json',
                 success: function(response) {
