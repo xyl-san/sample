@@ -136,7 +136,7 @@ function drawChart() {
 
 }
 </script>
-<script language="javascript" type="text/javascript">
+<script>
 function randomString() {
     var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZ";
     var string_length = 12;
