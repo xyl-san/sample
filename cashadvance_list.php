@@ -49,7 +49,7 @@
             <div class="card">
                 <div class="card-header">
                     <button type="button" class="btn btn-primary btn-sm btn-flat" data-bs-toggle="modal"
-                        data-bs-target="#newCashadvance">
+                        data-bs-target="#newCashAdvance">
                         <span>
                             <i class="fa fa-plus"></i>
                             New
@@ -60,8 +60,8 @@
                     <table id="example1" class="table" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Date</th>
                                 <th>Name</th>
+                                <th>Date</th>
                                 <th>Amount</th>
                                 <th>Tools</th>
                             </tr>
@@ -71,8 +71,8 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Date</th>
                                 <th>Name</th>
+                                <th>Date</th>
                                 <th>Amount</th>
                                 <th>Tools</th>
                             </tr>
@@ -80,9 +80,7 @@
                     </table>
                 </div>
             </div>
-
         </div>
-    </div>
     </div>
 
 
@@ -100,7 +98,7 @@
     $(function() {
         $('#example1').on('click', '.edit', function(e) {
             e.preventDefault();
-            $('#editCashadvance').modal('show');
+            $('#editCashAdvance').modal('show');
             var id = $(this).data('id');
             getRow(id);
         });
@@ -117,21 +115,19 @@
         $(document).ready(function() {
             $.ajax({
                 type: 'POST',
-                url: 'cashadvance_row.php',
+                url: 'get_rows.php',
                 data: {
-                    id: id
+                    id: id,
+                    cashRow: true,
                 },
                 dataType: 'json',
                 success: function(response) {
-                    $('.cashadvanceId').val(response.cashadvance_id);
-                    $('.cashadvanceDate').val(response.date_advance);
-                    $('.employeeCashadvance').val(response.employee_id);
-                    $('.cashadvanceAmount').val(response.amount);
-                    $('.delete_cashadvance').html(response.firstname + ' ' + response.lastname);
-
+                    $('.cashAdvanceId').val(response.cashadvance_id);
+                    $('.employeeSelection').html(response.firstname + ' ' + response.lastname).val(response.employee_id);
+                    $('.dateInfo').val(response.date_advance);
+                    $('.amountInfo').val(response.amount);
                 }
             });
-
         })
     }
     </script>

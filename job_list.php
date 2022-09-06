@@ -67,7 +67,9 @@
                         <thead>
                             <tr>
                                 <th scope="col">Job ID</th>
-                                <th scope="col">Description</th>
+                                <th scope="col">List of Employees</th>
+                                <th scope="col">Department</th>
+                                <th scope="col">Job Title</th>
                                 <th scope="col">Rate</th>
                                 <th scope="col">Tools</th>
                             </tr>
@@ -78,7 +80,9 @@
                         <tfoot>
                             <tr>
                                 <th scope="col">Job ID</th>
-                                <th scope="col">Description</th>
+                                <th scope="col">List of Employees</th>
+                                <th scope="col">Department</th>
+                                <th scope="col">Job Title</th>
                                 <th scope="col">Rate</th>
                                 <th scope="col">Tools</th>
                             </tr>
@@ -141,6 +145,37 @@
 
         })
     }
+
+    // $(document).ready(function(){
+    //     $("#deptSelect").on('change', function(){
+    //         var dept_id = $(this).val();
+    //         $.ajax({
+    //             url: 'get_rows.php',
+    //             type: 'POST',
+    //             data: {
+    //                 depart_id: dept_id,
+    //                 getJobs: true,
+    //             },
+    //             dataType: 'json',
+    //             success:function(response){
+                
+    //                 var len = response.length;
+                
+    //                 $("#jobSelect").empty().append("<option value=''>- Select -</option>");
+
+    //                 for( var i = 0; i<len; i++){
+    //                     var job_id = response[i]['job_id'];
+    //                     var job_name = response[i]['job_name'];
+
+    //                     $("#jobSelect").append("<option value='"+job_id+"'>"+job_name+"</option>");
+    //                 }
+    //             }
+    //         });
+    //     });
+    // });
+    // Gonna use this later
+
+
     </script>
 </body>
 

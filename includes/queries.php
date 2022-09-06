@@ -132,7 +132,7 @@ function employeeSchedule(){
           echo "error";
         }
       }
-
+      $conn->close();
       header('location: ../employees_list.php');
     }
 
@@ -211,7 +211,7 @@ function attendanceTable(){
   $conn->close();
 }
 
-function employeeAttendance(){
+function employeeSelection(){
   include 'conn.php';
   $sql = "SELECT employee_id, firstname, lastname FROM employees";
   $query = $conn->query($sql);
@@ -280,10 +280,12 @@ function departmentTable(){
   $sql = "SELECT department_id, department_name, created_on, updated_on FROM department WHERE delete_flag = '0'";
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
+    $d_id = $row['department_id'];
     ?>
 <tr>
     <td><?php echo $row['department_id']; ?></td>
     <td><?php echo $row['department_name']?></td>
+    <td><table class="table table-bordered"><?php departmentJobs($d_id); ?></table></td>
     <td>
         <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['department_id']; ?>"><i
                 class="fa fa-edit"></i> Edit</button>
@@ -295,6 +297,29 @@ function departmentTable(){
   }
   $conn->close();
 }
+
+function departmentJobs($d_id){
+  $dept_id = $d_id;
+  include 'conn.php';
+  $sql = "SELECT department_id, job_name FROM job WHERE department_id = $dept_id";
+  $query = $conn->query($sql);
+  if(mysqli_num_rows($query) != 0){
+    while($row = $query->fetch_assoc()){
+      ?>
+        <tr>
+            <td><?php echo $row['job_name']; ?></td>
+        </tr>
+  <?php
+    }
+  }else{
+    echo "<p>There are no jobs in this department yet. Try adding a job!</p>";
+  }
+  
+  $conn->close();
+}
+
+
+
 
 if(isset($_POST['departmentAdd'])){
   departmentAdd();
@@ -359,21 +384,24 @@ function departmentDelete(){
   $conn->close();
   header('location: department_list.php');
 }
+
+
 // Department
 
 // Job
 function jobTable(){
   include 'conn.php';
-  $sql = "SELECT job_id, description, rate, created_on, updated_on FROM job";
+  $sql = "SELECT j.job_id, j.job_name, j.description, j.rate, d.department_id, d.department_name FROM job AS j INNER JOIN department AS d ON j.department_id = d.department_id";
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
+    $j_id = $row['job_id'];
     ?>
 <tr>
     <td><?php echo $row['job_id']; ?></td>
-    <td><?php echo $row['description']; ?></td>
+    <td><table class="table table-bordered"><?php employeeJobs($j_id); ?></table></td>
+    <td><?php echo $row['department_name']; ?></td>
+    <td><?php echo $row['job_name']; ?></td>
     <td><?php echo $row['rate']; ?></td>
-    <td><?php echo $row['created_on']; ?></td>
-    <td><?php echo $row['updated_on']; ?></td>
     <td>
         <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['job_id']; ?>"><i
                 class="fa fa-edit"></i> Edit</button>
@@ -385,7 +413,76 @@ function jobTable(){
   }
   $conn->close();
 }
+
+if(isset($_POST['jobAdd'])){
+  jobAdd();
+}
+
+function jobAdd(){
+  include 'conn.php';
+  if(isset($_POST['jobAdd'])){
+    $dept_id = $_POST['departmentId'];
+    $job_name = $_POST['jobname'];
+    $job_desc = $_POST['jobdesc'];
+    $rate = $_POST['rate'];
+
+    $sql = "INSERT INTO job (department_id, job_name, description, rate, created_on) VALUES ('$dept_id', '$job_name', '$job_desc', '$rate', NOW())";
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+  }
+  $conn->close();
+  header('location: job_list.php');
+}
+
+function employeeJobs($j_id){
+  $job_id = $j_id;
+  include 'conn.php';
+  $sql = "SELECT `job_id`, `firstname`, `lastname` FROM `employees` WHERE job_id = '$job_id'";
+  $query = $conn->query($sql);
+  if(mysqli_num_rows($query) != 0){
+    while($row = $query->fetch_assoc()){
+      ?>
+        <tr>
+            <td><?php echo $row['firstname'] . ' ' .$row['lastname']; ?></td>
+        </tr>
+  <?php
+    }
+  }else{
+    echo "<p>There are no employees in this job yet. Try adding someone!</p>";
+  }
+  
+  $conn->close();
+}
 // Job
+
+// Deduction
+function deductionTable(){
+  include 'conn.php';
+  $sql = "SELECT d.deduction_id, d.description, d.amount, e.firstname, e.lastname FROM deductions as d INNER JOIN employees as e ON d.employee_id = e.employee_id";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    ?>
+    <tr>
+        <td><?php echo $row['deduction_id']; ?></td>
+        <td><?php echo $row['firstname'] ." ". $row['lastname']; ?></td>
+        <td><?php echo $row['description']; ?></td>
+        <td><?php echo $row['amount']; ?></td>
+        <td>
+            <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['deduction_id']; ?>"><i
+                    class="fa fa-edit"></i> Edit</button>
+            <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['deduction_id']; ?>"><i
+                    class="fa fa-trash"></i> Delete</button>
+        </td>
+    </tr>
+<?php
+  }
+  $conn->close();
+}
+// Deduction
 
 // Cash Advance
 
@@ -396,20 +493,45 @@ function cashadvanceTable(){
   while($row = $query->fetch_assoc()){
     ?>
 <tr>
-    <td><?php echo $row['date_advance']; ?></td>
     <td><?php echo $row['firstname'] ." ". $row['lastname']; ?></td>
+    <td><?php echo $row['date_advance']; ?></td>
     <td><?php echo $row['amount']; ?></td>
     <td>
-        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['cashadvance_id']; ?>"><i
-                class="fa fa-edit"></i> Edit</button>
-        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['cashadvance_id']; ?>"><i
-                class="fa fa-trash"></i> Delete</button>
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['cashadvance_id']; ?>"><i class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['cashadvance_id']; ?>"><i class="fa fa-trash"></i> Delete</button>
     </td>
 </tr>
 <?php
   }
   $conn->close();
 }
+
+if (isset($_POST['advanceAdd'])) {
+  cashAdvanceAdd();
+}
+
+function cashAdvanceAdd(){
+  include 'conn.php';
+  if(isset($_POST['advanceAdd'])){
+    $employeeID = $_POST['employeeId'];
+    $date = $_POST['date'];
+    $amount = $_POST['amount'];
+
+    $sql = "INSERT INTO cashadvance (date_advance, employee_id, amount, created_on) VALUES ('$date', '$employeeID', '$amount', NOW())";
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+  }
+  $conn->close();
+  header('location: cashadvance_list.php');
+}
+
+
+
+
 // Cash Advance
 
 
@@ -910,17 +1032,15 @@ function scheduleTable(){
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
       ?>
-<tr>
-    <td><?php echo $row['time_in']; ?></td>
-    <td><?php echo $row['time_out'];?></td>
-    <td>
-        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['schedule_id']; ?>"><i
-                class="fa fa-edit"></i> Edit</button>
-        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['schedule_id']; ?>"><i
-                class="fa fa-trash"></i> Delete</button>
-    </td>
-</tr>
-<?php
+      <tr>
+          <td><?php echo $row['time_in']; ?></td>
+          <td><?php echo $row['time_out'];?></td>
+          <td>
+              <button class="btn btn-success btn-sm schedEdit btn-flat" data-id="<?php echo $row['schedule_id']; ?>"><i class="fa fa-edit"></i> Edit</button>
+              <button class="btn btn-danger btn-sm schedDelete btn-flat" data-id="<?php echo $row['schedule_id']; ?>"><i class="fa fa-trash"></i> Delete</button>
+          </td>
+      </tr>
+      <?php
   }
   $conn->close();
 }

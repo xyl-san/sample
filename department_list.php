@@ -68,6 +68,7 @@
                             <tr>
                                 <th>Department ID</th>
                                 <th>Department</th>
+                                <th>List of Jobs in the Department</th>
                                 <th>Tools</th>
                             </tr>
                         </thead>
@@ -78,6 +79,7 @@
                             <tr>
                                 <th>Department ID</th>
                                 <th>Department</th>
+                                <th>List of Jobs in the Department</th>
                                 <th>Tools</th>
                             </tr>
                         </tfoot>

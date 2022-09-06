@@ -64,7 +64,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="example1" class="table">
+                        <table id="employeelist" class="table">
                             <thead>
                                 <tr>
                                     <th scope="col">Photo</th>
@@ -96,6 +96,43 @@
                     </div>
                 </div>
             </div>
+            <div class="container scheduleTable m-3">
+                <div class="card">
+                    <div class="card-header">
+                        <button type="button" class="btn btn-primary btn-sm btn-flat" data-bs-toggle="modal"
+                            data-bs-target="#newSchedule">
+                            <span>
+                                <i class="fa fa-plus"></i>
+                                New
+                            </span>
+                        </button>
+                        <span class="fw-bold float-end">Employee Schedules</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="empschedule" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Time In</th>
+                                        <th>Time Out</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php scheduleTable();?>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Time In</th>
+                                        <th>Time Out</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -115,25 +152,39 @@
     });
 
     $(function() {
-        $('#example1').on('click', '.edit', function(e) {
+        $('#employeelist').on('click', '.edit', function(e) {
             e.preventDefault();
             $('#editEmployee').modal('show');
             var id = $(this).data('id');
             getRow(id);
         });
 
-        $('#example1').on('click', '.delete', function(e) {
+        $('#employeelist').on('click', '.delete', function(e) {
             e.preventDefault();
             $('#deleteEmployee').modal('show');
             var id = $(this).data('id');
             getRow(id);
         });
 
-        $('#example1').on('click', '.photo', function(e) {
+        $('#employeelist').on('click', '.photo', function(e) {
             e.preventDefault();
             var id = $(this).data('id');
             $('#editEmployeePhoto').modal('show');
             getRow(id);
+        });
+
+        $('#empschedule').on('click', '.schedEdit', function(e) {
+            e.preventDefault();
+            $('#editSchedule').modal('show');
+            var id = $(this).data('id');
+            schedRow(id);
+        });
+
+        $('#empschedule').on('click', '.schedDelete', function(e) {
+            e.preventDefault();
+            $('#deleteSchedule').modal('show');
+            var id = $(this).data('id');
+            schedRow(id);
         });
     });
 
@@ -156,11 +207,30 @@
                     $('.contactInfo').val(response.contact_info);
                     $('.genderSelection').html(response.gender);
                     $('.jobSelection').html(response.job_name).val(response.job_id);
-                    $('.departmentSelection').html(response.department_name).val(response
-                        .department_id);
+                    $('.departmentSelection').html(response.department_name).val(response.department_id);
                     $('.del_employee_name').html(response.firstname + ' ' + response.lastname);
-                    $('.scheduleSelection').html(response.time_in + ' ' + response.time_out).val(
-                        response.schedule_id);
+                    $('.scheduleSelection').html(response.time_in + ' ' + response.time_out).val(response.schedule_id);
+                }
+            });
+        })
+    }
+
+    function schedRow(id) {
+        $(document).ready(function() {
+            $.ajax({
+                type: 'POST',
+                url: 'get_rows.php',
+                data: {
+                    id: id,
+                    empschedRow: true,
+                },
+                dataType: 'json',
+                success: function(response) {
+                    $('.schedule_id').val(response.schedule_id);
+                    $('.employeeSelection').val(response.firstname + ' ' + response.lastname);
+                    $('.scheduleSelection').val(response.time_in + ' ' + response.time_out);
+                    $('.delete_schedule').html(response.employee_code + ' ' + response.time_in +
+                        ' ' + response.time_out);
 
                 }
             });

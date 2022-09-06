@@ -39,6 +39,8 @@
 $(document).ready((function() {
     $.fn.dataTable.moment('MMM DD, YYYY');
     $('#example1').DataTable();
+    $('#employeelist').DataTable();
+    $('#empschedule').DataTable();
 
 }))
 

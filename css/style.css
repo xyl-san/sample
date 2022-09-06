@@ -174,7 +174,7 @@ a.article, a.article:hover {
 }
 
 .scheduleTable{
-    width: 575px !important;
+    width: 600px !important;
 }
 
 
@@ -233,7 +233,8 @@ body {
 
 
   #bodyStyle{
-    background: linear-gradient(180deg, rgba(255,230,188,1) 0%, rgba(142,128,106,1) 100%);
+    background: rgb(66,66,66);
+    background: linear-gradient(45deg, rgba(66,66,66,1) 0%, rgba(41,125,89,1) 56%);
 
   }
   

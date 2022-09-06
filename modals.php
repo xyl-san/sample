@@ -54,8 +54,7 @@
                         <label for="jobSelection">Job</label>
                     </div>
                     <div class="col-12 form-floating">
-                        <select class="form-control scheduleSelection" name="schedule" aria-label="Select schedule"
-                            required>
+                        <select class="form-control -Selection" name="schedule" aria-label="Select schedule" required>
                             <option value="" selected>- Select -</option>
                             <?php employeeSchedule();?>
                         </select>
@@ -264,7 +263,7 @@
                     <div class="col-md-6 form-floating">
                         <select class="form-control" name="employeeId" aria-label="Select employee">
                             <option value="" class="employeeSelection" selected>- Select -</option>
-                            <?php employeeAttendance();?>
+                            <?php employeeSelection();?>
                         </select>
                         <label for="employeeSelection">Employee</label>
                     </div>
@@ -783,5 +782,122 @@
 </div>
 <!-- End of Delete Department -->
 
+<!-- Add Cash Advance -->
+<div class="modal fade" id="newCashAdvance" tabindex="-1" role="dialog" aria-labelledby="cashAdvanceTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cashAdvanceTitle">New Cash Advance</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
+                    <div class="col-md-6 form-floating">
+                        <select class="form-control" name="employeeId" aria-label="Select employee">
+                            <option value="" class="employeeSelection" selected>- Select -</option>
+                            <?php employeeSelection();?>
+                        </select>
+                        <label for="employeeSelection">Employee</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="date" class="form-control dateInfo datepicker" name="date" required>
+                        <label for="date">Date</label>
+                    </div>
+                    <div class="col-xs-12 form-floating">
+                        <input type="number" class="form-control amountInfo" name="amount" placeholder="123456789" required>
+                        <label for="amount">Amount</label>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end" name="advanceAdd">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Add Cash Advance -->
 
 
+<!-- Edit Cash Advance -->
+<div class="modal fade" id="editCashAdvance" tabindex="-1" role="dialog" aria-labelledby="cashAdvanceTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cashAdvanceTitle">Cash Advance Info</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
+                    <input val="" type="hidden" class="cashAdvanceId" name="cashadvanceid">
+                    <div class="col-md-6 form-floating">
+                        <select class="form-control" name="employeeId" aria-label="Select employee">
+                            <option value="" class="employeeSelection" selected>- Select -</option>
+                            <?php employeeSelection();?>
+                        </select>
+                        <label for="employeeSelection">Employee</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="date" class="form-control dateInfo datepicker" name="date" required>
+                        <label for="date">Date</label>
+                    </div>
+                    <div class="col-xs-12 form-floating">
+                        <input type="number" class="form-control amountInfo" name="amount" placeholder="123456789" required>
+                        <label for="amount">Amount</label>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end" name="advanceEdit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Edit Cash Advance -->
+
+<!-- Add Job -->
+<div class="modal fade" id="newJob" tabindex="-1" role="dialog" aria-labelledby="jobTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="jobTitle">New Job</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
+                    <div class="col-md-12 form-floating">
+                        <select id="deptSelect" class="form-control" name="departmentId" aria-label="Select Department">
+                            <option value="" class="departmentSelection" selected>- Select -</option>
+                            <?php employeeDepartment();?>
+                        </select>
+                        <label for="departmentSelection">Department</label>
+                    </div>
+                    <div class="col-md-12 form-floating">
+                        <input type="text" class="form-control jobName" name="jobname" required>
+                        <label for="jobname">Job Name</label>
+                    </div>
+                    <div class="col form-floating">
+                        <textarea class="form-control jobDesc" name="jobdesc" required></textarea>
+                        <label for="jobdesc">Job Description</label>
+                    </div>
+                    <div class="col form-floating">
+                        <input type="number" class="form-control rateInfo" name="rate" required>
+                        <label for="rate">Job Rate</label>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end" name="jobAdd">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Add Job -->
