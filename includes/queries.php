@@ -280,10 +280,12 @@ function departmentTable(){
   $sql = "SELECT department_id, department_name, created_on, updated_on FROM department WHERE delete_flag = '0'";
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
+    $d_id = $row['department_id'];
     ?>
 <tr>
     <td><?php echo $row['department_id']; ?></td>
     <td><?php echo $row['department_name']?></td>
+    <td><table class="table table-bordered"><?php departmentJobs($d_id); ?></table></td>
     <td>
         <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['department_id']; ?>"><i
                 class="fa fa-edit"></i> Edit</button>
@@ -295,6 +297,29 @@ function departmentTable(){
   }
   $conn->close();
 }
+
+function departmentJobs($d_id){
+  $dept_id = $d_id;
+  include 'conn.php';
+  $sql = "SELECT department_id, job_name FROM job WHERE department_id = $dept_id";
+  $query = $conn->query($sql);
+  if(mysqli_num_rows($query) != 0){
+    while($row = $query->fetch_assoc()){
+      ?>
+        <tr>
+            <td><?php echo $row['job_name']; ?></td>
+        </tr>
+  <?php
+    }
+  }else{
+    echo "<p>There are no jobs in this department yet. Try adding a job!</p>";
+  }
+  
+  $conn->close();
+}
+
+
+
 
 if(isset($_POST['departmentAdd'])){
   departmentAdd();
@@ -359,6 +384,8 @@ function departmentDelete(){
   $conn->close();
   header('location: department_list.php');
 }
+
+
 // Department
 
 // Job
@@ -416,13 +443,18 @@ function employeeJobs($j_id){
   include 'conn.php';
   $sql = "SELECT `job_id`, `firstname`, `lastname` FROM `employees` WHERE job_id = '$job_id'";
   $query = $conn->query($sql);
-  while($row = $query->fetch_assoc()){
-    ?>
-      <tr>
-          <td><?php echo $row['firstname'] . ' ' .$row['lastname']; ?></td>
-      </tr>
-<?php
+  if(mysqli_num_rows($query) != 0){
+    while($row = $query->fetch_assoc()){
+      ?>
+        <tr>
+            <td><?php echo $row['firstname'] . ' ' .$row['lastname']; ?></td>
+        </tr>
+  <?php
+    }
+  }else{
+    echo "<p>There are no employees in this job yet. Try adding someone!</p>";
   }
+  
   $conn->close();
 }
 // Job
