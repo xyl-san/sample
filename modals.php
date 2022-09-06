@@ -219,6 +219,7 @@
 
 <!-- End Edit Photo Employee -->
 
+
 <!-- Start Delete Employee -->
 <div class="modal fade" id="deleteEmployee" tabindex="-1" role="dialog" aria-labelledby="employeeTitle"
     aria-hidden="true">
@@ -321,6 +322,7 @@
                         <button type="submit" class="btn btn-primary float-end" name="editAttendance">Submit</button>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
@@ -338,11 +340,16 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="includes/queries.php" method="POST" enctype="multipart/form-data"
+                <form class="row g-3" action="includes/queries.php" method="POST" name="randform" enctype="multipart/form-data"
                     autocomplete="off">
                     <div class="col-md-6 form-floating">
                         <input type="date" class="form-control journalEntryDate" name="journal_date" required>
                         <label for="dateCreated">Date Created</label>
+                    </div>
+                    <div class="col-md-12 form-floating">
+                        <button type="button" class="btn btn-secondary  btn-sm" onClick="randomString();">Generate
+                            Code</button>
+                        <input type="text" name="randomfield" required>
                     </div>
                     <div class="col-md-12 form-floating">
                         <input type="text" class="form-control journalDescription" name="description" required>

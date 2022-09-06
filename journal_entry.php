@@ -1,6 +1,7 @@
 <?php include 'includes/queries.php';?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,18 +18,12 @@
             <div class="card">
                 <div class="card-header">
                     <button type="button" class="btn btn-primary btn-sm btn-flat mt-2" data-bs-toggle="modal"
-                        data-bs-target="#newJournalEntry">
+                        data-bs-target="#newJournalEntry" >
                         <span>
                             <i class="fa-solid fa-pen-to-square"></i>
                             Add New
                         </span>
                     </button>
-                    <nav aria-label="breadcrumb" class="float-end mt-2">
-                        <ol class="breadcrumb ">
-                            <li class="breadcrumb-item"><a href="home.php">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Group List</li>
-                        </ol>
-                    </nav>
                 </div>
                 <div class="card-body">
                     <table id="example1" class="table" style="width:100%">
@@ -45,7 +40,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php journalEntryTable();?>
+                            <?php journalEntryTable();?>
                         </tbody>
                         <tfoot>
                             <tr>

@@ -122,6 +122,27 @@ function drawChart() {
     var chart = new google.visualization.PieChart(document.getElementById('jobChart'));
     chart.draw(data, options);
 }
+</script>
 
+<!-- debit and credit entry -->
+<script>
+    function add() {
+    var debit = document.getElementById("debitAmount").value;
+    var credit = document.getElementById("creditAmount").value;
+    var amount = debit - credit;
+    document.getElementById("amount").value = amount;
 
+}
+</script>
+<script language="javascript" type="text/javascript">
+function randomString() {
+    var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZ";
+    var string_length = 12;
+    var randomstring = '';
+    for (var i = 0; i < string_length; i++) {
+        var rnum = Math.floor(Math.random() * chars.length);
+        randomstring += chars.substring(rnum, rnum + 1);
+    }
+    document.randform.randomfield.value = randomstring;
+}
 </script>
