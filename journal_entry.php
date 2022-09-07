@@ -31,10 +31,10 @@
                             <tr>
                                 <th>Date</th>
                                 <th>Journal Code</th>
-                                <th>Account</th>
-                                <th>Group</th>
-                                <th>Description</th>
-                                <th>Type</th>
+                                <th>Partners</th>
+                                <th>Reference</th>
+                                <th>Journal</th>
+                                <th>Total</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -46,10 +46,10 @@
                             <tr>
                                 <th>Date</th>
                                 <th>Journal Code</th>
-                                <th>Account</th>
-                                <th>Group</th>
-                                <th>Description</th>
-                                <th>Type</th>
+                                <th>Partners</th>
+                                <th>Reference</th>
+                                <th>Journal</th>
+                                <th>Total</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>

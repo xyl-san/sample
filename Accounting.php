@@ -95,7 +95,7 @@
                         <canvas id="myChart4"></canvas>
                     </div>
                 </div>
-                <div class="card col-3 p-0" id="cardbgcolor">
+                <div class="card col-3 px-3" id="cardbgcolor">
                     <div class="card-body">
                     <button type="button" class="btn btn-secondary btn-sm"><i class="fa-solid fa-plus"></i> New Transaction</button>
                         <canvas id="myChart5"></canvas>

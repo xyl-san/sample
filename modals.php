@@ -329,9 +329,9 @@
 <!-- End Edit Attendance Employee -->
 
 <!-- Start Adding Journal Entry  -->
-<div class="modal fade" id="newJournalEntry" tabindex="-1" role="dialog" aria-labelledby="journalEntryTitle"
+<div class="modal fade lg-4" id="newJournalEntry" tabindex="-1" role="dialog" aria-labelledby="journalEntryTitle"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="journalEntryTitle">Add Journal Entry</h5>
@@ -339,64 +339,64 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="includes/queries.php" method="POST" name="randform" enctype="multipart/form-data"
-                    autocomplete="off">
+                <form class="row g-3" action="includes/queries.php" method="POST" name="randform"
+                    enctype="multipart/form-data" autocomplete="off">
+                    <div class="input-group mb-3">
+                        <button class="btn btn-outline-secondary" type="button" onClick="randomString();" id="button-addon1">Generate Code</button>
+                        <input type="text" class="form-control" placeholder="Generate code"
+                            aria-label="Example text with button addon" aria-describedby="button-addon1" name="randomfield">
+                    </div>
+                  
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control journalDescription" name="description">
+                        <label for="dateCreated">Reference</label>
+                    </div>
                     <div class="col-md-6 form-floating">
                         <input type="date" class="form-control journalEntryDate" name="journal_date" required>
                         <label for="dateCreated">Date Created</label>
                     </div>
-                    <div class="col-md-12 form-floating">
-                        <button type="button" class="btn btn-secondary  btn-sm" onClick="randomString();">Generate
-                            Code</button>
-                        <input type="text" name="randomfield" required>
-                    </div>
-                    <div class="col-md-12 form-floating">
-                        <input type="text" class="form-control journalDescription" name="description" required>
-                        <label for="dateCreated">Entry Description</label>
+
+
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control journalDescription" name="description">
+                        <label for="dateCreated">Description</label>
                     </div>
                     <div class="col-md-6 form-floating">
-                        <select class="form-control" name="accountListDebit" aria-label="Select account"
-                            id="account_id">
-                            <option value="" class="accounListDebitSelection" selected>- Select -</option>
-                            <?php accountListSelection();?>
+                        <select class="form-control" name="accountStatus" aria-label="Select account"
+                            id="accountStatus">
+                            <option value="3" class="Status" selected>Cash Basis Taxes</option>
+                            <option value="2" class="Status" selected>Exchange Difference</option>
+                            <option value="1" class="Status" selected>Miscellaneous Operations</option>
+                            <option value="" class="Status" selected>--Select--</option>
                         </select>
-                        <label for="accountDebit">Debit Description</label>
+                        <label for="account">Journal</label>
                     </div>
-                    <div class="col-md-6 form-floating">
-                        <select class="form-control" name="groupListDebit" aria-label="Select group" id="group_id">
-                            <option value="" class="groupListDebitSelection" selected>- Select -</option>
-                            <?php groupListSelection();?>
-                        </select>
-                        <label for="groupDebit">Debit Account</label>
+                    <div>
+                        <h6>
+                            Journal Items
+                        </h6>
                     </div>
                     <div class="col-md-12 form-floating">
-                        <input type="number" class="form-control amount" name="amount" id="debitAmount"
-                            oninput="add()" required>
-                        <label for="debitAmount">Debit Amount</label>
-                    </div>
-                    <div class="col-md-6 form-floating">
-                        <select class="form-control" name="accountListDebit" aria-label="Select account"
-                            id="account_id">
-                            <option value="" class="accounListDebitSelection" selected>- Select -</option>
-                            <?php accountListSelection();?>
-                        </select>
-                        <label for="accountDebit">Credit Description</label>
-                    </div>
-                    <div class="col-md-6 form-floating">
-                        <select class="form-control" name="groupListDebit" aria-label="Select group" id="group_id">
-                            <option value="" class="groupListDebitSelection" selected>- Select -</option>
-                            <?php groupListSelection();?>
-                        </select>
-                        <label for="groupDebit">Crdit Account</label>
-                    </div>
-                    <div class="col-md-12 form-floating">
-                        <input type="number" class="form-control amount" name="amount" id="creditAmount"
-                            oninput="add()" required>
-                        <label for="debitAmount">Credit Amount</label>
-                    </div>
-                    <div class="col-md-12 form-floating border-bottom">
-                        <input type="number" class="form-control journalEntryAmount" id="amount" name="amount">
-                        <label for="dateCreated">Total</label>
+                        <div id="containerTable">
+                            <table class="table" id="dynamicTable">
+                                <thead>
+                                    <tr>
+                                        <th>Debit Account</th>
+                                        <th>Credit Account</th>
+                                        <th>Partner</th>
+                                        <th>Debit</th>
+                                        <th>Credit</th>
+                                        <th>Total</th>
+                                        <th>Tool</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                            <button type="button" class="btn btn-secondary  btn-sm"
+                                onClick="addNewRowTable();">Add</button>
+                        </div>
                     </div>
                     <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-danger btn-primary">Cancel</button>
@@ -549,7 +549,7 @@
                         <label for="accountDescription">Description</label>
                     </div>
                     <div class="col-md-12 form-floating">
-                        <select class="form-control" name="type" aria-label="Select type" id="accountType">                         
+                        <select class="form-control" name="type" aria-label="Select type" id="accountType">
                             <option value="0" class="accoutType" selected>Debit</option>
                             <option value="1" class="accoutType" selected>Credit</option>
                             <option value="" class="accoutType" selected>--Select--</option>
@@ -806,7 +806,8 @@
                         <label for="date">Date</label>
                     </div>
                     <div class="col-xs-12 form-floating">
-                        <input type="number" class="form-control amountInfo" name="amount" placeholder="123456789" required>
+                        <input type="number" class="form-control amountInfo" name="amount" placeholder="123456789"
+                            required>
                         <label for="amount">Amount</label>
                     </div>
                     <div class="mb-2">
@@ -846,7 +847,8 @@
                         <label for="date">Date</label>
                     </div>
                     <div class="col-xs-12 form-floating">
-                        <input type="number" class="form-control amountInfo" name="amount" placeholder="123456789" required>
+                        <input type="number" class="form-control amountInfo" name="amount" placeholder="123456789"
+                            required>
                         <label for="amount">Amount</label>
                     </div>
                     <div class="mb-2">
@@ -861,8 +863,7 @@
 <!-- End Edit Cash Advance -->
 
 <!-- Add Job -->
-<div class="modal fade" id="newJob" tabindex="-1" role="dialog" aria-labelledby="jobTitle"
-    aria-hidden="true">
+<div class="modal fade" id="newJob" tabindex="-1" role="dialog" aria-labelledby="jobTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">

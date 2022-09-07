@@ -412,7 +412,7 @@ background-color: #C3B091;
     height: 300px;
 }
   #cardbgcolor  {
-    background-color:  #FFE6BC;
+    background-color:  #e6e6e6;
   }
   .card-title{
     text-align: center;
@@ -420,3 +420,4 @@ background-color: #C3B091;
 .card-text{
     text-align: center;
 }
+/* dynamic table */
