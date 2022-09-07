@@ -42,7 +42,7 @@
                             <h5 class="card-title">Chart of Accounts</h5>
                             <p class="card-text">Setup your charts of accounts and record initial balances. </p>
                             <div class="col-md-12 text-center">
-                                <a href="#" class="btn btn-outline-secondary">Set of Chart Accounts</a>
+                                <a href="account_list.php" class="btn btn-outline-secondary">Set of Chart Accounts</a>
                             </div>
                         </div>
                     </div>

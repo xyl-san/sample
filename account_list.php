@@ -8,6 +8,7 @@
     <title>Document</title>
     <?php include 'includes/styles.php'; ?>
     <!-- https://colorhunt.co/palette/effffdb8fff985f4ff42c2ff -->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
@@ -36,26 +37,57 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Date Created</th>
-                                <th>Account</th>
+                                <th>Code</th>
                                 <th>Description</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>Type</th>
+                                <th>Allow Reconcilliation</th>
+                                <th>Opening Debit</th>
+                                <th>Opening Credit</th>
+                                <th>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary me-md-2" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <div class="dropdown-item">
+                                                <div class="form-check"><input type="checkbox" id="checkbox-3259"
+                                                        class="form-check-input" name="opening_balance"
+                                                        role="menuitemcheckbox"><label for="checkbox-3259"
+                                                        class="custom-control-label"> Opening
+                                                        Balance</label>
+                                                </div>
+                                            </div>
+                                            <div class="dropdown-item">
+                                                <div class="form-check"><input type="checkbox" id="checkbox-3260"
+                                                        class="form-check-input" name="tax_ids"
+                                                        role="menuitemcheckbox"><label for="checkbox-3260"
+                                                        class="custom-control-label"> Default Taxes</label>
+                                                </div>
+                                            </div>
+                                            <div class="dropdown-item">
+                                                <div class="form-check"><input type="checkbox" id="checkbox-3261"
+                                                        class="form-check-input" name="tag_ids"
+                                                        role="menuitemcheckbox"><label for="checkbox-3261"
+                                                        class="custom-control-label"> Tags</label>
+                                                </div>
+                                            </div>
+                                            <div class="dropdown-item">
+                                                <div class="form-check"><input type="checkbox" id="checkbox-3262"
+                                                        class="form-check-input" name="allowed_journal_ids"
+                                                        role="menuitemcheckbox"><label for="checkbox-3262"
+                                                        class="custom-control-label"> Allowed
+                                                        Journals</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php accountListTable();?>
+
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>#</th>
-                                <th>Date Created</th>
-                                <th>Account</th>
-                                <th>Description</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </tfoot>
                     </table>
                 </div>
             </div>
