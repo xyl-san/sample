@@ -11,8 +11,8 @@
 </head>
 
 <body>
-    <div class="wrapper">
-        <nav id="sidebar" class="flex-shrink-0 p-3" style="width: 280px;">
+    <div class="wrapper bg-light">
+        <nav id="sidebar" class="flex-shrink-0 p-3 bg-light" style="width: 280px;">
             <div class="sidebar-header rounded">
                 <h3>Dream System</h3>
                 <strong>Boss Panda</strong>

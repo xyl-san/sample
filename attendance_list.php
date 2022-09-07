@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div class="wrapper">
+    <div class="wrapper bg-light">
         <nav id="sidebar" class="flex-shrink-0 p-3" style="width: 280px;">
             <div class="sidebar-header rounded">
                 <h3>Dream System</h3>
@@ -21,7 +21,13 @@
                 <li>
                     <a href="menu.php">
                         <i class="fa-solid fa-house"></i>
-                        Dashboard
+                         Menu
+                    </a>
+                </li>
+                <li>
+                    <a href="reports/attendance_reports.php">
+                        <i class="fa-solid fa-chart-line"></i>
+                         Reports
                     </a>
                 </li>
                 <li>
