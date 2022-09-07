@@ -14,7 +14,7 @@
 
 <body>
     <div class="wrapper">
-    <?php include 'accounting_sidebar.php'; ?>
+        <?php include 'accounting_sidebar.php'; ?>
         <div id="content" class="w-100">
             <div class="progress">
                 <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0"
@@ -31,7 +31,7 @@
                             <h5 class="card-title">Accounting Periods</h5>
                             <p class="card-text">Define your fiscal years and taxes returns periodicity.</p>
                             <div class="col-md-12 text-center">
-                                <a href="#" class="btn btn-outline-secondary">Configure</a>
+                                <a data-bs-target="#newConfigure" class="btn btn-outline-secondary btn-sm btn-flat mt-2"  data-bs-toggle="modal">Configure</a>
                             </div>
                         </div>
                     </div>
@@ -73,31 +73,36 @@
             <div class="row">
                 <div class="card col-3 px-3" id="cardbgcolor">
                     <div class="card-body">
-                    <button type="button" class="btn btn-secondary btn-sm"><i class="fa-solid fa-plus"></i> Add New</button>
+                        <button type="button" class="btn btn-secondary btn-sm"><i class="fa-solid fa-plus"></i> Add
+                            New</button>
                         <canvas id="myChart1"></canvas>
                     </div>
                 </div>
                 <div class="card col-3 px-3" id="cardbgcolor">
                     <div class="card-body">
-                    <button type="button" class="btn btn-secondary btn-sm"><i class="fa-solid fa-upload"></i> Upload</button>
+                        <button type="button" class="btn btn-secondary btn-sm"><i class="fa-solid fa-upload"></i>
+                            Upload</button>
                         <canvas id="myChart2"></canvas>
                     </div>
                 </div>
                 <div class="card col-3 px-3" id="cardbgcolor">
                     <div class="card-body">
-                    <button type="button" class="btn btn-secondary btn-sm"><i class="fa-solid fa-plus"></i> New Entry</button>
+                        <button type="button" class="btn btn-secondary btn-sm"><i class="fa-solid fa-plus"></i> New
+                            Entry</button>
                         <canvas id="myChart3"></canvas>
                     </div>
                 </div>
                 <div class="card col-3 px-3" id="cardbgcolor">
                     <div class="card-body">
-                    <button type="button" class="btn btn-secondary btn-sm"><i class="fa-solid fa-rotate"></i> Online Synchronization</button>
+                        <button type="button" class="btn btn-secondary btn-sm"><i class="fa-solid fa-rotate"></i> Online
+                            Synchronization</button>
                         <canvas id="myChart4"></canvas>
                     </div>
                 </div>
                 <div class="card col-3 px-3" id="cardbgcolor">
                     <div class="card-body">
-                    <button type="button" class="btn btn-secondary btn-sm"><i class="fa-solid fa-plus"></i> New Transaction</button>
+                        <button type="button" class="btn btn-secondary btn-sm"><i class="fa-solid fa-plus"></i> New
+                            Transaction</button>
                         <canvas id="myChart5"></canvas>
                     </div>
                 </div>

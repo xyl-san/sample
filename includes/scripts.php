@@ -46,8 +46,7 @@ $(document).ready((function() {
 
 $(document).ready((function() {
     $.fn.dataTable.moment('MMM DD, YYYY');
-    $('#accounting').DataTable({
-    });
+    $('#accounting').DataTable({});
 
 }))
 
@@ -128,7 +127,7 @@ function drawChart() {
 
 <!-- debit and credit entry -->
 <script>
-    function add() {
+function add() {
     var debit = document.getElementById("debitAmount").value;
     var credit = document.getElementById("creditAmount").value;
     var amount = debit - credit;
@@ -149,37 +148,36 @@ function randomString() {
 }
 </script>
 <script type="text/javascript">
-         
-         /* This method will add a new row */
-         function addNewRowTable(){
-             var table = document.getElementById("dynamicTable");
-             var rowCount = table.rows.length;
-             var cellCount = table.rows[0].cells.length; 
-             var row = table.insertRow(rowCount);
-             for(var i =0; i < cellCount; i++){
-                 var cell = row.insertCell(i);
-                 if(i < cellCount-1){
-                     cell.innerHTML='<input type="text" />';
-                 }else{
-                     cell.innerHTML = '<button onclick="deleteRow(this)"><i class ="fa fa-trash"></i></button>';
-                 }
-             }
-         }
-          
-         /* This method will delete a row */
-         function deleteRow(ele){
-             var table = document.getElementById('dynamicTable');
-             var rowCount = table.rows.length;
-             if(rowCount <= 1){
-                 alert("There is no row available to delete!");
-                 return;
-             }
-             if(ele){
-                 //delete specific row
-                 ele.parentNode.parentNode.remove();
-             }else{
-                 //delete last row
-                 table.deleteRow(rowCount-1);
-             }
-         }
-     </script>
+/* This method will add a new row */
+function addNewRowTable() {
+    var table = document.getElementById("dynamicTable");
+    var rowCount = table.rows.length;
+    var cellCount = table.rows[0].cells.length;
+    var row = table.insertRow(rowCount);
+    for (var i = 0; i < cellCount; i++) {
+        var cell = row.insertCell(i);
+        if (i < cellCount - 1) {
+            cell.innerHTML = '<input type="text" />';
+        } else {
+            cell.innerHTML = '<button onclick="deleteRow(this)"><i class ="fa fa-trash"></i></button>';
+        }
+    }
+}
+
+/* This method will delete a row */
+function deleteRow(ele) {
+    var table = document.getElementById('dynamicTable');
+    var rowCount = table.rows.length;
+    if (rowCount <= 1) {
+        alert("There is no row available to delete!");
+        return;
+    }
+    if (ele) {
+        //delete specific row
+        ele.parentNode.parentNode.remove();
+    } else {
+        //delete last row
+        table.deleteRow(rowCount - 1);
+    }
+}
+</script>

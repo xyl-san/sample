@@ -342,11 +342,13 @@
                 <form class="row g-3" action="includes/queries.php" method="POST" name="randform"
                     enctype="multipart/form-data" autocomplete="off">
                     <div class="input-group mb-3">
-                        <button class="btn btn-outline-secondary" type="button" onClick="randomString();" id="button-addon1">Generate Code</button>
+                        <button class="btn btn-outline-secondary" type="button" onClick="randomString();"
+                            id="button-addon1">Generate Code</button>
                         <input type="text" class="form-control" placeholder="Generate code"
-                            aria-label="Example text with button addon" aria-describedby="button-addon1" name="randomfield">
+                            aria-label="Example text with button addon" aria-describedby="button-addon1"
+                            name="randomfield">
                     </div>
-                  
+
                     <div class="col-md-6 form-floating">
                         <input type="text" class="form-control journalDescription" name="description">
                         <label for="dateCreated">Reference</label>
@@ -902,3 +904,182 @@
     </div>
 </div>
 <!-- End Add Job -->
+
+<!-- start adding accounting periods  -->
+<div class="modal fade" id="newConfigure" tabindex="-1" role="dialog" aria-labelledby="accountingPeriods"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="accountingPeriods">Accounting Periods</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
+                    <div>
+                        <h8>Fiscal Years</h8>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="date" class="form-control accountingPeriods" name="accountingPeriods" required>
+                        <label for="accountingPeriods">Opening Date</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="date" class="form-control accountingPeriods" name="accountingPeriods" required>
+                        <label for="accountingPeriods">Fiscal Year Date</label>
+                    </div>
+                    <div>
+                        <h8>Tax Return</h8>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="Date" class="form-control rateInfo" name="rate" required>
+                        <label for="rate">Periodicity</label>
+                    </div>
+                    <div class="col-md-5 form-floating">
+                        <select class="form-control" name="journalId" aria-label="Select account" id="journalId">
+                            <option value="Cash Basis Taxes" class="Status" selected>Cash Basis Taxes</option>
+                            <option value="Exchange Difference" class="Status" selected>Exchange Difference</option>
+                            <option value="Miscellaneous Operations" class="Status" selected>Miscellaneous Operations
+                            </option>
+                            <option value="" class="Status" selected>--Select--</option>
+                        </select>
+                        <label for="Journal ">Journal</label>
+                    </div>
+                    <!-- <div class="col-md-12 form-floating">
+                        <input type="text" class="form-control accountingPeriods" name="accountingPeriods" id="journalId" required>
+                        <label for="accountingPeriods">Journal</label>
+                    </div> -->
+                    <div class="col-md-1 form-floating">
+                        <a type="button" data-bs-target="#newFiscal" data-bs-toggle="modal" id="transferInput"><i
+                                class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cancel</button>
+                        <button type="submit" class="btn btn-success float-end" name="">Apply</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End adding accounting periods  -->
+
+<!-- Start open journal modal  -->
+<div class="modal fade" id="newFiscal" tabindex="-1" role="dialog" aria-labelledby="accountingPeriods"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="accountingPeriods">Open: Journal</h5>
+                <button type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-book"></i>
+                    Journal Entries</button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
+
+                    <div class="col-md-12 form-floating">
+                        <input type="text" class="form-control accountingPeriods" name="accountingPeriods"
+                            id="journalTransfer" required>
+                        <label for="accountingPeriods">Journal Name</label>
+                    </div>
+
+                    <div class="col-md-12 form-floating">
+                        <select class="form-control" name="accountStatus" aria-label="Select account"
+                            id="accountStatus">
+                            <option value="5" class="Status" selected>Sales</option>
+                            <option value="4" class="Status" selected>Purchase</option>
+                            <option value="3" class="Status" selected>Cash</option>
+                            <option value="2" class="Status" selected>Bank</option>
+                            <option value="1" class="Status" selected>Miscellaneous</option>
+                            <option value="" class="Status" selected>--Select--</option>
+                        </select>
+                        <label for="Journal ">Type</label>
+                    </div>
+
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="journal-tab" data-bs-toggle="tab"
+                                data-bs-target="#journalEntryId" type="button" role="tab" aria-controls="journalEntryId"
+                                aria-selected="true">Journal Entries</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="advanceSetting-tab" data-bs-toggle="tab"
+                                data-bs-target="#advanceSetting" type="button" role="tab" aria-controls="advanceSetting"
+                                aria-selected="false">Advance Setting</button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="journalEntryId" role="tabpanel"
+                            aria-labelledby="journal-tab">
+                            <div>
+                                <div>
+                                    <p6>
+                                        Accounting information
+                                    </p6>
+                                </div><br>
+                                <div class="col-md-12 form-floating">
+                                    <input type="date" class="form-control shortCode" name="shortCode" required>
+                                    <label for="shortCode">Short Code</label>
+                                </div><br>
+                                <div class="col-md-12 form-floating">
+                                    <select class="form-control currency" name="currency" aria-label="Select account"
+                                        id="accountStatus">
+                                        <option value="2" class="currencyId" selected>PHP</option>
+                                        <option value="1" class="currencyId" selected>USD</option>
+                                        <option value="" class="currencyId" selected>--Select--</option>
+                                    </select>
+                                    <label for="Journal ">Currency</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="advanceSetting" role="tabpanel"
+                            aria-labelledby="advanceSetting-tab">
+                            <div>
+                                <div>
+                                    <p6>
+                                        Control-Access
+                                    </p6>
+                                </div><br>
+                                <div class="col-md-12 form-floating">
+                                    <select class="form-control" name="accountListDebit" aria-label="Select account"
+                                        id="account_id">
+                                        <option value="" class="accounListDebitSelection" selected>- Select -</option>
+                                        <?php accountListSelection();?>
+                                    </select>
+                                    <label for="accountDebit">Allowed account types</label>
+                                </div><br>
+                                <div class="col-md-12 form-floating">
+                                    <select class="form-control" name="accountListDebit" aria-label="Select account"
+                                        id="account_id">
+                                        <option value="" class="accounListDebitSelection" selected>- Select -</option>
+                                        <?php accountListSelection();?>
+                                    </select>
+                                    <label for="accountDebit">Allowed account types</label>
+                                </div><br>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="checkBoxEntry">
+                                    <label class="form-check-label" for="checkBoxEntry">
+                                        Lock Posted Entries with Hash
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div><br>
+                    <div class="mb-2">
+                        <button type="button" data-bs-target="#newConfigure" data-bs-toggle="modal"
+                            class="btn btn-danger">Back</button>
+                        <button type="submit" class="btn btn-success float-end" name="">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End open journal modal  -->
+<script>
+$('#transferInput').click(function() {
+    $('#journalTransfer').val($('#journalId').val())
+});
+</script>
