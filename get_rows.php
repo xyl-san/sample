@@ -73,4 +73,15 @@
 		echo json_encode($users_arr);
 		$conn->close();
 	}
+
+	if(isset($_POST['jobRow'])){
+		include 'includes/conn.php';
+		$job_id = $_POST['id'];
+		$sql = "SELECT j.job_id, j.job_name, d.department_name, d.department_id, j.description, j.rate FROM job AS j INNER JOIN department as d ON j.department_id = d.department_id WHERE j.job_id = '$job_id'";
+		$query = $conn->query($sql);
+		$row = $query->fetch_assoc();
+
+		echo json_encode($row);
+		$conn->close();
+	}
 ?>

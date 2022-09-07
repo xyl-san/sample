@@ -391,16 +391,16 @@ function departmentDelete(){
 // Job
 function jobTable(){
   include 'conn.php';
-  $sql = "SELECT j.job_id, j.job_name, j.description, j.rate, d.department_id, d.department_name FROM job AS j INNER JOIN department AS d ON j.department_id = d.department_id";
+  $sql = "SELECT j.job_id, j.job_name, j.description, j.rate, d.department_id, d.department_name FROM job AS j INNER JOIN department AS d ON j.department_id = d.department_id WHERE j.delete_flag = '0'";
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
     $j_id = $row['job_id'];
     ?>
 <tr>
     <td><?php echo $row['job_id']; ?></td>
-    <td><table class="table table-bordered"><?php employeeJobs($j_id); ?></table></td>
     <td><?php echo $row['department_name']; ?></td>
     <td><?php echo $row['job_name']; ?></td>
+    <td><table class="table table-bordered"><?php employeeJobs($j_id); ?></table></td>
     <td><?php echo $row['rate']; ?></td>
     <td>
         <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['job_id']; ?>"><i
@@ -456,6 +456,40 @@ function employeeJobs($j_id){
   }
   
   $conn->close();
+}
+
+if(isset($_POST['jobEdit'])){
+  include 'conn.php';
+  $job_id = $_POST['jobid'];
+  $dept_id = $_POST['departmentId'];
+  $job_name = $_POST['jobname'];
+  $job_desc = $_POST['jobdesc'];
+  $rate = $_POST['rateInfo'];
+  
+  $sql = "UPDATE job SET department_id = '$dept_id', job_name = '$job_name', description = '$job_desc', rate = '$rate' WHERE job_id = '$job_id'";
+  if($conn->query($sql)){
+    echo "success";
+  }
+  else{
+    echo "error";
+  }
+$conn->close();
+header('location: job_list.php');
+}
+
+if(isset($_POST['jobDelete'])){
+  include 'conn.php';
+  $job_id = $_POST['jobid'];
+
+  $sql = "UPDATE job SET delete_flag = '1' WHERE job_id = '$job_id'";
+  if($conn->query($sql)){
+    echo "success";
+  }
+  else{
+    echo "error";
+  }
+$conn->close();
+header('location: job_list.php');
 }
 // Job
 

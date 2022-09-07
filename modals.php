@@ -928,3 +928,76 @@
     </div>
 </div>
 <!-- End Add Job -->
+
+<!-- Edit Job -->
+<div class="modal fade" id="editJob" tabindex="-1" role="dialog" aria-labelledby="jobTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="jobTitle">Edit Job</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
+                    <input val="" type="hidden" class="jobId" name="jobid">
+                    <div class="col-md-12 form-floating">
+                        <select id="deptSelect" class="form-control" name="departmentId" aria-label="Select Department">
+                            <option value="" class="departmentSelection" selected>- Select -</option>
+                            <?php employeeDepartment();?>
+                        </select>
+                        <label for="departmentSelection">Department</label>
+                    </div>
+                    <div class="col-md-12 form-floating">
+                        <input type="text" class="form-control jobName" name="jobname" required>
+                        <label for="jobname">Job Name</label>
+                    </div>
+                    <div class="col-md-12 form-floating">
+                        <textarea class="form-control jobDesc" name="jobdesc" rows="3" required></textarea>
+                        <label for="jobdesc">Job Description</label>
+                    </div>
+                    <div class="col-md-12 form-floating">
+                        <input type="number" class="form-control rateInfo" name="rate" required>
+                        <label for="rate">Job Rate</label>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end" name="jobEdit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Edit Job -->
+
+<!-- Delete Job -->
+<div class="modal fade" id="deleteJob" tabindex="-1" role="dialog" aria-labelledby="jobTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cashadvanceTitle">Delete a Job</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" method="POST" enctype="multipart/form-data"
+                    autocomplete="off">
+                    <input type="hidden" class="jobId" name="jobid">
+                    <div class="text-center">
+                        <p>
+                            Are you sure you want to delete this job?
+                        </p>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end" name="jobDelete">Yes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Delete Job -->
