@@ -857,6 +857,36 @@
 </div>
 <!-- End Edit Cash Advance -->
 
+<!-- Delete Cash Advance -->
+<div class="modal fade" id="deleteCashAdvance" tabindex="-1" role="dialog" aria-labelledby="cashadvanceTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cashadvanceTitle">Delete Employee's Cash Advance</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" method="POST" enctype="multipart/form-data"
+                    autocomplete="off">
+                    <input type="hidden" class="cashAdvanceId" name="cashadvanceid">
+                    <div class="text-center">
+                        <p>
+                            Delete employee's cash advance??
+                        </p>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end" name="advanceDelete">Yes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Delete Cash Advance -->
+
 <!-- Add Job -->
 <div class="modal fade" id="newJob" tabindex="-1" role="dialog" aria-labelledby="jobTitle"
     aria-hidden="true">

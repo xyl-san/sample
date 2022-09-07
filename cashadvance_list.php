@@ -105,7 +105,7 @@
 
         $('#example1').on('click', '.delete', function(e) {
             e.preventDefault();
-            $('#deleteCashadvance').modal('show');
+            $('#deleteCashAdvance').modal('show');
             var id = $(this).data('id');
             getRow(id);
         });

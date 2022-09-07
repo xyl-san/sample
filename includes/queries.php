@@ -552,6 +552,27 @@ function cashAdvanceEdit(){
   header('location: cashadvance_list.php');
 }
 
+if (isset($_POST['advanceDelete'])) {
+  cashAdvanceDelete();
+}
+
+function cashAdvanceDelete(){
+  include "conn.php";
+  if (isset($_POST['advanceDelete'])){
+    $cash_id = $_POST['cashadvanceid'];
+
+    $sql = "UPDATE cashadvance SET delete_flag = 1 WHERE cashadvance_id = '$cash_id'";
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+  }
+  $conn->close();
+  header('location: cashadvance_list.php');
+}
+
 
 // Cash Advance
 
