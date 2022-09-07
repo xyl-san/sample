@@ -67,9 +67,9 @@
                         <thead>
                             <tr>
                                 <th scope="col">Job ID</th>
-                                <th scope="col">List of Employees</th>
                                 <th scope="col">Department</th>
                                 <th scope="col">Job Title</th>
+                                <th scope="col">List of Employees</th>
                                 <th scope="col">Rate</th>
                                 <th scope="col">Tools</th>
                             </tr>
@@ -80,9 +80,9 @@
                         <tfoot>
                             <tr>
                                 <th scope="col">Job ID</th>
-                                <th scope="col">List of Employees</th>
                                 <th scope="col">Department</th>
                                 <th scope="col">Job Title</th>
+                                <th scope="col">List of Employees</th>
                                 <th scope="col">Rate</th>
                                 <th scope="col">Tools</th>
                             </tr>
@@ -128,18 +128,18 @@
         $(document).ready(function() {
             $.ajax({
                 type: 'POST',
-                url: 'job_row.php',
+                url: 'get_rows.php',
                 data: {
-                    id: id
+                    id: id,
+                    jobRow: true,
                 },
                 dataType: 'json',
                 success: function(response) {
                     $('.jobId').val(response.job_id);
-                    $('.jobDescription').val(response.description);
-                    $('.jobRate').val(response.rate);
-                    $('.JobCreateOn').val(response.created_on);
-                    $('.jobUpdatedon').val(response.updated_on);
-                    $('.delete_job').html(response.description);
+                    $('.jobDesc').val(response.description);
+                    $('.rateInfo').val(response.rate);
+                    $('.jobName').val(response.job_name);
+                    $('.departmentSelection').val(response.department_id).html(response.department_name);
                 }
             });
 
