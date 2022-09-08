@@ -60,7 +60,6 @@
                     <table id="example1" class="table" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Deduction ID</th>
                                 <th>Employee</th>
                                 <th>Description</th>
                                 <th>Amount</th>
@@ -72,7 +71,6 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Deduction ID</th>
                                 <th>Employee</th>
                                 <th>Description</th>
                                 <th>Amount</th>
@@ -85,12 +83,108 @@
 
         </div>
     </div>
+
+    <!-- Deduction Modals -->
+    <div class="modal fade" id="newDeduction" tabindex="-1" role="dialog" aria-labelledby="deductTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deductTitle">Add a new Employee Deduction</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3" action="#" method="POST" autocomplete="off">
+                        <div class="col-md-12 form-floating">
+                            <select class="form-control" name="employeeId" aria-label="Select employee">
+                                <option value="" class="employeeSelection" selected>- Select -</option>
+                                <?php employeeSelection();?>
+                            </select>
+                            <label for="employeeSelection">Employee</label>
+                        </div>
+                        <div class="col-md-12 form-floating">
+                            <textarea class="form-control deductionDescription" name="description" placeholder="Elaborate on the deduction" required></textarea>
+                            <label for="description">Description</label>
+                        </div>
+                        <div class="col-md-12 form-floating">
+                            <input type="number" class="form-control deductionAmount" name="amount" placeholder="123456789" required>
+                            <label for="amount">Amount</label>
+                        </div>
+                        <div class="mb-2">
+                            <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                            <button type="submit" class="btn btn-primary float-end" name="deductAdd">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <div class="modal fade" id="editDeduction" tabindex="-1" role="dialog" aria-labelledby="deductTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deductTitle">Edit a deduction</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3" action="#" method="POST" autocomplete="off">
+                        <input type="hidden" class="deduction_id" name="deductionid">
+                        <div class="col-md-12 form-floating">
+                            <select class="form-control" name="employeeId" aria-label="Select employee">
+                                <option value="" class="employeeSelection" selected>- Select -</option>
+                                <?php employeeSelection();?>
+                            </select>
+                            <label for="employeeSelection">Employee</label>
+                        </div>
+                        <div class="col-md-12 form-floating">
+                            <textarea class="form-control deductionDescription" name="description" placeholder="Elaborate on the deduction" required></textarea>
+                            <label for="description">Description</label>
+                        </div>
+                        <div class="col-md-12 form-floating">
+                            <input type="number" class="form-control deductionAmount" name="amount" placeholder="123456789" required>
+                            <label for="amount">Amount</label>
+                        </div>
+                        <div class="mb-2">
+                            <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                            <button type="submit" class="btn btn-primary float-end" name="deductEdit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="modal fade" id="deleteDeduction" tabindex="-1" role="dialog" aria-labelledby="deductTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deductTitle">Delete a deduction</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3" action="#" method="POST" enctype="multipart/form-data" autocomplete="off">
+                        <input type="hidden" class="deduction_id" name="deductionid">
+                        <div class="text-center">
+                            <p>
+                                Are you sure you want to delete this deduction?
+                            </p>
+                        </div>
+                        <div class="mb-2">
+                            <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                            <button type="submit" class="btn btn-primary float-end" name="deductDelete">Yes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Deduction Modals -->
 
     <?php include 'includes/scripts.php';?>
-    <?php include 'modals.php';?>
 
     <script type="text/javascript">
     $(document).ready(function() {
@@ -119,22 +213,19 @@
         $(document).ready(function() {
             $.ajax({
                 type: 'POST',
-                url: 'deduction_row.php',
+                url: 'get_rows.php',
                 data: {
-                    id: id
+                    id: id,
+                    deductRow: true,
                 },
                 dataType: 'json',
                 success: function(response) {
                     $('.deduction_id').val(response.deduction_id);
                     $('.deductionDescription').val(response.description);
                     $('.deductionAmount').val(response.amount);
-                    $('.employeeSelection').val(response.employee_id);
-                    $('.delete_deduction').html(response.firstname + ' ' + response.lastname + ' ' +
-                        response.description);
-
+                    $('.employeeSelection').val(response.employee_id).html(response.firstname + ' ' + response.lastname);
                 }
             });
-
         })
     }
     </script>

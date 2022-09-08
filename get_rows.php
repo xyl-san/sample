@@ -84,4 +84,14 @@
 		echo json_encode($row);
 		$conn->close();
 	}
+
+	if(isset($_POST['deductRow'])){
+		include 'includes/conn.php';
+		$deduction_id = $_POST['id'];
+		$sql = "SELECT d.deduction_id, d.description, d.amount, e.employee_id, e.firstname, e.lastname FROM deductions d INNER JOIN employees AS e on d.employee_id = e.employee_id WHERE deduction_id = '$deduction_id'";
+		$query = $conn->query($sql);
+		$row = $query->fetch_assoc();
+
+		echo json_encode($row);
+	}
 ?>

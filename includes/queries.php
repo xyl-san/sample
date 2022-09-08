@@ -358,8 +358,10 @@ if(isset($_POST['schedDelete'])){
 
 ?>
 
-<!-- Department -->
+
 <?php 
+// Department
+
 function departmentTable(){
   include 'conn.php';
   $sql = "SELECT department_id, department_name, created_on, updated_on FROM department WHERE delete_flag = '0'";
@@ -581,26 +583,76 @@ header('location: job_list.php');
 // Deduction
 function deductionTable(){
   include 'conn.php';
-  $sql = "SELECT d.deduction_id, d.description, d.amount, e.firstname, e.lastname FROM deductions as d INNER JOIN employees as e ON d.employee_id = e.employee_id";
+  $sql = "SELECT d.deduction_id, d.description, d.amount, e.firstname, e.lastname FROM deductions as d INNER JOIN employees as e ON d.employee_id = e.employee_id WHERE d.delete_flag = 0";
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
     ?>
     <tr>
-        <td><?php echo $row['deduction_id']; ?></td>
         <td><?php echo $row['firstname'] ." ". $row['lastname']; ?></td>
         <td><?php echo $row['description']; ?></td>
         <td><?php echo $row['amount']; ?></td>
         <td>
-            <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['deduction_id']; ?>"><i
-                    class="fa fa-edit"></i> Edit</button>
-            <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['deduction_id']; ?>"><i
-                    class="fa fa-trash"></i> Delete</button>
+            <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['deduction_id']; ?>"><i class="fa fa-edit"></i> Edit</button>
+            <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['deduction_id']; ?>"><i class="fa fa-trash"></i> Delete</button>
         </td>
     </tr>
 <?php
   }
   $conn->close();
 }
+
+if(isset($_POST['deductAdd'])){
+  include 'conn.php';
+  $employee_id = $_POST['employeeId'];
+  $description = $_POST['description'];
+  $amount = $_POST['amount'];
+  
+  $sql = "INSERT INTO deductions (description, amount, employee_id, created_on) VALUES ('$description', '$amount', '$employee_id', NOW())";
+  if($conn->query($sql)){
+    echo "success";
+  }
+  else{
+    echo "error";
+  }
+$conn->close();
+header('location: deduction_list.php');
+}
+
+if(isset($_POST['deductEdit'])){
+  include 'conn.php';
+  $deduction_id = $_POST['deductionid'];
+  $employee_id = $_POST['employeeId'];
+  $description = $_POST['description'];
+  $amount = $_POST['amount'];
+
+  $sql = "UPDATE deductions SET description = '$description', amount = '$amount', employee_id = '$employee_id', updated_on = NOW() WHERE deduction_id = '$deduction_id'";
+  if($conn->query($sql)){
+    echo "success";
+  }
+  else{
+    echo "error";
+  }
+  $conn->close();
+  header('location: deduction_list.php');
+}
+
+if(isset($_POST['deductDelete'])){
+  include 'conn.php';
+  $deduction_id = $_POST['deductionid'];
+  $sql = "UPDATE deductions SET delete_flag = '1' WHERE deduction_id = '$deduction_id'";
+  if($conn->query($sql)){
+    echo "success";
+  }
+  else{
+    echo "error";
+  }
+  $conn->close();
+  header('location: deduction_list.php');
+}
+
+
+
+
 // Deduction
 
 // Cash Advance
