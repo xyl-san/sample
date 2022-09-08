@@ -697,29 +697,8 @@ function cashAdvanceDelete(){
 
 
 // Accounting queries
+// journal entries table queries
 
-function accountListSelection(){
-  include 'conn.php';
-  $sql = "SELECT account_id, description FROM account_list";
-  $query = $conn->query($sql);
-  while($prow = $query->fetch_assoc()){
-      echo "
-      <option value='".$prow['account_id']."'>".$prow['description'];"</option>
-      ";
-  }
-}
-
-function accountGroupSelection(){
-  include 'conn.php';
-  $sql = "SELECT accountgroup_id, name FROM group_list";
-  $query = $conn->query($sql);
-  while($prow = $query->fetch_assoc()){
-      echo "
-      <option value='".$prow['accountgroup_id']."'>".$prow['name'];"</option>
-      ";
-  }
-  $conn->close();
-}
 function addToList(){
   include 'conn.php';
   $sql = "INSERT INTO employees (employee_code, firstname, lastname, address, birthdate, contact_info, gender, job_id, department_id, schedule_id, photo, created_on) VALUES ('$employee_code','$firstName', '$lastName', '$addressInfo', '$birthDate', '$contactInfo', '$genderSelection', '$jobSelection', '$departmentSelection', '$scheduleSelection', '$filename', NOW() )";
@@ -731,9 +710,10 @@ function addToList(){
   }
   $conn->close();
 }
+// account list table queries
 function accountListTable(){
   include 'conn.php';
-  $sql = "SELECT account_id, name, description, status, date_created FROM account_list";
+  $sql = "SELECT account_id, account_name, description, status, date_created FROM account_list";
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
     $status = ($row['status'])?'<span class="badge text-bg-success pull-right">Active</span>':'<span class="badge text-bg-danger pull-right">Inactive</span>';
@@ -741,7 +721,7 @@ function accountListTable(){
 <tr>
     <td><?php echo $row['account_id']; ?></td>
     <td><?php echo $row['date_created']; ?></td>
-    <td><?php echo $row['name']; ?></td>
+    <td><?php echo $row['account_name']; ?></td>
     <td><?php echo $row['description']; ?></td>
     <td><?php echo $status; ?></td>
     <td>
@@ -755,18 +735,149 @@ function accountListTable(){
   }
   $conn->close();
 }
-
-if (isset($_POST['addAccountList'])) {
-  addAccountList();
+// Journal Entries Table queries
+function journalEntryTable(){
+  include 'conn.php';
+  $sql = "SELECT j.journal_id, j.account_id, j.group_id, j.amount, j.date_created ,je.code,je.description, a.account_name, g.group_name,g.status, g.type FROM `journal_items` j inner join account_list a on j.journal_id = a.account_id inner join journal_entries je on j.journal_id = je.journal_id inner join group_list g on j.journal_id = g.group_id";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    $status = ($row['status'])?'<span class="badge text-bg-success pull-right">Active</span>':'<span class="badge text-bg-danger pull-right">Inactive</span>';
+    $type = ($row['type'])?'<span class="badge text-bg-warning pull-right">Credit</span>':'<span class="badge text-bg-info pull-right">Debit</span>';
+    ?>
+<tr>
+    <td><?php echo $row['date_created']; ?></td>
+    <td><?php echo $row['code']; ?></td>
+    <td><?php echo $row['account_name']; ?></td>
+    <td><?php echo $row['group_name']; ?></td>
+    <td><?php echo $row['description']; ?></td>
+    <td><?php echo $type; ?></td>
+    <td><?php echo $status; ?></td>
+    <td>
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['journal_id']; ?>"><i
+                class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['journal_id']; ?>"><i
+                class="fa fa-trash"></i> Delete</button>
+    </td>
+</tr>
+<?php
+  }
+  $conn->close();
 }
-function addAccountList(){
+// Journal Entries Table queries end
+
+// journal entry add queries
+if (isset($_POST['addJournalEntry'])) {
+  journalEntryAdd();
+}
+function journalEntryAdd(){
+  include 'conn.php';
+  if(isset($_POST['addJournalEntry'])){
+    $journalEntryDate = $_POST['journal_date'];
+    $journalDescription = $_POST['description'];
+    $accounListSelection = $_POST['accountList'];
+    $groupListSelection = $_POST['groupList'];
+    $amount = $_POST['amount'];
+    $letters = '';
+      $numbers = '';
+      foreach (range('A', 'Z') as $char) {
+          $letters .= $char;
+      }
+      for($i = 0; $i < 10; $i++){
+        $numbers .= $i;
+      }
+      $code = substr(str_shuffle($letters), 0, 3).substr(str_shuffle($numbers), 0, 9);
+    $sql = "INSERT INTO journal_entries (code,journal_date, description, date_created) VALUES ('$code','$journalEntryDate','$journalDescription', NOW() )";
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+  }
+  $conn->close();
+  header('location:../journal_entry.php');
+}
+// journal entry add queries end
+
+// working trial balance table queries
+function workingTrialBalanceTable(){
+  include 'conn.php';
+  $sql = "SELECT journal_date, code, description, amount FROM journal_entries, journal_items WHERE journal_entries.journal_id= journal_items.journal_id";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    ?>
+<tr>
+    <td><?php echo $row['journal_date']; ?></td>
+    <td><?php echo $row['description']; ?></td>
+    <td><?php echo $row['code']; ?></td>
+    <td><?php echo $row['amount']; ?></td>
+</tr>
+<?php
+  }
+  $conn->close();
+}
+// working trial balance table queries end
+
+// trial balance table queries
+function trialBalanceTable(){
+  include 'conn.php';
+  $sql = "SELECT journal_date, code, account_id, group_id, description, amount FROM journal_entries, journal_items WHERE journal_entries.journal_id= journal_items.journal_id";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    ?>
+<tr>
+    <td><?php echo $row['journal_date']; ?></td>
+    <td><?php echo $row['code']; ?></td>
+    <td><?php echo $row['description']; ?></td>
+    <td><?php echo $row['amount']; ?></td>
+    <td><?php echo $row['amount']; ?></td>
+</tr>
+<?php
+  }
+  $conn->close();
+}
+// trial balance table queries end
+
+// account list selection in journal queries
+function accountListSelection(){
+  include 'conn.php';
+  $sql = "SELECT account_id, account_name FROM account_list";
+  $query = $conn->query($sql);
+  while($prow = $query->fetch_assoc()){
+      echo "
+      <option value='".$prow['account_id']."'>".$prow['account_name']."</option>
+      ";
+  }
+  $conn->close();
+}
+// account list selection in journal end
+
+// account list selection in journal queries
+function groupListSelection(){
+  include 'conn.php';
+  $sql = "SELECT group_id, group_name FROM group_list";
+  $query = $conn->query($sql);
+  while($prow = $query->fetch_assoc()){
+      echo "
+      <option value='".$prow['group_id']."'>".$prow['group_name']."</option>
+      ";
+  }
+  $conn->close();
+}
+// account list selection in journal queries end
+
+// account list add new queries
+if (isset($_POST['addAccountList'])) {
+  accountListAdd();
+}
+function accountListAdd(){
   include 'conn.php';
   if(isset($_POST['addAccountList'])){
     $accountName = $_POST['accountName'];
     $accountDescription = $_POST['accountDescription'];
     $accountStatus = $_POST['accountStatus'];
    
-    $sql = "INSERT INTO account_list (name, description, status, date_created) VALUES ('$accountName','$accountDescription','$accountStatus', NOW() )";
+    $sql = "INSERT INTO account_list (account_name, description, status, date_created) VALUES ('$accountName','$accountDescription','$accountStatus', NOW() )";
     if($conn->query($sql)){
       echo "success";
     }
@@ -777,7 +888,9 @@ function addAccountList(){
   $conn->close();
   header('location:../account_list.php');
 }
+// account list add new queries end
 
+// account list edit queries
 if (isset($_POST['editAccountList'])) {
 editAccountList();
 }
@@ -788,7 +901,7 @@ editAccountList();
       $accountName = $_POST['name'];
       $accountDescription = $_POST['description'];
       $accountStatusSelection = $_POST['status'];
-      $sql = "UPDATE account_list SET name = '$accountName', description = '$accountDescription', status = '$accountStatusSelection' WHERE account_id = '$account_id'";
+      $sql = "UPDATE account_list SET account_name = '$accountName', description = '$accountDescription', status = '$accountStatusSelection' WHERE account_id = '$account_id'";
       if($conn->query($sql)){
         echo "success";
       }
@@ -799,7 +912,9 @@ editAccountList();
     $conn->close();
     header('location:../account_list.php');
   }
+  // account list edit queries end
 
+  // account list delete queries
   if(isset($_POST['deleteAccountList'])){
     accountListDelete();
   }
@@ -818,33 +933,37 @@ editAccountList();
     $conn->close();
     header('location: ../account_list.php');
   }
+  // account list delete queries end
 
-  
+  // group list table queries
   function groupListTable(){
     include 'conn.php';
-    $sql = "SELECT accountgroup_id, name, description, type, status, date_created FROM group_list";
+    $sql = "SELECT group_id, group_name, description, type, status, date_created FROM group_list";
     $query = $conn->query($sql);
     while($row = $query->fetch_assoc()){
       $status = ($row['status'])?'<span class="badge text-bg-success pull-right">Active</span>':'<span class="badge text-bg-danger pull-right">Inactive</span>';
       $type = ($row['type'])?'<span class="badge text-bg-warning pull-right">Credit</span>':'<span class="badge text-bg-info pull-right">Debit</span>';
       ?>
 <tr>
-    <td><?php echo $row['accountgroup_id']; ?></td>
+    <td><?php echo $row['group_id']; ?></td>
     <td><?php echo $row['date_created']; ?></td>
-    <td><?php echo $row['name']; ?></td>
+    <td><?php echo $row['group_name']; ?></td>
     <td><?php echo $row['description']; ?></td>
     <td><?php echo $type; ?></td>
     <td><?php echo $status; ?></td>
     <td>
-        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['accountgroup_id']; ?>"><i
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['group_id']; ?>"><i
                 class="fa fa-edit"></i> Edit</button>
-        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['accountgroup_id']; ?>"><i
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['group_id']; ?>"><i
                 class="fa fa-trash"></i> Delete</button>
     </td>
 </tr>
 <?php
     }
   }
+ // group list table queries end
+
+// group list add new queries
   if (isset($_POST['addGroupList'])) {
     addGroupList();
   }
@@ -855,8 +974,7 @@ editAccountList();
       $description = $_POST['description'];
       $type = $_POST['type'];
       $status = $_POST['status'];
-     
-      $sql = "INSERT INTO group_list (name, description,type, status, date_created) VALUES ('$name','$description','$type','$status', NOW() )";
+      $sql = "INSERT INTO group_list (group_name, description,type, status, date_created) VALUES ('$name','$description','$type','$status', NOW() )";
       if($conn->query($sql)){
         echo "success";
       }
@@ -865,21 +983,23 @@ editAccountList();
       }
     }
     $conn->close();
-    header('location:../account_group.php');
+    header('location:../group_list.php');
   }
+// group list add new queries end
 
+// group list edit queries
   if (isset($_POST['editGroupList'])) {
-    editGroupList();
+    groupListEdit();
     }
-      function editGroupList(){
+      function groupListEdit(){
         include 'conn.php';
         if(isset($_POST['editGroupList'])){
-          $groupId = $_POST['accountgroup_id'];
+          $groupId = $_POST['group_id'];
           $groupName = $_POST['name'];
           $groupDescription = $_POST['description'];
           $groupTypeSelection = $_POST['type'];
           $groupStatusSelection = $_POST['status'];
-          $sql = "UPDATE group_list SET name = '$groupName', description = '$groupDescription',type='$groupTypeSelection', status = '$groupStatusSelection' WHERE accountgroup_id = '$groupId'";
+          $sql = "UPDATE group_list SET group_name = '$groupName', description = '$groupDescription',type='$groupTypeSelection', status = '$groupStatusSelection' WHERE group_id = '$groupId'";
           if($conn->query($sql)){
             echo "success";
           }
@@ -888,17 +1008,19 @@ editAccountList();
           }
         }
         $conn->close();
-        header('location:../account_group.php');
+        header('location:../group_list.php');
       }
+// group list edit queries  end
 
+// group list delelte queries
       if (isset($_POST['deleteGroupList'])) {
         groupListDelete();
       }
       function groupListDelete(){
         include 'conn.php';
         if(isset($_POST['deleteGroupList'])){
-          $groupId = $_POST['accountgroup_id'];
-          $sql = "DELETE FROM group_list WHERE accountgroup_id = '$groupId'";
+          $groupId = $_POST['group_id'];
+          $sql = "DELETE FROM group_list WHERE group_id = '$groupId'";
         }
         if($conn->query($sql)){
           $_SESSION['success'] = 'Group list deleted successfully';
@@ -907,35 +1029,9 @@ editAccountList();
           $_SESSION['error'] = $conn->error;
         }
         $conn->close();
-        header('location:../account_group.php');
+        header('location:../group_list.php');
       }
-
-
-    if(isset($_POST['addJournalEntry'])){
-        journalEntryNew();
-    }
-    function journalEntryNew(){
-      include 'conn.php';
-      if(isset($_POST['addJorunalList'])){
-        $groupId = $_POST['accountgroup_id'];
-        $groupName = $_POST['name'];
-        $groupDescription = $_POST['description'];
-        $groupTypeSelection = $_POST['type'];
-        $groupStatusSelection = $_POST['status'];
-
-        $sql = "INSERT INTO journal_items (journal_id, account_id, accountgroup_id, amount, date_created) VALUES ('$journal_id','$account_id','$accountgroup_id','$amount',NOW())";
-        
-      }
-      if($conn->query($sql)){
-        $_SESSION['success'] = 'Added New Journal Entry!';
-      }
-      else{
-        $_SESSION['error'] = $conn->error;
-      }
-      $conn->close();
-      header('location: ../account_list.php');
-
-    }
+// group list delelte queries end
 
       if (isset($_POST['leadAdd'])) {
         leadAdd();
@@ -1070,23 +1166,23 @@ function inventoryTable(){
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
       ?>
-      <tr>
-          <td><img src="<?php echo (!empty($row['photo']))? './images/'.$row['photo']:'./images/profile.jpg'; ?>" width="30px"
-                  height="30px"> <a href="#edit_photo" data-toggle="modal" class="pull-right photo"
-                  data-id="<?php echo $row['inventory_id']; ?>"><span class="fa fa-edit"></span></a></td>
-          <td><?php echo $row['product_id']; ?></td>
-          <td><?php echo $row['description'];?></td>
-          <td><?php echo $row['quantity'];?></td>
-          <td><?php echo date('h:i A', strtotime($row['updated_on'])) ?></td>
+<tr>
+    <td><img src="<?php echo (!empty($row['photo']))? './images/'.$row['photo']:'./images/profile.jpg'; ?>" width="30px"
+            height="30px"> <a href="#edit_photo" data-toggle="modal" class="pull-right photo"
+            data-id="<?php echo $row['inventory_id']; ?>"><span class="fa fa-edit"></span></a></td>
+    <td><?php echo $row['product_id']; ?></td>
+    <td><?php echo $row['description'];?></td>
+    <td><?php echo $row['quantity'];?></td>
+    <td><?php echo date('h:i A', strtotime($row['updated_on'])) ?></td>
 
-          <td>
-              <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['inventory_id']; ?>"><i
-                      class="fa fa-edit"></i> Edit</button>
-              <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['inventory_id']; ?>"><i
-                      class="fa fa-trash"></i> Delete</button>
-          </td>
-      </tr>
-      <?php
+    <td>
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['inventory_id']; ?>"><i
+                class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['inventory_id']; ?>"><i
+                class="fa fa-trash"></i> Delete</button>
+    </td>
+</tr>
+<?php
   }
   $conn->close();
 }

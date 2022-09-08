@@ -39,7 +39,8 @@
                         <label for="genderSelection">Gender</label>
                     </div>
                     <div class="col-12 form-floating">
-                        <select class="form-control departmentSelection" name="department" aria-label="Select department" required>
+                        <select class="form-control departmentSelection" name="department"
+                            aria-label="Select department" required>
                             <option value="" selected>- Select -</option>
                             <?php employeeDepartment();?>
                         </select>
@@ -69,7 +70,6 @@
                         <button type="submit" class="btn btn-primary float-end" name="addEmployee">Submit</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
@@ -129,8 +129,8 @@
                     <div class="col-12 form-floating">
                         <select class="form-control" name="job" aria-label="Select job">
                             <option value="" class="jobSelection" selected>- Select -</option>
-                            
-                        <?php employeePosition();?>
+
+                            <?php employeePosition();?>
                         </select>
                         <label for="jobSelection">Job</label>
 
@@ -185,10 +185,7 @@
 </div>
 <!-- End of Delete Employee -->
 
-
-
 <!-- Start Edit Photo Employee -->
-
 <div class="modal fade" id="editEmployeePhoto" tabindex="-1" role="dialog" aria-labelledby="employeeTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -331,91 +328,95 @@
 </div>
 <!-- End Edit Attendance Employee -->
 
-<!-- Start of Accounting Add new Journal -->
-<div class="modal fade" id="addNewJournal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollabl">
-        <div class="modal-content rounded-0">
-            <div class="modal-header rounded-0">
-                <h5 class="modal-title" id="JourneyTitle">Add New Journal Entry</h5>
+<!-- Start Adding Journal Entry  -->
+<div class="modal fade lg-4" id="newJournalEntry" tabindex="-1" role="dialog" aria-labelledby="journalEntryTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="journalEntryTitle">Add Journal Entry</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
-            <div class="modal-body rounded-0">
-                <form class="row g-3" action="#" method="POST" autocomplete="off">
-                    <div class="col-md-6 form-floating">
-                        <input type="date" class="form-control date" name="date" id="date" required>
-                        <label for="date">Entry Date</label>
+            <div class="modal-body">
+                <form class="row g-3" action="includes/queries.php" method="POST" name="randform"
+                    enctype="multipart/form-data" autocomplete="off">
+                    <div class="input-group mb-3">
+                        <button class="btn btn-outline-secondary" type="button" onClick="randomString();"
+                            id="button-addon1">Generate Code</button>
+                        <input type="text" class="form-control" placeholder="Generate code"
+                            aria-label="Example text with button addon" aria-describedby="button-addon1"
+                            name="randomfield">
                     </div>
-                    <div class="col-md-12 form-floating">
-                        <textarea class="form-control tArea entryDescription" rows="2" name="entrydescription"
-                            required></textarea>
-                        <label for="entrydescription">Entry Description</label>
-                    </div>
-                    <div class="col-md-6 form-floating">
-                        <select class="form-control" name="accountList" aria-label="Select account" id="account_id">
-                            <option value="" class="accounListSelection" selected>- Select -</option>
-                            <?php accountListSelection();?>
-                        </select>
-                        <label for="account">Account List</label>
-                    </div>
-                    <div class="col-md-6 form-floating">
-                        <select class="form-control" name="accountgroup" aria-label="Select accountgroup" id="group_id">
-                            <option value="" class="accountGroupSelection" selected>- Select -</option>
-                            <?php accountGroupSelection();?>
-                        </select>
-                        <label for="accountgroup">Account Group</label>
-                    </div>
-                    <div class="col-md-6 form-floating">
-                        <input type="number" class="form-control amount" name="amount" id="amount" required>
-                        <label for="amount">Amount</label>
-                    </div>
-                    <div class="col-md-6 form-floating">
-                        <button type="button" class="btn btn-secondary " id="addToList"><i
-                                class="fa-solid fa-plus"></i>Add Account</button>
-                    </div>
-                    <div class="col-md-12 form-floating">
-                        <table id="example1" class="table table-stripped table-bordered">
-                            <thead class="table-info">
-                                <tr>
-                                    <th width="10%">Tool</th>
-                                    <th>Account</th>
-                                    <th>Group</th>
-                                    <th>Debit</th>
-                                    <th>Credit</th>
-                                </tr>
-                            </thead>
-                            <tbody>
 
-                            </tbody>
-                            <tfoot>
-                                <tr class="bg-gradient-secondary">
-                                <tr>
-                                    <th colspan="3" class="text-center">Total</th>
-                                    <th class="text-right total_debit">0.00</th>
-                                    <th class="text-right total_credit">0.00</th>
-                                </tr>
-                                <tr>
-                                    <th colspan="3" class="text-center"></th>
-                                    <th colspan="3" class="text-center total-balance">0</th>
-                                </tr>
-                                </tr>
-                            </tfoot>
-                        </table>
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control journalDescription" name="description">
+                        <label for="dateCreated">Reference</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="date" class="form-control journalEntryDate" name="journal_date" required>
+                        <label for="dateCreated">Date Created</label>
+                    </div>
+
+
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control journalDescription" name="description">
+                        <label for="dateCreated">Description</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <select class="form-control" name="accountStatus" aria-label="Select account"
+                            id="accountStatus">
+                            <option value="3" class="Status" selected>Cash Basis Taxes</option>
+                            <option value="2" class="Status" selected>Exchange Difference</option>
+                            <option value="1" class="Status" selected>Miscellaneous Operations</option>
+                            <option value="" class="Status" selected>--Select--</option>
+                        </select>
+                        <label for="account">Journal</label>
+                    </div>
+                    <div>
+                        <h6>
+                            Journal Items
+                        </h6>
+                    </div>
+                    <div class="col-md-12 form-floating">
+                        <div id="containerTable">
+                            <table class="table" id="dynamicTable">
+                                <thead>
+                                    <tr>
+                                        <th>Debit Account</th>
+                                        <th>Credit Account</th>
+                                        <th>Partner</th>
+                                        <th>Debit</th>
+                                        <th>Credit</th>
+                                        <th>Total</th>
+                                        <th>Tool</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                            <button type="button" class="btn btn-secondary  btn-sm"
+                                onClick="addNewRowTable();">Add</button>
+                        </div>
                     </div>
                     <div class="mb-2">
-                        <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cancel</button>
-                        <button type="submit" class="btn btn-primary float-end">Submit</button>
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-danger btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-success float-end" name="addJournalEntry">Save</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-<!-- End of Accounting Add new Journal -->
+
+<!-- End of Adding Journal Entry -->
+<!-- Start Edit Journal Entry -->
+
+<!-- End EditJournal Entry -->
 
 <!--Start Adding Account List-->
-<div class="modal fade" id="addAccountList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade" id="newAccountList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollabl">
         <div class="modal-content rounded-0">
@@ -426,28 +427,29 @@
             </div>
             <div class="modal-body rounded-0">
                 <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
-              
+
                     <div class="col-md-12 form-floating">
                         <textarea class="form-control tArea entryName" rows="2" name="accountName" required></textarea>
                         <label for="accountName">Name</label>
                     </div>
                     <div class="col-md-12 form-floating">
-                        <textarea class="form-control tArea entryDescription" rows="2" name="accountDescription" required></textarea>
+                        <textarea class="form-control tArea entryDescription" rows="2" name="accountDescription"
+                            required></textarea>
                         <label for="accountDescription">Description</label>
                     </div>
                     <div class="col-md-12 form-floating">
                         <select class="form-control" name="accountStatus" aria-label="Select account"
                             id="accountStatus">
-                            <option value="" class="accoutStatus" selected>--Select--</option>  
-                            <option value="0" class="accoutStatus" selected>Inactive</option>
-                            <option value="1" class="accoutStatus" selected>Active</option>   
+                            <option value="0" class="Status" selected>Inactive</option>
+                            <option value="1" class="Status" selected>Active</option>
+                            <option value="" class="Status" selected>--Select--</option>
                         </select>
                         <label for="account">Status</label>
                     </div>
-                        <div class="mb-2">
-                            <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cancel</button>
-                            <button type="submit" class="btn btn-primary float-end" name="addAccountList">Submit</button>
-                        </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end" name="addAccountList">Submit</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -478,9 +480,9 @@
                     </div>
                     <div class="col-md-12 form-floating">
                         <select class="form-control accountStatusSelection" name="status" aria-label="Select account">
-                            <option value="" class="accoutStatus" selected>--Select--</option>  
+                            <option value="" class="accoutStatus" selected>--Select--</option>
                             <option value="0" class="accoutStatus" selected>Inactive</option>
-                            <option value="1" class="accoutStatus" selected>Active</option>   
+                            <option value="1" class="accoutStatus" selected>Active</option>
                         </select>
                         <label for="accountStatus">Status</label>
                     </div>
@@ -513,6 +515,8 @@
                         <p>
                             Delete account list?
                         </p>
+                        <p class="deleteAccountList">
+                        </p>
                     </div>
                     <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
@@ -526,7 +530,7 @@
 <!--End Delete Account List-->
 
 <!--Start Adding Group List-->
-<div class="modal fade" id="addGroupList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade" id="newGroupList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollabl">
         <div class="modal-content rounded-0">
@@ -537,35 +541,35 @@
             </div>
             <div class="modal-body rounded-0">
                 <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
-              
                     <div class="col-md-12 form-floating">
                         <textarea class="form-control tArea entryName" rows="2" name="name" required></textarea>
                         <label for="accountName">Name</label>
                     </div>
                     <div class="col-md-12 form-floating">
-                        <textarea class="form-control tArea entryDescription" rows="2" name="description" required></textarea>
+                        <textarea class="form-control tArea entryDescription" rows="2" name="description"
+                            required></textarea>
                         <label for="accountDescription">Description</label>
                     </div>
                     <div class="col-md-12 form-floating">
                         <select class="form-control" name="type" aria-label="Select type" id="accountType">
-                            <option value="" class="accoutType" selected>--Select--</option>  
                             <option value="0" class="accoutType" selected>Debit</option>
-                            <option value="1" class="accoutType" selected>Credit</option>   
+                            <option value="1" class="accoutType" selected>Credit</option>
+                            <option value="" class="accoutType" selected>--Select--</option>
                         </select>
                         <label for="account">Status</label>
                     </div>
                     <div class="col-md-12 form-floating">
                         <select class="form-control" name="status" aria-label="Select status" id="accountStatus">
-                            <option value="" class="accoutStatus" selected>--Select--</option>  
                             <option value="0" class="accoutStatus" selected>Inactive</option>
-                            <option value="1" class="accoutStatus" selected>Active</option>   
+                            <option value="1" class="accoutStatus" selected>Active</option>
+                            <option value="" class="accoutStatus" selected>--Select--</option>
                         </select>
                         <label for="account">Status</label>
                     </div>
-                        <div class="mb-2">
-                            <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cancel</button>
-                            <button type="submit" class="btn btn-primary float-end" name="addGroupList">Submit</button>
-                        </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end" name="addGroupList">Submit</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -574,54 +578,54 @@
 <!--End Adding Group List-->
 
 <!--Start edit Group List-->
-<div class="modal fade" id="editGroupList" tabindex="-1" role="dialog" aria-labelledby="accountListTitle"
+<div class="modal fade" id="editGroupList" tabindex="-1" role="dialog" aria-labelledby="groupListTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="accountListTitle">Edit group list information</h5>
+                <h5 class="modal-title" id="groupListTitle">Edit group list information</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
             <div class="modal-body">
                 <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
-                    <input type="hidden" class="groupId" name="accountgroup_id">
+                    <input type="hidden" class="groupId" name="group_id">
                     <div class="col-md-12 form-floating">
-                        <input type="text" class="form-control groupName" name="name" required>
-                        <label for="accountName">Name</label>
+                        <input type="text" class="form-control groupName" name="name">
+                        <label for="groupName">Name</label>
                     </div>
                     <div class="col-md-12 form-floating">
-                        <input type="text" class="form-control groupDescription" name="description" required>
-                        <label for="accountDescription">Description</label>
+                        <input type="text" class="form-control groupDescription" name="description">
+                        <label for="groupDescription">Description</label>
                     </div>
                     <div class="col-md-12 form-floating">
                         <select class="form-control groupTypeSelection" name="type" aria-label="Select account">
-                            <option value="" class="typeSelection" selected>--Select--</option>  
                             <option value="0" class="typeSelection" selected>Debit</option>
-                            <option value="1" class="typeSelection" selected>Credit</option>   
+                            <option value="1" class="typeSelection" selected>Credit</option>
+                            <option value="" class="typeSelection" selected>--Select--</option>
                         </select>
-                        <label for="accountStatus">Type</label>
+                        <label for="groupStatus">Type</label>
                     </div>
                     <div class="col-md-12 form-floating">
                         <select class="form-control groupStatusSelection" name="status" aria-label="Select account">
-                            <option value="" class="statusSelection" selected>--Select--</option>  
                             <option value="0" class="statusSelection" selected>Inactive</option>
-                            <option value="1" class="statusSelection" selected>Active</option>   
+                            <option value="1" class="statusSelection" selected>Active</option>
+                            <option value="" class="statusSelection" selected>--Select--</option>
                         </select>
-                        <label for="accountStatus">Status</label>
+                        <label for="groupStatus">Status</label>
                     </div>
                     <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cancel</button>
                         <button type="submit" class="btn btn-primary float-end" name="editGroupList">Submit</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
 </div>
 <!--End edit Group List-->
-<!--Start Delete Account List-->
+
+<!--Start Delete Group List-->
 <div class="modal fade" id="deleteGroupList" tabindex="-1" role="dialog" aria-labelledby="groupListTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -633,10 +637,12 @@
             </div>
             <div class="modal-body">
                 <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
-                    <input type="hidden" class="groupId" name="accountgroup_id">
+                    <input type="hidden" class="groupId" name="group_id">
                     <div class="text-center">
                         <p>
                             Delete group list?
+                        </p>
+                        <p class="deleteGroupName">
                         </p>
                     </div>
                     <div class="mb-2">
@@ -648,11 +654,10 @@
         </div>
     </div>
 </div>
-<!--End Delete Account List-->
+<!--End Delete Group List-->
 
 <!-- Add lead -->
-<div class="modal fade" id="newLead" tabindex="-1" role="dialog" aria-labelledby="leadTitle"
-    aria-hidden="true">
+<div class="modal fade" id="newLead" tabindex="-1" role="dialog" aria-labelledby="leadTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -663,12 +668,12 @@
             <div class="modal-body">
                 <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
                     <div class="col-xs-12 form-floating">
-                        <input type="text" class="form-control leadName" name="leadname" placeholder="John"
-                            required>
+                        <input type="text" class="form-control leadName" name="leadname" placeholder="John" required>
                         <label for="leadname">Name</label>
                     </div>
                     <div class="col-xs-12 form-floating">
-                        <input type="email" class="form-control leadEmail" name="leademail" placeholder="example@email.com" required>
+                        <input type="email" class="form-control leadEmail" name="leademail"
+                            placeholder="example@email.com" required>
                         <label for="leadcontact">E-mail Address</label>
                     </div>
                     <div class="col-xs-12 form-floating">
@@ -677,7 +682,8 @@
                         <label for="leadcontact">Contact Number</label>
                     </div>
                     <div class="col-xs-12 form-floating">
-                        <textarea class="tArea form-control leadDescription" name="leaddescription" placeholder="Description"></textarea>
+                        <textarea class="tArea form-control leadDescription" name="leaddescription"
+                            placeholder="Description"></textarea>
                         <label for="leaddescription">Description (Optional)</label>
                     </div>
                     <div class="mb-2">
@@ -692,8 +698,7 @@
 <!-- End add lead -->
 
 <!-- Add Department -->
-<div class="modal fade" id="newDepartment" tabindex="-1" role="dialog" aria-labelledby="leadTitle"
-    aria-hidden="true">
+<div class="modal fade" id="newDepartment" tabindex="-1" role="dialog" aria-labelledby="leadTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -704,7 +709,8 @@
             <div class="modal-body">
                 <form class="row g-3" action="#" method="POST" autocomplete="off">
                     <div class="col-xs-12 form-floating">
-                        <input type="text" class="form-control departmentName" name="departmentname" placeholder="IT Department" required>
+                        <input type="text" class="form-control departmentName" name="departmentname"
+                            placeholder="IT Department" required>
                         <label for="departmentname">Name</label>
                     </div>
                     <div class="mb-2">
@@ -760,8 +766,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="#" method="POST" enctype="multipart/form-data"
-                    autocomplete="off">
+                <form class="row g-3" action="#" method="POST" enctype="multipart/form-data" autocomplete="off">
                     <input type="hidden" class="departmentId" name="department_id">
                     <div class="text-center">
                         <p>
@@ -803,7 +808,8 @@
                         <label for="date">Date</label>
                     </div>
                     <div class="col-xs-12 form-floating">
-                        <input type="number" class="form-control amountInfo" name="amount" placeholder="123456789" required>
+                        <input type="number" class="form-control amountInfo" name="amount" placeholder="123456789"
+                            required>
                         <label for="amount">Amount</label>
                     </div>
                     <div class="mb-2">
@@ -843,7 +849,8 @@
                         <label for="date">Date</label>
                     </div>
                     <div class="col-xs-12 form-floating">
-                        <input type="number" class="form-control amountInfo" name="amount" placeholder="123456789" required>
+                        <input type="number" class="form-control amountInfo" name="amount" placeholder="123456789"
+                            required>
                         <label for="amount">Amount</label>
                     </div>
                     <div class="mb-2">
@@ -868,8 +875,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="#" method="POST" enctype="multipart/form-data"
-                    autocomplete="off">
+                <form class="row g-3" action="#" method="POST" enctype="multipart/form-data" autocomplete="off">
                     <input type="hidden" class="cashAdvanceId" name="cashadvanceid">
                     <div class="text-center">
                         <p>
@@ -888,8 +894,7 @@
 <!-- End of Delete Cash Advance -->
 
 <!-- Add Job -->
-<div class="modal fade" id="newJob" tabindex="-1" role="dialog" aria-labelledby="jobTitle"
-    aria-hidden="true">
+<div class="modal fade" id="newJob" tabindex="-1" role="dialog" aria-labelledby="jobTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -930,8 +935,7 @@
 <!-- End Add Job -->
 
 <!-- Edit Job -->
-<div class="modal fade" id="editJob" tabindex="-1" role="dialog" aria-labelledby="jobTitle"
-    aria-hidden="true">
+<div class="modal fade" id="editJob" tabindex="-1" role="dialog" aria-labelledby="jobTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -973,8 +977,7 @@
 <!-- End Edit Job -->
 
 <!-- Delete Job -->
-<div class="modal fade" id="deleteJob" tabindex="-1" role="dialog" aria-labelledby="jobTitle"
-    aria-hidden="true">
+<div class="modal fade" id="deleteJob" tabindex="-1" role="dialog" aria-labelledby="jobTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -983,8 +986,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="#" method="POST" enctype="multipart/form-data"
-                    autocomplete="off">
+                <form class="row g-3" action="#" method="POST" enctype="multipart/form-data" autocomplete="off">
                     <input type="hidden" class="jobId" name="jobid">
                     <div class="text-center">
                         <p>
@@ -1001,6 +1003,178 @@
     </div>
 </div>
 <!-- End of Delete Job -->
+
+
+
+<!-- start adding accounting periods  -->
+<div class="modal fade" id="newConfigure" tabindex="-1" role="dialog" aria-labelledby="accountingPeriods"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="accountingPeriods">Accounting Periods</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
+                    <div>
+                        <h8>Fiscal Years</h8>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="date" class="form-control accountingPeriods" name="accountingPeriods" required>
+                        <label for="accountingPeriods">Opening Date</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="date" class="form-control accountingPeriods" name="accountingPeriods" required>
+                        <label for="accountingPeriods">Fiscal Year Date</label>
+                    </div>
+                    <div>
+                        <h8>Tax Return</h8>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="Date" class="form-control rateInfo" name="rate" required>
+                        <label for="rate">Periodicity</label>
+                    </div>
+                    <div class="col-md-5 form-floating">
+                        <select class="form-control" name="journalId" aria-label="Select account" id="journalId">
+                            <option value="Cash Basis Taxes" class="Status" selected>Cash Basis Taxes</option>
+                            <option value="Exchange Difference" class="Status" selected>Exchange Difference</option>
+                            <option value="Miscellaneous Operations" class="Status" selected>Miscellaneous Operations
+                            </option>
+                            <option value="" class="Status" selected>--Select--</option>
+                        </select>
+                        <label for="Journal ">Journal</label>
+                    </div>
+                    <div class="col-md-1 form-floating">
+                        <a type="button" data-bs-target="#newFiscal" data-bs-toggle="modal" id="transferInput"><i
+                                class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cancel</button>
+                        <button type="submit" class="btn btn-success float-end" name="">Apply</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End adding accounting periods  -->
+
+<!-- Start open journal modal  -->
+<div class="modal fade" id="newFiscal" tabindex="-1" role="dialog" aria-labelledby="accountingPeriods"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="accountingPeriods">Open: Journal</h5>
+                <a href="journal_entry.php"><button  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-book"></i>
+                    Journal Entries</button></a>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
+
+                    <div class="col-md-12 form-floating">
+                        <input type="text" class="form-control accountingPeriods" name="accountingPeriods"
+                            id="journalTransfer" required>
+                        <label for="accountingPeriods">Journal Name</label>
+                    </div>
+
+                    <div class="col-md-12 form-floating">
+                        <select class="form-control" name="accountStatus" aria-label="Select account"
+                            id="accountStatus">
+                            <option value="5" class="Status" selected>Sales</option>
+                            <option value="4" class="Status" selected>Purchase</option>
+                            <option value="3" class="Status" selected>Cash</option>
+                            <option value="2" class="Status" selected>Bank</option>
+                            <option value="1" class="Status" selected>Miscellaneous</option>
+                            <option value="" class="Status" selected>--Select--</option>
+                        </select>
+                        <label for="Journal ">Type</label>
+                    </div>
+
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="journal-tab" data-bs-toggle="tab"
+                                data-bs-target="#journalEntryId" type="button" role="tab" aria-controls="journalEntryId"
+                                aria-selected="true">Journal Entries</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="advanceSetting-tab" data-bs-toggle="tab"
+                                data-bs-target="#advanceSetting" type="button" role="tab" aria-controls="advanceSetting"
+                                aria-selected="false">Advance Setting</button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="journalEntryId" role="tabpanel"
+                            aria-labelledby="journal-tab">
+                            <div>
+                                <div>
+                                    <p6>
+                                        Accounting information
+                                    </p6>
+                                </div><br>
+                                <div class="col-md-12 form-floating">
+                                    <input type="text" class="form-control text-uppercase shortCode" name="shortCode" required>
+                                    <label for="shortCode">Short Code</label>
+                                </div><br>
+                                <div class="col-md-12 form-floating">
+                                    <select class="form-control currency" name="currency" aria-label="Select account"
+                                        id="accountStatus">
+                                        <option value="2" class="currencyId" selected>PHP</option>
+                                        <option value="1" class="currencyId" selected>USD</option>
+                                        <option value="" class="currencyId" selected>--Select--</option>
+                                    </select>
+                                    <label for="Journal ">Currency</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="advanceSetting" role="tabpanel"
+                            aria-labelledby="advanceSetting-tab">
+                            <div>
+                                <div>
+                                    <p6>
+                                        Control-Access
+                                    </p6>
+                                </div><br>
+                                <div class="col-md-12 form-floating">
+                                    <select class="form-control" name="accountListDebit" aria-label="Select account"
+                                        id="account_id">
+                                        <option value="" class="accounListDebitSelection" selected>- Select -</option>
+                                        <?php accountListSelection();?>
+                                    </select>
+                                    <label for="accountDebit">Allowed account types</label>
+                                </div><br>
+                                <div class="col-md-12 form-floating">
+                                    <select class="form-control" name="accountListDebit" aria-label="Select account"
+                                        id="account_id">
+                                        <option value="" class="accounListDebitSelection" selected>- Select -</option>
+                                        <?php accountListSelection();?>
+                                    </select>
+                                    <label for="accountDebit">Allowed account</label>
+                                </div><br>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="checkBoxEntry">
+                                    <label class="form-check-label" for="checkBoxEntry">
+                                        Lock Posted Entries with Hash
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div><br>
+                    <div class="mb-2">
+                        <button type="button" data-bs-target="#newConfigure" data-bs-toggle="modal"
+                            class="btn btn-danger">Back</button>
+                        <button type="submit" class="btn btn-success float-end" name="">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- Schedules Modals -->
 <div class="modal fade" id="newSchedule" tabindex="-1" role="dialog" aria-labelledby="schedTitle"
@@ -1087,3 +1261,12 @@
     </div>
 </div>
 <!-- Schedules Modals -->
+
+
+
+<!-- End open journal modal  -->
+<script>
+$('#transferInput').click(function() {
+    $('#journalTransfer').val($('#journalId').val())
+});
+</script>

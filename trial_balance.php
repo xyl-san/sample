@@ -17,13 +17,6 @@
             <?php include 'header.php'; ?>
             <div class="card">
                 <div class="card-header">
-                    <button type="button" class="btn btn-primary btn-sm btn-flat mt-2" data-bs-toggle="modal"
-                        data-bs-target="#addGroupList">
-                        <span>
-                            <i class="fa-solid fa-pen-to-square"></i>
-                            Add Group List
-                        </span>
-                    </button>
                     <nav aria-label="breadcrumb" class="float-end mt-2">
                         <ol class="breadcrumb ">
                             <li class="breadcrumb-item"><a href="home.php">Home</a></li>
@@ -32,30 +25,56 @@
                     </nav>
                 </div>
                 <div class="card-body">
+                    <div class="row g-3 align-items-center callout border-primary shadow rounded-0 ">
+                        <h4 class="text-muted">Filter Date</h4>
+                        <form class="row g-6" action="" id="filter">
+                            <div class="row align-items-end">
+                                <div class="col-md-4 form-group">
+                                    <label for="from" class="control-label">Date From</label>
+                                    <input type="date" id="from" name="from" value="2022-08-29"
+                                        class="form-control form-control-sm rounded-0">
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="to" class="control-label">Date To</label>
+                                    <input type="date" id="to" name="to" value="2022-09-05"
+                                        class="form-control form-control-sm rounded-0">
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <button class="btn btn-default bg-gradient-navy btn-flat btn-sm"><i
+                                            class="fa fa-filter"></i> Filter</button>
+                                    <button class="btn btn-default border btn-flat btn-sm" id="print" type="button"><i
+                                            class="fa fa-print"></i> Print</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div> <br>
+                    <h3 class="text-center"><b>Accounting Journal Management System</b></h3>
+                    <h4 class="text-center"><b>Trial Balance</b></h4>
+                    <p class="m-0 text-center">
+                        <?php
+                            $date = date("F j, Y H:i:s - A");
+                            echo $date;
+                        ?></p>
                     <table id="example1" class="table" style="width:100%">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Date Created</th>
-                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Journal Code</th>
                                 <th>Description</th>
-                                <th>Type</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>Debit</th>
+                                <th>Credit</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php groupListTable();?>
+                            <?php trialBalanceTable();?>
                         </tbody>
                         <tfoot>
                             <tr>
-                            <th>#</th>
-                                <th>Date Created</th>
-                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Journal Code</th>
                                 <th>Description</th>
-                                <th>Type</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>Debit</th>
+                                <th>Credit</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -77,14 +96,14 @@
     $(function() {
         $('#example1').on('click', '.edit', function(e) {
             e.preventDefault();
-            $('#editGroupList').modal('show');
+            $('#editJournalEntry').modal('show');
             var id = $(this).data('id');
             getRow(id);
         });
 
         $('#example1').on('click', '.delete', function(e) {
             e.preventDefault();
-            $('#deleteGroupList').modal('show');
+            $('#deleteJournalEntry').modal('show');
             var id = $(this).data('id');
             getRow(id);
         });
@@ -94,17 +113,18 @@
         $(document).ready(function() {
             $.ajax({
                 type: 'POST',
-                url: 'account_group_row.php',
+                url: 'joural_entry_row.php',
                 data: {
                     id: id
                 },
                 dataType: 'json',
                 success: function(response) {
-                    $('.groupId').val(response.accountgroup_id);
+                    $('.groupId').val(response.group_id);
                     $('.groupName').val(response.name);
                     $('.groupDescription').val(response.description);
                     $('.groupTypeSelection').val(response.type);
                     $('.groupStatusSelection').val(response.status);
+                    $('.deleteGroupName').html(response.name);
 
                 }
             });

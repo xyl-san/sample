@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 01, 2022 at 12:01 PM
+-- Generation Time: Sep 05, 2022 at 02:50 AM
 -- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -89,7 +89,8 @@ INSERT INTO `account_list` (`account_id`, `name`, `description`, `status`, `dele
 (45, 'Income taxes expense', 'Income taxes expense', 1, 0, '2022-02-01 11:43:44', NULL),
 (46, 'Warranty expense', 'Warranty expense', 1, 0, '2022-02-01 11:44:01', NULL),
 (47, 'Utilities expense', 'Utilities expense', 1, 0, '2022-02-01 11:44:10', NULL),
-(48, 'Selling expense', 'Selling expense', 1, 0, '2022-02-01 11:44:23', NULL);
+(48, 'Selling expense', 'Selling expense', 1, 0, '2022-02-01 11:44:23', NULL),
+(50, 'Discounts', 'Discounts', 1, 0, '2022-08-23 17:46:44', '2022-08-23 17:49:13');
 
 -- --------------------------------------------------------
 
@@ -263,10 +264,10 @@ INSERT INTO `employees` (`employee_id`, `department_id`, `job_id`, `schedule_id`
 --
 
 CREATE TABLE `group_list` (
-  `accountgroup_id` int(30) NOT NULL,
+  `group_id` int(30) NOT NULL,
   `name` text NOT NULL,
   `description` text NOT NULL,
-  `type` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1 = Debit, 2= Credit',
+  `type` tinyint(1) NOT NULL DEFAULT 1 COMMENT '0= Debit, 1= Credit',
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '0=Inactive, 1= Active',
   `delete_flag` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 = No, 1 = Yes ',
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
@@ -277,15 +278,13 @@ CREATE TABLE `group_list` (
 -- Dumping data for table `group_list`
 --
 
-INSERT INTO `group_list` (`accountgroup_id`, `name`, `description`, `type`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
+INSERT INTO `group_list` (`group_id`, `name`, `description`, `type`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
 (1, 'Assets', 'The cash, inventory, and other resources you owned.', 0, 1, 0, '2022-02-01 09:56:35', '2022-08-29 13:33:53'),
-(2, 'Revenue', 'Cash coming into your business through sales and other types of payments', 2, 1, 0, '2022-02-01 09:57:45', NULL),
-(3, 'Expenses', 'The amount you’re spending on services and other items, like payroll, utility bills, and fees for contractors.', 1, 1, 0, '2022-02-01 09:58:09', '2022-02-01 09:59:13'),
-(4, 'Liabilities', 'The money you still owe on loans, debts, and other obligations.', 2, 1, 0, '2022-02-01 09:58:34', NULL),
-(5, 'Equity', 'How much is remaining after you subtract liabilities from assets.', 2, 1, 0, '2022-02-01 09:59:05', NULL),
-(6, 'Dividend', 'Form of income that shareholders of corporations receive for each share of stock that they hold.', 1, 1, 0, '2022-02-01 10:00:13', NULL),
-(7, 'Sample101', 'Sample', 1, 0, 1, '2022-02-01 10:01:35', '2022-02-01 10:03:28'),
-(8, 'dfgsdfsdfeasf', 'sfsdfsdfsdfd', 0, 1, 0, '2022-08-29 13:41:49', NULL);
+(2, 'Revenue', 'Cash coming into your business through sales and other types of payments', 1, 1, 0, '2022-02-01 09:57:45', '2022-09-02 20:55:05'),
+(3, 'Expenses', 'The amount you’re spending on services and other items, like payroll, utility bills, and fees for contractors.', 0, 1, 0, '2022-02-01 09:58:09', '2022-09-02 20:55:11'),
+(4, 'Liabilities', 'The money you still owe on loans, debts, and other obligations.', 1, 1, 0, '2022-02-01 09:58:34', '2022-09-02 20:55:14'),
+(5, 'Equity', 'How much is remaining after you subtract liabilities from assets.', 1, 1, 0, '2022-02-01 09:59:05', '2022-09-03 15:56:54'),
+(6, 'Withdrawals', 'Form of income that shareholders of corporations receive for each share of stock that they hold.', 0, 1, 0, '2022-02-01 10:00:13', '2022-09-03 15:56:46');
 
 -- --------------------------------------------------------
 
@@ -349,6 +348,35 @@ CREATE TABLE `job` (
 
 INSERT INTO `job` (`job_id`, `department_id`, `job_name`, `description`, `rate`, `created_on`, `updated_on`, `delete_flag`) VALUES
 (51, 11, 'Accountant', 'Accountant', 550, '2022-09-01 13:59:38', '2022-09-01 13:59:38', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `journal_entries`
+--
+
+CREATE TABLE `journal_entries` (
+  `journal_id` int(30) NOT NULL,
+  `code` varchar(100) NOT NULL,
+  `journal_date` date NOT NULL,
+  `description` text NOT NULL,
+  `account_id` int(30) NOT NULL,
+  `group_id` int(30) NOT NULL,
+  `amount` bigint(20) NOT NULL,
+  `user_id` int(30) DEFAULT NULL,
+  `date_created` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `journal_entries`
+--
+
+INSERT INTO `journal_entries` (`journal_id`, `code`, `journal_date`, `description`, `account_id`, `group_id`, `amount`, `user_id`, `date_created`, `date_updated`) VALUES
+(39, 'xZZxxxZ', '2022-09-01', 'xZxxxxzXx', 7, 1, 100, 12, '2022-09-03 20:02:44', NULL),
+(40, 'xZZxxxZ', '2022-09-01', 'xZxxxxzXx', 4, 2, 100, NULL, '2022-09-03 20:02:44', NULL),
+(43, 'ffafff', '2022-09-29', 'fafaffaf', 7, 1, 100, NULL, '2022-09-03 20:05:54', NULL),
+(44, 'ffafff', '2022-09-29', 'fafaffaf', 7, 1, 100, NULL, '2022-09-03 20:06:02', NULL);
 
 -- --------------------------------------------------------
 
@@ -732,7 +760,7 @@ ALTER TABLE `employees`
 -- Indexes for table `group_list`
 --
 ALTER TABLE `group_list`
-  ADD PRIMARY KEY (`accountgroup_id`);
+  ADD PRIMARY KEY (`group_id`);
 
 --
 -- Indexes for table `inventory`
@@ -753,6 +781,15 @@ ALTER TABLE `items`
 ALTER TABLE `job`
   ADD PRIMARY KEY (`job_id`),
   ADD KEY `department_id` (`department_id`);
+
+--
+-- Indexes for table `journal_entries`
+--
+ALTER TABLE `journal_entries`
+  ADD PRIMARY KEY (`journal_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `account_id` (`account_id`),
+  ADD KEY `group_id` (`group_id`);
 
 --
 -- Indexes for table `leads`
@@ -856,7 +893,7 @@ ALTER TABLE `supplier_product`
 -- AUTO_INCREMENT for table `account_list`
 --
 ALTER TABLE `account_list`
-  MODIFY `account_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `account_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `admin`
@@ -910,7 +947,7 @@ ALTER TABLE `employees`
 -- AUTO_INCREMENT for table `group_list`
 --
 ALTER TABLE `group_list`
-  MODIFY `accountgroup_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `group_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `inventory`
@@ -929,6 +966,12 @@ ALTER TABLE `items`
 --
 ALTER TABLE `job`
   MODIFY `job_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+
+--
+-- AUTO_INCREMENT for table `journal_entries`
+--
+ALTER TABLE `journal_entries`
+  MODIFY `journal_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `leads`
@@ -1031,6 +1074,13 @@ ALTER TABLE `employees`
 --
 ALTER TABLE `job`
   ADD CONSTRAINT `job_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Constraints for table `journal_entries`
+--
+ALTER TABLE `journal_entries`
+  ADD CONSTRAINT `journal_entries_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `group_list` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `journal_entries_ibfk_2` FOREIGN KEY (`account_id`) REFERENCES `account_list` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `leads`
