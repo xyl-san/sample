@@ -1175,6 +1175,96 @@
         </div>
     </div>
 </div>
+
+
+<!-- Schedules Modals -->
+<div class="modal fade" id="newSchedule" tabindex="-1" role="dialog" aria-labelledby="schedTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="schedTitle">Add a new Schedule</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
+                    <div class="col form-floating">
+                        <input type="time" class="form-control timeIn" name="timein" required>
+                        <label for="rate">Time In</label>
+                    </div>
+                    <div class="col form-floating">
+                        <input type="time" class="form-control timeOut" name="timeout" required>
+                        <label for="rate">Time Out</label>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end" name="schedAdd">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editSchedule" tabindex="-1" role="dialog" aria-labelledby="schedTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="schedTitle">Edit a schedule</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" method="POST" autocomplete="off">
+                    <input val="" type="hidden" class="schedule_id" name="scheduleid">
+                    <div class="col form-floating">
+                        <input type="time" class="form-control timeIn" name="timein" required>
+                        <label for="rate">Time In</label>
+                    </div>
+                    <div class="col form-floating">
+                        <input type="time" class="form-control timeOut" name="timeout" required>
+                        <label for="rate">Time Out</label>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end" name="schedEdit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteSchedule" tabindex="-1" role="dialog" aria-labelledby="schedTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="schedTitle">Delete a schedule</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="#" method="POST" enctype="multipart/form-data" autocomplete="off">
+                    <input type="hidden" class="schedule_id" name="scheduleid">
+                    <div class="text-center">
+                        <p>
+                            Are you sure you want to delete this schedule?
+                        </p>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end" name="schedDelete">Yes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Schedules Modals -->
+
+
+
 <!-- End open journal modal  -->
 
 <!-- Start Create Taxes  -->
