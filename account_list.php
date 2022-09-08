@@ -45,7 +45,7 @@
                                 <th>Opening Credit</th>
                                 <th class="opening_balance" >Opening Balance</th>
                                 <th class="tax_ids">Default Taxes</th>
-                                <th class="tax_ids">Tags</th>
+                                <th class="tag_ids">Tags</th>
                                 <th class="allowed_journal_ids">Allowed Journals</th>
                                 <th>
                                     <div class="dropdown">
