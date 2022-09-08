@@ -65,7 +65,7 @@
                                                         class="custom-control-label"> Opening Balance</label>
                                                 </div>
                                             </div>
-                                            <div class="dropdown-item">
+                                            <div class="dropdown-item"> 
                                                 <div class="form-check"><input type="checkbox" class="form-check-input"
                                                         name="tax_ids" role="menuitemcheckbox"><label
                                                         class="custom-control-label"> Default Taxes</label>
