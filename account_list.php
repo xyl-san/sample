@@ -19,12 +19,18 @@
             <div class="card">
                 <div class="card-header">
                     <button type="button" class="btn btn-primary btn-sm btn-flat mt-2" data-bs-toggle="modal"
-                        data-bs-target="#newAccountList">
+                        data-bs-target="#">
                         <span>
                             <i class="fa-solid fa-pen-to-square"></i>
                             Add New
                         </span>
                     </button>
+                   <a href="Accounting.php"><button type="button" class="btn btn-success btn-sm btn-flat mt-2" data-bs-toggle="modal">
+                        <span>
+                        <i class="fa-solid fa-square-check"></i>
+                            Done
+                        </span>
+                    </button></a>
                     <nav aria-label="breadcrumb" class="float-end mt-2">
                         <ol class="breadcrumb ">
                             <li class="breadcrumb-item"><a href="home.php">Home</a></li>
@@ -33,17 +39,16 @@
                     </nav>
                 </div>
                 <div class="card-body">
-                    <table id="report" class="table" style="width:100%">
+                    <table id="example1" class="table" style="width:100%">
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Code</th>
                                 <th>Description</th>
                                 <th>Type</th>
                                 <th>Allow Reconcilliation</th>
                                 <th>Opening Debit</th>
                                 <th>Opening Credit</th>
-                                <th class="opening_balance" >Opening Balance</th>
+                                <th class="opening_balance">Opening Balance</th>
                                 <th class="tax_ids">Default Taxes</th>
                                 <th class="tag_ids">Tags</th>
                                 <th class="allowed_journal_ids">Allowed Journals</th>
@@ -55,33 +60,27 @@
                                         </button>
                                         <div class="dropdown-menu">
                                             <div class="dropdown-item">
-                                                <div class="form-check"><input type="checkbox" id="checkbox-3259"
-                                                        class="form-check-input" name="opening_balance"
-                                                        role="menuitemcheckbox"><label for="checkbox-3259"
-                                                        class="custom-control-label"> Opening
-                                                        Balance</label>
+                                                <div class="form-check"><input type="checkbox" class="form-check-input"
+                                                        name="opening_balance" role="menuitemcheckbox"><label
+                                                        class="custom-control-label"> Opening Balance</label>
                                                 </div>
                                             </div>
                                             <div class="dropdown-item">
-                                                <div class="form-check"><input type="checkbox" id="checkbox-3260"
-                                                        class="form-check-input" name="tax_ids"
-                                                        role="menuitemcheckbox"><label for="checkbox-3260"
+                                                <div class="form-check"><input type="checkbox" class="form-check-input"
+                                                        name="tax_ids" role="menuitemcheckbox"><label
                                                         class="custom-control-label"> Default Taxes</label>
                                                 </div>
                                             </div>
                                             <div class="dropdown-item">
-                                                <div class="form-check"><input type="checkbox" id="checkbox-3261"
-                                                        class="form-check-input" name="tag_ids"
-                                                        role="menuitemcheckbox"><label for="checkbox-3261"
+                                                <div class="form-check"><input type="checkbox" class="form-check-input"
+                                                        name="tag_ids" role="menuitemcheckbox"><label
                                                         class="custom-control-label"> Tags</label>
                                                 </div>
                                             </div>
                                             <div class="dropdown-item">
-                                                <div class="form-check"><input type="checkbox" id="checkbox-3262"
-                                                        class="form-check-input" name="allowed_journal_ids"
-                                                        role="menuitemcheckbox"><label for="checkbox-3262"
-                                                        class="custom-control-label"> Allowed
-                                                        Journals</label>
+                                                <div class="form-check"><input type="checkbox" class="form-check-input"
+                                                        name="allowed_journal_ids" role="menuitemcheckbox"><label
+                                                        class="custom-control-label"> Allowed Journals</label>
                                                 </div>
                                             </div>
                                         </div>

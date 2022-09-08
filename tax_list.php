@@ -18,12 +18,18 @@
             <div class="card">
                 <div class="card-header">
                     <button type="button" class="btn btn-primary btn-sm btn-flat mt-2" data-bs-toggle="modal"
-                        data-bs-target="#newGroupList">
+                        data-bs-target="#newTaxes">
                         <span>
                             <i class="fa-solid fa-pen-to-square"></i>
                             Add New
                         </span>
                     </button>
+                    <a href="Accounting.php"><button type="button" class="btn btn-success btn-sm btn-flat mt-2" data-bs-toggle="modal">
+                        <span>
+                        <i class="fa-solid fa-square-check"></i>
+                            Done
+                        </span>
+                    </button></a>
                     <nav aria-label="breadcrumb" class="float-end mt-2">
                         <ol class="breadcrumb ">
                             <li class="breadcrumb-item"><a href="home.php">Home</a></li>
@@ -35,29 +41,33 @@
                     <table id="example1" class="table" style="width:100%">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Date Created</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Type</th>
+                                <th></th>
+                                <th>Tax Name</th>
+                                <th>Tax Type</th>
+                                <th>Tax Scope</th>
+                                <th>Label on Invoices</th>
+                                <th class="country">Country</th>
                                 <th>Status</th>
-                                <th>Action</th>
+                                <th><div class="dropdown">
+                                        <button class="btn me-md-2" type="button" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <div class="dropdown-item">
+                                                <div class="form-check"><input type="checkbox" class="form-check-input"
+                                                        name="country" role="menuitemcheckbox"><label
+                                                        class="custom-control-label"> Country</label>
+                                                </div>
+                                            </div>                 
+                                        </div>
+                                    </div>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php groupListTable();?>
+                         
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>#</th>
-                                <th>Date Created</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Type</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -111,6 +121,16 @@
             });
         })
     }
+    
+    $("input:checkbox:not(:checked)").each(function() {
+        var column = "table ." + $(this).attr("name");
+        $(column).hide();
+    });
+
+    $("input:checkbox").click(function() {
+        var column = "table ." + $(this).attr("name");
+        $(column).toggle();
+    });
     </script>
 </body>
 </html>

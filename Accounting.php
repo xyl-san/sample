@@ -18,7 +18,7 @@
         <div id="content" class="w-100">
             <div class="progress">
                 <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0"
-                    aria-valuemax="100">25%
+                    aria-valuemax="100">0%
                 </div>
             </div>
             <div class="row py-5 m-2">
@@ -53,7 +53,7 @@
                             <h5 class="card-title">Taxes</h5>
                             <p class="card-text">Set default Taxes for sales and purchase transactions.</p>
                             <div class="col-md-12 text-center">
-                                <a href="#" class="btn btn-outline-secondary">Set Taxes</a>
+                                <a href="tax_list.php" class="btn btn-outline-secondary">Set Taxes</a>
                             </div>
                         </div>
                     </div>

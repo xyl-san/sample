@@ -409,8 +409,8 @@
         </div>
     </div>
 </div>
-
 <!-- End of Adding Journal Entry -->
+
 <!-- Start Edit Journal Entry -->
 
 <!-- End EditJournal Entry -->
@@ -1068,15 +1068,16 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="accountingPeriods">Open: Journal</h5>
-                <a href="journal_entry.php"><button  type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-book"></i>
-                    Journal Entries</button></a>
+                <a href="journal_entry.php"><button type="button" class="btn btn-outline-secondary"><i
+                            class="fa-solid fa-book"></i>
+                        Journal Entries</button></a>
             </div>
             <div class="modal-body">
                 <form class="row g-3" action="#" method="POST" autocomplete="off">
 
                     <div class="col-md-12 form-floating">
                         <input type="text" class="form-control accountingPeriods" name="accountingPeriods"
-                            id="journalTransfer" required>
+                            id="journalTransfer">
                         <label for="accountingPeriods">Journal Name</label>
                     </div>
 
@@ -1116,7 +1117,7 @@
                                     </p6>
                                 </div><br>
                                 <div class="col-md-12 form-floating">
-                                    <input type="text" class="form-control text-uppercase shortCode" name="shortCode" required>
+                                    <input type="text" class="form-control text-uppercase shortCode" name="shortCode">
                                     <label for="shortCode">Short Code</label>
                                 </div><br>
                                 <div class="col-md-12 form-floating">
@@ -1175,6 +1176,75 @@
     </div>
 </div>
 <!-- End open journal modal  -->
+
+<!-- Start Create Taxes  -->
+<div class="modal fade lg-4" id="newTaxes" tabindex="-1" role="dialog" aria-labelledby="createTaxesTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createTaxesTitle">Create Taxes</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="includes/queries.php" method="POST" enctype="multipart/form-data"
+                    autocomplete="off">
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control taxName" name="taxName">
+                        <label for="taxName">Tax Name</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <select class="form-control taxScope" name="taxType" aria-label="Select taxType" id="taxType">
+                            <option value="Sales" class="taxType" selected>Sales</option>
+                            <option value="Purchased" class="taxType" selected>Purchased</option>
+                            <option value="None" class="taxType" selected>None</option>
+                            <option value="" class="taxType" selected></option>
+                        </select>
+                        <label for="taxType">Tax Type</label>
+                    </div>
+
+                    <div class="col-md-6 form-floating">
+                        <select class="form-control" name="taxComputation" aria-label="Select taxComputation"
+                            id="taxComputation">
+                            <option value="Group Taxes" class="taxComputation" selected>Group Taxes</option>
+                            <option value="Fixed" class="taxComputation" selected>Fixed</option>
+                            <option value="Percentage of Price" class="taxComputation" selected>Percentage of Price
+                            </option>
+                            <option value="Percentage of Price Tax Included" class="taxComputation" selected>Percentage
+                                of Price Tax Included</option>
+                            <option value="" class="taxComputation" selected></option>
+                        </select>
+                        <label for="taxComputation">Tax Computation</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <select class="form-control taxScope" name="taxScope" aria-label="Select taxScope"
+                            id="taxScope">
+                            <option value="Sales" class="taxScope" selected>Services</option>
+                            <option value="Purchased" class="taxScope" selected>Goods</option>
+                            <option value="" class="taxScope" selected></option>
+                        </select>
+                        <label for="taxScope">Tax Scope</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Active</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="number" class="form-control taxName" name="taxName">
+                        <label for="taxName">Tax Name</label>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-danger btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-success float-end" name="addJournalEntry">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Create Taxes -->
+
 <script>
 $('#transferInput').click(function() {
     $('#journalTransfer').val($('#journalId').val())
