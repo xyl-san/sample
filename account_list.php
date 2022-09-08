@@ -33,7 +33,7 @@
                     </nav>
                 </div>
                 <div class="card-body">
-                    <table id="example1" class="table" style="width:100%">
+                    <table id="report" class="table" style="width:100%">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -43,10 +43,14 @@
                                 <th>Allow Reconcilliation</th>
                                 <th>Opening Debit</th>
                                 <th>Opening Credit</th>
+                                <th class="opening_balance" >Opening Balance</th>
+                                <th class="tax_ids">Default Taxes</th>
+                                <th class="tax_ids">Tags</th>
+                                <th class="allowed_journal_ids">Allowed Journals</th>
                                 <th>
                                     <div class="dropdown">
-                                        <button class="btn btn-secondary me-md-2" type="button"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button class="btn me-md-2" type="button" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
                                             <i class="fa-solid fa-ellipsis-vertical"></i>
                                         </button>
                                         <div class="dropdown-menu">
@@ -141,7 +145,18 @@
 
         })
     }
+
+    $("input:checkbox:not(:checked)").each(function() {
+        var column = "table ." + $(this).attr("name");
+        $(column).hide();
+    });
+
+    $("input:checkbox").click(function() {
+        var column = "table ." + $(this).attr("name");
+        $(column).toggle();
+    });
     </script>
+
 </body>
 
 </html>
