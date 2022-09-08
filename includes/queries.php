@@ -271,6 +271,91 @@ function attendanceEdit(){
 }
 
 // Attendance 
+
+// Schedules
+
+function scheduleTable(){
+  include 'conn.php';
+  $sql = "SELECT schedule_id, time_in, time_out FROM schedules WHERE delete_flag = '0'";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+      ?>
+      <tr>
+          <td><?php echo $row['time_in']; ?></td>
+          <td><?php echo $row['time_out'];?></td>
+          <td>
+              <button class="btn btn-success btn-sm schedEdit btn-flat" data-id="<?php echo $row['schedule_id']; ?>"><i class="fa fa-edit"></i> Edit</button>
+              <button class="btn btn-danger btn-sm schedDelete btn-flat" data-id="<?php echo $row['schedule_id']; ?>"><i class="fa fa-trash"></i> Delete</button>
+          </td>
+      </tr>
+      <?php
+  }
+  $conn->close();
+}
+
+if (isset($_POST['schedAdd'])){
+  scheduleAdd();
+}
+
+function scheduleAdd(){
+  if(isset($_POST['schedAdd'])){
+    include 'conn.php';
+    $time_in = $_POST['timein'];
+    $time_out = $_POST['timeout'];
+
+    $sql = "INSERT INTO schedules (time_in, time_out, created_on) VALUES ('$time_in', '$time_out', NOW())";
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+  }
+  $conn->close();
+  header('location: employees_list.php');
+}
+
+if (isset($_POST['schedEdit'])){
+  scheduleEdit();
+}
+
+function scheduleEdit(){
+  if(isset($_POST['schedEdit'])){
+    include 'conn.php';
+    $schedule_id = $_POST['scheduleid'];
+    $time_in = $_POST['timein'];
+    $time_out = $_POST['timeout'];
+
+    $sql = "UPDATE schedules SET time_in = '$time_in', time_out = '$time_out', updated_on = NOW() WHERE schedule_id = '$schedule_id'";
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+  }
+  $conn->close();
+  header('location: employees_list.php');
+}
+
+if(isset($_POST['schedDelete'])){
+  include 'conn.php';
+  $schedule_id = $_POST['scheduleid'];
+
+  $sql = "UPDATE schedules SET delete_flag = 1 WHERE schedule_id = '$schedule_id'";
+  if($conn->query($sql)){
+    echo "success";
+  }
+  else{
+    echo "error";
+  }
+  $conn->close();
+  header('location: employees_list.php');
+}
+
+// Schedules
+
+
 ?>
 
 <!-- Department -->
@@ -1005,24 +1090,4 @@ function inventoryTable(){
   }
   $conn->close();
 }
-
-function scheduleTable(){
-  include 'conn.php';
-  $sql = "SELECT schedule_id, time_in, time_out FROM schedules WHERE delete_flag = '0'";
-  $query = $conn->query($sql);
-  while($row = $query->fetch_assoc()){
-      ?>
-      <tr>
-          <td><?php echo $row['time_in']; ?></td>
-          <td><?php echo $row['time_out'];?></td>
-          <td>
-              <button class="btn btn-success btn-sm schedEdit btn-flat" data-id="<?php echo $row['schedule_id']; ?>"><i class="fa fa-edit"></i> Edit</button>
-              <button class="btn btn-danger btn-sm schedDelete btn-flat" data-id="<?php echo $row['schedule_id']; ?>"><i class="fa fa-trash"></i> Delete</button>
-          </td>
-      </tr>
-      <?php
-  }
-  $conn->close();
-}
-
 ?>

@@ -227,11 +227,8 @@
                 dataType: 'json',
                 success: function(response) {
                     $('.schedule_id').val(response.schedule_id);
-                    $('.employeeSelection').val(response.firstname + ' ' + response.lastname);
-                    $('.scheduleSelection').val(response.time_in + ' ' + response.time_out);
-                    $('.delete_schedule').html(response.employee_code + ' ' + response.time_in +
-                        ' ' + response.time_out);
-
+                    $('.timeIn').val(response.time_in);
+                    $('.timeOut').val(response.time_out);
                 }
             });
 
