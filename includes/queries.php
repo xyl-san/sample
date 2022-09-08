@@ -1174,7 +1174,6 @@ function inventoryTable(){
     <td><?php echo $row['description'];?></td>
     <td><?php echo $row['quantity'];?></td>
     <td><?php echo date('h:i A', strtotime($row['updated_on'])) ?></td>
-
     <td>
         <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['inventory_id']; ?>"><i
                 class="fa fa-edit"></i> Edit</button>

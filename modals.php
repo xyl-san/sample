@@ -1270,7 +1270,7 @@
 <!-- Start Create Taxes  -->
 <div class="modal fade lg-4" id="newTaxes" tabindex="-1" role="dialog" aria-labelledby="createTaxesTitle"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="createTaxesTitle">Create Taxes</h5>
@@ -1316,7 +1316,7 @@
                         </select>
                         <label for="taxScope">Tax Scope</label>
                     </div>
-                    <div class="form-check form-switch">
+                    <div class="col-md-6 form-check form-switch">
                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
                         <label class="form-check-label" for="flexSwitchCheckChecked">Active</label>
                     </div>
@@ -1324,6 +1324,79 @@
                         <input type="number" class="form-control taxName" name="taxName">
                         <label for="taxName">Tax Name</label>
                     </div>
+
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="taxDefinition-tab" data-bs-toggle="tab"
+                                data-bs-target="#taxDefinition" type="button" role="tab" aria-controls="taxDefinition"
+                                aria-selected="true">Definitions</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="advanceOptions-tab" data-bs-toggle="tab"
+                                data-bs-target="#advanceOptions" type="button" role="tab" aria-controls="advanceOptions"
+                                aria-selected="false">Advance Options</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+
+                        <div class="tab-pane fade show active" id="taxDefinition" role="tabpanel"
+                            aria-labelledby="taxDefinition-tab">
+                            <div>
+                                <div>
+                                    <p6>
+                                        Distribution for Invoices
+                                    </p6>
+                                </div><br>
+                                <div class="col-md-12 form-floating">
+                                    <input type="text" class="form-control text-uppercase shortCode" name="shortCode">
+                                    <label for="shortCode">Short Code</label>
+                                </div><br>
+                                <div class="col-md-12 form-floating">
+                                    <select class="form-control currency" name="currency" aria-label="Select account"
+                                        id="accountStatus">
+                                        <option value="2" class="currencyId" selected>PHP</option>
+                                        <option value="1" class="currencyId" selected>USD</option>
+                                        <option value="" class="currencyId" selected>--Select--</option>
+                                    </select>
+                                    <label for="Journal ">Currency</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="advanceOptions" role="tabpanel"
+                            aria-labelledby="advanceOptions-tab">
+                            <div>
+                                <div>
+                                    <p6>
+                                        Control-Access
+                                    </p6>
+                                </div><br>
+                                <div class="col-md-12 form-floating">
+                                    <select class="form-control" name="accountListDebit" aria-label="Select account"
+                                        id="account_id">
+                                        <option value="" class="accounListDebitSelection" selected>- Select -</option>
+                                        <?php accountListSelection();?>
+                                    </select>
+                                    <label for="accountDebit">Allowed account types</label>
+                                </div><br>
+                                <div class="col-md-12 form-floating">
+                                    <select class="form-control" name="accountListDebit" aria-label="Select account"
+                                        id="account_id">
+                                        <option value="" class="accounListDebitSelection" selected>- Select -</option>
+                                        <?php accountListSelection();?>
+                                    </select>
+                                    <label for="accountDebit">Allowed account</label>
+                                </div><br>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="checkBoxEntry">
+                                    <label class="form-check-label" for="checkBoxEntry">
+                                        Lock Posted Entries with Hash
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div><br>
+
                     <div class="mb-2">
                         <button type="button" data-bs-dismiss="modal" class="btn btn-danger btn-primary">Cancel</button>
                         <button type="submit" class="btn btn-success float-end" name="addJournalEntry">Save</button>

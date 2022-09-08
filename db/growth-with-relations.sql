@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 05, 2022 at 02:50 AM
+-- Generation Time: Sep 08, 2022 at 08:15 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -29,7 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `account_list` (
   `account_id` int(30) NOT NULL,
-  `name` text NOT NULL,
+  `code` varchar(50) NOT NULL,
+  `account_name` text NOT NULL,
   `description` text NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `delete_flag` tinyint(1) NOT NULL DEFAULT 0,
@@ -41,56 +42,58 @@ CREATE TABLE `account_list` (
 -- Dumping data for table `account_list`
 --
 
-INSERT INTO `account_list` (`account_id`, `name`, `description`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
-(1, 'Cash', 'Cash', 1, 0, '2022-02-01 10:09:26', NULL),
-(2, 'Petty Cash', 'Petty Cash', 1, 0, '2022-02-01 10:09:40', NULL),
-(3, 'Cash Equivalents', 'Cash Equivalents', 1, 0, '2022-02-01 10:09:56', NULL),
-(4, 'Accounts Receivable', 'Accounts Receivable', 1, 0, '2022-02-01 10:10:22', NULL),
-(5, 'Interest Receivable', 'Interest Receivable', 1, 0, '2022-02-01 10:10:57', NULL),
-(6, 'Office Supplies', 'Office Supplies', 1, 0, '2022-02-01 10:11:13', NULL),
-(7, 'Accounts Payable', 'Accounts Payable', 1, 0, '2022-02-01 10:11:55', NULL),
-(8, 'Insurance Payable', 'Insurance Payable', 1, 0, '2022-02-01 10:12:07', NULL),
-(9, 'Interest Payable', 'Interest Payable', 1, 0, '2022-02-01 10:12:20', NULL),
-(10, 'Legal Fees Payable', 'Legal Fees Payable', 1, 0, '2022-02-01 10:12:35', NULL),
-(11, 'Office Salaries Payable', 'Office Salaries Payable', 1, 0, '2022-02-01 10:12:51', NULL),
-(12, 'Salaries Payable', 'Salaries Payable', 1, 0, '2022-02-01 10:13:03', NULL),
-(13, 'Wages Payable', 'Wages Payable', 1, 0, '2022-02-01 10:13:24', NULL),
-(14, 'Owner’s Capital', 'Owner’s Capital', 1, 0, '2022-02-01 10:13:54', NULL),
-(15, 'Owner’s Withdrawals', 'Owner’s Withdrawals', 1, 0, '2022-02-01 10:14:04', NULL),
-(16, 'Common Stock, Par Value', 'Common Stock, Par Value', 1, 0, '2022-02-01 10:14:25', NULL),
-(17, 'Common stock, no par value', 'Common stock, no par value', 1, 0, '2022-02-01 10:14:34', NULL),
-(18, 'Common stock dividend distributable', 'Common stock dividend distributable', 1, 0, '2022-02-01 10:14:50', NULL),
-(19, 'Paid-in capital in excess of par value, Common stock', 'Paid-in capital in excess of par value, Common\r\nstock', 1, 0, '2022-02-01 10:15:02', NULL),
-(20, 'Paid-in capital in excess of stated value, No-par common stock', 'Paid-in capital in excess of stated value, No-par\r\ncommon stock', 1, 0, '2022-02-01 10:15:11', NULL),
-(21, 'Retained earnings', 'Retained earnings', 1, 0, '2022-02-01 10:15:31', NULL),
-(22, 'Cash dividends', 'Cash dividends', 1, 0, '2022-02-01 10:15:44', NULL),
-(23, 'Stock dividends', 'Stock dividends', 1, 0, '2022-02-01 10:15:58', NULL),
-(24, 'Treasury stock, Common', 'Treasury stock, Common', 1, 0, '2022-02-01 10:16:48', NULL),
-(25, 'Unrealized gain-Equity', 'Unrealized gain-Equity', 1, 0, '2022-02-01 10:16:57', NULL),
-(26, 'Unrealized loss-Equity', 'Unrealized loss-Equity', 1, 0, '2022-02-01 10:17:05', NULL),
-(27, 'Fees earned from product one', 'Fees earned from product one', 1, 0, '2022-02-01 10:17:27', NULL),
-(28, 'Fees earned from product two', 'Fees earned from product two', 1, 0, '2022-02-01 10:17:43', NULL),
-(29, 'Service revenue one', 'Service revenue one', 1, 0, '2022-02-01 10:17:55', NULL),
-(30, 'Service revenue two', 'Service revenue two', 1, 0, '2022-02-01 10:18:04', NULL),
-(31, 'Commissions earned', 'Commissions earned', 1, 0, '2022-02-01 10:18:14', NULL),
-(32, 'Rent revenue', 'Rent revenue', 1, 0, '2022-02-01 10:18:26', NULL),
-(33, 'Dividends revenue', 'Dividends revenue', 1, 0, '2022-02-01 10:18:40', NULL),
-(34, 'Earnings from investments in “blank”', 'Earnings from investments in “blank”', 1, 0, '2022-02-01 10:18:51', NULL),
-(35, 'Interest revenue', 'Interest revenue', 1, 0, '2022-02-01 10:19:03', NULL),
-(36, 'Sinking fund earnings', 'Sinking fund earnings', 1, 0, '2022-02-01 11:41:57', NULL),
-(37, 'Amortization expense', 'Amortization expense', 1, 0, '2022-02-01 11:42:08', NULL),
-(38, 'Depletion expense', 'Depletion expense', 1, 0, '2022-02-01 11:42:16', NULL),
-(39, 'Depreciation expense-Automobiles', 'Depreciation expense-Automobiles', 1, 0, '2022-02-01 11:42:25', NULL),
-(40, 'Depreciation expense-Building', 'Depreciation expense-Building', 1, 0, '2022-02-01 11:42:34', NULL),
-(41, 'Depreciation expense-Furniture', 'Depreciation expense-Furniture', 1, 0, '2022-02-01 11:43:02', NULL),
-(42, 'Office salaries expense', 'Office salaries expense', 1, 0, '2022-02-01 11:43:12', NULL),
-(43, 'Sales salaries expense', 'Sales salaries expense', 1, 0, '2022-02-01 11:43:21', NULL),
-(44, 'Salaries expense', 'Salaries expense', 1, 0, '2022-02-01 11:43:31', NULL),
-(45, 'Income taxes expense', 'Income taxes expense', 1, 0, '2022-02-01 11:43:44', NULL),
-(46, 'Warranty expense', 'Warranty expense', 1, 0, '2022-02-01 11:44:01', NULL),
-(47, 'Utilities expense', 'Utilities expense', 1, 0, '2022-02-01 11:44:10', NULL),
-(48, 'Selling expense', 'Selling expense', 1, 0, '2022-02-01 11:44:23', NULL),
-(50, 'Discounts', 'Discounts', 1, 0, '2022-08-23 17:46:44', '2022-08-23 17:49:13');
+INSERT INTO `account_list` (`account_id`, `code`, `account_name`, `description`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
+(1, '', 'Cash', 'Cash', 1, 0, '2022-02-01 10:09:26', NULL),
+(2, '', 'Petty Cash', 'Petty Cash', 1, 0, '2022-02-01 10:09:40', NULL),
+(3, '', 'Cash Equivalents', 'Cash Equivalents', 1, 0, '2022-02-01 10:09:56', NULL),
+(4, '', 'Accounts Receivable', 'Accounts Receivable', 1, 0, '2022-02-01 10:10:22', NULL),
+(5, '', 'Interest Receivable', 'Interest Receivable', 1, 0, '2022-02-01 10:10:57', NULL),
+(6, '', 'Office Supplies', 'Office Supplies', 1, 0, '2022-02-01 10:11:13', NULL),
+(7, '', 'Accounts Payable', 'Accounts Payable', 1, 0, '2022-02-01 10:11:55', NULL),
+(8, '', 'Insurance Payable', 'Insurance Payable', 1, 0, '2022-02-01 10:12:07', NULL),
+(9, '', 'Interest Payable', 'Interest Payable', 1, 0, '2022-02-01 10:12:20', NULL),
+(10, '', 'Legal Fees Payable', 'Legal Fees Payable', 1, 0, '2022-02-01 10:12:35', NULL),
+(11, '', 'Office Salaries Payable', 'Office Salaries Payable', 1, 0, '2022-02-01 10:12:51', NULL),
+(12, '', 'Salaries Payable', 'Salaries Payable', 1, 0, '2022-02-01 10:13:03', NULL),
+(13, '', 'Wages Payable', 'Wages Payable', 1, 0, '2022-02-01 10:13:24', NULL),
+(14, '', 'Owner’s Capital', 'Owner’s Capital', 1, 0, '2022-02-01 10:13:54', NULL),
+(15, '', 'Owner’s Withdrawals', 'Owner’s Withdrawals', 1, 0, '2022-02-01 10:14:04', NULL),
+(16, '', 'Common Stock, Par Value', 'Common Stock, Par Value', 1, 0, '2022-02-01 10:14:25', NULL),
+(17, '', 'Common stock, no par value', 'Common stock, no par value', 1, 0, '2022-02-01 10:14:34', NULL),
+(18, '', 'Common stock dividend distributable', 'Common stock dividend distributable', 1, 0, '2022-02-01 10:14:50', NULL),
+(19, '', 'Paid-in capital in excess of par value, Common stock', 'Paid-in capital in excess of par value, Common\r\nstock', 1, 0, '2022-02-01 10:15:02', NULL),
+(20, '', 'Paid-in capital in excess of stated value, No-par common stock', 'Paid-in capital in excess of stated value, No-par\r\ncommon stock', 1, 0, '2022-02-01 10:15:11', NULL),
+(21, '', 'Retained earnings', 'Retained earnings', 1, 0, '2022-02-01 10:15:31', NULL),
+(22, '', 'Cash dividends', 'Cash dividends', 1, 0, '2022-02-01 10:15:44', NULL),
+(23, '', 'Stock dividends', 'Stock dividends', 1, 0, '2022-02-01 10:15:58', NULL),
+(24, '', 'Treasury stock, Common', 'Treasury stock, Common', 1, 0, '2022-02-01 10:16:48', NULL),
+(25, '', 'Unrealized gain-Equity', 'Unrealized gain-Equity', 1, 0, '2022-02-01 10:16:57', NULL),
+(26, '', 'Unrealized loss-Equity', 'Unrealized loss-Equity', 1, 0, '2022-02-01 10:17:05', NULL),
+(27, '', 'Fees earned from product one', 'Fees earned from product one', 1, 0, '2022-02-01 10:17:27', NULL),
+(28, '', 'Fees earned from product two', 'Fees earned from product two', 1, 0, '2022-02-01 10:17:43', NULL),
+(29, '', 'Service revenue one', 'Service revenue one', 1, 0, '2022-02-01 10:17:55', NULL),
+(30, '', 'Service revenue two', 'Service revenue two', 1, 0, '2022-02-01 10:18:04', NULL),
+(31, '', 'Commissions earned', 'Commissions earned', 1, 0, '2022-02-01 10:18:14', NULL),
+(32, '', 'Rent revenue', 'Rent revenue', 1, 0, '2022-02-01 10:18:26', NULL),
+(33, '', 'Dividends revenue', 'Dividends revenue', 1, 0, '2022-02-01 10:18:40', NULL),
+(34, '', 'Earnings from investments in “blank”', 'Earnings from investments in “blank”', 1, 0, '2022-02-01 10:18:51', NULL),
+(35, '', 'Interest revenue', 'Interest revenue', 1, 0, '2022-02-01 10:19:03', NULL),
+(36, '', 'Sinking fund earnings', 'Sinking fund earnings', 1, 0, '2022-02-01 11:41:57', NULL),
+(37, '', 'Amortization expense', 'Amortization expense', 1, 0, '2022-02-01 11:42:08', NULL),
+(38, '', 'Depletion expense', 'Depletion expense', 1, 0, '2022-02-01 11:42:16', NULL),
+(39, '', 'Depreciation expense-Automobiles', 'Depreciation expense-Automobiles', 1, 0, '2022-02-01 11:42:25', NULL),
+(40, '', 'Depreciation expense-Building', 'Depreciation expense-Building', 1, 0, '2022-02-01 11:42:34', NULL),
+(41, '', 'Depreciation expense-Furniture', 'Depreciation expense-Furniture', 1, 0, '2022-02-01 11:43:02', NULL),
+(42, '', 'Office salaries expense', 'Office salaries expense', 1, 0, '2022-02-01 11:43:12', NULL),
+(43, '', 'Sales salaries expense', 'Sales salaries expense', 1, 0, '2022-02-01 11:43:21', NULL),
+(44, '', 'Salaries expense', 'Salaries expense', 1, 0, '2022-02-01 11:43:31', NULL),
+(45, '', 'Income taxes expense', 'Income taxes expense', 1, 0, '2022-02-01 11:43:44', NULL),
+(46, '', 'Warranty expense', 'Warranty expense', 1, 0, '2022-02-01 11:44:01', NULL),
+(47, '', 'Utilities expense', 'Utilities expense', 1, 0, '2022-02-01 11:44:10', NULL),
+(48, '', 'Selling expense', 'Selling expense', 1, 0, '2022-02-01 11:44:23', NULL),
+(50, '', 'Discounts', 'Discounts', 1, 0, '2022-08-23 17:46:44', '2022-08-23 17:49:13'),
+(52, '', 'sadassad', 'sasaddsa', 0, 0, '2022-09-08 11:09:48', NULL),
+(53, '', 'aaac', 'caca', 1, 0, '2022-09-08 11:15:09', NULL);
 
 -- --------------------------------------------------------
 
@@ -265,7 +268,7 @@ INSERT INTO `employees` (`employee_id`, `department_id`, `job_id`, `schedule_id`
 
 CREATE TABLE `group_list` (
   `group_id` int(30) NOT NULL,
-  `name` text NOT NULL,
+  `group_name` text NOT NULL,
   `description` text NOT NULL,
   `type` tinyint(1) NOT NULL DEFAULT 1 COMMENT '0= Debit, 1= Credit',
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '0=Inactive, 1= Active',
@@ -278,7 +281,7 @@ CREATE TABLE `group_list` (
 -- Dumping data for table `group_list`
 --
 
-INSERT INTO `group_list` (`group_id`, `name`, `description`, `type`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
+INSERT INTO `group_list` (`group_id`, `group_name`, `description`, `type`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
 (1, 'Assets', 'The cash, inventory, and other resources you owned.', 0, 1, 0, '2022-02-01 09:56:35', '2022-08-29 13:33:53'),
 (2, 'Revenue', 'Cash coming into your business through sales and other types of payments', 1, 1, 0, '2022-02-01 09:57:45', '2022-09-02 20:55:05'),
 (3, 'Expenses', 'The amount you’re spending on services and other items, like payroll, utility bills, and fees for contractors.', 0, 1, 0, '2022-02-01 09:58:09', '2022-09-02 20:55:11'),
@@ -360,10 +363,7 @@ CREATE TABLE `journal_entries` (
   `code` varchar(100) NOT NULL,
   `journal_date` date NOT NULL,
   `description` text NOT NULL,
-  `account_id` int(30) NOT NULL,
-  `group_id` int(30) NOT NULL,
-  `amount` bigint(20) NOT NULL,
-  `user_id` int(30) DEFAULT NULL,
+  `employee_id` int(30) DEFAULT NULL,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -372,11 +372,38 @@ CREATE TABLE `journal_entries` (
 -- Dumping data for table `journal_entries`
 --
 
-INSERT INTO `journal_entries` (`journal_id`, `code`, `journal_date`, `description`, `account_id`, `group_id`, `amount`, `user_id`, `date_created`, `date_updated`) VALUES
-(39, 'xZZxxxZ', '2022-09-01', 'xZxxxxzXx', 7, 1, 100, 12, '2022-09-03 20:02:44', NULL),
-(40, 'xZZxxxZ', '2022-09-01', 'xZxxxxzXx', 4, 2, 100, NULL, '2022-09-03 20:02:44', NULL),
-(43, 'ffafff', '2022-09-29', 'fafaffaf', 7, 1, 100, NULL, '2022-09-03 20:05:54', NULL),
-(44, 'ffafff', '2022-09-29', 'fafaffaf', 7, 1, 100, NULL, '2022-09-03 20:06:02', NULL);
+INSERT INTO `journal_entries` (`journal_id`, `code`, `journal_date`, `description`, `employee_id`, `date_created`, `date_updated`) VALUES
+(3, '202202-00001', '2022-02-01', 'Capital', 1, '2022-02-01 14:08:50', NULL),
+(6, '202208-00001', '2022-08-23', 'Purchase Computers', 5, '2022-08-23 16:24:22', NULL),
+(9, '202208-00004', '2022-08-23', 'Furniture', 6, '2022-08-23 17:50:42', NULL),
+(12, 'TVR085793614', '2022-09-08', 'Furniture', NULL, '2022-09-05 18:06:30', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `journal_items`
+--
+
+CREATE TABLE `journal_items` (
+  `journal_id` int(30) NOT NULL,
+  `account_id` int(30) NOT NULL,
+  `group_id` int(30) NOT NULL,
+  `amount` float NOT NULL DEFAULT 0,
+  `date_created` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `journal_items`
+--
+
+INSERT INTO `journal_items` (`journal_id`, `account_id`, `group_id`, `amount`, `date_created`) VALUES
+(3, 1, 1, 15000, '2022-02-01 14:52:56'),
+(3, 14, 5, 15000, '2022-02-01 14:52:56'),
+(6, 1, 1, 25000, '2022-08-23 16:24:22'),
+(6, 4, 4, 25000, '2022-08-23 16:24:22'),
+(9, 1, 1, 24000, '2022-08-23 17:50:42'),
+(9, 50, 1, 1000, '2022-08-23 17:50:42'),
+(9, 4, 4, 25000, '2022-08-23 17:50:42');
 
 -- --------------------------------------------------------
 
@@ -399,13 +426,13 @@ CREATE TABLE `leads` (
 --
 
 INSERT INTO `leads` (`lead_id`, `name`, `email`, `contact_number`, `description`, `stage_id`, `delete_flag`) VALUES
-(6, 'Roge Hardware Supplies', 'roge123@gmail.com', 2147483647, 'Hardware supplies of offices and home', 5, 0),
-(7, 'Sam Boutique', 'sambal2022@gmail.com', 2147483647, 'Food and Drugs Supplies', 1, 0),
-(8, 'Mondragon Pet shop', 'donmondragon050@gmail.com', 2147483647, 'Nationwide Pets Breed', 4, 0),
+(6, 'Roge Hardware Supplies', 'roge123@gmail.com', 2147483647, 'Hardware supplies of offices and home', 1, 0),
+(7, 'Sam Boutique', 'sambal2022@gmail.com', 2147483647, 'Food and Drugs Supplies', 2, 1),
+(8, 'Mondragon Pet shop', 'donmondragon050@gmail.com', 2147483647, 'Nationwide Pets Breed', 2, 1),
 (9, 'Awesome Appliances ', 'awesomeappliances0808@gmail.com', 2147483647, 'Branded of all Appliances', 3, 0),
-(10, 'Coffee Shop', 'miyacalifacoffeeshop@gmail.com', 2147483647, 'We serves coffee of various types, notably espresso, latte, and cappuccino.', 2, 0),
-(12, 'Amazing Super Market', 'amazingsupermarket@gmail.com', 2147483647, '', 1, 0),
-(13, 'Huawei', 'a@g.com', 423, '', 5, 0);
+(10, 'Coffee Shop', 'miyacalifacoffeeshop@gmail.com', 2147483647, 'We serves coffee of various types, notably espresso, latte, and cappuccino.', 2, 1),
+(12, 'Amazing Super Market', 'amazingsupermarket@gmail.com', 2147483647, '', 1, 1),
+(13, 'Huawei', 'a@g.com', 423, '', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -787,7 +814,13 @@ ALTER TABLE `job`
 --
 ALTER TABLE `journal_entries`
   ADD PRIMARY KEY (`journal_id`),
-  ADD KEY `user_id` (`user_id`),
+  ADD KEY `user_id` (`employee_id`);
+
+--
+-- Indexes for table `journal_items`
+--
+ALTER TABLE `journal_items`
+  ADD KEY `journal_id` (`journal_id`),
   ADD KEY `account_id` (`account_id`),
   ADD KEY `group_id` (`group_id`);
 
@@ -893,7 +926,7 @@ ALTER TABLE `supplier_product`
 -- AUTO_INCREMENT for table `account_list`
 --
 ALTER TABLE `account_list`
-  MODIFY `account_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `account_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `admin`
@@ -965,13 +998,13 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `job`
 --
 ALTER TABLE `job`
-  MODIFY `job_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `job_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `journal_entries`
 --
 ALTER TABLE `journal_entries`
-  MODIFY `journal_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `journal_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `leads`
@@ -1074,13 +1107,6 @@ ALTER TABLE `employees`
 --
 ALTER TABLE `job`
   ADD CONSTRAINT `job_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
-
---
--- Constraints for table `journal_entries`
---
-ALTER TABLE `journal_entries`
-  ADD CONSTRAINT `journal_entries_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `group_list` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `journal_entries_ibfk_2` FOREIGN KEY (`account_id`) REFERENCES `account_list` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `leads`
