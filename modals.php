@@ -1177,6 +1177,8 @@
 </div>
 
 
+<!-- End open journal modal  -->
+
 <!-- Schedules Modals -->
 <div class="modal fade" id="newSchedule" tabindex="-1" role="dialog" aria-labelledby="schedTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -1261,10 +1263,6 @@
     </div>
 </div>
 <!-- Schedules Modals -->
-
-
-
-<!-- End open journal modal  -->
 
 <!-- Start Create Taxes  -->
 <div class="modal fade lg-4" id="newTaxes" tabindex="-1" role="dialog" aria-labelledby="createTaxesTitle"

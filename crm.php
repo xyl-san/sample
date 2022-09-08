@@ -68,8 +68,7 @@
                                 <?php 
                                     foreach($leadList as $key => $li){
                                 ?>
-                                <div class="card ui-widget-content border m-3 listitems "
-                                    data-itemid=<?php echo $li['lead_id'] ?>>
+                                <div class="card ui-widget-content border m-3 listitems " data-itemid=<?php echo $li['lead_id'] ?> style="border-left: 10px #7386D5;">
                                     <div class="card-header prospect-header">
                                         <p class="fw-bolder d-inline-block mx-auto"><?php echo $li['name'] ?></p>
                                         <div class="prospect-btn-delete">
@@ -83,16 +82,26 @@
                                                 id="colordropdown" data-bs-toggle="dropdown">
                                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                                                 <ul class="dropdown-menu" aria-labelledby="colordropdown">
-                                                    <li class="red"><img src="assets/icons/red.png" style="width: 30px;  height: 30px;"></li>
-                                                    <li class="blue"><img src="assets/icons/blue.png" style="width: 30px;  height: 30px;"></li>
-                                                    <li class="green"><img src="assets/icons/green.png" style="width: 30px;  height: 30px;"></li>
-                                                    <li class="black"><img src="assets/icons/black.png" style="width: 30px;  height: 30px;"></li>
-                                                    <li class="gold"><img src="assets/icons/gold.png" style="width: 30px;  height: 30px;"></li>
-                                                    <li class="brown"><img src="assets/icons/brown.png" style="width: 30px;  height: 30px;"></li>
-                                                    <li class="indigo"><img src="assets/icons/indigo.png" style="width: 30px;  height: 30px;"></li>
-                                                    <li class="maroon"><img src="assets/icons/maroon.png" style="width: 30px;  height: 30px;"></li>
-                                                    <li class="orange"><img src="assets/icons/orange.png" style="width: 30px;  height: 30px;"></li>
-                                                    <li class="pink"><img src="assets/icons/pink.png" style="width: 30px;  height: 30px;"></li>
+                                                    <li class="red"><img src="assets/icons/red.png"
+                                                            style="width: 30px;  height: 30px;"></li>
+                                                    <li class="blue"><img src="assets/icons/blue.png"
+                                                            style="width: 30px;  height: 30px;"></li>
+                                                    <li class="green"><img src="assets/icons/green.png"
+                                                            style="width: 30px;  height: 30px;"></li>
+                                                    <li class="black"><img src="assets/icons/black.png"
+                                                            style="width: 30px;  height: 30px;"></li>
+                                                    <li class="gold"><img src="assets/icons/gold.png"
+                                                            style="width: 30px;  height: 30px;"></li>
+                                                    <li class="brown"><img src="assets/icons/brown.png"
+                                                            style="width: 30px;  height: 30px;"></li>
+                                                    <li class="indigo"><img src="assets/icons/indigo.png"
+                                                            style="width: 30px;  height: 30px;"></li>
+                                                    <li class="maroon"><img src="assets/icons/maroon.png"
+                                                            style="width: 30px;  height: 30px;"></li>
+                                                    <li class="orange"><img src="assets/icons/orange.png"
+                                                            style="width: 30px;  height: 30px;"></li>
+                                                    <li class="pink"><img src="assets/icons/pink.png"
+                                                            style="width: 30px;  height: 30px;"></li>
                                                 </ul>
                                         </div>
                                     </div>
@@ -128,11 +137,16 @@
                                                 id="colordropdown" data-bs-toggle="dropdown">
                                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                                                 <ul class="dropdown-menu" aria-labelledby="colordropdown">
-                                                    <li class="red"><img src="assets/icons/red.png" style="width: 25px;  height: 25px;"></li>
-                                                    <li class="blue"><img src="assets/icons/blue.png" style="width: 25px;  height: 25px;"></li>
-                                                    <li class="green"><img src="assets/icons/green.png" style="width: 25px;  height: 25px;"></li>
-                                                    <li class="black"><img src="assets/icons/black.png" style="width: 25px;  height: 25px;"></li>
-                                                    <li class="gold"><img src="assets/icons/gold.png" style="width: 25px;  height: 25px;"></li>
+                                                    <li class="red"><img src="assets/icons/red.png"
+                                                            style="width: 25px;  height: 25px;"></li>
+                                                    <li class="blue"><img src="assets/icons/blue.png"
+                                                            style="width: 25px;  height: 25px;"></li>
+                                                    <li class="green"><img src="assets/icons/green.png"
+                                                            style="width: 25px;  height: 25px;"></li>
+                                                    <li class="black"><img src="assets/icons/black.png"
+                                                            style="width: 25px;  height: 25px;"></li>
+                                                    <li class="gold"><img src="assets/icons/gold.png"
+                                                            style="width: 25px;  height: 25px;"></li>
                                                 </ul>
                                         </div>
                                     </div>
@@ -170,11 +184,16 @@
                                                 id="colordropdown" data-bs-toggle="dropdown">
                                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                                                 <ul class="dropdown-menu" aria-labelledby="colordropdown">
-                                                    <li class="red"><img src="assets/icons/red.png" style="width: 25px;  height: 25px;"></li>
-                                                    <li class="blue"><img src="assets/icons/blue.png" style="width: 25px;  height: 25px;"></li>
-                                                    <li class="green"><img src="assets/icons/green.png" style="width: 25px;  height: 25px;"></li>
-                                                    <li class="black"><img src="assets/icons/black.png" style="width: 25px;  height: 25px;"></li>
-                                                    <li class="gold"><img src="assets/icons/gold.png" style="width: 25px;  height: 25px;"></li>
+                                                    <li class="red"><img src="assets/icons/red.png"
+                                                            style="width: 25px;  height: 25px;"></li>
+                                                    <li class="blue"><img src="assets/icons/blue.png"
+                                                            style="width: 25px;  height: 25px;"></li>
+                                                    <li class="green"><img src="assets/icons/green.png"
+                                                            style="width: 25px;  height: 25px;"></li>
+                                                    <li class="black"><img src="assets/icons/black.png"
+                                                            style="width: 25px;  height: 25px;"></li>
+                                                    <li class="gold"><img src="assets/icons/gold.png"
+                                                            style="width: 25px;  height: 25px;"></li>
                                                 </ul>
                                         </div>
                                     </div>
@@ -211,11 +230,16 @@
                                                 id="colordropdown" data-bs-toggle="dropdown">
                                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                                                 <ul class="dropdown-menu" aria-labelledby="colordropdown">
-                                                    <li class="red"><img src="assets/icons/red.png" style="width: 25px;  height: 25px;"></li>
-                                                    <li class="blue"><img src="assets/icons/blue.png" style="width: 25px;  height: 25px;"></li>
-                                                    <li class="green"><img src="assets/icons/green.png" style="width: 25px;  height: 25px;"></li>
-                                                    <li class="black"><img src="assets/icons/black.png" style="width: 25px;  height: 25px;"></li>
-                                                    <li class="gold"><img src="assets/icons/gold.png" style="width: 25px;  height: 25px;"></li>
+                                                    <li class="red"><img src="assets/icons/red.png"
+                                                            style="width: 25px;  height: 25px;"></li>
+                                                    <li class="blue"><img src="assets/icons/blue.png"
+                                                            style="width: 25px;  height: 25px;"></li>
+                                                    <li class="green"><img src="assets/icons/green.png"
+                                                            style="width: 25px;  height: 25px;"></li>
+                                                    <li class="black"><img src="assets/icons/black.png"
+                                                            style="width: 25px;  height: 25px;"></li>
+                                                    <li class="gold"><img src="assets/icons/gold.png"
+                                                            style="width: 25px;  height: 25px;"></li>
                                                 </ul>
                                         </div>
                                     </div>
@@ -251,11 +275,16 @@
                                                 id="colordropdown" data-bs-toggle="dropdown">
                                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                                                 <ul class="dropdown-menu" aria-labelledby="colordropdown">
-                                                    <li class="red"><img src="assets/icons/red.png" style="width: 25px;  height: 25px;"></li>
-                                                    <li class="blue"><img src="assets/icons/blue.png" style="width: 25px;  height: 25px;"></li>
-                                                    <li class="green"><img src="assets/icons/green.png" style="width: 25px;  height: 25px;"></li>
-                                                    <li class="black"><img src="assets/icons/black.png" style="width: 25px;  height: 25px;"></li>
-                                                    <li class="gold"><img src="assets/icons/gold.png" style="width: 25px;  height: 25px;"></li>
+                                                    <li class="red"><img src="assets/icons/red.png"
+                                                            style="width: 25px;  height: 25px;"></li>
+                                                    <li class="blue"><img src="assets/icons/blue.png"
+                                                            style="width: 25px;  height: 25px;"></li>
+                                                    <li class="green"><img src="assets/icons/green.png"
+                                                            style="width: 25px;  height: 25px;"></li>
+                                                    <li class="black"><img src="assets/icons/black.png"
+                                                            style="width: 25px;  height: 25px;"></li>
+                                                    <li class="gold"><img src="assets/icons/gold.png"
+                                                            style="width: 25px;  height: 25px;"></li>
                                                 </ul>
                                         </div>
                                     </div>

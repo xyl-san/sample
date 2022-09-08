@@ -41,13 +41,6 @@ $(document).ready((function() {
     $('#example1').DataTable();
     $('#employeelist').DataTable();
     $('#empschedule').DataTable();
-
-}))
-
-$(document).ready((function() {
-    $.fn.dataTable.moment('MMM DD, YYYY');
-    $('#accounting').DataTable({});
-
 }))
 
 $(document).ready((function() {
