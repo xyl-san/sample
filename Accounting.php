@@ -31,7 +31,8 @@
                             <h5 class="card-title">Accounting Periods</h5>
                             <p class="card-text">Define your fiscal years and taxes returns periodicity.</p>
                             <div class="col-md-12 text-center">
-                                <a data-bs-target="#newConfigure" class="btn btn-outline-secondary btn-sm btn-flat mt-2"  data-bs-toggle="modal">Configure</a>
+                                <a data-bs-target="#newConfigure" class="btn btn-outline-secondary btn-sm btn-flat mt-2"
+                                    data-bs-toggle="modal">Configure</a>
                             </div>
                         </div>
                     </div>
@@ -75,11 +76,11 @@
                     <div class="card-body">
                         <button type="button" class="btn btn-secondary btn-sm"><i class="fa-solid fa-plus"></i> Add
                             New</button>
-                            <button type="button" class="btn btn-sm float-end"><i class="fa-solid fa-ellipsis-vertical"></i> 
-                            </button>
-                            <div class="dropdown">
-                                
-                            </div>
+                        <button type="button" class="btn btn-sm float-end"><i class="fa-solid fa-ellipsis-vertical"></i>
+                        </button>
+                        <div class="dropdown">
+
+                        </div>
                         <canvas id="myChart1"></canvas>
                     </div>
                 </div>
@@ -87,8 +88,8 @@
                     <div class="card-body">
                         <button type="button" class="btn btn-secondary btn-sm"><i class="fa-solid fa-upload"></i>
                             Upload</button>
-                            <button type="button" class="btn btn-sm float-end"><i class="fa-solid fa-ellipsis-vertical"></i> 
-                            </button>
+                        <button type="button" class="btn btn-sm float-end"><i class="fa-solid fa-ellipsis-vertical"></i>
+                        </button>
                         <canvas id="myChart2"></canvas>
                     </div>
                 </div>
@@ -96,8 +97,8 @@
                     <div class="card-body">
                         <button type="button" class="btn btn-secondary btn-sm"><i class="fa-solid fa-plus"></i> New
                             Entry</button>
-                            <button type="button" class="btn btn-sm float-end"><i class="fa-solid fa-ellipsis-vertical"></i> 
-                            </button>
+                        <button type="button" class="btn btn-sm float-end"><i class="fa-solid fa-ellipsis-vertical"></i>
+                        </button>
                         <canvas id="myChart3"></canvas>
                     </div>
                 </div>
@@ -105,8 +106,8 @@
                     <div class="card-body">
                         <button type="button" class="btn btn-secondary btn-sm"><i class="fa-solid fa-rotate"></i> Online
                             Synchronization</button>
-                            <button type="button" class="btn btn-sm float-end"><i class="fa-solid fa-ellipsis-vertical"></i> 
-                            </button>
+                        <button type="button" class="btn btn-sm float-end"><i class="fa-solid fa-ellipsis-vertical"></i>
+                        </button>
                         <canvas id="myChart4"></canvas>
                     </div>
                 </div>
@@ -114,8 +115,8 @@
                     <div class="card-body">
                         <button type="button" class="btn btn-secondary btn-sm"><i class="fa-solid fa-plus"></i> New
                             Transaction</button>
-                            <button type="button" class="btn btn-sm float-end"><i class="fa-solid fa-ellipsis-vertical"></i> 
-                            </button>
+                        <button type="button" class="btn btn-sm float-end"><i class="fa-solid fa-ellipsis-vertical"></i>
+                        </button>
                         <canvas id="myChart5"></canvas>
                     </div>
                 </div>

@@ -1276,7 +1276,7 @@
             </div>
             <div class="modal-body">
                 <form class="row g-3" action="includes/queries.php" method="POST" enctype="multipart/form-data"
-                    autocomplete="off" name="randform">
+                    autocomplete="off">
                     <div class="col-md-6 form-floating">
                         <input type="text" class="form-control taxName" name="taxName">
                         <label for="taxName">Tax Name</label>
@@ -1423,21 +1423,6 @@
 <!-- Start Invoicing Modal Add -->
 
 <!-- End Invoicing Modal Add -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <script>

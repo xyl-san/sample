@@ -193,13 +193,13 @@ function addNewRowTableJournal() {
         if (i < cellCount - 1) {
             cell.innerHTML = '<input class="form-control form-control-sm" type="text" aria-label=".form-control-sm example">';
         } else {
-            cell.innerHTML = '<button onclick="deleteRow(this)" style="border:none;"><i class ="fa fa-trash"></i></button>';
+            cell.innerHTML = '<button class="btn btn-danger btn-sm" onclick="deleteRowJournal(this)" style="border:none;"><i class ="fa fa-trash"></i></button>';
         }
-    }
+      }
 }
 
-function deleteRow(ele) {
-    var table = document.getElementById('dynamicTableJournalEntry');
+function deleteRowJournal(ele) {
+    var table = document.getElementById('dynamicTableJournalEntry');    
     var rowCount = table.rows.length;
     if (rowCount <= 1) {
         alert("There is no row available to delete!");
@@ -210,7 +210,7 @@ function deleteRow(ele) {
         ele.parentNode.parentNode.remove();
     } else {
         //delete last row
-        table.deleteRow(rowCount - 1);
+        table.deleteRowJournal(rowCount - 1);
     }
 }
 /* This function for tax table will add a new row */
