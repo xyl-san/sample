@@ -1418,11 +1418,19 @@
     </div>
 </div>
 <!-- End Create Taxes -->
-
-
-<!-- Start Invoicing Modal Add -->
-
-<!-- End Invoicing Modal Add -->
+<!-- start creating invoies -->
+<div class="modal">
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <div class="modal-content">
+                <div class="form-control">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end creating invoies -->
 
 
 <script>

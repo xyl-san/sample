@@ -1237,4 +1237,29 @@ function inventoryTable(){
   }
   $conn->close();
 }
+
+
+// customer table queries
+function customerTable(){
+  include 'conn.php';
+  $sql = "SELECT c.customer_id,  c.customer_firstname,  c.customer_lastname,  c.customer_contact_info,  c.customer_address,  c.created_on,  c.updated_on, e.firstname, e.lastname FROM customer c INNER JOIN employees AS e ON c.employee_id = e.employee_id";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    ?>
+<tr>
+  <td></td>
+  <td><?php echo $row['customer_id']; ?></td>
+  <td><?php echo $row['created_on']; ?></td>
+  <td><?php echo $row['customer_firstname'].", ". $row['customer_lastname']; ?></td>
+  <td><?php echo $row['customer_contact_info']; ?></td>
+  <td><?php echo $row['customer_address']; ?></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td><?php echo $row['firstname'].", ". $row['lastname'];; ?></td>
+</tr>
+<?php
+  }
+}
 ?>

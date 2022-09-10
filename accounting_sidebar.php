@@ -18,7 +18,7 @@
             </a>
             <ul class="collapse list-unstyled" id="customersSubmenu">
                 <li>
-                    <a href=""> Customers List</a>
+                    <a href="customer.php"> Customers List</a>
                     <a href="invoices.php"> Invoices</a>
                     <a href=""> Credit Notes</a>
                     <a href=""> Payments</a>

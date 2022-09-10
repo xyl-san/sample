@@ -41,7 +41,6 @@ $(document).ready((function() {
     $('#example1').DataTable();
     $('#employeelist').DataTable();
     $('#empschedule').DataTable();
-    $('#customerList').DataTable();
 }))
 
 $(document).ready((function() {
@@ -246,4 +245,5 @@ function deleteRow(ele) {
         table.deleteRow(rowCount - 1);
     }
 }
+
 </script>
