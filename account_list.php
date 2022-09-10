@@ -138,7 +138,6 @@
                     $('.accountDescription').val(response.description);
                     $('.accountStatus').val(response.status);
                     $('.deleteAccountList').html(response.name);
-
                 }
             });
 
