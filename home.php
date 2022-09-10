@@ -11,12 +11,10 @@ session_start();
     <title>Document</title>
     <?php include 'includes/styles.php'; ?>
 </head>
-
-<body>
+<body class="toggle-sidebar">
+<?php include 'header.php'; ?>  
     <div class="wrapper">
-        <?php include 'sidebar.php'; ?>
         <div id="content" class="w-100">
-            <?php include 'header.php'; ?>
             <div class="container">
                 <div class="row">
                     <div class="card col p-0">
