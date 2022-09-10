@@ -1,22 +1,15 @@
-<nav id="sidebar" class="flex-shrink-0 p-3" style="width: 280px;">
-    <div class="sidebar-header rounded">
-        <h3>Growth</h3>
-        <strong>VPD</strong>
-    </div>
+<nav id="sidebar" class="shadow-md flex-shrink-0 p-3" style="width: 280px;">
     <ul class="list-unstyled components">
         <h5>Manage</h5>
         <li>
-            <a href="home.php">
-                <i class="fa-solid fa-house"></i>
+            <button class="btn noMenu" href="home.php">
                 Home
-            </a>
+            </button>
         </li>
         <li>
-            <a href="#employeeSubmenu" data-bs-toggle="collapse" aria-expanded="false"
-                class="dropdown-toggle text-wrap">
-                <i class="fa-solid fa-users"></i>
+            <button href="#employeeSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="btn btn-toggle text-wrap">
                 Human Resource
-            </a>
+            </button>
             <ul class="collapse list-unstyled" id="employeeSubmenu">
                 <li>
                     <a href="employees_list.php"><i class="fa-solid fa-user-tie"></i> Employees</a>
@@ -30,10 +23,10 @@
             </ul>
         </li>
         <li>
-            <a href="#pmSystem" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-wrap">
-                <i class="fa-solid fa-warehouse"></i>
-                Purchase Management
-            </a>
+            
+            <button href="#pmSystem" data-bs-toggle="collapse" aria-expanded="false" class="btn btn-toggle text-wrap">
+                Inventory
+            </button>
             <ul class="collapse list-unstyled" id="pmSystem">
                 <li>
                     <a href="#"><i class="fa-solid fa-warehouse"></i> Warehouse</a>
@@ -50,9 +43,9 @@
             </ul>
         </li>
         <li>
-            <a href="#cmSystem" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-wrap">
-                <i class="fa-solid fa-people-group"></i>
-                Customer Management</a>
+            <button href="#cmSystem" data-bs-toggle="collapse" aria-expanded="false" class="btn btn-toggle text-wrap">
+                Customers
+            </button>
             <ul class="collapse list-unstyled" id="cmSystem">
                 <li>
                     <a href="#"><i class="fa-solid fa-person"></i> Customer</a>
@@ -66,9 +59,9 @@
             </ul>
         </li>
         <li>
-            <a href="#paySystem" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-wrap">
-                <i class="fa-solid fa-file-invoice"></i>
-                Payroll/Payslip</a>
+            <button href="#paySystem" data-bs-toggle="collapse" aria-expanded="false" class="btn btn-toggle text-wrap">
+                Payroll
+            </button>
             <ul class="collapse list-unstyled" id="paySystem">
                 <li>
                     <a href="#"><i class="fa-solid fa-file-invoice"></i> Payroll</a>
@@ -79,11 +72,9 @@
             </ul>
         </li>
         <li>
-            <a href="#accountingSubmenu" data-bs-toggle="collapse" aria-expanded="false"
-                class="dropdown-toggle text-wrap">
-                <i class="fa-solid fa-file-invoice-dollar"></i>
+            <button href="#accountingSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="btn btn-toggle text-wrap">
                 Accounting
-            </a>
+            </button>
             <ul class="collapse list-unstyled" id="accountingSubmenu">
                 <li>
                     <a href=""><i class="fa-solid fa-book"></i> Journal Entries</a>
@@ -98,10 +89,10 @@
             </ul>
         </li>
         <li>
-            <a href="#"><i class="fa-solid fa-store"></i> Point of Sales</a>
+            <button href="#" class="btn noMenu text-wrap"></i> Point of Sales</button>
         </li>
         <li>
-            <a href="#"><i class="fa-solid fa-gear"></i> Account Settings</a>
+            <button href="#" class="btn noMenu text-wrap"></i> Account Settings</button>
         </li>
     </ul>
 </nav>

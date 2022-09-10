@@ -7,134 +7,168 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <?php include 'includes/styles.php'; ?>
-    <!-- https://colorhunt.co/palette/effffdb8fff985f4ff42c2ff -->
 </head>
 
 <body>
-    <div class="wrapper bg-light">
-        <nav id="sidebar" class="flex-shrink-0 p-3 bg-light" style="width: 280px;">
-            <div class="sidebar-header rounded">
-                <h3>Dream System</h3>
-                <strong>Boss Panda</strong>
-            </div>
-            <ul class="list-unstyled components">
-                <li>
-                    <a href="menu.php">
-                        <i class="fa-solid fa-house"></i>
-                        Dashboard
-                    </a>
-                </li>
-                <li>
-                    <a href="#employeeSubmenu" data-bs-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle text-wrap">
-                        <i class="fa-solid fa-users"></i>
-                        Human Resource
-                    </a>
-                    <ul class="collapse list-unstyled" id="employeeSubmenu">
-                        <li>
-                            <a href="employees_list.php"> Employees</a>
-                            <a href="attendance_list.php">Attendance</a>
-                            <a href="cashadvance_list.php">Cash Advance</a>
-                            <a href="schedule_list.php">Schedules</a>
-                            <a href="department_list.php"> Department</a>
-                            <a href="job_list.php"> Jobs</a>
-                            <a href="deduction_list.php">Deductions</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-        <div id="content" class="w-100">
-            <?php include 'header.php'; ?>
-            <div class="card">
-                <div class="card-header">
-                    <button type="button" class="btn btn-primary btn-sm mt-2" data-bs-toggle="modal"
-                        data-bs-target="#newEmployee">
-                        <span>
-                            <i class="fa fa-plus"></i>
-                            New
-                        </span>
-                    </button>
-                    <div aria-label="breadcrumb" class="breadcrumbs float-end mt-2">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="home.php">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Employees</li>
-                        </ol>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="employeelist" class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Photo</th>
-                                    <th scope="col">Employee ID</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Address</th>
-                                    <th scope="col">Birthdate</th>
-                                    <th scope="col">Job</th>
-                                    <th scope="col">Schedule</th>
-                                    <th scope="col">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php employeeTable();?>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th scope="col">Photo</th>
-                                    <th scope="col">Employee ID</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Address</th>
-                                    <th scope="col">Birthdate</th>
-                                    <th scope="col">Job</th>
-                                    <th scope="col">Schedule</th>
-                                    <th scope="col">Actions</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="container scheduleTable m-3">
-                <div class="card">
-                    <div class="card-header">
-                        <button type="button" class="btn btn-primary btn-sm btn-flat" data-bs-toggle="modal"
-                            data-bs-target="#newSchedule">
-                            <span>
-                                <i class="fa fa-plus"></i>
-                                New
-                            </span>
-                        </button>
-                        <span class="fw-bold float-end">Employee Schedules</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="empschedule" class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Time In</th>
-                                        <th>Time Out</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php scheduleTable();?>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Time In</th>
-                                        <th>Time Out</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+    <?php include 'header.php'; ?>
+    <div class="wrapper" id="employeeWrapper">
+        <?php include 'sidebar.php'; ?>
+        <div id="content" class="w-100 mx-4">
+            <div class="row">
+                <div class="col-9">
+                    <div class="container-fluid">
+                        <div class="row me-0 ms-0 mb-4 gx-2">
+                            <div class="shadow-sm col card m-2 border-0">
+                                <div class="card-body">
+                                    <h5 class="card-title">Total number of employees</h5>
+                                    <div class="d-flex justify-content-center w-0">
+                                        <i class="bi bi-people fa-5x"></i>
+                                        <h1>25</h1>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="shadow-sm col card m-2 border-0">
+                                <div class="card-body">
+                                    <h5 class="card-title">Employees per department</h5>
+                                    <div class="d-flex justify-content-center">
+                                        <i class="bi bi-person-workspace fa-5x"></i>
+                                        <h1>5</h1>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="shadow-sm col card m-2 border-0">
+                                <div class="card-body">
+                                    <h5 class="card-title">Jobs per Department</h5>
+                                    <div class="d-flex justify-content-center">
+                                        <i class="bi bi-briefcase fa-5x"></i>
+                                        <h1>2</h1>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+
+                    <div>
+                        <ul class="nav nav-tabs" id="employeeTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="employeeTableTab" data-bs-toggle="tab"
+                                    data-bs-target="#employeeTable" type="button" role="tab"
+                                    aria-controls="home-tab-pane" aria-selected="true">List of Employees</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="employeeSchedTab" data-bs-toggle="tab"
+                                    data-bs-target="#employeeSchedule" type="button" role="tab"
+                                    aria-controls="profile-tab-pane" aria-selected="false">Employee Schedules</button>
+                            </li>
+                        </ul>
+                        <div id="employeeTabContent" class="tab-content">
+                            <div id="employeeTable" class="card tab-pane fade show active  border-0" role="tabpanel"
+                                aria-labelledby="employeeTableTab" tabindex="0">
+                                <div class="card-header">
+                                    <div class="d-flex justify-content-end">
+                                        <button type="button" class="btn btn-primary btn-sm mt-2" data-bs-toggle="modal"
+                                            data-bs-target="#newEmployee">
+                                            <span>
+                                                <i class="fa fa-plus"></i>
+                                                Add new employee
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="shadow-sm card-body">
+                                    <div class="table-responsive ">
+                                        <table id="employeelist" class="table table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Photo</th>
+                                                    <th scope="col">Employee ID</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Address</th>
+                                                    <th scope="col">Birthdate</th>
+                                                    <th scope="col">Job</th>
+                                                    <th scope="col">Schedule</th>
+                                                    <th scope="col">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php employeeTable();?>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th scope="col">Photo</th>
+                                                    <th scope="col">Employee ID</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Address</th>
+                                                    <th scope="col">Birthdate</th>
+                                                    <th scope="col">Job</th>
+                                                    <th scope="col">Schedule</th>
+                                                    <th scope="col">Actions</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div> <!-- employeeTable -->
+                            <div id="employeeSchedule" class="card tab-pane fade border-0" role="tabpanel"
+                                aria-labelledby="employeeSchedTab" tabindex="0">
+                                <div class="card-header">
+                                    <button type="button" class="btn btn-primary btn-sm btn-flat" data-bs-toggle="modal"
+                                        data-bs-target="#newSchedule">
+                                        <span>
+                                            <i class="fa fa-plus"></i>
+                                            New
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table id="empschedule" class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Time In</th>
+                                                    <th>Time Out</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php scheduleTable();?>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>Time In</th>
+                                                    <th>Time Out</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- employeeSchedule -->
+                    </div>
+                </div>
+
+                <div class="shadow-md card col border-0">
+                    <div class="card-body">
+                        <p>
+                            IM A DUMMY......
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            DATA
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
 
     <?php include 'includes/scripts.php';?>
@@ -207,9 +241,11 @@
                     $('.contactInfo').val(response.contact_info);
                     $('.genderSelection').html(response.gender);
                     $('.jobSelection').html(response.job_name).val(response.job_id);
-                    $('.departmentSelection').html(response.department_name).val(response.department_id);
+                    $('.departmentSelection').html(response.department_name).val(response
+                        .department_id);
                     $('.del_employee_name').html(response.firstname + ' ' + response.lastname);
-                    $('.scheduleSelection').html(response.time_in + ' ' + response.time_out).val(response.schedule_id);
+                    $('.scheduleSelection').html(response.time_in + ' ' + response.time_out).val(
+                        response.schedule_id);
                 }
             });
         })
@@ -233,6 +269,15 @@
             });
 
         })
+    }
+
+    $('.sidetoggles').on('click', function() {
+        toggleChev('#chev');
+    })
+
+
+    function toggleChev(x) {
+        x.classList.toggle("fa-chevron-up");
     }
     </script>
 </body>

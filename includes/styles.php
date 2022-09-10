@@ -1,6 +1,6 @@
 <!-- Bootstrap 5 CSS only -->
 <link rel="stylesheet" href="css/bootstrap/css/bootstrap.css">
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 <!-- Bootstrap datepicker CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"/>
 <!-- Bootstrap timepicker CSS -->
