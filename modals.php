@@ -380,7 +380,7 @@
                     </div>
                     <div class="col-md-12 form-floating">
                         <div id="containerTable">
-                            <table class="table" id="dynamicTable">
+                            <table class="table" id="dynamicTableJournalEntry">
                                 <thead>
                                     <tr>
                                         <th>Debit Account</th>
@@ -397,7 +397,7 @@
                                 </tbody>
                             </table>
                             <button type="button" class="btn btn-secondary  btn-sm"
-                                onClick="addNewRowTable();">Add</button>
+                                onClick="addNewRowTableJournal();">Add</button>
                         </div>
                     </div>
                     <div class="mb-2">
@@ -1180,8 +1180,7 @@
 <!-- End open journal modal  -->
 
 <!-- Schedules Modals -->
-<div class="modal fade" id="newSchedule" tabindex="-1" role="dialog" aria-labelledby="schedTitle"
-    aria-hidden="true">
+<div class="modal fade" id="newSchedule" tabindex="-1" role="dialog" aria-labelledby="schedTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -1268,7 +1267,7 @@
 <!-- Start Create Taxes  -->
 <div class="modal fade lg-4" id="newTaxes" tabindex="-1" role="dialog" aria-labelledby="createTaxesTitle"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="createTaxesTitle">Create Taxes</h5>
@@ -1314,9 +1313,14 @@
                         </select>
                         <label for="taxScope">Tax Scope</label>
                     </div>
-                    <div class="col-md-6 form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                        <label class="form-check-label" for="flexSwitchCheckChecked">Active</label>
+                    <div class="col-md-6 form-floating">
+                        <select class="form-control statusTax" name="statusTax" aria-label="Select taxType"
+                            id="taxType">
+                            <option value="0" class="status" selected>Active</option>
+                            <option value="1" class="status" selected>Inactive</option>
+                            <option value="" class="status" selected></option>
+                        </select>
+                        <label for="status">Status</label>
                     </div>
                     <div class="col-md-6 form-floating">
                         <input type="number" class="form-control taxName" name="taxName">
@@ -1346,17 +1350,24 @@
                                     </p6>
                                 </div><br>
                                 <div class="col-md-12 form-floating">
-                                    <input type="text" class="form-control text-uppercase shortCode" name="shortCode">
-                                    <label for="shortCode">Short Code</label>
-                                </div><br>
-                                <div class="col-md-12 form-floating">
-                                    <select class="form-control currency" name="currency" aria-label="Select account"
-                                        id="accountStatus">
-                                        <option value="2" class="currencyId" selected>PHP</option>
-                                        <option value="1" class="currencyId" selected>USD</option>
-                                        <option value="" class="currencyId" selected>--Select--</option>
-                                    </select>
-                                    <label for="Journal ">Currency</label>
+                                    <div id="containerTable">
+                                        <table class="table" id="dynamicTableTax">
+                                            <thead>
+                                                <tr>
+                                                    <th>Amount</th>
+                                                    <th>Base On</th>
+                                                    <th>Account</th>
+                                                    <th>Tax Grids</th>
+                                                    <th>Tool</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+                                        <button type="button" class="btn btn-secondary  btn-sm"
+                                            onClick="addNewRowTableTax();">Add</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1364,11 +1375,11 @@
                         <div class="tab-pane fade" id="advanceOptions" role="tabpanel"
                             aria-labelledby="advanceOptions-tab">
                             <div>
-                                <div>
-                                    <p6>
-                                        Control-Access
-                                    </p6>
+                                <div class="col-md-6 form-floating">
+                                    <input type="text" class="form-control taxName" name="taxName">
+                                    <label for="taxName">Label on Invoices</label>
                                 </div><br>
+
                                 <div class="col-md-12 form-floating">
                                     <select class="form-control" name="accountListDebit" aria-label="Select account"
                                         id="account_id">
@@ -1377,6 +1388,7 @@
                                     </select>
                                     <label for="accountDebit">Allowed account types</label>
                                 </div><br>
+
                                 <div class="col-md-12 form-floating">
                                     <select class="form-control" name="accountListDebit" aria-label="Select account"
                                         id="account_id">
@@ -1385,6 +1397,7 @@
                                     </select>
                                     <label for="accountDebit">Allowed account</label>
                                 </div><br>
+
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="checkBoxEntry">
                                     <label class="form-check-label" for="checkBoxEntry">
@@ -1405,6 +1418,12 @@
     </div>
 </div>
 <!-- End Create Taxes -->
+
+
+<!-- Start Invoicing Modal Add -->
+
+<!-- End Invoicing Modal Add -->
+
 
 <script>
 $('#transferInput').click(function() {

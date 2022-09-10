@@ -118,34 +118,47 @@ function drawChart() {
 }
 </script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawVisualization);
+<script type="text/javascript">
+google.charts.load('current', {
+    'packages': ['corechart']
+});
+google.charts.setOnLoadCallback(drawVisualization);
 
-      function drawVisualization() {
-        // Some raw data (not necessarily accurate)
-        var data = google.visualization.arrayToDataTable([
-          ['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
-          ['2004/05',  165,      938,         522,             998,           450,      614.6],
-          ['2005/06',  135,      1120,        599,             1268,          288,      682],
-          ['2006/07',  157,      1167,        587,             807,           397,      623],
-          ['2007/08',  139,      1110,        615,             968,           215,      609.4],
-          ['2008/09',  136,      691,         629,             1026,          366,      569.6]
-        ]);
+function drawVisualization() {
+    // Some raw data (not necessarily accurate)
+    var data = google.visualization.arrayToDataTable([
+        ['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
+        ['2004/05', 165, 938, 522, 998, 450, 614.6],
+        ['2005/06', 135, 1120, 599, 1268, 288, 682],
+        ['2006/07', 157, 1167, 587, 807, 397, 623],
+        ['2007/08', 139, 1110, 615, 968, 215, 609.4],
+        ['2008/09', 136, 691, 629, 1026, 366, 569.6]
+    ]);
 
-        var options = {
-          title : 'Monthly Coffee Production by Country',
-          vAxis: {title: 'Cups'},
-          hAxis: {title: 'Month'},
-          seriesType: 'bars',
-          series: {5: {type: 'line'}}
-        };
+    var options = {
+        title: 'Monthly Coffee Production by Country',
+        vAxis: {
+            title: 'Cups'
+        },
+        hAxis: {
+            title: 'Month'
+        },
+        seriesType: 'bars',
+        series: {
+            5: {
+                type: 'line'
+            }
+        }
+    };
 
-        var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script>
-    <!-- debit and credit entry -->
+    var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+}
+</script>
+
+
+
+<!-- debit and credit entry -->
 <script>
 function add() {
     var debit = document.getElementById("debitAmount").value;
@@ -155,6 +168,7 @@ function add() {
 
 }
 </script>
+<!-- This function generate codes in journal entry -->
 <script>
 function randomString() {
     var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZ";
@@ -168,25 +182,56 @@ function randomString() {
 }
 </script>
 <script type="text/javascript">
-/* This method will add a new row */
-function addNewRowTable() {
-    var table = document.getElementById("dynamicTable");
+/* This function will add a new row for journal entry */
+function addNewRowTableJournal() {
+    var table = document.getElementById("dynamicTableJournalEntry");
     var rowCount = table.rows.length;
     var cellCount = table.rows[0].cells.length;
     var row = table.insertRow(rowCount);
     for (var i = 0; i < cellCount; i++) {
         var cell = row.insertCell(i);
         if (i < cellCount - 1) {
-            cell.innerHTML = '<input type="text" />';
+            cell.innerHTML = '<input class="form-control form-control-sm" type="text" aria-label=".form-control-sm example">';
         } else {
-            cell.innerHTML = '<button onclick="deleteRow(this)"><i class ="fa fa-trash"></i></button>';
+            cell.innerHTML = '<button class="btn btn-danger btn-sm" onclick="deleteRowJournal(this)" style="border:none;"><i class ="fa fa-trash"></i></button>';
+        }
+      }
+}
+
+function deleteRowJournal(ele) {
+    var table = document.getElementById('dynamicTableJournalEntry');    
+    var rowCount = table.rows.length;
+    if (rowCount <= 1) {
+        alert("There is no row available to delete!");
+        return;
+    }
+    if (ele) {
+        //delete specific row
+        ele.parentNode.parentNode.remove();
+    } else {
+        //delete last row
+        table.deleteRowJournal(rowCount - 1);
+    }
+}
+/* This function for tax table will add a new row */
+function addNewRowTableTax() {
+    var table = document.getElementById("dynamicTableTax");
+    var rowCount = table.rows.length;
+    var cellCount = table.rows[0].cells.length;
+    var row = table.insertRow(rowCount);
+    for (var i = 0; i < cellCount; i++) {
+        var cell = row.insertCell(i);
+        if (i < cellCount - 1) {
+            cell.innerHTML = '  <input class="form-control form-control-sm" type="text" aria-label=".form-control-sm example">';
+        } else {
+            cell.innerHTML =
+                '<button class="btn btn-danger btn-sm" onclick="deleteRow(this)" style="border: none;"><i class ="fa fa-trash"></i></button>';
         }
     }
 }
 
-/* This method will delete a row */
 function deleteRow(ele) {
-    var table = document.getElementById('dynamicTable');
+    var table = document.getElementById('dynamicTableTax');
     var rowCount = table.rows.length;
     if (rowCount <= 1) {
         alert("There is no row available to delete!");
