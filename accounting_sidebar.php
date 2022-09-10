@@ -18,12 +18,12 @@
             </a>
             <ul class="collapse list-unstyled" id="customersSubmenu">
                 <li>
+                    <a href=""> Customers List</a>
                     <a href="invoices.php"> Invoices</a>
                     <a href=""> Credit Notes</a>
                     <a href=""> Payments</a>
                     <a href=""> Follow-up Reports</a>
                     <a href=""> Products </a>
-                    <a href=""> Customes</a>
                 </li>
             </ul>
         </li>
