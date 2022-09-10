@@ -41,7 +41,38 @@
 
 <body>
     <div class="wrapper">
-        <?php include 'sidebar.php'; ?>
+        <nav id="sidebar" class="flex-shrink-0 p-3" style="width: 280px;">
+            <div class="sidebar-header rounded">
+                <h3>Growth</h3>
+                <strong>VPD</strong>
+            </div>
+            <ul class="list-unstyled components">
+                <h5>Manage</h5>
+                <li>
+                    <a href="menu.php">
+                        <i class="fa-solid fa-house"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="#cmSystem" data-bs-toggle="collapse" aria-expanded="false"
+                        class="dropdown-toggle text-wrap">
+                        <i class="fa-solid fa-people-group"></i>
+                        Customer Management</a>
+                    <ul class="collapse list-unstyled" id="cmSystem">
+                        <li>
+                            <a href="#"><i class="fa-solid fa-person"></i> Customer</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa-solid fa-list"></i> Transactions</a>
+                        </li>
+                        <li>
+                            <a href="crm.php"><i class="fa-solid fa-person"></i> Customer Relationship Management</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
         <div id="content" class="w-100">
             <?php include 'header.php'; ?>
             <div class="card">
@@ -68,7 +99,8 @@
                                 <?php 
                                     foreach($leadList as $key => $li){
                                 ?>
-                                <div class="card ui-widget-content border m-3 listitems " data-itemid=<?php echo $li['lead_id'] ?> style="border-left: 10px #7386D5;">
+                                <div class="card ui-widget-content border m-3 listitems "
+                                    data-itemid=<?php echo $li['lead_id'] ?> style="border-left: 10px #7386D5;">
                                     <div class="card-header prospect-header">
                                         <p class="fw-bolder d-inline-block mx-auto"><?php echo $li['name'] ?></p>
                                         <div class="prospect-btn-delete">
@@ -81,28 +113,6 @@
                                             <button class="btn btn-sm float-end colordropdown" type="button"
                                                 id="colordropdown" data-bs-toggle="dropdown">
                                                 <i class="fa-solid fa-ellipsis-vertical"></i>
-                                                <ul class="dropdown-menu" aria-labelledby="colordropdown">
-                                                    <li class="red"><img src="assets/icons/red.png"
-                                                            style="width: 30px;  height: 30px;"></li>
-                                                    <li class="blue"><img src="assets/icons/blue.png"
-                                                            style="width: 30px;  height: 30px;"></li>
-                                                    <li class="green"><img src="assets/icons/green.png"
-                                                            style="width: 30px;  height: 30px;"></li>
-                                                    <li class="black"><img src="assets/icons/black.png"
-                                                            style="width: 30px;  height: 30px;"></li>
-                                                    <li class="gold"><img src="assets/icons/gold.png"
-                                                            style="width: 30px;  height: 30px;"></li>
-                                                    <li class="brown"><img src="assets/icons/brown.png"
-                                                            style="width: 30px;  height: 30px;"></li>
-                                                    <li class="indigo"><img src="assets/icons/indigo.png"
-                                                            style="width: 30px;  height: 30px;"></li>
-                                                    <li class="maroon"><img src="assets/icons/maroon.png"
-                                                            style="width: 30px;  height: 30px;"></li>
-                                                    <li class="orange"><img src="assets/icons/orange.png"
-                                                            style="width: 30px;  height: 30px;"></li>
-                                                    <li class="pink"><img src="assets/icons/pink.png"
-                                                            style="width: 30px;  height: 30px;"></li>
-                                                </ul>
                                         </div>
                                     </div>
                                     <div class="card-body crm-body">
@@ -136,18 +146,6 @@
                                             <button class="btn btn-sm float-end colordropdown" type="button"
                                                 id="colordropdown" data-bs-toggle="dropdown">
                                                 <i class="fa-solid fa-ellipsis-vertical"></i>
-                                                <ul class="dropdown-menu" aria-labelledby="colordropdown">
-                                                    <li class="red"><img src="assets/icons/red.png"
-                                                            style="width: 25px;  height: 25px;"></li>
-                                                    <li class="blue"><img src="assets/icons/blue.png"
-                                                            style="width: 25px;  height: 25px;"></li>
-                                                    <li class="green"><img src="assets/icons/green.png"
-                                                            style="width: 25px;  height: 25px;"></li>
-                                                    <li class="black"><img src="assets/icons/black.png"
-                                                            style="width: 25px;  height: 25px;"></li>
-                                                    <li class="gold"><img src="assets/icons/gold.png"
-                                                            style="width: 25px;  height: 25px;"></li>
-                                                </ul>
                                         </div>
                                     </div>
                                     <div class="card-body crm-body">
@@ -183,18 +181,6 @@
                                             <button class="btn btn-sm float-end colordropdown" type="button"
                                                 id="colordropdown" data-bs-toggle="dropdown">
                                                 <i class="fa-solid fa-ellipsis-vertical"></i>
-                                                <ul class="dropdown-menu" aria-labelledby="colordropdown">
-                                                    <li class="red"><img src="assets/icons/red.png"
-                                                            style="width: 25px;  height: 25px;"></li>
-                                                    <li class="blue"><img src="assets/icons/blue.png"
-                                                            style="width: 25px;  height: 25px;"></li>
-                                                    <li class="green"><img src="assets/icons/green.png"
-                                                            style="width: 25px;  height: 25px;"></li>
-                                                    <li class="black"><img src="assets/icons/black.png"
-                                                            style="width: 25px;  height: 25px;"></li>
-                                                    <li class="gold"><img src="assets/icons/gold.png"
-                                                            style="width: 25px;  height: 25px;"></li>
-                                                </ul>
                                         </div>
                                     </div>
                                     <div class="card-body crm-body">
@@ -229,18 +215,6 @@
                                             <button class="btn btn-sm float-end colordropdown" type="button"
                                                 id="colordropdown" data-bs-toggle="dropdown">
                                                 <i class="fa-solid fa-ellipsis-vertical"></i>
-                                                <ul class="dropdown-menu" aria-labelledby="colordropdown">
-                                                    <li class="red"><img src="assets/icons/red.png"
-                                                            style="width: 25px;  height: 25px;"></li>
-                                                    <li class="blue"><img src="assets/icons/blue.png"
-                                                            style="width: 25px;  height: 25px;"></li>
-                                                    <li class="green"><img src="assets/icons/green.png"
-                                                            style="width: 25px;  height: 25px;"></li>
-                                                    <li class="black"><img src="assets/icons/black.png"
-                                                            style="width: 25px;  height: 25px;"></li>
-                                                    <li class="gold"><img src="assets/icons/gold.png"
-                                                            style="width: 25px;  height: 25px;"></li>
-                                                </ul>
                                         </div>
                                     </div>
                                     <div class="card-body crm-body">
@@ -274,18 +248,6 @@
                                             <button class="btn btn-sm float-end colordropdown" type="button"
                                                 id="colordropdown" data-bs-toggle="dropdown">
                                                 <i class="fa-solid fa-ellipsis-vertical"></i>
-                                                <ul class="dropdown-menu" aria-labelledby="colordropdown">
-                                                    <li class="red"><img src="assets/icons/red.png"
-                                                            style="width: 25px;  height: 25px;"></li>
-                                                    <li class="blue"><img src="assets/icons/blue.png"
-                                                            style="width: 25px;  height: 25px;"></li>
-                                                    <li class="green"><img src="assets/icons/green.png"
-                                                            style="width: 25px;  height: 25px;"></li>
-                                                    <li class="black"><img src="assets/icons/black.png"
-                                                            style="width: 25px;  height: 25px;"></li>
-                                                    <li class="gold"><img src="assets/icons/gold.png"
-                                                            style="width: 25px;  height: 25px;"></li>
-                                                </ul>
                                         </div>
                                     </div>
                                     <div class="card-body crm-body">
