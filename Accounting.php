@@ -11,7 +11,7 @@
     <!-- https://colorhunt.co/palette/effffdb8fff985f4ff42c2ff -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 </head>
-
+<!-- jdadASDJKLadjJASDLJKash -->
 <body>
     <div class="wrapper">
         <?php include 'accounting_sidebar.php'; ?>
