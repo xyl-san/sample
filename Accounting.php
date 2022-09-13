@@ -74,7 +74,7 @@
             <div class="row">
                 <div class="card col-3 px-2 m-2" id="cardbgcolor">
                     <div class="card-body">
-                        <a href="customer_invoice.php"><button type="button" class="btn btn-secondary btn-sm"><i class="fa-solid fa-plus"></i> Add
+                        <a href="invoices.php"><button type="button" class="btn btn-secondary btn-sm"><i class="fa-solid fa-plus"></i> Add
                             New</button></a>
                         <button type="button" class="btn btn-sm float-end"><i class="fa-solid fa-ellipsis-vertical"></i>
                         </button>

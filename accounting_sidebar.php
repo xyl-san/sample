@@ -5,7 +5,7 @@
     <ul class="list-unstyled components">
         <h5>Accounting</h5>
         <li>
-            <a href="Accounting.php">
+            <a href="accounting.php">
                 <i class="fa-solid fa-house"></i>
                 Dashboard
             </a>

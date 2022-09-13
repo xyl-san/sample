@@ -1262,4 +1262,18 @@ function customerTable(){
 <?php
   }
 }
+
+function customerInvoice(){
+  include 'conn.php';
+  $sql = "SELECT customer_id, customer_firstname,customer_lastname FROM customer";
+  $query = $conn->query($sql);
+  while($prow = $query->fetch_assoc()){
+      echo "
+      <option value='".$prow['customer_id']."'>".$prow['customer_firstname'].", ".$prow['customer_lastname']."</option>
+      ";
+  }
+  $conn->close();
+}
+
+
 ?>

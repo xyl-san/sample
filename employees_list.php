@@ -24,6 +24,8 @@
                                     <div class="d-flex justify-content-center w-0">
                                         <i class="bi bi-people fa-5x"></i>
                                         <h1>25</h1>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -51,7 +53,9 @@
                     </div>
 
                     <div>
+
                         <ul class="nav nav-tabs" id="employeeTab" role="tablist">
+
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="employeeTableTab" data-bs-toggle="tab"
                                     data-bs-target="#employeeTable" type="button" role="tab"
@@ -62,8 +66,12 @@
                                     data-bs-target="#employeeSchedule" type="button" role="tab"
                                     aria-controls="profile-tab-pane" aria-selected="false">Employee Schedules</button>
                             </li>
+
                         </ul>
+
+                        
                         <div id="employeeTabContent" class="tab-content">
+
                             <div id="employeeTable" class="card tab-pane fade show active  border-0" role="tabpanel"
                                 aria-labelledby="employeeTableTab" tabindex="0">
                                 <div class="card-header">
@@ -77,6 +85,7 @@
                                         </button>
                                     </div>
                                 </div>
+
                                 <div class="shadow-sm card-body">
                                     <div class="table-responsive ">
                                         <table id="employeelist" class="table table-borderless">
@@ -110,7 +119,9 @@
                                         </table>
                                     </div>
                                 </div>
+
                             </div> <!-- employeeTable -->
+
                             <div id="employeeSchedule" class="card tab-pane fade border-0" role="tabpanel"
                                 aria-labelledby="employeeSchedTab" tabindex="0">
                                 <div class="card-header">
@@ -122,6 +133,7 @@
                                         </span>
                                     </button>
                                 </div>
+
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <table id="empschedule" class="table">
@@ -145,6 +157,7 @@
                                         </table>
                                     </div>
                                 </div>
+                                
                             </div>
 
                         </div>

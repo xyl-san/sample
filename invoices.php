@@ -17,15 +17,49 @@
         <?php include 'accounting_sidebar.php'; ?>
         <div id="content" class="w-100">
             <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
+                                aria-valuemin="25" aria-valuemax="100">25%
+                            </div>
+                        </div><br>
+                        <div class="col-4">
+                            <h5 class="card-title">Company Data</h5>
+                            <p class="card-text">Set your company's data for documents header/footer.</p>
+                            <div class="col-md-12 text-center">
+                                <a data-bs-target="#" class="btn btn-outline-success btn-sm btn-flat mt-2"
+                                    data-bs-toggle="modal">Let's Start!</a>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <h5 class="card-title">Invoice Layout</h5>
+                            <p class="card-text">Customize the look of your invoices</p>
+                            <div class="col-md-12 text-center">
+                                <a data-bs-target="#" class="btn btn-outline-success btn-sm btn-flat mt-2"
+                                    data-bs-toggle="modal">Customize</a>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <h5 class="card-title">Create Invoice</h5>
+                            <p class="card-text">Create your first invoice.</p>
+                            <div class="col-md-12 text-center">
+                                <a data-bs-target="#" class="btn btn-outline-success btn-sm btn-flat mt-2"
+                                    data-bs-toggle="modal">Create</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
                 <div class="card-header" style="background-color:#ffeccc;">
                     <h4>Invoices</h4>
-                    <button type="button" class="btn btn-outline-success btn-sm btn-flat mt-2" data-bs-toggle="modal"
-                        data-bs-target="#">
+                    <a href="customer_list_invoice.php" type="button" class="btn btn-outline-success btn-sm btn-flat mt-2">
                         <span>
                             <i class="fa-solid fa-file-signature"></i>
                             Create Invoices
                         </span>
-                    </button>
+                    </a>
                 </div>
                 <div class="card-body">
                     <table id="example1" class="table">
@@ -33,11 +67,12 @@
                             <tr>
                                 <th></th>
                                 <th>Number</th>
+                                <th>Due Date</th>
                                 <th>Customer</th>
                                 <th>Particulars</th>
-                                <th>Invoice Date</th>
-                                <th>Due Date</th>
                                 <th>Tax Encluded</th>
+                                <th>Total Amount</th>
+                                <th>Invoice Date</th>
                                 <th>Payment Status</th>
                                 <th>Payment Terms</th>
                             </tr>
@@ -49,11 +84,12 @@
                             <tr>
                                 <th></th>
                                 <th>Number</th>
+                                <th>Due Date</th>
                                 <th>Customer</th>
                                 <th>Particulars</th>
-                                <th>Invoice Date</th>
-                                <th>Due Date</th>
                                 <th>Tax Encluded</th>
+                                <th>Total Amount</th>
+                                <th>Invoice Date</th>
                                 <th>Payment Status</th>
                                 <th>Payment Terms</th>
                             </tr>
