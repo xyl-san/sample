@@ -62,7 +62,7 @@
                     </a>
                 </div>
                 <div class="card-body">
-                    <table id="example1" class="table">
+                    <table id="example1" class="table" style="width:100%">
                         <thead>
                             <tr>
                                 <th></th>
@@ -78,7 +78,7 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                        <?php invoicesTable();?>
                         </tbody>
                         <tfoot>
                             <tr>

@@ -1263,6 +1263,7 @@ function customerTable(){
   }
 }
 
+// customer invoice
 function customerInvoice(){
   include 'conn.php';
   $sql = "SELECT customer_id, customer_firstname,customer_lastname FROM customer";
@@ -1273,6 +1274,58 @@ function customerInvoice(){
       ";
   }
   $conn->close();
+}
+
+
+if (isset($_POST['addJournalItems'])) {
+  journalItemsAdd();
+}
+function journalItemsAdd(){
+  include 'conn.php';
+  if(isset($_POST['addJournalItems'])){
+    $product = $_POST['product'];
+    $label = $_POST['label'];
+    $account = $_POST['account'];
+    $quantity = $_POST['quantity'];
+    $price = $_POST['price'];
+    $taxes = $_POST['taxes'];
+    $subtotal = $_POST['subtotal'];
+    $total_amount = $_POST['total_amount'];
+    $invoice_date = $_POST['invoice_date'];
+
+    $sql = "INSERT INTO invoice (product, label, account, quantity, price, taxes, subtotal, amount_total,invoice_date) VALUES 
+    ('$product','$label', '$account', '$quantity', '$price', '$taxes', '$subtotal', '$total_amount','$invoice_date')";
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+  }
+  $conn->close();
+  header('location: ../customer_list_invoice.php');
+}
+// invoices table
+function invoicesTable(){
+  include 'conn.php';
+  $sql = "SELECT inv.invoice_id, inv.product, inv.label, inv.account,inv.quantity,inv.price,inv.taxes, inv.subtotal,inv.amount_total,inv.invoice_date, cust.customer_firstname,cust.customer_lastname FROM invoice inv INNER JOIN customer AS cust ON inv.customer_id = cust.customer_id";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    ?>
+<tr>
+  <td></td>
+  <td><?php echo $row['customer_id']; ?></td>
+  <td><?php echo $row['duedate']; ?></td>
+  <td><?php echo $row['customer_firstname'].", ". $row['customer_lastname']; ?></td>
+  <td><?php echo $row['']; ?></td>
+  <td><?php echo $row['customer_address']; ?></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+</tr>
+<?php
+  }
 }
 
 
