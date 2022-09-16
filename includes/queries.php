@@ -1249,10 +1249,10 @@ function inventoryTable(){
 }
 
 
-// customer table queries
+// accounting invoices queries
 function customerTable(){
   include 'conn.php';
-  $sql = "SELECT c.customer_id,  c.customer_firstname,  c.customer_lastname,  c.customer_contact_info,  c.customer_address,  c.created_on,  c.updated_on, e.firstname, e.lastname FROM customer c INNER JOIN employees AS e ON c.employee_id = e.employee_id";
+  $sql = "SELECT c.customer_id,  c.customer_firstname,  c.customer_lastname,  c.customer_contact_info,  c.customer_address,  c.created_on,  c.updated_on, e.firstname, e.lastname FROM customer c INNER JOIN employees AS e ON c.employee_id = e.employee_id WHERE c.delete_flag='0'";
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
     ?>
@@ -1273,7 +1273,7 @@ function customerTable(){
   }
 }
 
-// customer invoice
+
 function customerInvoice(){
   include 'conn.php';
   $sql = "SELECT customer_id, customer_firstname,customer_lastname FROM customer";
@@ -1286,13 +1286,12 @@ function customerInvoice(){
   $conn->close();
 }
 
-// add journal Items
-if (isset($_POST['addJournalItems'])) {
-  journalItemsAdd();
+if (isset($_POST['addCustomerInvoice'])) {
+  customerInvoiceAdd();
 }
-function journalItemsAdd(){
+function customerInvoiceAdd(){
   include 'conn.php';
-  if(isset($_POST['addJournalItems'])){
+  if(isset($_POST['addCustomerInvoice'])){
     $product = $_POST['product'];
     $label = $_POST['label'];
     $account = $_POST['account'];
@@ -1323,10 +1322,9 @@ function journalItemsAdd(){
   header('location: ../create_invoice.php');
 }
 
-// invoices table
 function invoicesTable(){
   include 'conn.php';
-  $sql = "SELECT inv.invoice_id, inv.invoice_code, inv.product_id, inv.label, inv.account_id, inv.quantity, inv.price, inv.taxes, inv.subtotal, inv.amount_total,inv.currency, inv.invoice_date, inv.due_date, inv.terms, inv.payment_reference, inv.employee_id, inv.delete_flag, emp.firstname, emp.lastname, prod.product_name, prod.product_description, cust.customer_id, cust.customer_firstname, cust.customer_lastname FROM invoice inv INNER JOIN employees AS emp ON inv.employee_id=emp.employee_id INNER JOIN product AS prod ON inv.product_id = prod.product_id INNER JOIN customer AS cust ON inv.customer_id = cust.customer_id WHERE inv.delete_flag='0'";
+  $sql = "SELECT inv.invoice_id AS invoice_id, inv.invoice_code, inv.product_id, inv.label, inv.account_id, inv.quantity, inv.price, inv.taxes, inv.subtotal, inv.amount_total,inv.currency, inv.invoice_date, inv.due_date, inv.terms, inv.payment_reference, inv.employee_id, inv.delete_flag, emp.firstname, emp.lastname, prod.product_name, prod.product_description, cust.customer_id, cust.customer_firstname, cust.customer_lastname FROM invoice inv INNER JOIN employees AS emp ON inv.employee_id=emp.employee_id INNER JOIN product AS prod ON inv.product_id = prod.product_id INNER JOIN customer AS cust ON inv.customer_id = cust.customer_id WHERE inv.delete_flag='0'";
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
     ?>
@@ -1352,7 +1350,7 @@ function invoicesTable(){
 <?php
   }
 }
-// product selection for invoice
+
 function productInvoice(){
   include 'conn.php';
   $sql = "SELECT product_id, product_name FROM product";
@@ -1365,7 +1363,6 @@ function productInvoice(){
   $conn->close();
 }
 
-// product description selection for invoice
 function productDescriptionInvoice(){
   include 'conn.php';
   $sql = "SELECT product_id, product_description FROM product";
@@ -1378,7 +1375,6 @@ function productDescriptionInvoice(){
   $conn->close();
 }
 
-// employee selection for invoice
 function salesPerson(){
   include 'conn.php';
   $sql = "SELECT employee_id, firstname, lastname FROM employees";
@@ -1391,10 +1387,9 @@ function salesPerson(){
   $conn->close();
 }
 
-// for journal items queries
 function journalItemsTable(){
   include 'conn.php';
-  $sql = "SELECT inv.invoice_code, inv.product_id, inv.label, inv.account_id, inv.quantity, inv.price, inv.taxes, inv.subtotal, inv.amount_total,inv.currency, inv.invoice_date,inv.due_date, inv.terms, inv.payment_reference, inv.employee_id, emp.firstname, emp.lastname, prod.product_name, prod.product_description, cust.customer_id, cust.customer_firstname, cust.customer_lastname, acc.account_id, acc.account_name, acc.description FROM invoice inv INNER JOIN employees AS emp ON inv.employee_id=emp.employee_id INNER JOIN product AS prod ON inv.product_id = prod.product_id INNER JOIN customer AS cust ON inv.customer_id = cust.customer_id INNER JOIN account_list AS acc on inv.account_id = acc.account_id";
+  $sql = "SELECT inv.invoice_code, inv.product_id, inv.label, inv.account_id, inv.quantity, inv.price, inv.taxes, inv.subtotal, inv.amount_total,inv.currency, inv.invoice_date,inv.due_date, inv.terms, inv.payment_reference, inv.employee_id, emp.firstname, emp.lastname, prod.product_name, prod.product_description, cust.customer_id, cust.customer_firstname, cust.customer_lastname, acc.account_id, acc.account_name, acc.description FROM invoice inv INNER JOIN employees AS emp ON inv.employee_id=emp.employee_id INNER JOIN product AS prod ON inv.product_id = prod.product_id INNER JOIN customer AS cust ON inv.customer_id = cust.customer_id INNER JOIN account_list AS acc on inv.account_id = acc.account_id WHERE inv.delete_flag='0'";
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
     ?>
@@ -1402,6 +1397,7 @@ function journalItemsTable(){
     <td><?php echo $row['account_name']; ?></td>
     <td><?php echo $row['product_name']; ?></td>
     <td><?php echo $row['due_date']; ?></td>
+    <td><?php echo $row['terms']; ?></td>
     <td><?php echo $row['amount_total']; ?></td>
     <td><?php echo $row['taxes']; ?></td>
     <td></td>
@@ -1411,7 +1407,6 @@ function journalItemsTable(){
   }
 }
 
-// invoice delete queries
 if(isset($_POST['deleteInvoice'])){
   invoiceDelete();
 }
@@ -1430,7 +1425,7 @@ function invoiceDelete(){
   $conn->close();
   header('location: ../invoices.php');
 }
-// customer invoice edit
+
 if (isset($_POST['editInvoice'])) {
   invoiceEdit();
 }
@@ -1439,11 +1434,11 @@ if (isset($_POST['editInvoice'])) {
     if(isset($_POST['editInvoice'])){
       $invoiceId = $_POST['invoice_id'];
       $invoiceCode = $_POST['invoice_code'];
-      $customer = $_POST['customer_id'];
+      $customerInvoice = $_POST['customer_id'];
       $invoiceDate = $_POST['invoice_date'];
       $paymentReference = $_POST['payment_reference'];
       $dueDate = $_POST['due_date'];
-      $termsInvoice = $_POST['terms_invoice'];
+      $termsInvoice = $_POST['terms'];
       $productInvoice = $_POST['product'];
       $labelInvoice = $_POST['label'];
       $accountInvoice = $_POST['account_id'];
@@ -1454,9 +1449,9 @@ if (isset($_POST['editInvoice'])) {
       $total_amountInvoice = $_POST['total_amount'];
       $currency = $_POST['currency'];
       $salesPersonInvoice = $_POST['employee_id'];
-      $invoiceNotesInvoice = $_POST['invoice_notes'];
+      $invoiceNotes = $_POST['invoice_notes'];
   
-      $sql = "UPDATE invoice SET `invoice_code`='[$invoiceCode]', `product_id`='[$productInvoice]',`label`='[$labelInvoice]',`account_id`='[$accountInvoice]',`quantity`='[$quantityInvoice]',`price`='[$priceInvoice]',`taxes`='[$taxesInvoice]',`subtotal`='[$subtotalInvoice]',`amount_total`='[$total_amountInvoice]',`customer_id`='[$customer]',`currency`='[$currency ]',`invoice_date`='[$invoiceDate]',`due_date`='[$dueDate]',`terms`='[$termsInvoice]',`payment_reference`='[$paymentReference]',`employee_id`='[$employee_id]',`invoice_notes`='[$invoiceNotesInvoice]' WHERE invoice_id = '$invoiceId'";
+      $sql = "UPDATE invoice SET invoice_code = '$invoiceCode', product_id='$productInvoice', label='$labelInvoice', account_id='$accountInvoice', quantity='$quantityInvoice', price='$priceInvoice', taxes='$taxesInvoice', subtotal='$subtotalInvoice', amount_total='$total_amountInvoice', customer_id='$customerInvoice', currency='$currency', invoice_date='$invoiceDate', due_date='$dueDate', terms='$termsInvoice', payment_reference='$paymentReference', employee_id='$salesPersonInvoice', invoice_notes = '$invoiceNotes' WHERE invoice_id ='$invoiceId' ";
       if($conn->query($sql)){
         echo "success";
       }
@@ -1468,4 +1463,75 @@ if (isset($_POST['editInvoice'])) {
     header('location: ../invoices.php');
   }
 
+// end accounting invoices queries
+
+// Accounting credit notes queries
+function creditNotesTable(){
+  include 'conn.php';
+  $sql = "SELECT crd.credit_notes_id as credit_notes_id, crd.credit_notes_code, crd.invoice_date,crd.due_date, crd.label,crd.quantity, crd.price, crd.tax, crd.subtotal, crd.total_amount, crd.currency, crd.payment_status, prod.product_id, prod.product_name,prod.product_description, emp.employee_id, emp.firstname, emp.lastname, cust.customer_id, cust.customer_firstname, cust.customer_lastname FROM credit_notes crd INNER JOIN product AS prod ON crd.product_id = prod.product_id INNER JOIN employees AS emp ON crd.employee_id = emp.employee_id INNER JOIN customer AS cust ON crd.customer_id = cust.customer_id WHERE crd.delete_flag='0'";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    ?>
+<tr>
+    <td><?php echo $row['credit_notes_code']; ?></td>
+    <td><?php echo $row['customer_firstname'].", ". $row['customer_lastname']; ?></td>
+    <td><?php echo $row['invoice_date']; ?></td>
+    <td><?php echo $row['due_date']; ?></td>
+    <td><?php echo $row['firstname'].", ". $row['lastname']; ?></td>
+    <td><?php echo $row['tax']; ?></td>
+    <td><?php echo $row['total_amount']; ?></td>
+    <td><?php echo $row['total_amount']; ?></td>
+    <td><?php echo $row['currency']; ?></td>
+    <td></td>
+    <td> <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['credit_notes_id']; ?>"><i
+                class="fa fa-edit"></i> Edit</button>
+
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['credit_notes_id']; ?>"><i
+                class="fa fa-trash"></i> Delete</button>
+    </td>
+</tr>
+<?php
+  }
+}
+
+if (isset($_POST['addCreditNotes'])) {
+  creditNotesAdd();
+}
+function creditNotesAdd(){
+  include 'conn.php';
+  if(isset($_POST['addCreditNotes'])){
+    $product = $_POST['product'];
+    $label = $_POST['label'];
+    $account = $_POST['account'];
+    $quantity = $_POST['quantity'];
+    $price = $_POST['price'];
+    $taxes = $_POST['taxes'];
+    $subtotal = $_POST['subtotal'];
+    $total_amount = $_POST['total_amount'];
+    $invoiceDate = $_POST['invoiceDate'];
+    $creditNotesCode = $_POST['credit_notes_code'];
+    $customer = $_POST['customer'];
+    $currency = $_POST['currency'];
+    $dueDate = $_POST['due_date'];
+    $terms = $_POST['terms'];
+    $paymentReference = $_POST['paymentReference'];
+    $salesPerson = $_POST['salesPerson'];
+    $invoiceNotes = $_POST['invoiceNotes'];
+
+    $sql= "INSERT INTO `credit_notes` ( `credit_notes_code`, `customer_id`, `invoice_date`, `due_date`, `employee_id`, `product_id`, `label`, `quantity`, `price`, `tax`, `subtotal`, `total_amount`, `currency`) VALUES 
+    ('$creditNotesCode', '$customer', ' $invoiceDate', '$dueDate', '$salesPerson', '$product', '$label', '$quantity', '$price', '$taxes', '$subtotal', '$total_amount', '$currency')";
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+  }
+  $conn->close();
+  header('location: ../create_invoice.php');
+}
+
+
 ?>
+	
+      

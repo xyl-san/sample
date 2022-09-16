@@ -245,7 +245,7 @@ function deleteRow(ele) {
         table.deleteRow(rowCount - 1);
     }
 }
-// for invoices computations
+// for customer invoices computations
 function invoice() {
     var quantity = document.getElementById("quantity").value;
     var price = document.getElementById("price").value;
@@ -257,5 +257,18 @@ function invoice() {
 
     var total_amount = tax + subtotal;
     document.getElementById("total_amount").value = subtotal;
+}
+// for customer credit notes computations
+function creditNotes() {
+    var quantity = document.getElementById("quantityCreditNotes").value;
+    var price = document.getElementById("priceCreditNotes").value;
+    var subtotal = quantity * price;
+    var tax = subtotal / 1.12 * 0.12;
+    document.getElementById("taxesCreditNotes").value = parseFloat(tax).toFixed(2);
+    var sub = subtotal - tax;
+    document.getElementById("subtotalCreditNotes").value = parseFloat(sub).toFixed(2);
+
+    var total_amount = tax + subtotal;
+    document.getElementById("total_amountCreditNotes").value = subtotal;
 }
 </script>

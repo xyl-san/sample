@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2022 at 11:21 AM
+-- Generation Time: Sep 17, 2022 at 12:56 AM
 -- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -172,6 +172,39 @@ CREATE TABLE `category` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `credit_notes`
+--
+
+CREATE TABLE `credit_notes` (
+  `credit_notes_id` int(11) NOT NULL,
+  `credit_notes_code` varchar(20) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `invoice_date` date NOT NULL,
+  `due_date` date NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `label` int(11) NOT NULL,
+  `quantity` float NOT NULL,
+  `price` float NOT NULL,
+  `tax` float NOT NULL,
+  `subtotal` float NOT NULL,
+  `total_amount` float NOT NULL,
+  `currency` varchar(50) NOT NULL,
+  `payment_status` varchar(20) NOT NULL,
+  `notes` varchar(50) NOT NULL,
+  `delete_flag` tinyint(4) NOT NULL COMMENT '[1] - True [0] - False'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `credit_notes`
+--
+
+INSERT INTO `credit_notes` (`credit_notes_id`, `credit_notes_code`, `customer_id`, `invoice_date`, `due_date`, `employee_id`, `product_id`, `label`, `quantity`, `price`, `tax`, `subtotal`, `total_amount`, `currency`, `payment_status`, `notes`, `delete_flag`) VALUES
+(1, 'kkkk55-ll', 1, '2022-09-02', '2022-09-30', 80, 2, 5, 10, 20, 20, 20, 20, 'php', 'not paid', '', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `customer`
 --
 
@@ -194,7 +227,7 @@ CREATE TABLE `customer` (
 
 INSERT INTO `customer` (`customer_id`, `customer_firstname`, `customer_lastname`, `customer_contact_info`, `customer_address`, `customer_created_on`, `employee_id`, `created_on`, `updated_on`, `delete_flag`) VALUES
 (1, 'Steve', 'Lizada', '09451221', 'QC', '2022-09-15 03:26:40', 80, '2022-09-15 11:26:40', '2022-09-15 11:26:40', 0),
-(2, 'Maang', 'Conar', '0969222', 'Paco Manila', '2022-09-15 07:52:55', 81, '2022-09-15 15:52:55', '2022-09-15 15:52:55', 0);
+(2, 'Maang', 'Conar', '0969222', 'Paco Manila', '2022-09-16 16:52:09', 81, '2022-09-15 15:52:55', '2022-09-15 15:52:55', 0);
 
 -- --------------------------------------------------------
 
@@ -350,7 +383,12 @@ CREATE TABLE `invoice` (
 --
 
 INSERT INTO `invoice` (`invoice_id`, `invoice_code`, `product_id`, `label`, `account_id`, `quantity`, `price`, `taxes`, `subtotal`, `amount_total`, `customer_id`, `currency`, `invoice_date`, `due_date`, `terms`, `payment_reference`, `employee_id`, `invoice_notes`, `delete_flag`) VALUES
-(21, 'CINV-2022-2211', 2, '3', 18, 10, 1000, 1071.43, 8928.57, 10000, 1, 'USD', '2022-09-16', '2022-09-16', '2 Months', 'Bank transfer', 80, '', 0);
+(21, 'daddddd', 2, '3', 18, 10, 1000, 1071.43, 8928.57, 10000, 1, 'USD', '2022-09-16', '2022-09-16', '2 Months', 'Bank transfer', 80, '', 1),
+(22, 'INVOICE-2022-CODE', 3, 'CASH', 5, 1, 500, 5, 500, 500, 1, 'USD', '2020-10-25', '2020-09-25', '1 month', 'bank deposit', 81, 'gumana ka animal', 1),
+(23, 'INVOICE-2022-1001', 2, '3', 18, 10, 20000, 21428.57, 178571.43, 200000, 2, '', '2022-09-16', '0000-00-00', '1 Month', 'BANK TRANSFER', 82, 'PLEASE GUMANA NA KANA ANIMAL', 1),
+(24, 'INVOICE-2020-1997', 2, '3', 20, 10, 50000, 53571.43, 446428.57, 500000, 1, 'PHP', '2022-09-16', '0000-00-00', '1 Month', 'BANK TRANSFER', 82, 'PLEASE HELP ME OUT OF THIS', 0),
+(25, 'sfsdffsdfsd', 2, '2', 18, 10, 10, 10.71, 89.29, 100, 1, 'PHP', '2022-09-17', '0000-00-00', '1 Month', 'fsfsfsf', 80, '', 1),
+(26, 'dDd', 2, '2', 20, 10, 10, 10.71, 89.29, 100, 1, '', '2022-09-17', '0000-00-00', '21 Days', 'FSSDDF', 81, '', 0);
 
 -- --------------------------------------------------------
 
@@ -795,6 +833,15 @@ ALTER TABLE `category`
   ADD KEY `product_id` (`product_id`);
 
 --
+-- Indexes for table `credit_notes`
+--
+ALTER TABLE `credit_notes`
+  ADD PRIMARY KEY (`credit_notes_id`),
+  ADD KEY `employee_id` (`employee_id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
@@ -1006,6 +1053,12 @@ ALTER TABLE `category`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `credit_notes`
+--
+ALTER TABLE `credit_notes`
+  MODIFY `credit_notes_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
@@ -1045,7 +1098,7 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `items`
@@ -1140,6 +1193,14 @@ ALTER TABLE `attendance`
 --
 ALTER TABLE `cashadvance`
   ADD CONSTRAINT `cashadvance_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `credit_notes`
+--
+ALTER TABLE `credit_notes`
+  ADD CONSTRAINT `credit_notes_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `credit_notes_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `credit_notes_ibfk_3` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `customer`

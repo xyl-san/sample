@@ -175,6 +175,7 @@
                                                             <th>Account</th>
                                                             <th>Label</th>
                                                             <th>Due Date</th>
+                                                            <th>Terms</th>
                                                             <th>Amount in Currency</th>
                                                             <th>Taxes</th>
                                                             <th>Debit</th>
@@ -242,7 +243,7 @@
                                 </div>
                             </div>
                             <div class="mb-2">
-                                <input class="btn btn-outline-success btn-sm" type="submit" name="addJournalItems"
+                                <input class="btn btn-outline-success btn-sm" type="submit" name="addCustomerInvoice"
                                     value="SAVE">
                             </div>
                         </form>

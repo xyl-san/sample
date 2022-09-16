@@ -107,7 +107,7 @@
     </div>
     <?php include 'includes/scripts.php';?>
     <?php include 'modals.php';?>
-    <?php include 'edit_invoice.php';?>
+    <?php include 'accounting_modal.php';?>
 
     <script type="text/javascript">
     $(document).ready(function() {
@@ -142,10 +142,11 @@
                 success: function(response) {
                     $('.invoice_id').val(response.invoice_id);
                     $('.invoiceCode').val(response.invoice_code);
-                    $('.customer').html(response.customer_firstname +', ' + response.customer_lastname);
+                    $('.customerInvoice').html(response.customer_firstname +', ' + response.customer_lastname);
                     $('.invoiceDate').val(response.invoice_date);
                     $('.dueDate').val(response.due_date);
-                    $('.salesPersonInvoice').html(response.firstname);
+                    $('.salesPersonInvoice').html(response.firstname +', ' + response.lastname);
+                    $('.salesPersonInvoiceOtherInfo').val(response.firstname+', ' + response.lastname   );
                     $('.currency').val(response.currency);
                     $('.termsInvoice').val(response.terms);
                     $('.paymentReference').val(response.payment_reference);
@@ -157,7 +158,7 @@
                     $('.taxesInvoice').val(response.taxes);
                     $('.subtotalInvoice').val(response.subtotal);
                     $('.total_amountInvoice').val(response.amount_total);
-                    $('.invoiceNotesInvoice').val(response.invoice_notes);
+                    $('.invoiceNotes').val(response.invoice_notes);
                 }
             });
         })
