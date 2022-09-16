@@ -1440,6 +1440,10 @@ if (isset($_POST['editInvoice'])) {
       $invoiceId = $_POST['invoice_id'];
       $invoiceCode = $_POST['invoice_code'];
       $customer = $_POST['customer_id'];
+      $invoiceDate = $_POST['invoice_date'];
+      $paymentReference = $_POST['payment_reference'];
+      $dueDate = $_POST['due_date'];
+      $termsInvoice = $_POST['terms_invoice'];
       $productInvoice = $_POST['product'];
       $labelInvoice = $_POST['label'];
       $accountInvoice = $_POST['account_id'];
@@ -1449,14 +1453,10 @@ if (isset($_POST['editInvoice'])) {
       $subtotalInvoice = $_POST['subtotal'];
       $total_amountInvoice = $_POST['total_amount'];
       $currency = $_POST['currency'];
-      $invoiceDate = $_POST['invoice_date'];
-      $dueDate = $_POST['due_date'];
-      $termsInvoice = $_POST['terms_invoice'];
-      $paymentReference = $_POST['payment_reference'];
-      $salesPerson = $_POST['employee_id'];
+      $salesPersonInvoice = $_POST['employee_id'];
       $invoiceNotesInvoice = $_POST['invoice_notes'];
   
-      $sql = "UPDATE invoice SET `invoice_code`='[$invoiceCode]',`product_id`='[$product]',`label`='[$label]',`account_id`='[$account_id]',`quantity`='[$quantity]',`price`='[$price]',`taxes`='[$taxes]',`subtotal`='[$subtotal]',`amount_total`='[$total_amount]',`customer_id`='[$customer_id]',`currency`='[$currency ]',`invoice_date`='[$invoice_date]',`due_date`='[$due_date]',`terms`='[$terms]',`payment_reference`='[$payment_reference]',`employee_id`='[$employee_id]',`invoice_notes`='[$invoice_notes]' WHERE invoice_id = '$invoice_id'";
+      $sql = "UPDATE invoice SET `invoice_code`='[$invoiceCode]', `product_id`='[$productInvoice]',`label`='[$labelInvoice]',`account_id`='[$accountInvoice]',`quantity`='[$quantityInvoice]',`price`='[$priceInvoice]',`taxes`='[$taxesInvoice]',`subtotal`='[$subtotalInvoice]',`amount_total`='[$total_amountInvoice]',`customer_id`='[$customer]',`currency`='[$currency ]',`invoice_date`='[$invoiceDate]',`due_date`='[$dueDate]',`terms`='[$termsInvoice]',`payment_reference`='[$paymentReference]',`employee_id`='[$employee_id]',`invoice_notes`='[$invoiceNotesInvoice]' WHERE invoice_id = '$invoiceId'";
       if($conn->query($sql)){
         echo "success";
       }

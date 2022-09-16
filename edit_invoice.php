@@ -30,19 +30,19 @@
                         </div>
                         <div class="col-md-6">
                             <label for="paymentReference" class="form-label">Payment Reference</label>
-                            <input type="text" class="form-control paymentReference" id="paymentReference"
+                            <input type="text" class="form-control paymentReference"
                                 name="payment_reference">
                         </div>
                         <div class="col-md-3">
                             <label for="dueDate" class="form-label">Due Date</label>
-                            <input type="date" class="form-control dueDate" id="dueDate" name="due_date">
+                            <input type="date" class="form-control dueDate" name="due_date">
                         </div>
                         <div class="col-md-1">
                             <h4 class="text-center" style="line-height:4;">or</h4>
                         </div>
                         <div class="col-md-2">
                             <label for="status" class="form-label">Terms</label>
-                            <select class="form-control termsInvoice" name="terms_Invoice" aria-label="Select terms" id="terms">
+                            <select class="form-control termsInvoice" name="terms_Invoice" aria-label="Select terms">
                                 <option value="15 Days" class="termsType" selected>15 Days</option>
                                 <option value="21 Days" class="termsType" selected>21 Days</option>
                                 <option value="30 Days" class="termsType" selected>30 Days</option>
@@ -61,7 +61,7 @@
                         </div>
                         <div class="col-md-3">
                             <label for="journal" class="form-label">Journal</label>
-                            <input type="journal" class="form-control" id="journal" value="Customer Invoice">
+                            <input type="journal" class="form-control" value="Customer Invoice">
                         </div>
                         <div class="col-md-3">
                             <label for="currency" class="form-label">Currency</label>
@@ -114,19 +114,19 @@
                                                 <tr>
                                                     <td><select class="form-control productInvoice" name="product"
                                                             id="product">
-                                                            <option value="" class="product" selected>
+                                                            <option value="" selected>
                                                             </option>
                                                             <?php productInvoice();?>
                                                         </select></td>
                                                     <td><select class="form-control labelInvoice" name="label"
                                                             id="label">
-                                                            <option value="" class="label" selected>
+                                                            <option value="" selected>
                                                             </option>
                                                             <?php productDescriptionInvoice();?>
                                                         </select></td>
-                                                    <td><select class="form-control accountInvoice" name="account"
+                                                    <td><select class="form-control accountInvoice" name="account_id"
                                                             id="account">
-                                                            <option value="" class="account" selected>
+                                                            <option value="" selected>
                                                             </option>
                                                             <?php accountListSelection();?>
                                                         </select></td>

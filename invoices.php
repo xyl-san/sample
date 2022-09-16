@@ -142,10 +142,10 @@
                 success: function(response) {
                     $('.invoice_id').val(response.invoice_id);
                     $('.invoiceCode').val(response.invoice_code);
-                    $('.customer').html(response.customer_firstname +', ' + response.lastname);
+                    $('.customer').html(response.customer_firstname +', ' + response.customer_lastname);
                     $('.invoiceDate').val(response.invoice_date);
                     $('.dueDate').val(response.due_date);
-                    $('.salesPersonInvoice').val(response.employee_id);
+                    $('.salesPersonInvoice').html(response.firstname);
                     $('.currency').val(response.currency);
                     $('.termsInvoice').val(response.terms);
                     $('.paymentReference').val(response.payment_reference);
