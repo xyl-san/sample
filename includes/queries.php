@@ -280,15 +280,17 @@ function scheduleTable(){
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
       ?>
-      <tr>
-          <td><?php echo $row['time_in']; ?></td>
-          <td><?php echo $row['time_out'];?></td>
-          <td>
-              <button class="btn btn-success btn-sm schedEdit btn-flat" data-id="<?php echo $row['schedule_id']; ?>"><i class="fa fa-edit"></i> Edit</button>
-              <button class="btn btn-danger btn-sm schedDelete btn-flat" data-id="<?php echo $row['schedule_id']; ?>"><i class="fa fa-trash"></i> Delete</button>
-          </td>
-      </tr>
-      <?php
+<tr>
+    <td><?php echo $row['time_in']; ?></td>
+    <td><?php echo $row['time_out'];?></td>
+    <td>
+        <button class="btn btn-success btn-sm schedEdit btn-flat" data-id="<?php echo $row['schedule_id']; ?>"><i
+                class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-danger btn-sm schedDelete btn-flat" data-id="<?php echo $row['schedule_id']; ?>"><i
+                class="fa fa-trash"></i> Delete</button>
+    </td>
+</tr>
+<?php
   }
   $conn->close();
 }
@@ -372,7 +374,9 @@ function departmentTable(){
 <tr>
     <td><?php echo $row['department_id']; ?></td>
     <td><?php echo $row['department_name']?></td>
-    <td><table class="table table-bordered"><?php departmentJobs($d_id); ?></table></td>
+    <td>
+        <table class="table table-bordered"><?php departmentJobs($d_id); ?></table>
+    </td>
     <td>
         <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['department_id']; ?>"><i
                 class="fa fa-edit"></i> Edit</button>
@@ -393,10 +397,10 @@ function departmentJobs($d_id){
   if(mysqli_num_rows($query) != 0){
     while($row = $query->fetch_assoc()){
       ?>
-        <tr>
-            <td><?php echo $row['job_name']; ?></td>
-        </tr>
-  <?php
+<tr>
+    <td><?php echo $row['job_name']; ?></td>
+</tr>
+<?php
     }
   }else{
     echo "<p>There are no jobs in this department yet. Try adding a job!</p>";
@@ -487,7 +491,9 @@ function jobTable(){
     <td><?php echo $row['job_id']; ?></td>
     <td><?php echo $row['department_name']; ?></td>
     <td><?php echo $row['job_name']; ?></td>
-    <td><table class="table table-bordered"><?php employeeJobs($j_id); ?></table></td>
+    <td>
+        <table class="table table-bordered"><?php employeeJobs($j_id); ?></table>
+    </td>
     <td><?php echo $row['rate']; ?></td>
     <td>
         <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['job_id']; ?>"><i
@@ -533,10 +539,10 @@ function employeeJobs($j_id){
   if(mysqli_num_rows($query) != 0){
     while($row = $query->fetch_assoc()){
       ?>
-        <tr>
-            <td><?php echo $row['firstname'] . ' ' .$row['lastname']; ?></td>
-        </tr>
-  <?php
+<tr>
+    <td><?php echo $row['firstname'] . ' ' .$row['lastname']; ?></td>
+</tr>
+<?php
     }
   }else{
     echo "<p>There are no employees in this job yet. Try adding someone!</p>";
@@ -587,15 +593,17 @@ function deductionTable(){
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
     ?>
-    <tr>
-        <td><?php echo $row['firstname'] ." ". $row['lastname']; ?></td>
-        <td><?php echo $row['description']; ?></td>
-        <td><?php echo $row['amount']; ?></td>
-        <td>
-            <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['deduction_id']; ?>"><i class="fa fa-edit"></i> Edit</button>
-            <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['deduction_id']; ?>"><i class="fa fa-trash"></i> Delete</button>
-        </td>
-    </tr>
+<tr>
+    <td><?php echo $row['firstname'] ." ". $row['lastname']; ?></td>
+    <td><?php echo $row['description']; ?></td>
+    <td><?php echo $row['amount']; ?></td>
+    <td>
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['deduction_id']; ?>"><i
+                class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['deduction_id']; ?>"><i
+                class="fa fa-trash"></i> Delete</button>
+    </td>
+</tr>
 <?php
   }
   $conn->close();
@@ -668,8 +676,10 @@ function cashadvanceTable(){
     <td><?php echo $row['date_advance']; ?></td>
     <td><?php echo $row['amount']; ?></td>
     <td>
-        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['cashadvance_id']; ?>"><i class="fa fa-edit"></i> Edit</button>
-        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['cashadvance_id']; ?>"><i class="fa fa-trash"></i> Delete</button>
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['cashadvance_id']; ?>"><i
+                class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['cashadvance_id']; ?>"><i
+                class="fa fa-trash"></i> Delete</button>
     </td>
 </tr>
 <?php
@@ -1247,17 +1257,17 @@ function customerTable(){
   while($row = $query->fetch_assoc()){
     ?>
 <tr>
-  <td></td>
-  <td><?php echo $row['customer_id']; ?></td>
-  <td><?php echo $row['created_on']; ?></td>
-  <td><?php echo $row['customer_firstname'].", ". $row['customer_lastname']; ?></td>
-  <td><?php echo $row['customer_contact_info']; ?></td>
-  <td><?php echo $row['customer_address']; ?></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><?php echo $row['firstname'].", ". $row['lastname'];; ?></td>
+    <td></td>
+    <td><?php echo $row['customer_id']; ?></td>
+    <td><?php echo $row['created_on']; ?></td>
+    <td><?php echo $row['customer_firstname'].", ". $row['customer_lastname']; ?></td>
+    <td><?php echo $row['customer_contact_info']; ?></td>
+    <td><?php echo $row['customer_address']; ?></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><?php echo $row['firstname'].", ". $row['lastname'];; ?></td>
 </tr>
 <?php
   }
@@ -1276,7 +1286,7 @@ function customerInvoice(){
   $conn->close();
 }
 
-
+// add journal Items
 if (isset($_POST['addJournalItems'])) {
   journalItemsAdd();
 }
@@ -1291,10 +1301,17 @@ function journalItemsAdd(){
     $taxes = $_POST['taxes'];
     $subtotal = $_POST['subtotal'];
     $total_amount = $_POST['total_amount'];
-    $invoice_date = $_POST['invoice_date'];
+    $invoiceDate = $_POST['invoiceDate'];
+    $invoiceCode = $_POST['invoiceCode'];
+    $customer = $_POST['customer'];
+    $currency = $_POST['currency'];
+    $dueDate = $_POST['dueDate'];
+    $terms = $_POST['terms'];
+    $paymentReference = $_POST['paymentReference'];
+    $salesPerson = $_POST['salesPerson'];
+    $invoiceNotes = $_POST['invoiceNotes'];
 
-    $sql = "INSERT INTO invoice (product, label, account, quantity, price, taxes, subtotal, amount_total,invoice_date) VALUES 
-    ('$product','$label', '$account', '$quantity', '$price', '$taxes', '$subtotal', '$total_amount','$invoice_date')";
+    $sql= "INSERT INTO `invoice` (`invoice_code`, `product_id`, `label`, `account_id`, `quantity`, `price`, `taxes`, `subtotal`, `amount_total`, `customer_id`, `currency`, `invoice_date`, `due_date`, `terms`, `payment_reference`, `employee_id`, `invoice_notes`) VALUES ('$invoiceCode', '$product', '$label', '$account', '$quantity', '$price', '$taxes', '$subtotal', '$total_amount', '$customer', '$currency', '$invoiceDate', '$dueDate', '$terms', '$paymentReference', ' $salesPerson', '$invoiceNotes')";
     if($conn->query($sql)){
       echo "success";
     }
@@ -1303,30 +1320,152 @@ function journalItemsAdd(){
     }
   }
   $conn->close();
-  header('location: ../customer_list_invoice.php');
+  header('location: ../create_invoice.php');
 }
+
 // invoices table
 function invoicesTable(){
   include 'conn.php';
-  $sql = "SELECT inv.invoice_id, inv.product, inv.label, inv.account,inv.quantity,inv.price,inv.taxes, inv.subtotal,inv.amount_total,inv.invoice_date, cust.customer_firstname,cust.customer_lastname FROM invoice inv INNER JOIN customer AS cust ON inv.customer_id = cust.customer_id";
+  $sql = "SELECT inv.invoice_id, inv.invoice_code, inv.product_id, inv.label, inv.account_id, inv.quantity, inv.price, inv.taxes, inv.subtotal, inv.amount_total,inv.currency, inv.invoice_date, inv.due_date, inv.terms, inv.payment_reference, inv.employee_id, inv.delete_flag, emp.firstname, emp.lastname, prod.product_name, prod.product_description, cust.customer_id, cust.customer_firstname, cust.customer_lastname FROM invoice inv INNER JOIN employees AS emp ON inv.employee_id=emp.employee_id INNER JOIN product AS prod ON inv.product_id = prod.product_id INNER JOIN customer AS cust ON inv.customer_id = cust.customer_id WHERE inv.delete_flag='0'";
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
     ?>
 <tr>
-  <td></td>
-  <td><?php echo $row['customer_id']; ?></td>
-  <td><?php echo $row['duedate']; ?></td>
-  <td><?php echo $row['customer_firstname'].", ". $row['customer_lastname']; ?></td>
-  <td><?php echo $row['']; ?></td>
-  <td><?php echo $row['customer_address']; ?></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
+    <td></td>
+    <td><?php echo $row['invoice_code']; ?></td>
+    <td><?php echo $row['due_date']; ?></td>
+    <td><?php echo $row['terms']; ?></td>
+    <td><?php echo $row['customer_firstname'].", ". $row['customer_lastname']; ?></td>
+    <td><?php echo $row['product_name']; ?></td>
+    <td><?php echo $row['taxes']; ?></td>
+    <td><?php echo $row['amount_total']; ?></td>
+    <td><?php echo $row['invoice_date']; ?></td>
+    <td></td>
+    <td><?php echo $row['payment_reference']; ?></td>
+    <td> <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['invoice_id']; ?>"><i
+                class="fa fa-edit"></i> Edit</button>
+
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['invoice_id']; ?>"><i
+                class="fa fa-trash"></i> Delete</button>
+    </td>
+</tr>
+<?php
+  }
+}
+// product selection for invoice
+function productInvoice(){
+  include 'conn.php';
+  $sql = "SELECT product_id, product_name FROM product";
+  $query = $conn->query($sql);
+  while($prow = $query->fetch_assoc()){
+      echo "
+      <option value='".$prow['product_id']."'>".$prow['product_name']."</option>
+      ";
+  }
+  $conn->close();
+}
+
+// product description selection for invoice
+function productDescriptionInvoice(){
+  include 'conn.php';
+  $sql = "SELECT product_id, product_description FROM product";
+  $query = $conn->query($sql);
+  while($prow = $query->fetch_assoc()){
+      echo "
+      <option value='".$prow['product_id']."'>".$prow['product_description']."</option>
+      ";
+  }
+  $conn->close();
+}
+
+// employee selection for invoice
+function salesPerson(){
+  include 'conn.php';
+  $sql = "SELECT employee_id, firstname, lastname FROM employees";
+  $query = $conn->query($sql);
+  while($prow = $query->fetch_assoc()){
+      echo "
+      <option value='".$prow['employee_id']."'>".$prow['firstname'].", ".$prow['lastname']."</option>
+      ";
+  }
+  $conn->close();
+}
+
+// for journal items queries
+function journalItemsTable(){
+  include 'conn.php';
+  $sql = "SELECT inv.invoice_code, inv.product_id, inv.label, inv.account_id, inv.quantity, inv.price, inv.taxes, inv.subtotal, inv.amount_total,inv.currency, inv.invoice_date,inv.due_date, inv.terms, inv.payment_reference, inv.employee_id, emp.firstname, emp.lastname, prod.product_name, prod.product_description, cust.customer_id, cust.customer_firstname, cust.customer_lastname, acc.account_id, acc.account_name, acc.description FROM invoice inv INNER JOIN employees AS emp ON inv.employee_id=emp.employee_id INNER JOIN product AS prod ON inv.product_id = prod.product_id INNER JOIN customer AS cust ON inv.customer_id = cust.customer_id INNER JOIN account_list AS acc on inv.account_id = acc.account_id";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    ?>
+<tr>
+    <td><?php echo $row['account_name']; ?></td>
+    <td><?php echo $row['product_name']; ?></td>
+    <td><?php echo $row['due_date']; ?></td>
+    <td><?php echo $row['amount_total']; ?></td>
+    <td><?php echo $row['taxes']; ?></td>
+    <td></td>
+    <td></td>
 </tr>
 <?php
   }
 }
 
+// invoice delete queries
+if(isset($_POST['deleteInvoice'])){
+  invoiceDelete();
+}
+function invoiceDelete(){
+  include 'conn.php';
+  if(isset($_POST['deleteInvoice'])){
+    $invoiceId = $_POST['invoiceId'];
+    $sql = "UPDATE invoice SET delete_flag = 1 WHERE invoice_id = '$invoiceId'";
+  }
+  if($conn->query($sql)){
+    $_SESSION['success'] = 'Customer invoice deleted successfully';
+  }
+  else{
+    $_SESSION['error'] = $conn->error;
+  }
+  $conn->close();
+  header('location: ../invoices.php');
+}
+// customer invoice edit
+if (isset($_POST['editInvoice'])) {
+  invoiceEdit();
+}
+  function invoiceEdit(){
+    include 'conn.php';
+    if(isset($_POST['editInvoice'])){
+      $invoiceId = $_POST['invoice_id'];
+      $invoiceCode = $_POST['invoice_code'];
+      $customer = $_POST['customer_id'];
+      $productInvoice = $_POST['product'];
+      $labelInvoice = $_POST['label'];
+      $accountInvoice = $_POST['account_id'];
+      $quantityInvoice = $_POST['quantity'];
+      $priceInvoice = $_POST['price'];
+      $taxesInvoice = $_POST['taxes'];
+      $subtotalInvoice = $_POST['subtotal'];
+      $total_amountInvoice = $_POST['total_amount'];
+      $currency = $_POST['currency'];
+      $invoiceDate = $_POST['invoice_date'];
+      $dueDate = $_POST['due_date'];
+      $termsInvoice = $_POST['terms_invoice'];
+      $paymentReference = $_POST['payment_reference'];
+      $salesPerson = $_POST['employee_id'];
+      $invoiceNotesInvoice = $_POST['invoice_notes'];
+  
+      $sql = "UPDATE invoice SET `invoice_code`='[$invoiceCode]',`product_id`='[$product]',`label`='[$label]',`account_id`='[$account_id]',`quantity`='[$quantity]',`price`='[$price]',`taxes`='[$taxes]',`subtotal`='[$subtotal]',`amount_total`='[$total_amount]',`customer_id`='[$customer_id]',`currency`='[$currency ]',`invoice_date`='[$invoice_date]',`due_date`='[$due_date]',`terms`='[$terms]',`payment_reference`='[$payment_reference]',`employee_id`='[$employee_id]',`invoice_notes`='[$invoice_notes]' WHERE invoice_id = '$invoice_id'";
+      if($conn->query($sql)){
+        echo "success";
+      }
+      else{
+        echo "error";
+      }
+    }
+    $conn->close();
+    header('location: ../invoices.php');
+  }
 
 ?>

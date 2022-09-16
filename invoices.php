@@ -8,7 +8,6 @@
     <title>Document</title>
     <?php include 'includes/styles.php'; ?>
     <link rel="stylesheet" href="css/style.css">
-    <!-- https://colorhunt.co/palette/effffdb8fff985f4ff42c2ff -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 </head>
 
@@ -54,7 +53,8 @@
             <div class="card">
                 <div class="card-header" style="background-color:#ffeccc;">
                     <h4>Invoices</h4>
-                    <a href="customer_list_invoice.php" type="button" class="btn btn-outline-success btn-sm btn-flat mt-2">
+                    <a href="create_invoice.php" type="button"
+                        class="btn btn-outline-success btn-sm btn-flat mt-2">
                         <span>
                             <i class="fa-solid fa-file-signature"></i>
                             Create Invoices
@@ -68,6 +68,7 @@
                                 <th></th>
                                 <th>Number</th>
                                 <th>Due Date</th>
+                                <th>Terms</th>
                                 <th>Customer</th>
                                 <th>Particulars</th>
                                 <th>Tax Encluded</th>
@@ -75,16 +76,18 @@
                                 <th>Invoice Date</th>
                                 <th>Payment Status</th>
                                 <th>Payment Terms</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <?php invoicesTable();?>
+                            <?php invoicesTable();?>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th></th>
                                 <th>Number</th>
                                 <th>Due Date</th>
+                                <th>Terms</th>
                                 <th>Customer</th>
                                 <th>Particulars</th>
                                 <th>Tax Encluded</th>
@@ -92,6 +95,8 @@
                                 <th>Invoice Date</th>
                                 <th>Payment Status</th>
                                 <th>Payment Terms</th>
+                                <th>Actions</th>
+                            </tr>
                             </tr>
                         </tfoot>
                     </table>
@@ -102,6 +107,7 @@
     </div>
     <?php include 'includes/scripts.php';?>
     <?php include 'modals.php';?>
+    <?php include 'edit_invoice.php';?>
 
     <script type="text/javascript">
     $(document).ready(function() {
@@ -109,6 +115,54 @@
             $('#sidebar').toggleClass('active');
         });
     });
+    $(function() {
+        $('#example1').on('click', '.delete', function(e) {
+            e.preventDefault();
+            $('#deleteInvoice').modal('show');
+            var id = $(this).data('id');
+            getRow(id);
+        });
+        $('#example1').on('click', '.edit', function(e) {
+            e.preventDefault();
+            $('#editInvoice').modal('show');
+            var id = $(this).data('id');
+            getRow(id);
+        });
+      
+    });
+    function getRow(id) {
+        $(document).ready(function() {
+            $.ajax({
+                type: 'POST',
+                url: 'invoice_row.php',
+                data: {
+                    id: id,
+                },
+                dataType: 'json',
+                success: function(response) {
+                    $('.invoice_id').val(response.invoice_id);
+                    $('.invoiceCode').val(response.invoice_code);
+                    $('.customer').html(response.customer_firstname +', ' + response.lastname);
+                    $('.invoiceDate').val(response.invoice_date);
+                    $('.dueDate').val(response.due_date);
+                    $('.salesPersonInvoice').val(response.employee_id);
+                    $('.currency').val(response.currency);
+                    $('.termsInvoice').val(response.terms);
+                    $('.paymentReference').val(response.payment_reference);
+                    $('.productInvoice').val(response.product_id);
+                    $('.labelInvoice').val(response.label);
+                    $('.accountInvoice').val(response.account_id);
+                    $('.quantityInvoice').val(response.quantity);
+                    $('.priceInvoice').val(response.price);
+                    $('.taxesInvoice').val(response.taxes);
+                    $('.subtotalInvoice').val(response.subtotal);
+                    $('.total_amountInvoice').val(response.amount_total);
+                    $('.invoiceNotesInvoice').val(response.invoice_notes);
+                }
+            });
+        })
+    }
+
     </script>
 
 </body>

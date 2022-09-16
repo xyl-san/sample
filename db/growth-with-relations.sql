@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2022 at 08:15 AM
+-- Generation Time: Sep 16, 2022 at 11:21 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -188,6 +188,14 @@ CREATE TABLE `customer` (
   `delete_flag` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`customer_id`, `customer_firstname`, `customer_lastname`, `customer_contact_info`, `customer_address`, `customer_created_on`, `employee_id`, `created_on`, `updated_on`, `delete_flag`) VALUES
+(1, 'Steve', 'Lizada', '09451221', 'QC', '2022-09-15 03:26:40', 80, '2022-09-15 11:26:40', '2022-09-15 11:26:40', 0),
+(2, 'Maang', 'Conar', '0969222', 'Paco Manila', '2022-09-15 07:52:55', 81, '2022-09-15 15:52:55', '2022-09-15 15:52:55', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -308,6 +316,41 @@ CREATE TABLE `inventory` (
   `updated_on` datetime NOT NULL DEFAULT current_timestamp(),
   `delete_flag` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invoice`
+--
+
+CREATE TABLE `invoice` (
+  `invoice_id` int(11) NOT NULL,
+  `invoice_code` varchar(50) NOT NULL,
+  `product_id` int(50) NOT NULL,
+  `label` varchar(50) NOT NULL,
+  `account_id` int(50) NOT NULL,
+  `quantity` bigint(50) NOT NULL,
+  `price` double NOT NULL,
+  `taxes` double NOT NULL,
+  `subtotal` double NOT NULL,
+  `amount_total` double NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `currency` varchar(11) NOT NULL,
+  `invoice_date` date NOT NULL,
+  `due_date` date NOT NULL,
+  `terms` varchar(11) NOT NULL,
+  `payment_reference` varchar(20) NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `invoice_notes` varchar(50) NOT NULL,
+  `delete_flag` tinyint(11) NOT NULL COMMENT '[1] - True [0] - False'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `invoice`
+--
+
+INSERT INTO `invoice` (`invoice_id`, `invoice_code`, `product_id`, `label`, `account_id`, `quantity`, `price`, `taxes`, `subtotal`, `amount_total`, `customer_id`, `currency`, `invoice_date`, `due_date`, `terms`, `payment_reference`, `employee_id`, `invoice_notes`, `delete_flag`) VALUES
+(21, 'CINV-2022-2211', 2, '3', 18, 10, 1000, 1071.43, 8928.57, 10000, 1, 'USD', '2022-09-16', '2022-09-16', '2 Months', 'Bank transfer', 80, '', 0);
 
 -- --------------------------------------------------------
 
@@ -480,7 +523,9 @@ CREATE TABLE `order_detail` (
   `bill_id` int(11) NOT NULL,
   `unit_price` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `total` int(11) NOT NULL,
+  `vat` float(10,2) NOT NULL,
+  `tax` float(10,2) NOT NULL,
+  `total_amount` float(10,2) NOT NULL,
   `order_date` date NOT NULL,
   `delivery_date` date NOT NULL,
   `discount` int(11) NOT NULL
@@ -518,13 +563,6 @@ CREATE TABLE `payment` (
   `debited_date` date DEFAULT NULL,
   `balance` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `payment`
---
-
-INSERT INTO `payment` (`bill_id`, `Payment_type`, `credit_amount`, `credit_date`, `debited_amount`, `debited_date`, `balance`) VALUES
-(12345, 'Cash', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -597,10 +635,12 @@ CREATE TABLE `purchase_order` (
 
 CREATE TABLE `sales` (
   `sales_id` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `created_on` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_on` datetime NOT NULL DEFAULT current_timestamp(),
-  `delete_flag` tinyint(1) NOT NULL
+  `employee_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `vat` float NOT NULL,
+  `tax` float NOT NULL,
+  `total_amount` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -797,6 +837,16 @@ ALTER TABLE `inventory`
   ADD KEY `product_id` (`product_id`);
 
 --
+-- Indexes for table `invoice`
+--
+ALTER TABLE `invoice`
+  ADD PRIMARY KEY (`invoice_id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `employee_id` (`employee_id`),
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `account_id` (`account_id`);
+
+--
 -- Indexes for table `items`
 --
 ALTER TABLE `items`
@@ -885,7 +935,10 @@ ALTER TABLE `purchase_order`
 -- Indexes for table `sales`
 --
 ALTER TABLE `sales`
-  ADD PRIMARY KEY (`sales_id`);
+  ADD PRIMARY KEY (`sales_id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `employee_id` (`employee_id`);
 
 --
 -- Indexes for table `sample`
@@ -956,7 +1009,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `deductions`
@@ -974,7 +1027,7 @@ ALTER TABLE `department`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `group_list`
@@ -987,6 +1040,12 @@ ALTER TABLE `group_list`
 --
 ALTER TABLE `inventory`
   MODIFY `inventory_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `invoice`
+--
+ALTER TABLE `invoice`
+  MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `items`
@@ -1101,6 +1160,15 @@ ALTER TABLE `employees`
   ADD CONSTRAINT `employees_ibfk_5` FOREIGN KEY (`schedule_id`) REFERENCES `schedules` (`schedule_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `employees_ibfk_6` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `employees_ibfk_7` FOREIGN KEY (`job_id`) REFERENCES `job` (`job_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Constraints for table `invoice`
+--
+ALTER TABLE `invoice`
+  ADD CONSTRAINT `invoice_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `invoice_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `invoice_ibfk_3` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `invoice_ibfk_4` FOREIGN KEY (`account_id`) REFERENCES `account_list` (`account_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `job`

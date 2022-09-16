@@ -245,5 +245,17 @@ function deleteRow(ele) {
         table.deleteRow(rowCount - 1);
     }
 }
+// for invoices computations
+function invoice() {
+    var quantity = document.getElementById("quantity").value;
+    var price = document.getElementById("price").value;
+    var subtotal = quantity * price;
+    var tax = subtotal / 1.12 * 0.12;
+    document.getElementById("taxes").value = parseFloat(tax).toFixed(2);
+    var sub = subtotal - tax;
+    document.getElementById("subtotal").value = parseFloat(sub).toFixed(2);
 
+    var total_amount = tax + subtotal;
+    document.getElementById("total_amount").value = subtotal;
+}
 </script>
