@@ -203,8 +203,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label for="exampleFormControlInput1" class="form-label">Salesperson</label>
-                                            <input value="" type="text" class="form-control"
-                                                id="exampleFormControlInput1">
+                                            <input value="" type="text" class="form-control salesPersonInvoice">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="exampleFormControlInput1" class="form-label">Fiscal
