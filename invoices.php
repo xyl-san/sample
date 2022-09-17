@@ -65,8 +65,7 @@
                     <table id="example1" class="table" style="width:100%">
                         <thead>
                             <tr>
-                                <th></th>
-                                <th>Number</th>
+                                <th>Invoice Number</th>
                                 <th>Due Date</th>
                                 <th>Terms</th>
                                 <th>Customer</th>
@@ -74,7 +73,6 @@
                                 <th>Tax Encluded</th>
                                 <th>Total Amount</th>
                                 <th>Invoice Date</th>
-                                <th>Payment Status</th>
                                 <th>Payment Terms</th>
                                 <th>Actions</th>
                             </tr>
@@ -84,8 +82,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th></th>
-                                <th>Number</th>
+                                <th>Invoice Number</th>
                                 <th>Due Date</th>
                                 <th>Terms</th>
                                 <th>Customer</th>
@@ -93,7 +90,6 @@
                                 <th>Tax Encluded</th>
                                 <th>Total Amount</th>
                                 <th>Invoice Date</th>
-                                <th>Payment Status</th>
                                 <th>Payment Terms</th>
                                 <th>Actions</th>
                             </tr>
@@ -106,7 +102,6 @@
     </div>
     </div>
     <?php include 'includes/scripts.php';?>
-    <?php include 'modals.php';?>
     <?php include 'accounting_modal.php';?>
 
     <script type="text/javascript">
@@ -140,24 +135,24 @@
                 },
                 dataType: 'json',
                 success: function(response) {
-                    $('.invoice_id').val(response.invoice_id);
+                    $('.invoiceId').val(response.invoice_id);
                     $('.invoiceCode').val(response.invoice_code);
-                    $('.customerInvoice').html(response.customer_firstname +', ' + response.customer_lastname);
+                    $('.customerId').html(response.customer_firstname +', ' + response.customer_lastname);
                     $('.invoiceDate').val(response.invoice_date);
                     $('.dueDate').val(response.due_date);
-                    $('.salesPersonInvoice').html(response.firstname +', ' + response.lastname);
+                    $('.employeeId').html(response.firstname +', ' + response.lastname);
                     $('.salesPersonInvoiceOtherInfo').val(response.firstname+', ' + response.lastname   );
                     $('.currency').val(response.currency);
-                    $('.termsInvoice').val(response.terms);
+                    $('.terms').val(response.terms);
                     $('.paymentReference').val(response.payment_reference);
-                    $('.productInvoice').val(response.product_id);
-                    $('.labelInvoice').val(response.label);
-                    $('.accountInvoice').val(response.account_id);
-                    $('.quantityInvoice').val(response.quantity);
-                    $('.priceInvoice').val(response.price);
-                    $('.taxesInvoice').val(response.taxes);
-                    $('.subtotalInvoice').val(response.subtotal);
-                    $('.total_amountInvoice').val(response.amount_total);
+                    $('.productId').val(response.product_id);
+                    $('.label').val(response.label);
+                    $('.accountId').val(response.account_id);
+                    $('.quantity').val(response.quantity);
+                    $('.price').val(response.price);
+                    $('.taxes').val(response.taxes);
+                    $('.subtotal').val(response.subtotal);
+                    $('.total_amount').val(response.amount_total);
                     $('.invoiceNotes').val(response.invoice_notes);
                 }
             });

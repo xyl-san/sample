@@ -1419,34 +1419,6 @@
 </div>
 <!-- End Create Taxes -->
 
-<!-- Start invoice delete confirmation -->
-<div class="modal fade" id="deleteInvoice" tabindex="-1" role="dialog" aria-labelledby="invoiceTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                </button>
-            </div>
-            <div class="modal-body">
-                <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
-                    <input type="hidden" class="invoice_id" name="invoiceId">
-                    <div class="text-center">
-                        <p>
-                            Delete customer invoice record?
-                        </p>
-                    </div>
-                    <div class="mb-2">
-                        <button type="button" data-bs-dismiss="modal" class="btn btn-warning">Cancel</button>
-                        <button type="submit" class="btn btn-danger float-end" name="deleteInvoice">Yes</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End invoice delete confirmation -->
-
-
 <script>
 $('#transferInput').click(function() {
     $('#journalTransfer').val($('#journalId').val())
