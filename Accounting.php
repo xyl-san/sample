@@ -123,7 +123,7 @@
             </div>
         </div>
         <?php include 'includes/scripts.php';?>
-        <?php include 'modals.php';?>
+        <?php include 'accounting_modal.php';?>
 
         <script type="text/javascript">
         $(document).ready(function() {

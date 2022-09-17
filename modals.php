@@ -1004,63 +1004,6 @@
 </div>
 <!-- End of Delete Job -->
 
-
-
-<!-- start adding accounting periods  -->
-<div class="modal fade" id="newConfigure" tabindex="-1" role="dialog" aria-labelledby="accountingPeriods"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="accountingPeriods">Accounting Periods</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                </button>
-            </div>
-            <div class="modal-body">
-                <form class="row g-3" action="#" method="POST" autocomplete="off">
-                    <div>
-                        <h8>Fiscal Years</h8>
-                    </div>
-                    <div class="col-md-6 form-floating">
-                        <input type="date" class="form-control accountingPeriods" name="accountingPeriods" required>
-                        <label for="accountingPeriods">Opening Date</label>
-                    </div>
-                    <div class="col-md-6 form-floating">
-                        <input type="date" class="form-control accountingPeriods" name="accountingPeriods" required>
-                        <label for="accountingPeriods">Fiscal Year Date</label>
-                    </div>
-                    <div>
-                        <h8>Tax Return</h8>
-                    </div>
-                    <div class="col-md-6 form-floating">
-                        <input type="Date" class="form-control rateInfo" name="rate" required>
-                        <label for="rate">Periodicity</label>
-                    </div>
-                    <div class="col-md-5 form-floating">
-                        <select class="form-control" name="journalId" aria-label="Select account" id="journalId">
-                            <option value="Cash Basis Taxes" class="Status" selected>Cash Basis Taxes</option>
-                            <option value="Exchange Difference" class="Status" selected>Exchange Difference</option>
-                            <option value="Miscellaneous Operations" class="Status" selected>Miscellaneous Operations
-                            </option>
-                            <option value="" class="Status" selected>--Select--</option>
-                        </select>
-                        <label for="Journal ">Journal</label>
-                    </div>
-                    <div class="col-md-1 form-floating">
-                        <a type="button" data-bs-target="#newFiscal" data-bs-toggle="modal" id="transferInput"><i
-                                class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                    </div>
-                    <div class="mb-2">
-                        <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cancel</button>
-                        <button type="submit" class="btn btn-success float-end" name="">Apply</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End adding accounting periods  -->
-
 <!-- Start open journal modal  -->
 <div class="modal fade" id="newFiscal" tabindex="-1" role="dialog" aria-labelledby="accountingPeriods"
     aria-hidden="true">
