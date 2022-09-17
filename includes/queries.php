@@ -1449,7 +1449,7 @@ if (isset($_POST['editInvoice'])) {
       $employeeId = $_POST['employee_id'];
       $invoiceNotes = $_POST['invoice_notes'];
   
-      $sql = "UPDATE `invoice` SET `invoice_code`='$invoiceCode',`product_id`='$productId',`label`='$label',`account_id`='$accountId',`quantity`='$quantity',`price`='$price',`taxes`='$taxes',`subtotal`='$subtotal',`amount_total`='$total_amount',`customer_id`='$customer',`currency`='$currency',`invoice_date`='$invoiceDate',`due_date`='$dueDate',`terms`='$terms',`payment_reference`='$paymentReference',`employee_id`='$employeeId',`invoice_notes`='$invoiceNotes' WHERE `invoice_id` = '$invoiceId' ";
+      $sql = "UPDATE invoice SET `zinvoice_code`='$invoiceCode',`product_id`='$productId',`label`='$label',`account_id`='$accountId',`quantity`='$quantity',`price`='$price',`taxes`='$taxes',`subtotal`='$subtotal',`amount_total`='$total_amount',`customer_id`='$customer',`currency`='$currency',`invoice_date`='$invoiceDate',`due_date`='$dueDate',`terms`='$terms',`payment_reference`='$paymentReference',`employee_id`='$employeeId',`invoice_notes`='$invoiceNotes' WHERE `invoice_id` = '$invoiceId' ";
       if($conn->query($sql)){
         echo "success";
       }
