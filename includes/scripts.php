@@ -272,3 +272,4 @@ function creditNotes() {
     document.getElementById("total_amountCreditNotes").value = subtotal;
 }
 </script>
+

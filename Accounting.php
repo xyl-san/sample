@@ -124,6 +124,8 @@
         </div>
         <?php include 'includes/scripts.php';?>
         <?php include 'accounting_modal.php';?>
+        <?php include 'modals.php';?>
+
 
         <script type="text/javascript">
         $(document).ready(function() {

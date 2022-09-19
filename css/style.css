@@ -425,9 +425,6 @@ background-color: #C3B091;
 }
 
 
-
-
-
 .btn-toggle, .noMenu {
     display: inline-flex;
     align-items: center;
@@ -456,3 +453,4 @@ background-color: #C3B091;
   .btn-toggle[aria-expanded="true"]::before {
     transform: rotate(90deg);
   }
+

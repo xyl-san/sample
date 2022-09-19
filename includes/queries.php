@@ -1527,5 +1527,39 @@ function creditNotesAdd(){
     header('location: ../credit_notes.php');
   }
   
+  if (isset($_POST['addJournalEntries'])) {
+    journalEntriesAdd();
+  }
+  function journalEntriesAdd(){
+    include 'conn.php';
+    if(isset($_POST['addJournalEntries'])){
+      $openingDate = $_POST['openingDate'];
+      $fiscalYearEnd = $_POST['fiscalYearEnd'];
+      $periodicity = $_POST['periodicity'];
+      $reminder = $_POST['reminder'];
+      $journal = $_POST['journal'];
 
+      $letters = '';
+      $numbers = '';
+      foreach (range('A', 'Z') as $char) {
+          $letters .= $char;
+      }
+      for($i = 0; $i < 10; $i++){
+        $numbers .= $i;
+      }
+      $accounting_period_code = substr(str_shuffle($letters), 0, 3).substr(str_shuffle($numbers), 0, 9);
+      $sql = "INSERT INTO `accounting_periods` ( `accounting_periods_code`, `opening_date`, `fiscal_year_end`, `periodicity`, `reminder`, `journal`) VALUES 
+      ('$accounting_period_code', '$openingDate', '$fiscalYearEnd', '$periodicity', '$reminder', '$journal')";
+        if($conn->query($sql)){
+          echo "success";
+        }
+        else{
+          echo "error";
+        }
+      }
+      $conn->close();
+      header('location: ../journal_entries.php');
+    }
+    
+  
 ?>
