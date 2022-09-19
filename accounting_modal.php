@@ -320,7 +320,7 @@
                     <div class="col-md-12">
                     <label for="Journal">Journal</label>
                         <div class="input-group ">
-                            <select class="form-control journal" name="journal" aria-label="Select account">
+                            <select class="form-control journal" name="journal" aria-label="Select account" id="journal">
                             <option value="Cash Basis Taxes" class="journalDescription" selected>Cash Basis Taxes
                             </option>
                             <option value="Exchange Difference" class="journalDescription" selected>Exchange Difference
@@ -332,7 +332,8 @@
                             <option value="Point of Sale" class="journalDescription" selected>Point of Sale</option>
                             <option value="" class="journalDescription" selected></option>
                         </select>
-                                <a href="accounting.php" type="button" class="input-group-text"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                <a type="button" class="input-group-text text-hover" title="Open Journal"  data-bs-target="#newFiscal" data-bs-toggle="modal">
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </div>
                     </div>
                     <div class="mb-2">
@@ -461,3 +462,18 @@
     </div>
 </div>
 <!-- End open journal modal  -->
+
+
+
+
+<!-- this function for transfering data from textfeild to another textfeild -->
+<script>
+window.onload = function() {
+    var src = document.getElementById("journal"),
+        dst = document.getElementById("journalTransfer");
+    src.addEventListener('input', function() {
+        dst.value = src.value;
+    });
+};
+
+</script>

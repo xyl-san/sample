@@ -454,3 +454,6 @@ background-color: #C3B091;
     transform: rotate(90deg);
   }
 
+.text-hover:hover :after.openJournal{
+opacity: 1;
+} 

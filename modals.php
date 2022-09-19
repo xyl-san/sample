@@ -1245,8 +1245,3 @@
 </div>
 <!-- End Create Taxes -->
 
-<script>
-$('#transferInput').click(function() {
-    $('#journalTransfer').val($('#journalId').val())
-});
-</script>
