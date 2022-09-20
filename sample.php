@@ -18,12 +18,9 @@
     <div class="wrapper">
         <?php include 'accounting_sidebar.php'; ?>
         <div id="content" class="w-100">
-            <select name="bacl">
-                <option value="1">Thing One</option>
-                <option value="2">Thing Two</option>
-                <option value="3">Thing Three</option>
-                <option value="">New Thing&hellip;</option>
-            </select>
+            <button data-bs-target="#addAccountList" data-bs-toggle="modal" class="btn btn-danger btn-sm">
+                Sample
+            </button>
         </div>
         <?php include 'includes/scripts.php';?>
         <?php include 'accounting_modal.php';?>
@@ -37,11 +34,10 @@
             });
         });
         $('select[name=things]').change(function() {
-    if ($(this).val() == '')
-    {
-        window.location.href = 'invoices.php'; 
-    }
-});
+            if ($(this).val() == '') {
+                window.location.href = 'invoices.php';
+            }
+        });
         </script>
 </body>
 

@@ -337,7 +337,6 @@
                                 <option value="Cash Basis Taxes" class="journalDescription">Cash Basis
                                     Taxes </option>
                                 <option value="Point of Sale" class="journalDescription">Point of Sale</option>
-                                    <option value="">Create New</option>
                             </select>
 
                             <a type="button" class="btn btn-outline-secondary input-group-text text-hover"
@@ -449,18 +448,19 @@
                                     Keep empty for no control
                                 </p6>
                                 <div class="col-md-12 form-floating">
-                                    <select class="form-control" name="accountListDebit" aria-label="Select account"
-                                        id="account_id">
-                                        <option value="" class="accounListDebitSelection" selected></option>
+                                    <select class="form-control" name="allowedAccountType" aria-label="Select account"
+                                        id="allowedAccountType">
+                                        <option value="" class="allowedAccountType" selected></option>
                                         <?php allowedAccountType();?>
                                     </select>
                                     <label for="accountDebit">Allowed account types</label>
                                 </div><br>
 
                                 <div class="col-md-12 form-floating">
-                                    <select class="form-control" name="accountListDebit" aria-label="Select account"
-                                        id="account_id">
-                                        <option value="" class="accounListDebitSelection" selected></option>
+                                    <select class="form-control" name="allowedAccount" aria-label="Select account"
+                                        id="allowedAccount">
+                                        <option value="" class="allowedAccountType">Create New</option>
+                                        <option value="0" class="allowedAccount" selected></option>
                                         <?php allowedAccount();?>
                                     </select>
                                     <label for="accountDebit">Allowed account</label>
@@ -488,11 +488,13 @@
 <!-- End open journal modal  -->
 
 <!-- Start open currency  -->
-<div class="modal fade" id="currency" tabindex="-1" role="dialog" aria-labelledby="openCurrency" aria-hidden="true">
+<div class="modal fade" id="addAccountList" tabindex="-1" role="dialog" aria-labelledby="addAccountList"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
         <div class="modal-content">
+
             <div class="modal-header">
-                <h5 class="modal-title" id="openCurrency">Open: Currency</h5>
+                <h5 class="modal-title" id="openCurrency">Create: Allowed Accounts</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -500,119 +502,71 @@
                 <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
 
                     <div class="col-md-6 form-floating">
-                        <input type="text" class="form-control currencyType" name="currencyType"
-                            id="currencyDestination" readonly>
-                        <label for="currencyType">Currency</label>
-                    </div>
-
-                    <div class="col-md-6 form-floating">
-                        <input type="text" class="form-control currencyUnit" name="currencyUnit">
-                        <label for="currencyUnit">Currency Unit</label>
+                        <input type="text" class="form-control accountCode" name="accountCode" required>
+                        <label for="accountCode">Account Code</label>
                     </div>
                     <div class="col-md-6 form-floating">
-                        <input type="text" class="form-control countryCurrency" name="countryCurrency">
-                        <label for="countryCurrency">Country Currency</label>
+                        <input type="text" class="form-control accountName" name="accountName" required>
+                        <label for="accountName">Account Name</label>
+                    </div>
+                    <div>
+                        <h6 class="opacity-75">Accounting</h6>
                     </div>
                     <div class="col-md-6 form-floating">
-                        <input type="text" class="form-control currencySubunit" name="currencySubunit">
-                        <label for="currencySubunit">Currency Subunit</label>
+                        <input type="text" class="form-control type" name="type" required>
+                        <label for="type">Type</label>
                     </div>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input activeSwitchBox" type="checkbox" role="switch"
-                            id="activeSwitchBox" checked>
-                        <label class="form-check-label" for="activeSwitchBox">Active
-                            input</label>
+                    <div class="col-md-6 form-floating">
+                        <select class="form-control currency" name="currency" aria-label="Select account" id="currency">
+                            <option value="PHP" class="currencyType" selected>PHP</option>
+                            <option value="USD" class="currencyType">USD</option>
+                        </select>
+                        <label for="currency">Account Currency</label>
                     </div>
-
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="journal-tab" data-bs-toggle="tab"
-                                data-bs-target="#journalEntryId" type="button" role="tab" aria-controls="journalEntryId"
-                                aria-selected="true">Journal Entries</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="advanceSetting-tab" data-bs-toggle="tab"
-                                data-bs-target="#advanceSetting" type="button" role="tab" aria-controls="advanceSetting"
-                                aria-selected="false">Advance Setting</button>
-                        </li>
-                    </ul>
-
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="journalEntryId" role="tabpanel"
-                            aria-labelledby="journal-tab">
-                            <div>
-                                <div>
-                                    <p6>
-                                        Accounting information
-                                    </p6>
-                                </div><br>
-                                <div class="col-md-12 form-floating">
-                                    <input type="text" class="form-control text-uppercase shortCode" name="shortCode">
-                                    <label for="shortCode">Short Code</label>
-                                </div><br>
-
-                                <div class="col-md-12 ">
-                                    <label for="Journal">Currency</label>
-                                    <div class="input-group">
-                                        <select class="form-control currency" name="currency"
-                                            aria-label="Select account" id="accountStatus">
-                                            <option value="PHP" class="currencyId" selected>PHP</option>
-                                            <option value="USD" class="currencyId" selected>USD</option>
-                                            <option value="" class="currencyId" selected></option>
-                                        </select>
-                                        <a type="button" class="input-group-text text-hover" title="Open Journal"
-                                            data-bs-target="#currency" data-bs-toggle="modal">
-                                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control type" name="type" required >
+                        <label for="type">Default Taxes</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control tags" name="tags" required >
+                        <label for="tags">Tags</label>
+                    </div>
+                    <div class="col-md-6 form-floating ">
+                        <div class="form-check">
+                            <input class="allowReconciliation" type="checkbox" value="" id="allowReconciliation">
+                            <label for="allowReconciliation">
+                                Allow Reconciliation
+                            </label>
                         </div>
-                        <div class="tab-pane fade" id="advanceSetting" role="tabpanel"
-                            aria-labelledby="advanceSetting-tab">
-                            <div>
-                                <div>
-                                    <p6>
-                                        Control-Access
-                                    </p6>
-                                </div><br>
-                                <div class="col-md-12 form-floating">
-                                    <select class="form-control" name="accountListDebit" aria-label="Select account"
-                                        id="account_id">
-                                        <option value="" class="accounListDebitSelection" selected>- Select -</option>
-                                        <?php accountListSelection();?>
-                                    </select>
-                                    <label for="accountDebit">Allowed account types</label>
-                                </div><br>
-                                <div class="col-md-12 form-floating">
-                                    <select class="form-control" name="accountListDebit" aria-label="Select account"
-                                        id="account_id">
-                                        <option value="" class="accounListDebitSelection" selected>- Select -</option>
-                                        <?php accountListSelection();?>
-                                    </select>
-                                    <label for="accountDebit">Allowed account</label>
-                                </div><br>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="checkBoxEntry">
-                                    <label class="form-check-label" for="checkBoxEntry">
-                                        Lock Posted Entries with Hash
-                                    </label>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="col-md-6 form-floating ">
+                        <div class="form-check">
+                            <input class="deprecated" type="checkbox" value="" id="deprecated">
+                            <label for="deprecated">
+                                Deprecated
+                            </label>
                         </div>
-                    </div><br>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control tags" name="tags" required >
+                        <label for="tags">Allowed Journals</label>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="tags">Group</label>
+                    </div>
+
                     <div class="mb-2">
                         <button type="button" data-bs-target="#newConfigure" data-bs-toggle="modal"
                             class="btn btn-danger">Back</button>
                         <button type="submit" class="btn btn-success float-end" name="">Save</button>
                     </div>
+
                 </form>
             </div>
         </div>
     </div>
 </div>
-<!-- End open currency  -->
-
+<!-- end creating account list -->
 
 
 
@@ -628,11 +582,11 @@ $('#currencyInternalLink').click(function() {
 });
 
 // create new for allowed accouns in advance settings in nav tab
-$('select[name=journal]').change(function() {
-    if ($(this).val() == '')
-    {
-        window.location.href = 'accounting_modal.php'; 
+
+$('select[name=allowedAccount]').change(function() {
+    if ($(this).val() == '') {
+        var show = $(this).val();
+        $('#addAccountList').modal('show');
     }
 });
-
 </script>
