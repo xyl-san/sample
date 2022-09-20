@@ -11,6 +11,7 @@
     <!-- https://colorhunt.co/palette/effffdb8fff985f4ff42c2ff -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    
 </head>
   
 <body>
@@ -33,7 +34,8 @@
                             <p class="card-text">Define your fiscal years and taxes returns periodicity.</p>
                             <div class="col-md-12 text-center">
                                 <a data-bs-target="#newConfigure" class="btn btn-outline-secondary btn-sm btn-flat mt-2"
-                                    data-bs-toggle="modal">Configure</a>
+                                    data-bs-toggle="modal">Configure
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -288,6 +290,7 @@
                 }
             }
         });
+
         </script>
 </body>
 

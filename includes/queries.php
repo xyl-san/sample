@@ -1561,5 +1561,31 @@ function creditNotesAdd(){
       header('location: ../journal_entries.php');
     }
     
-  
+   // allowed account list in advance settings
+   function allowedAccountType(){
+    include 'conn.php';
+    $sql = "SELECT account_name, type FROM account_type_list";
+    $query = $conn->query($sql);
+    while($prow = $query->fetch_assoc()){
+        echo "
+        <option value='".$prow['account_name']."'>".$prow['account_name']."</option>
+        ";
+    }
+    $conn->close();
+  }
+
+
+  // allowed account list in advance settings
+  function allowedAccount(){
+    include 'conn.php';
+    $sql = "SELECT account_id, account_description FROM account_list";
+    $query = $conn->query($sql);
+    while($prow = $query->fetch_assoc()){
+        echo "
+        <option value='".$prow['account_id']."'>".$prow['account_description']."</option>
+        ";
+    }
+    $conn->close();
+  }
+
 ?>

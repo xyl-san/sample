@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 17, 2022 at 12:56 AM
+-- Generation Time: Sep 20, 2022 at 11:38 AM
 -- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,76 +24,102 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `accounting_periods`
+--
+
+CREATE TABLE `accounting_periods` (
+  `accounting_periods_id` int(11) NOT NULL,
+  `accounting_periods_code` varchar(50) NOT NULL,
+  `opening_date` date NOT NULL,
+  `fiscal_year_end` date NOT NULL,
+  `periodicity` varchar(50) NOT NULL,
+  `reminder` bigint(50) NOT NULL,
+  `journal` varchar(50) NOT NULL,
+  `delete_flag` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `accounting_periods`
+--
+
+INSERT INTO `accounting_periods` (`accounting_periods_id`, `accounting_periods_code`, `opening_date`, `fiscal_year_end`, `periodicity`, `reminder`, `journal`, `delete_flag`) VALUES
+(12, 'IUC163479508', '2022-09-19', '2023-09-19', '', 0, '', 0),
+(13, 'MLJ809745621', '2022-09-19', '2023-09-19', 'Semi-Annually', 100, 'Miscellaneous Operations', 0),
+(14, 'GLP962578301', '2022-09-20', '2023-09-20', 'Annually', 45, 'Exchange Difference', 0),
+(15, 'AEB382764901', '2022-09-20', '2023-09-20', 'Annually', 10, 'Cash Basis Taxes', 0),
+(16, 'NJD720459861', '2022-09-20', '2023-09-20', 'Monthly', 10, 'Miscellaneous Operations', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `account_list`
 --
 
 CREATE TABLE `account_list` (
-  `account_id` int(30) NOT NULL,
-  `code` varchar(50) NOT NULL,
-  `account_name` text NOT NULL,
-  `description` text NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1,
-  `delete_flag` tinyint(1) NOT NULL DEFAULT 0,
-  `date_created` datetime NOT NULL DEFAULT current_timestamp(),
-  `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
+  `account_id` int(11) NOT NULL,
+  `account_code` varchar(50) NOT NULL,
+  `account_description` varchar(50) NOT NULL,
+  `account_name` varchar(50) NOT NULL,
+  `allow_reconciliation` varchar(20) NOT NULL,
+  `non-trade` varchar(20) NOT NULL,
+  `account_currency` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `account_list`
 --
 
-INSERT INTO `account_list` (`account_id`, `code`, `account_name`, `description`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
-(1, '', 'Cash', 'Cash', 1, 0, '2022-02-01 10:09:26', NULL),
-(2, '', 'Petty Cash', 'Petty Cash', 1, 0, '2022-02-01 10:09:40', NULL),
-(3, '', 'Cash Equivalents', 'Cash Equivalents', 1, 0, '2022-02-01 10:09:56', NULL),
-(4, '', 'Accounts Receivable', 'Accounts Receivable', 1, 0, '2022-02-01 10:10:22', NULL),
-(5, '', 'Interest Receivable', 'Interest Receivable', 1, 0, '2022-02-01 10:10:57', NULL),
-(6, '', 'Office Supplies', 'Office Supplies', 1, 0, '2022-02-01 10:11:13', NULL),
-(7, '', 'Accounts Payable', 'Accounts Payable', 1, 0, '2022-02-01 10:11:55', NULL),
-(8, '', 'Insurance Payable', 'Insurance Payable', 1, 0, '2022-02-01 10:12:07', NULL),
-(9, '', 'Interest Payable', 'Interest Payable', 1, 0, '2022-02-01 10:12:20', NULL),
-(10, '', 'Legal Fees Payable', 'Legal Fees Payable', 1, 0, '2022-02-01 10:12:35', NULL),
-(11, '', 'Office Salaries Payable', 'Office Salaries Payable', 1, 0, '2022-02-01 10:12:51', NULL),
-(12, '', 'Salaries Payable', 'Salaries Payable', 1, 0, '2022-02-01 10:13:03', NULL),
-(13, '', 'Wages Payable', 'Wages Payable', 1, 0, '2022-02-01 10:13:24', NULL),
-(14, '', 'Owner’s Capital', 'Owner’s Capital', 1, 0, '2022-02-01 10:13:54', NULL),
-(15, '', 'Owner’s Withdrawals', 'Owner’s Withdrawals', 1, 0, '2022-02-01 10:14:04', NULL),
-(16, '', 'Common Stock, Par Value', 'Common Stock, Par Value', 1, 0, '2022-02-01 10:14:25', NULL),
-(17, '', 'Common stock, no par value', 'Common stock, no par value', 1, 0, '2022-02-01 10:14:34', NULL),
-(18, '', 'Common stock dividend distributable', 'Common stock dividend distributable', 1, 0, '2022-02-01 10:14:50', NULL),
-(19, '', 'Paid-in capital in excess of par value, Common stock', 'Paid-in capital in excess of par value, Common\r\nstock', 1, 0, '2022-02-01 10:15:02', NULL),
-(20, '', 'Paid-in capital in excess of stated value, No-par common stock', 'Paid-in capital in excess of stated value, No-par\r\ncommon stock', 1, 0, '2022-02-01 10:15:11', NULL),
-(21, '', 'Retained earnings', 'Retained earnings', 1, 0, '2022-02-01 10:15:31', NULL),
-(22, '', 'Cash dividends', 'Cash dividends', 1, 0, '2022-02-01 10:15:44', NULL),
-(23, '', 'Stock dividends', 'Stock dividends', 1, 0, '2022-02-01 10:15:58', NULL),
-(24, '', 'Treasury stock, Common', 'Treasury stock, Common', 1, 0, '2022-02-01 10:16:48', NULL),
-(25, '', 'Unrealized gain-Equity', 'Unrealized gain-Equity', 1, 0, '2022-02-01 10:16:57', NULL),
-(26, '', 'Unrealized loss-Equity', 'Unrealized loss-Equity', 1, 0, '2022-02-01 10:17:05', NULL),
-(27, '', 'Fees earned from product one', 'Fees earned from product one', 1, 0, '2022-02-01 10:17:27', NULL),
-(28, '', 'Fees earned from product two', 'Fees earned from product two', 1, 0, '2022-02-01 10:17:43', NULL),
-(29, '', 'Service revenue one', 'Service revenue one', 1, 0, '2022-02-01 10:17:55', NULL),
-(30, '', 'Service revenue two', 'Service revenue two', 1, 0, '2022-02-01 10:18:04', NULL),
-(31, '', 'Commissions earned', 'Commissions earned', 1, 0, '2022-02-01 10:18:14', NULL),
-(32, '', 'Rent revenue', 'Rent revenue', 1, 0, '2022-02-01 10:18:26', NULL),
-(33, '', 'Dividends revenue', 'Dividends revenue', 1, 0, '2022-02-01 10:18:40', NULL),
-(34, '', 'Earnings from investments in “blank”', 'Earnings from investments in “blank”', 1, 0, '2022-02-01 10:18:51', NULL),
-(35, '', 'Interest revenue', 'Interest revenue', 1, 0, '2022-02-01 10:19:03', NULL),
-(36, '', 'Sinking fund earnings', 'Sinking fund earnings', 1, 0, '2022-02-01 11:41:57', NULL),
-(37, '', 'Amortization expense', 'Amortization expense', 1, 0, '2022-02-01 11:42:08', NULL),
-(38, '', 'Depletion expense', 'Depletion expense', 1, 0, '2022-02-01 11:42:16', NULL),
-(39, '', 'Depreciation expense-Automobiles', 'Depreciation expense-Automobiles', 1, 0, '2022-02-01 11:42:25', NULL),
-(40, '', 'Depreciation expense-Building', 'Depreciation expense-Building', 1, 0, '2022-02-01 11:42:34', NULL),
-(41, '', 'Depreciation expense-Furniture', 'Depreciation expense-Furniture', 1, 0, '2022-02-01 11:43:02', NULL),
-(42, '', 'Office salaries expense', 'Office salaries expense', 1, 0, '2022-02-01 11:43:12', NULL),
-(43, '', 'Sales salaries expense', 'Sales salaries expense', 1, 0, '2022-02-01 11:43:21', NULL),
-(44, '', 'Salaries expense', 'Salaries expense', 1, 0, '2022-02-01 11:43:31', NULL),
-(45, '', 'Income taxes expense', 'Income taxes expense', 1, 0, '2022-02-01 11:43:44', NULL),
-(46, '', 'Warranty expense', 'Warranty expense', 1, 0, '2022-02-01 11:44:01', NULL),
-(47, '', 'Utilities expense', 'Utilities expense', 1, 0, '2022-02-01 11:44:10', NULL),
-(48, '', 'Selling expense', 'Selling expense', 1, 0, '2022-02-01 11:44:23', NULL),
-(50, '', 'Discounts', 'Discounts', 1, 0, '2022-08-23 17:46:44', '2022-08-23 17:49:13'),
-(52, '', 'sadassad', 'sasaddsa', 0, 0, '2022-09-08 11:09:48', NULL),
-(53, '', 'aaac', 'caca', 1, 0, '2022-09-08 11:15:09', NULL);
+INSERT INTO `account_list` (`account_id`, `account_code`, `account_description`, `account_name`, `allow_reconciliation`, `non-trade`, `account_currency`) VALUES
+(1, '2022-0001', 'Current Assets', 'Current Assets', '', '', ''),
+(2, '2022-0002', 'Account Receivable (PoS)', 'Receivable', '', '', ''),
+(3, '2022-0003', 'Bank Suspense Account', 'Current Assets', '', '', ''),
+(4, '2022-0004', 'Outstanding  Receipts', 'Current Assets', '', '', ''),
+(5, '2022-0005', 'Outstanding Payments', 'Current Assets', '', '', ''),
+(6, '2022-0006', 'Bank', 'Bank and Cash', '', '', ''),
+(7, '2022-0007', 'Cash', 'Bank and Cash', '', '', ''),
+(8, '2022-0008', 'Liquidity Transfer', 'Current Assets', '', '', ''),
+(9, '2022-0009', 'Stock  Valuation', 'Current Assets', '', '', ''),
+(10, '2022-0010', 'Stock Interim (Received)', 'Current Assets', '', '', ''),
+(11, '2022-0011', 'Stock Interim (Delivered)', 'Current Assets', '', '', ''),
+(12, '2022-0012', 'Account Receivable', 'Receivable', '', '', ''),
+(13, '2022-0013', 'Products to receive', 'Current Assets', '', '', ''),
+(14, '2022-0014', 'Tax Paid', 'Current Assets', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `account_type_list`
+--
+
+CREATE TABLE `account_type_list` (
+  `account_name` varchar(50) NOT NULL,
+  `type` varchar(50) NOT NULL,
+  `delete_flag` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `account_type_list`
+--
+
+INSERT INTO `account_type_list` (`account_name`, `type`, `delete_flag`) VALUES
+('Bank and Cash', 'Liquidity', 0),
+('Cost of Revenue', 'Regular', 0),
+('Credit Card', 'Liquidity', 0),
+('Current Assets', 'Regular', 0),
+('Current Liabilities', 'Regular', 0),
+('Current Year Earnings', 'Regular', 0),
+('Depreciation', 'Regular', 0),
+('Equity', 'Regular', 0),
+('Expenses', 'Regular', 0),
+('Fixed Assets', 'Regular', 0),
+('Income', 'Regular', 0),
+('Non-current Assets', 'Regular', 0),
+('Non-current Liabilities', 'Regular', 0),
+('Off-Balance Sheet', 'Regular', 0),
+('Other Income', 'Regular', 0),
+('Payable', 'Payable', 0),
+('Prepayments', 'Regular', 0),
+('Receivable', 'Receivable', 0);
 
 -- --------------------------------------------------------
 
@@ -181,26 +207,31 @@ CREATE TABLE `credit_notes` (
   `customer_id` int(11) NOT NULL,
   `invoice_date` date NOT NULL,
   `due_date` date NOT NULL,
+  `terms` varchar(20) NOT NULL,
   `employee_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `label` int(11) NOT NULL,
-  `quantity` float NOT NULL,
-  `price` float NOT NULL,
-  `tax` float NOT NULL,
-  `subtotal` float NOT NULL,
-  `total_amount` float NOT NULL,
+  `label` varchar(50) NOT NULL,
+  `account_id` int(11) NOT NULL,
+  `quantity` decimal(10,2) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `tax` decimal(10,2) NOT NULL,
+  `subtotal` decimal(10,2) NOT NULL,
+  `total_amount` decimal(10,2) NOT NULL,
   `currency` varchar(50) NOT NULL,
   `payment_status` varchar(20) NOT NULL,
+  `payment_reference` varchar(20) NOT NULL,
   `notes` varchar(50) NOT NULL,
-  `delete_flag` tinyint(4) NOT NULL COMMENT '[1] - True [0] - False'
+  `delete_flag` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `credit_notes`
 --
 
-INSERT INTO `credit_notes` (`credit_notes_id`, `credit_notes_code`, `customer_id`, `invoice_date`, `due_date`, `employee_id`, `product_id`, `label`, `quantity`, `price`, `tax`, `subtotal`, `total_amount`, `currency`, `payment_status`, `notes`, `delete_flag`) VALUES
-(1, 'kkkk55-ll', 1, '2022-09-02', '2022-09-30', 80, 2, 5, 10, 20, 20, 20, 20, 'php', 'not paid', '', 0);
+INSERT INTO `credit_notes` (`credit_notes_id`, `credit_notes_code`, `customer_id`, `invoice_date`, `due_date`, `terms`, `employee_id`, `product_id`, `label`, `account_id`, `quantity`, `price`, `tax`, `subtotal`, `total_amount`, `currency`, `payment_status`, `payment_reference`, `notes`, `delete_flag`) VALUES
+(4, 'ujuuy', 2, '2022-09-17', '2022-09-17', '0', 80, 3, '2', 17, '10.00', '10.00', '10.71', '89.29', '100.00', 'USD', 'tutyu', 'uutyu', '', 0),
+(5, 'sasdasadsadsd', 2, '2022-09-17', '2022-09-17', '1 Month', 81, 3, '2', 19, '10.00', '10.00', '10.71', '89.29', '100.00', 'USD', '', 'dsadsadsasad', '', 0),
+(6, 'fafafsasfa', 2, '2022-10-07', '0000-00-00', '15 Days', 80, 2, '2', 16, '10.00', '10.00', '10.71', '89.29', '100.00', 'PHP', '', 'faaafs', 'faffaf', 0);
 
 -- --------------------------------------------------------
 
@@ -383,12 +414,10 @@ CREATE TABLE `invoice` (
 --
 
 INSERT INTO `invoice` (`invoice_id`, `invoice_code`, `product_id`, `label`, `account_id`, `quantity`, `price`, `taxes`, `subtotal`, `amount_total`, `customer_id`, `currency`, `invoice_date`, `due_date`, `terms`, `payment_reference`, `employee_id`, `invoice_notes`, `delete_flag`) VALUES
-(21, 'daddddd', 2, '3', 18, 10, 1000, 1071.43, 8928.57, 10000, 1, 'USD', '2022-09-16', '2022-09-16', '2 Months', 'Bank transfer', 80, '', 1),
-(22, 'INVOICE-2022-CODE', 3, 'CASH', 5, 1, 500, 5, 500, 500, 1, 'USD', '2020-10-25', '2020-09-25', '1 month', 'bank deposit', 81, 'gumana ka animal', 1),
-(23, 'INVOICE-2022-1001', 2, '3', 18, 10, 20000, 21428.57, 178571.43, 200000, 2, '', '2022-09-16', '0000-00-00', '1 Month', 'BANK TRANSFER', 82, 'PLEASE GUMANA NA KANA ANIMAL', 1),
-(24, 'INVOICE-2020-1997', 2, '3', 20, 10, 50000, 53571.43, 446428.57, 500000, 1, 'PHP', '2022-09-16', '0000-00-00', '1 Month', 'BANK TRANSFER', 82, 'PLEASE HELP ME OUT OF THIS', 0),
-(25, 'sfsdffsdfsd', 2, '2', 18, 10, 10, 10.71, 89.29, 100, 1, 'PHP', '2022-09-17', '0000-00-00', '1 Month', 'fsfsfsf', 80, '', 1),
-(26, 'dDd', 2, '2', 20, 10, 10, 10.71, 89.29, 100, 1, '', '2022-09-17', '0000-00-00', '21 Days', 'FSSDDF', 81, '', 0);
+(33, 'CINV-2022-01', 0, '3', 1, 1, 79000, 8464.29, 70535.71, 79000, 0, 'USD', '2022-09-17', '0000-00-00', '15 Days', 'pay-001', 0, '', 0),
+(34, 'CINV-2022-2', 0, '2', 1, 1, 79999, 8571.32, 71427.68, 79999, 0, 'PHP', '2022-09-17', '2022-09-17', '15 Days', 'pay-001', 0, 'Motorcycle', 0),
+(35, 'cust-inv-2020', 0, '2', 20, 100, 10, 10.71, 89.29, 100, 0, 'PHP', '2022-09-17', '0000-00-00', '21 Days', 'bank transfer', 0, 'just do it', 0),
+(36, 'tilapia', 0, '3', 20, 10, 100, 107.14, 892.86, 1000, 0, 'USD', '2022-09-30', '2022-09-28', '45 Days', 'dsasasad', 0, '1100', 0);
 
 -- --------------------------------------------------------
 
@@ -440,51 +469,16 @@ INSERT INTO `job` (`job_id`, `department_id`, `job_name`, `description`, `rate`,
 --
 
 CREATE TABLE `journal_entries` (
-  `journal_id` int(30) NOT NULL,
-  `code` varchar(100) NOT NULL,
-  `journal_date` date NOT NULL,
-  `description` text NOT NULL,
-  `employee_id` int(30) DEFAULT NULL,
-  `date_created` datetime NOT NULL DEFAULT current_timestamp(),
-  `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
+  `journal_entries_id` int(11) NOT NULL,
+  `date` int(11) NOT NULL,
+  `journal_entries_code` varchar(50) NOT NULL,
+  `partner` varchar(50) NOT NULL,
+  `reference` varchar(50) NOT NULL,
+  `journal` varchar(50) NOT NULL,
+  `total` decimal(50,0) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `to_check` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `journal_entries`
---
-
-INSERT INTO `journal_entries` (`journal_id`, `code`, `journal_date`, `description`, `employee_id`, `date_created`, `date_updated`) VALUES
-(3, '202202-00001', '2022-02-01', 'Capital', 1, '2022-02-01 14:08:50', NULL),
-(6, '202208-00001', '2022-08-23', 'Purchase Computers', 5, '2022-08-23 16:24:22', NULL),
-(9, '202208-00004', '2022-08-23', 'Furniture', 6, '2022-08-23 17:50:42', NULL),
-(12, 'TVR085793614', '2022-09-08', 'Furniture', NULL, '2022-09-05 18:06:30', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `journal_items`
---
-
-CREATE TABLE `journal_items` (
-  `journal_id` int(30) NOT NULL,
-  `account_id` int(30) NOT NULL,
-  `group_id` int(30) NOT NULL,
-  `amount` float NOT NULL DEFAULT 0,
-  `date_created` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `journal_items`
---
-
-INSERT INTO `journal_items` (`journal_id`, `account_id`, `group_id`, `amount`, `date_created`) VALUES
-(3, 1, 1, 15000, '2022-02-01 14:52:56'),
-(3, 14, 5, 15000, '2022-02-01 14:52:56'),
-(6, 1, 1, 25000, '2022-08-23 16:24:22'),
-(6, 4, 4, 25000, '2022-08-23 16:24:22'),
-(9, 1, 1, 24000, '2022-08-23 17:50:42'),
-(9, 50, 1, 1000, '2022-08-23 17:50:42'),
-(9, 4, 4, 25000, '2022-08-23 17:50:42');
 
 -- --------------------------------------------------------
 
@@ -800,10 +794,23 @@ INSERT INTO `supplier_product` (`supplier_id`, `product_id`) VALUES
 --
 
 --
+-- Indexes for table `accounting_periods`
+--
+ALTER TABLE `accounting_periods`
+  ADD PRIMARY KEY (`accounting_periods_id`);
+
+--
 -- Indexes for table `account_list`
 --
 ALTER TABLE `account_list`
-  ADD PRIMARY KEY (`account_id`);
+  ADD PRIMARY KEY (`account_id`),
+  ADD KEY `account_name` (`account_name`);
+
+--
+-- Indexes for table `account_type_list`
+--
+ALTER TABLE `account_type_list`
+  ADD PRIMARY KEY (`account_name`);
 
 --
 -- Indexes for table `admin`
@@ -839,7 +846,8 @@ ALTER TABLE `credit_notes`
   ADD PRIMARY KEY (`credit_notes_id`),
   ADD KEY `employee_id` (`employee_id`),
   ADD KEY `customer_id` (`customer_id`),
-  ADD KEY `product_id` (`product_id`);
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `account_id` (`account_id`);
 
 --
 -- Indexes for table `customer`
@@ -910,16 +918,7 @@ ALTER TABLE `job`
 -- Indexes for table `journal_entries`
 --
 ALTER TABLE `journal_entries`
-  ADD PRIMARY KEY (`journal_id`),
-  ADD KEY `user_id` (`employee_id`);
-
---
--- Indexes for table `journal_items`
---
-ALTER TABLE `journal_items`
-  ADD KEY `journal_id` (`journal_id`),
-  ADD KEY `account_id` (`account_id`),
-  ADD KEY `group_id` (`group_id`);
+  ADD PRIMARY KEY (`journal_entries_id`);
 
 --
 -- Indexes for table `leads`
@@ -1023,10 +1022,16 @@ ALTER TABLE `supplier_product`
 --
 
 --
+-- AUTO_INCREMENT for table `accounting_periods`
+--
+ALTER TABLE `accounting_periods`
+  MODIFY `accounting_periods_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
 -- AUTO_INCREMENT for table `account_list`
 --
 ALTER TABLE `account_list`
-  MODIFY `account_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `admin`
@@ -1056,7 +1061,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `credit_notes`
 --
 ALTER TABLE `credit_notes`
-  MODIFY `credit_notes_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `credit_notes_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -1098,7 +1103,7 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `items`
@@ -1116,7 +1121,7 @@ ALTER TABLE `job`
 -- AUTO_INCREMENT for table `journal_entries`
 --
 ALTER TABLE `journal_entries`
-  MODIFY `journal_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `journal_entries_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `leads`
@@ -1183,6 +1188,12 @@ ALTER TABLE `supplier`
 --
 
 --
+-- Constraints for table `account_list`
+--
+ALTER TABLE `account_list`
+  ADD CONSTRAINT `account_list_ibfk_1` FOREIGN KEY (`account_name`) REFERENCES `account_type_list` (`account_name`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Constraints for table `attendance`
 --
 ALTER TABLE `attendance`
@@ -1203,12 +1214,6 @@ ALTER TABLE `credit_notes`
   ADD CONSTRAINT `credit_notes_ibfk_3` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `customer`
---
-ALTER TABLE `customer`
-  ADD CONSTRAINT `customer_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `deductions`
 --
 ALTER TABLE `deductions`
@@ -1221,15 +1226,6 @@ ALTER TABLE `employees`
   ADD CONSTRAINT `employees_ibfk_5` FOREIGN KEY (`schedule_id`) REFERENCES `schedules` (`schedule_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `employees_ibfk_6` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `employees_ibfk_7` FOREIGN KEY (`job_id`) REFERENCES `job` (`job_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
-
---
--- Constraints for table `invoice`
---
-ALTER TABLE `invoice`
-  ADD CONSTRAINT `invoice_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `invoice_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `invoice_ibfk_3` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `invoice_ibfk_4` FOREIGN KEY (`account_id`) REFERENCES `account_list` (`account_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `job`
