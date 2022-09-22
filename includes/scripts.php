@@ -41,6 +41,8 @@ $(document).ready((function() {
     $('#example1').DataTable();
     $('#employeelist').DataTable();
     $('#empschedule').DataTable();
+    $('#accountType').DataTable();
+    $('#accountList').DataTable();
 }))
 
 $(document).ready((function() {

@@ -1490,6 +1490,7 @@ function creditNotesTable(){
 <?php
   }
 }
+
 if (isset($_POST['addCreditNotes'])) {
   creditNotesAdd();
 }
@@ -1588,4 +1589,41 @@ function creditNotesAdd(){
     $conn->close();
   }
 
+
+// allowed account type list table
+function accountListTypeTableInModal(){
+  include 'conn.php';
+  $sql = "SELECT account_name, type FROM account_type_list ";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    ?>
+<tr>
+    <td><?php echo $row['account_name']; ?></td>
+    <td><?php echo $row['type']; ?></td>
+</tr>
+<?php
+  }
+}
+
+// allowed account list table
+function accountListTableInModal(){
+  include 'conn.php';
+  $sql = "SELECT acct.account_id, acct.account_code, acct.account_description, acct.account_currency, acct.default_taxes, acct.tags, acct.allow_reconciliation, acct.deprecated, acct.allowed_journal, acctype.account_name FROM account_type_list acctype INNER JOIN account_list AS acct ON acctype.account_name = acct.account_name";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    ?>
+<tr>
+    <td><?php echo $row['account_code']; ?></td>
+    <td><?php echo $row['account_description']; ?></td>
+    <td><?php echo $row['account_name']; ?></td>
+    <td><?php echo $row['allow_reconciliation']; ?></td>
+    <td></td>
+    <td><?php echo $row['default_taxes']; ?></td>
+    <td><?php echo $row['tags']; ?></td>
+    <td><?php echo $row['allowed_journal']; ?></td>
+    <td><?php echo $row['account_currency']; ?></td>
+</tr>
+<?php
+  }
+}
 ?>

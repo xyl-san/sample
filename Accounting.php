@@ -20,7 +20,7 @@
         <div id="content" class="w-100">
             <div class="progress">
                 <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0"
-                    aria-valuemax="100">0%
+                    aria-valuemax="100">
                 </div>
             </div>
             <div class="row py-5 m-2">
