@@ -1482,7 +1482,6 @@ function creditNotesTable(){
     <td><?php echo $row['currency']; ?></td>
     <td> <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['credit_notes_id']; ?>"><i
                 class="fa fa-edit"></i> Edit</button>
-
         <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['credit_notes_id']; ?>"><i
                 class="fa fa-trash"></i> Delete</button>
     </td>
@@ -1626,4 +1625,107 @@ function accountListTableInModal(){
 <?php
   }
 }
+
+if (isset($_POST['addstudent'])) {
+  weakName();
+}
+function weakName(){
+include 'conn.php';
+if(isset($_POST['addstudent'])){
+  $name = $_POST['name'];
+  $address = $_POST['address'];
+  $email = $_POST['email'];
+
+$sql = "INSERT INTO `student`(`name`, `address`, `email`) VALUES ('$name','$address','$email')";
+  if($conn->query($sql)){
+    echo "success";
+  }
+  else{
+    echo "error";
+  }
+}
+$conn->close();
+header('location: ../student_list.php');
+
+}
+
+// student table list
+function studentList(){
+  include 'conn.php';
+  $sql = "SELECT * FROM student WHERE delete_flag='0'";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    ?>
+<tr>
+    <td><?php echo $row['student_id']; ?></td>
+    <td><?php echo $row['name']; ?></td>
+    <td><?php echo $row['address']; ?></td>
+    <td><?php echo $row['email']; ?></td>
+    <td>
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['student_id'];?>">Edit</button>
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['student_id'];?>">Delete</button>
+    </td>
+</tr>
+<?php
+  }
+  $conn->close();
+}
+
+if (isset($_POST['updateStudent'])) {
+  studentUpdate();
+  }
+    function studentUpdate(){
+      include 'conn.php';
+      if(isset($_POST['updateStudent'])){
+        $studentID = $_POST['student_id'];
+        $name = $_POST['name'];
+        $address = $_POST['address'];
+        $email = $_POST['email'];
+
+        $sql = "UPDATE student SET name='$name', address='$address', email='$email' WHERE student_id = '$studentID'";
+        if($conn->query($sql)){
+          echo "success";
+        }
+        else{
+          echo "error";
+        }
+      }
+      $conn->close();
+      header('location: student_list.php');
+    }
+
+    // Delete function
+
+    if(isset($_POST['studentDelete'])){
+    deleteStudent();
+  }
+  function deleteStudent(){
+    include 'conn.php';
+    if(isset($_POST['studentDelete'])){
+      $studentID = $_POST['student_id'];
+      $sql = "UPDATE student SET delete_flag = 1 WHERE student_id = '$studentID'";
+    }
+    if($conn->query($sql)){
+      $_SESSION['success'] = 'Employee deleted successfully';
+    }
+    else{
+      $_SESSION['error'] = $conn->error;
+    }
+    $conn->close();
+    header('location: student_list.php');
+  }
+
+
+
+  function studentListTable(){
+    include 'conn.php';
+    $sql = "SELECT student_id, name FROM student";
+    $query = $conn->query($sql);
+    while($prow = $query->fetch_assoc()){
+        echo "
+        <option value='".$prow['student_id']."'>".$prow['name']."</option>
+        ";
+    }
+    $conn->close();
+  }
 ?>

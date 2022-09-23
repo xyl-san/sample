@@ -460,7 +460,7 @@
                                             Keep empty for no control
                                         </p6>
                                         <div class="col-md-12 form-floating">
-                                            <select class="form-control" name="allowedAccountType"
+                                            <select class="form-control" id="allowedAccountType"
                                                 aria-label="Select account" id="allowedAccountType">
                                                 <option value="0" class="allowedAccountType" selected></option>
                                                 <option value="" class="allowedAccountType text-primary">Search More...
@@ -525,9 +525,9 @@
                             </ul>
 
                             <div class="tab-content" id="myTabContent">
+
                                 <div class="tab-pane fade show active" id="journalEntry" role="tabpanel"
                                     aria-labelledby="journalEntry-tab">
-
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="row">
@@ -537,7 +537,7 @@
                                                         name="bankAccount">
                                                     <label for="bankAccount">Bank Account</label>
                                                 </div>
-                                                <div class="col-6 ">
+                                                <div class="col-6 py-2">
                                                     <div class="input-group form-floating">
                                                         <input type="text" class="form-control suspenseAccount"
                                                             name="suspenseAccount">
@@ -550,56 +550,148 @@
                                                         <label for="Journal">Suspense Account</label>
                                                     </div>
                                                 </div>
-                                                <div class="col-6 form-floating">
+                                                <div class="col-6 form-floating py-2">
                                                     <input type="text" class="form-control  profitAccount"
                                                         name="profitAccount">
                                                     <label for="profitAccount">Profit Account</label>
                                                 </div>
-                                                <div class="col-6 form-floating">
+                                                <div class="col-6 form-floating py-2">
                                                     <input type="text" class="form-control lossAccount"
                                                         name="lossAccount">
                                                     <label for="lossAccount">Loss Account</label>
                                                 </div>
-                                                <div class="col-6 form-floating">
+                                                <div class="col-6 form-floating py-2">
                                                     <input type="text" class="form-control text-uppercase shortCode"
                                                         name="shortCode">
                                                     <label for="shortCode">Short Code</label>
                                                 </div>
-                                                <div class="col-6 form-floating">
+                                                <div class="col-6 form-floating py-2">
                                                     <input type="text" class="form-control text-uppercase shortCode"
                                                         name="shortCode">
                                                     <label for="shortCode">Currency</label>
                                                 </div>
                                                 <h6 class="opacity-75">Bank Account Number</h6>
+                                                <div class="col-12 form-floating py-2">
+                                                    <input type="text" class="form-control  accountNumnber"
+                                                        name="accountNumnber">
+                                                    <label for="bankAccount">Account Number</label>
+                                                </div>
+                                                <div class="form-group form-control">
+
+                                                <div class="col-3 form-check">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                                        id="flexRadioDefault1">
+                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        Default radio
+                                                    </label>
+                                                </div>
+                                                <div class="col-3 form-check">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                                        id="flexRadioDefault2" checked>
+                                                    <label class="form-check-label" for="flexRadioDefault2">
+                                                        Default checked radio
+                                                    </label>
+                                                </div>
+                                                <div class=" col-3 form-check">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                                        id="flexRadioDefault2" checked>
+                                                    <label class="form-check-label" for="flexRadioDefault2">
+                                                        Default checked radio
+                                                    </label>
+                                                </div>
+                                                </div>
+                                               
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
 
-                            </div><br>
+                                <div class="tab-pane fade" id="incomingPayments" role="tabpanel"
+                                    aria-labelledby="incomingPayments-tab">
+                                    <table id="table" style="width: 100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Payment Method</th>
+                                                <th>Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="text" class="form-control "></td>
+                                                <td><input type="text" class="form-control"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
 
-                            <div class="tab-pane fade" id="incomingPayments" role="tabpanel"
-                                aria-labelledby="incomingPayments-tab">
+                                <div class="tab-pane fade" id="outgoingPayments" role="tabpanel"
+                                    aria-labelledby="outgoingPayments-tab">
+                                    <table id="table" style="width: 100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Payment Method</th>
+                                                <th>Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="text" class="form-control "></td>
+                                                <td><input type="text" class="form-control"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="tab-pane fade" id="advancedSetting" role="tabpanel"
+                                    aria-labelledby="advancedSetting-tab">
+
+                                    <div>
+                                        <p5>
+                                            Control-Access
+                                        </p5>
+                                    </div><br>
+                                    <p6 class="opacity-50">
+                                        Keep empty for no control
+                                    </p6>
+                                    <div class="col-md-12 form-floating">
+                                        <select class="form-control" name="allowedAccountType"
+                                            aria-label="Select account" id="allowedAccountType">
+                                            <option value="0" class="allowedAccountType" selected></option>
+                                            <option value="" class="allowedAccountType text-primary">Search More...
+                                            </option>
+                                            <?php allowedAccountType();?>
+                                        </select>
+                                        <label for="allowedAccount">Allowed account types</label>
+                                    </div><br>
+
+                                    <div class="col-md-12 form-floating">
+                                        <select class="form-control" name="allowedAccount" aria-label="Select account"
+                                            id="allowedAccount">
+                                            <option value="0" class="allowedAccount" selected></option>
+                                            <option value="" class="allowedAccount text-success">Create New...
+                                            </option>
+                                            <?php allowedAccount();?>
+                                        </select>
+                                        <label for="accountDebit">Allowed account</label>
+                                    </div><br>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="checkBoxEntry">
+                                        <label class="form-check-label" for="checkBoxEntry">
+                                            Lock Posted Entries with Hash
+                                        </label>
+                                    </div>
+                                </div>
+
                             </div>
-
-                            <div class="tab-pane fade" id="outgoingPayments" role="tabpanel"
-                                aria-labelledby="outgoingPayments-tab">
-                            </div>
-
-                            <div class="tab-pane fade" id="advancedSetting" role="tabpanel"
-                                aria-labelledby="advancedSetting-tab">
-                            </div>
-
                         </div>
-                    </div>
 
 
-                    <div class="mb-2">
-                        <button type="button" data-bs-target="#newConfigure" data-bs-toggle="modal"
-                            class="btn btn-danger btn-sm">Back</button>
-                        <button type="submit" class="btn btn-success float-end btn-sm" name="">Save</button>
-                    </div>
+                        <div class="mb-2">
+                            <button type="button" data-bs-target="#newConfigure" data-bs-toggle="modal"
+                                class="btn btn-danger btn-sm">Back</button>
+                            <button type="submit" class="btn btn-success float-end btn-sm" name="">Save</button>
+                        </div>
                 </form>
             </div> <!-- modal-body closing div -->
 
@@ -783,6 +875,7 @@
 </div> <!-- modal closing div -->
 <!-- allowed account list table end -->
 <!-- creating account list  -->
+
 <div class="modal fade" id="createAccountList" tabindex="-1" role="dialog" aria-labelledby="addAccountList"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
@@ -865,7 +958,6 @@
 <!-- end creating account list -->
 
 
-
 <script>
 // this function for open journal internal link
 $('#openJournalInternalLink').click(function() {
@@ -877,7 +969,7 @@ $('#currencyInternalLink').click(function() {
     $('#currencyDestination').val($('#currencySource').val())
 });
 
-// create new for allowed accouns in advance settings in nav tab
+// create new for allowed accounts in advance settings in nav tab
 $('select[name=allowedAccount]').change(function() {
     if ($(this).val() == '') {
         var show = $(this).val();
@@ -885,6 +977,19 @@ $('select[name=allowedAccount]').change(function() {
     }
 });
 $('select[name=allowedAccountType]').change(function() {
+    if ($(this).val() == '') {
+        var show = $(this).val();
+        $('#allowedAccountsTypeTable').modal('show');
+    }
+});
+
+$('#allowedAccount').change(function() {
+    if ($(this).val() == '') {
+        var show = $(this).val();
+        $('#allowedAccountsTable').modal('show');
+    }
+});
+$('#allowedAccountType').change(function() {
     if ($(this).val() == '') {
         var show = $(this).val();
         $('#allowedAccountsTypeTable').modal('show');

@@ -43,6 +43,7 @@ $(document).ready((function() {
     $('#empschedule').DataTable();
     $('#accountType').DataTable();
     $('#accountList').DataTable();
+    $('#studentList').DataTable();
 }))
 
 $(document).ready((function() {
