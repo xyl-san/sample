@@ -14,6 +14,8 @@
     <?php include 'includes/styles.php'; ?>
 </head>
 
+
+
 <body>
     <div class="wrapper">
         <nav id="sidebar" class="flex-shrink-0 p-3" style="width: 280px;">
