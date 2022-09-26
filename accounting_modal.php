@@ -395,6 +395,7 @@
                         <label for="Journal ">Type</label>
                     </div>
 
+                    <!-- Miscellaneous navigation tab -->
                     <div id="miscellaneousNavTab" style="display: none;">
                         <div class="form-group">
                             <ul class="nav nav-tabs show active" id="myTab" role="tablist">
@@ -491,38 +492,39 @@
                             </div>
                         </div>
                     </div>
-
+                    <!-- End Miscellaneous navigation tab -->
+                    <!-- Bank navigation tab -->
                     <div id="bankNavTab" style="display: none;">
                         <div class="form-group">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="journalEntry-tab" data-bs-toggle="tab"
+                                    <button class="nav-link active btn" id="journalEntry-tabBank" data-bs-toggle="tab"
                                         data-bs-target="#journalEntry" type="button" role="tab"
                                         aria-controls="journalEntry" aria-selected="true"> Journal
                                         Entries</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="incomingPayments-tab" data-bs-toggle="tab"
+                                    <button class="nav-link btn" id="incomingPayments-tabBank" data-bs-toggle="tab"
                                         data-bs-target="#incomingPayments" type="button" role="tab"
                                         aria-controls="incomingPayments" aria-selected="false"> Incoming
                                         Payments
                                     </button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="outgoingPayments-tab" data-bs-toggle="tab"
+                                    <button class="nav-link btn" id="outgoingPayments-tab" data-bs-toggle="tab"
                                         data-bs-target="#outgoingPayments" type="button" role="tab"
                                         aria-controls="outgoingPayments" aria-selected="false"> Outgoing
                                         Payments
                                     </button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="advancedSetting-tab" data-bs-toggle="tab"
+                                    <button class="nav-link btn" id="advancedSetting-tab" data-bs-toggle="tab"
                                         data-bs-target="#advancedSetting" type="button" role="tab"
                                         aria-controls="advancedSetting" aria-selected="false"> Advanced
                                         Settings</button>
                                 </li>
                             </ul>
-                            <div class="tab-content" id="myTabContent">
+                            <div class="tab-content" id="bankAccountingInformationContent">
                                 <div class="tab-pane fade show active" id="journalEntry" role="tabpanel"
                                     aria-labelledby="journalEntry-tab">
                                     <div class="card" style="border:none;">
@@ -573,22 +575,23 @@
                                                         name="accountNumnber">
                                                     <label for="bankAccount">Account Number</label>
                                                 </div>
+                                                <h6 class="opacity-75">Bank Feeds</h6>
                                                 <div class="form-group">
-                                                    <div class="col-3">
+                                                    <div class="col-6">
                                                         <input class="form-check-input" type="radio"
                                                             name="flexRadioDefault" id="flexRadioDefault1">
                                                         <label class="form-check-label" for="flexRadioDefault1">
                                                             Undefined Yet
                                                         </label>
                                                     </div>
-                                                    <div class="col-3">
+                                                    <div class="col-6">
                                                         <input class="form-check-input" type="radio"
                                                             name="flexRadioDefault" id="flexRadioDefault2" checked>
                                                         <label class="form-check-label" for="flexRadioDefault2">
                                                             Import (CAMPT, CSV, OFX)
                                                         </label>
                                                     </div>
-                                                    <div class=" col-3">
+                                                    <div class=" col-6">
                                                         <input class="form-check-input" type="radio"
                                                             name="flexRadioDefault" id="flexRadioDefault2" checked>
                                                         <label class="form-check-label" for="flexRadioDefault2">
@@ -602,81 +605,107 @@
                                 </div>
                                 <div class="tab-pane fade" id="incomingPayments" role="tabpanel"
                                     aria-labelledby="incomingPayments-tab">
-                                    <table id="table" style="width: 100%">
-                                        <thead>
-                                            <tr>
-                                                <th>Payment Method</th>
-                                                <th>Name</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><input type="text" class="form-control "></td>
-                                                <td><input type="text" class="form-control"></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class="card" style="border:none;">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <table id="table" style="width: 100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>
+                                                                <h6 class="opacity-75">Payment Method</h6>
+                                                            </th>
+                                                            <th>
+                                                                <h6 class="opacity-75">Name</h6>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><input type="text" class="form-control "></td>
+                                                            <td><input type="text" class="form-control"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="tab-pane fade" id="outgoingPayments" role="tabpanel"
                                     aria-labelledby="outgoingPayments-tab">
-                                    <table id="table" style="width: 100%">
-                                        <thead>
-                                            <tr>
-                                                <th>Payment Method</th>
-                                                <th>Name</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><input type="text" class="form-control "></td>
-                                                <td><input type="text" class="form-control"></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class="card" style="border:none;">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <table id="table" style="width: 100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>
+                                                                <h6 class="opacity-75">Payment Method</h6>
+                                                            </th>
+                                                            <th>
+                                                                <h6 class="opacity-75">Name</h6>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><input type="text" class="form-control "></td>
+                                                            <td><input type="text" class="form-control"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="tab-pane fade" id="advancedSetting" role="tabpanel"
                                     aria-labelledby="advancedSetting-tab">
+                                    <div class="card" style="border:none;">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div>
+                                                    <p5>
+                                                        Control-Access
+                                                    </p5>
+                                                </div><br>
+                                                <p6 class="opacity-50">
+                                                    Keep empty for no control
+                                                </p6>
+                                                <div class="col-md-12 form-floating py-2">
+                                                    <select class="form-control" name="allowedAccountType"
+                                                        aria-label="Select account" id="allowedAccountType">
+                                                        <option value="0" class="allowedAccountType" selected>
+                                                        </option>
+                                                        <option value="" class="allowedAccountType text-primary">
+                                                            Search More...
+                                                        </option>
+                                                        <?php allowedAccountType();?>
+                                                    </select>
+                                                    <label for="allowedAccount">Allowed account types</label>
+                                                </div><br>
 
-                                    <div>
-                                        <p5>
-                                            Control-Access
-                                        </p5>
-                                    </div><br>
-                                    <p6 class="opacity-50">
-                                        Keep empty for no control
-                                    </p6>
-                                    <div class="col-md-12 form-floating">
-                                        <select class="form-control" name="allowedAccountType"
-                                            aria-label="Select account" id="allowedAccountType">
-                                            <option value="0" class="allowedAccountType" selected>
-                                            </option>
-                                            <option value="" class="allowedAccountType text-primary">
-                                                Search More...
-                                            </option>
-                                            <?php allowedAccountType();?>
-                                        </select>
-                                        <label for="allowedAccount">Allowed account types</label>
-                                    </div><br>
+                                                <div class="col-md-12 form-floating py-2">
+                                                    <select class="form-control" name="allowedAccount"
+                                                        aria-label="Select account" id="allowedAccount">
+                                                        <option value="0" class="allowedAccount" selected></option>
+                                                        <option value="" class="allowedAccount text-success">Create
+                                                            New...
+                                                        </option>
+                                                        <?php allowedAccount();?>
+                                                    </select>
+                                                    <label for="accountDebit">Allowed account</label>
+                                                </div><br>
 
-                                    <div class="col-md-12 form-floating">
-                                        <select class="form-control" name="allowedAccount" aria-label="Select account"
-                                            id="allowedAccount">
-                                            <option value="0" class="allowedAccount" selected></option>
-                                            <option value="" class="allowedAccount text-success">Create
-                                                New...
-                                            </option>
-                                            <?php allowedAccount();?>
-                                        </select>
-                                        <label for="accountDebit">Allowed account</label>
-                                    </div><br>
-
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkBoxEntry">
-                                        <label class="form-check-label" for="checkBoxEntry">
-                                            Lock Posted Entries with Hash
-                                        </label>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="checkBoxEntry">
+                                                    <label class="form-check-label" for="checkBoxEntry">
+                                                        Lock Posted Entries with Hash
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -685,6 +714,132 @@
 
                         </div>
                     </div>
+                    <!-- End Bank navigation tab -->
+
+                    <!-- Sales navigation tab -->
+                    <div class="card" id="salesNavTab" style="border:none;" role="tabpanel"
+                        aria-labelledby="journal-tab">
+                        <div class="form-group">
+
+                            <ul class="nav nav-tabs" id="salesTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active btn" id="journal-tab" data-bs-toggle="tab"
+                                        data-bs-target="#salesJournalEntry" type="button" role="tab"
+                                        aria-controls="salesJournalEntry" aria-selected="true">Journal
+                                        Entries</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link btn" id="journal-tab" data-bs-toggle="tab"
+                                        data-bs-target="#salesAdvancedSetting" type="button" role="tab"
+                                        aria-controls="salesAdvancedSetting" aria-selected="false">Advanced
+                                        Settings</button>
+                                </li>
+                            </ul>
+
+                            <div>
+                                <form>
+                                    <div class="col tab-pane fade show active" styles="display: none"
+                                        id="salesJournalEntry">
+
+                                        <h6 class="opacity-75">Accounting Information</h6>
+                                    </div>
+                                    <div class="row g-3">
+
+                                        <div class="col-6">
+                                            <div class="input-group form-floating">
+                                                <select class="form-control incomeDefault" name="defaulIncomeSales"
+                                                    aria-label="Select account" id="salesIncomeDefault">
+                                                    <option value="cashDifference" class="salesIncomeDefault" selected>
+                                                        Cash
+                                                        Difference Gain</option>
+                                                    <option value="foreignExchange" class="salesAccount">Foreign
+                                                        Exchange
+                                                        Gain
+                                                    </option>
+                                                </select>
+                                                <a type="button"
+                                                    class="btn btn-outline-secondary input-group-text text-hover"
+                                                    title="Extenal Link" data-bs-target="#defaulIncomeSales"
+                                                    data-bs-toggle="modal" id="currencyInternalLink">
+                                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                                </a>
+                                                <label for="Journal">Default Income Account</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control text-uppercase shortCode"
+                                                    name="shortCode">
+                                                <label for="shortCode">Short Code</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="input-group form-floating">
+                                                <select class="form-control currencySales" name="currencySales"
+                                                    aria-label="Select account" id="currencySource">
+                                                    <option value="PHP" class="currencyId" selected>PHP</option>
+                                                    <option value="USD" class="currencyId">USD</option>
+                                                </select>
+                                                <label for="Journal">Currency</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+
+                            <form>
+                                <div class="col tab-pane fade show active" styles="display: none"
+                                    id="salesAdvancedSetting" role="tabpanel" aria-labelledby="journal-tab">
+                                    <label for="inputEmail4" class="form-label">
+                                        <h6 class="opacity-75">Control Access</h6>
+                                    </label>
+                                </div>
+                                <div class="row g-3">
+
+                                    <div class="col-6">
+                                        <div class="input-group form-floating">
+                                            <select class="form-control incomeDefault" name="defaulIncomeSales"
+                                                aria-label="Select account" id="salesIncomeDefault">
+                                                <option value="cashDifference" class="salesIncomeDefault" selected>Cash
+                                                    Difference Gain</option>
+                                                <option value="foreignExchange" class="salesAccount">Foreign
+                                                    Exchange
+                                                    Gain
+                                                </option>
+                                            </select>
+                                            <a type="button"
+                                                class="btn btn-outline-secondary input-group-text text-hover"
+                                                title="Extenal Link" data-bs-target="#defaulIncomeSales"
+                                                data-bs-toggle="modal" id="currencyInternalLink">
+                                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                            </a>
+                                            <label for="Journal">Default Income Account</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control text-uppercase shortCode"
+                                                name="shortCode">
+                                            <label for="shortCode">Short Code</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group form-floating">
+                                            <select class="form-control currencySales" name="currencySales"
+                                                aria-label="Select account" id="currencySource">
+                                                <option value="PHP" class="currencyId" selected>PHP</option>
+                                                <option value="USD" class="currencyId">USD</option>
+                                            </select>
+                                            <label for="Journal">Currency</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                    <!-- End Sales navigation tab -->
                     <div class="mb-2">
                         <button type="button" data-bs-target="#newConfigure" data-bs-toggle="modal"
                             class="btn btn-danger btn-sm">Back</button>
@@ -695,7 +850,6 @@
         </div>
 
     </div>
-</div>
 </div>
 <!-- End open journal modal  -->
 
@@ -993,6 +1147,7 @@ $('#allowedAccountType').change(function() {
 });
 
 // this function id for nav tab select option
+//for miscellaneuos tab 
 $('#accountStatusOptions').on('change', function() {
     if ($(this).val() === "Miscellaneous") {
         $("#miscellaneousNavTab").show()
@@ -1000,11 +1155,20 @@ $('#accountStatusOptions').on('change', function() {
         $("#miscellaneousNavTab").hide();
     }
 });
+//for bank tab
 $('#accountStatusOptions').on('change', function() {
     if ($(this).val() === "Bank") {
         $("#bankNavTab").show()
     } else {
         $("#bankNavTab").hide();
+    }
+});
+//for Sales tab
+$('#accountStatusOptions').on('change', function() {
+    if ($(this).val() === "Sales") {
+        $("#salesNavTab").show()
+    } else {
+        $("#salesNavTab").hide();
     }
 });
 </script>
