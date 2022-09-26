@@ -10,23 +10,31 @@
 
 <body>
     <div class="wrapper">
-        <div id="content" class="w-50">
+        <div id="content" >
             <div class="card">
+                <div class="card-header">
+                    <span class="">Student Info</span>
+                    <span><button class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#addStudent"
+                            type="button"><i class="fa-solid fa-user-plus"></i></button></span>
+                </div>
                 <div class="card-body">
-                    <div class="card-header">
-                        <h5>Student Info</h5>
-                    </div>
                     <div class="row">
-                        <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
-                            <div class="col-md-6 form-floating px-2">
-
-                                <select name="studentList" id="studenList">
-                                    <option value="">Please select student list</option>
-                                    <?php studentListTable();?>
-
-                                </select>
-                            </div>
-                        </form>
+                        <table class="table" id="sample">
+                            <thead>
+                                <tr>
+                                    <th>Student ID</th>
+                                    <th>Name</th>
+                                    <th>Address</th>
+                                    <th>Email</th>
+                                    <th>Course Description</th>
+                                    <th>Duration</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php studentInfoTable();?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -34,6 +42,45 @@
     </div>
     <?php include 'includes/scripts.php';?>
     <?php include 'accounting_modal.php';?>
+
+    <script type="text/javascript">     
+   $(function() {
+            $('#sample').on('click', '.edit', function(e) {
+                e.preventDefault();
+                $('#updateStudent').modal('show');
+                var id = $(this).data('id');
+                getRow(id);
+            });
+
+            $('#sample').on('click', '.delete', function(e) {
+                e.preventDefault();
+                $('#deleteStudent').modal('show');
+                var id = $(this).data('id');
+                getRow(id);
+            });
+        });
+
+    function getRow(id) {       
+        $(document).ready(function() {
+            $.ajax({
+                type: 'POST',
+                url: 'student_row.php',
+                data: {
+                    id: id
+                },
+                dataType: 'json',
+                success: function(response) {
+                    $('.studentID').val(response.student_id);
+                    $('.name').val(response.name);
+                    $('.address').val(response.address);
+                    $('.email').val(response.email);
+                    $('.course_descript').html(response.description);
+                }
+            });
+
+        })
+    }
+    </script>
 </body>
 
 </html>

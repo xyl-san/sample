@@ -237,14 +237,13 @@
                     </div>
 
                 </form>
-            </div> <!-- modal-body closing div -->
-
-        </div> <!-- modal-content closing div -->
-    </div> <!-- modal-dialog closing div -->
-</div> <!-- modal closing div -->
+            </div>
+        </div>
+    </div>
+</div>
 <!-- end customer invoice  -->
 
-<!-- delete customer invoice  -->
+<!--start delete customer invoice  -->
 <div class="modal fade" id="deleteInvoice" tabindex="-1" role="dialog" aria-labelledby="invoiceTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -268,13 +267,13 @@
                         <button type="submit" class="btn btn-danger float-end" name="deleteInvoice">Yes</button>
                     </div>
                 </form>
-            </div> <!-- modal-body closing div -->
+            </div>
 
-        </div> <!-- modal-content closing div -->
-    </div> <!-- modal-dialog closing div -->
-</div> <!-- modal closing div -->
+        </div>
+    </div>
+</div>
 
-<!-- allowed account list table end -->
+<!--end delete customer invoice  -->
 
 
 <!-- start adding accounting periods  -->
@@ -356,13 +355,11 @@
                             name="addJournalEntries">Apply</button>
                     </div>
                 </form>
-            </div> <!-- modal-body closing div -->
+            </div>
 
-        </div> <!-- modal-content closing div -->
-    </div> <!-- modal-dialog closing div -->
-</div> <!-- modal closing div -->
-<!-- allowed account list table end -->
-
+        </div>
+    </div>
+</div>
 <!-- End adding accounting periods  -->
 
 <!-- Start open journal modal  -->
@@ -386,7 +383,6 @@
                         <label for="journalDestination">Journal Name</label>
                     </div>
 
-
                     <div class="col-md-6 form-group form-floating">
                         <select class="form-control" name="accountStatus" aria-label="Select account"
                             id="accountStatusOptions">
@@ -398,7 +394,6 @@
                         </select>
                         <label for="Journal ">Type</label>
                     </div>
-
 
                     <div id="miscellaneousNavTab" style="display: none;">
                         <div class="form-group">
@@ -418,32 +413,36 @@
 
                                 <div class="tab-pane fade show active" id="journalEntryId" role="tabpanel"
                                     aria-labelledby="journal-tab">
-                                    <div>
-                                        <div>
-                                            <p6>
-                                                Accounting information
-                                            </p6>
-                                        </div><br>
-                                        <div class="col-md-12 form-floating">
-                                            <input type="text" class="form-control text-uppercase shortCode"
-                                                name="shortCode">
-                                            <label for="shortCode">Short Code</label>
-                                        </div><br>
+                                    <div class="card" style="border:none;">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div>
+                                                    <p6>
+                                                        Accounting information
+                                                    </p6>
+                                                </div><br>
+                                                <div class="col-md-6 form-floating px-2">
+                                                    <input type="text" class="form-control text-uppercase shortCode"
+                                                        name="shortCode">
+                                                    <label for="shortCode">Short Code</label>
+                                                </div><br>
 
-                                        <div class="col-md-12 ">
-                                            <label for="Journal">Currency</label>
-                                            <div class="input-group">
-                                                <select class="form-control currency" name="currency"
-                                                    aria-label="Select account" id="currencySource">
-                                                    <option value="PHP" class="currencyId" selected>PHP</option>
-                                                    <option value="USD" class="currencyId">USD</option>
-                                                </select>
-                                                <a type="button"
-                                                    class="btn btn-outline-secondary input-group-text text-hover"
-                                                    title="Open Currency" data-bs-target="#currency"
-                                                    data-bs-toggle="modal" id="currencyInternalLink">
-                                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                                                </a>
+                                                <div class="col-md-6 ">
+                                                    <div class="input-group form-floating">
+                                                        <select class="form-control currency" name="currency"
+                                                            aria-label="Select account" id="currencySource">
+                                                            <option value="PHP" class="currencyId" selected>PHP</option>
+                                                            <option value="USD" class="currencyId">USD</option>
+                                                        </select>
+                                                        <a type="button"
+                                                            class="btn btn-outline-secondary input-group-text text-hover"
+                                                            title="Open Currency" data-bs-target="#currency"
+                                                            data-bs-toggle="modal" id="currencyInternalLink">
+                                                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                                        </a>
+                                                        <label for="Journal">Currency</label>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -523,12 +522,10 @@
                                         Settings</button>
                                 </li>
                             </ul>
-
                             <div class="tab-content" id="myTabContent">
-
                                 <div class="tab-pane fade show active" id="journalEntry" role="tabpanel"
                                     aria-labelledby="journalEntry-tab">
-                                    <div class="card">
+                                    <div class="card" style="border:none;">
                                         <div class="card-body">
                                             <div class="row">
                                                 <h6 class="opacity-75">Accounting Information</h6>
@@ -576,36 +573,33 @@
                                                         name="accountNumnber">
                                                     <label for="bankAccount">Account Number</label>
                                                 </div>
-                                                <div class="form-group form-control">
-
-                                                <div class="col-3 form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                        id="flexRadioDefault1">
-                                                    <label class="form-check-label" for="flexRadioDefault1">
-                                                        Default radio
-                                                    </label>
+                                                <div class="form-group">
+                                                    <div class="col-3">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="flexRadioDefault" id="flexRadioDefault1">
+                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                            Undefined Yet
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                                        <label class="form-check-label" for="flexRadioDefault2">
+                                                            Import (CAMPT, CSV, OFX)
+                                                        </label>
+                                                    </div>
+                                                    <div class=" col-3">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                                        <label class="form-check-label" for="flexRadioDefault2">
+                                                            Automated Bank Synchronization
+                                                        </label>
+                                                    </div>
                                                 </div>
-                                                <div class="col-3 form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                        id="flexRadioDefault2" checked>
-                                                    <label class="form-check-label" for="flexRadioDefault2">
-                                                        Default checked radio
-                                                    </label>
-                                                </div>
-                                                <div class=" col-3 form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                        id="flexRadioDefault2" checked>
-                                                    <label class="form-check-label" for="flexRadioDefault2">
-                                                        Default checked radio
-                                                    </label>
-                                                </div>
-                                                </div>
-                                               
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="tab-pane fade" id="incomingPayments" role="tabpanel"
                                     aria-labelledby="incomingPayments-tab">
                                     <table id="table" style="width: 100%">
@@ -656,8 +650,10 @@
                                     <div class="col-md-12 form-floating">
                                         <select class="form-control" name="allowedAccountType"
                                             aria-label="Select account" id="allowedAccountType">
-                                            <option value="0" class="allowedAccountType" selected></option>
-                                            <option value="" class="allowedAccountType text-primary">Search More...
+                                            <option value="0" class="allowedAccountType" selected>
+                                            </option>
+                                            <option value="" class="allowedAccountType text-primary">
+                                                Search More...
                                             </option>
                                             <?php allowedAccountType();?>
                                         </select>
@@ -668,7 +664,8 @@
                                         <select class="form-control" name="allowedAccount" aria-label="Select account"
                                             id="allowedAccount">
                                             <option value="0" class="allowedAccount" selected></option>
-                                            <option value="" class="allowedAccount text-success">Create New...
+                                            <option value="" class="allowedAccount text-success">Create
+                                                New...
                                             </option>
                                             <?php allowedAccount();?>
                                         </select>
@@ -684,22 +681,22 @@
                                 </div>
 
                             </div>
+
+
                         </div>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-target="#newConfigure" data-bs-toggle="modal"
+                            class="btn btn-danger btn-sm">Back</button>
+                        <button type="submit" class="btn btn-success float-end btn-sm" name="">Save</button>
+                    </div>
+            </div>
+            </form>
+        </div>
 
-
-                        <div class="mb-2">
-                            <button type="button" data-bs-target="#newConfigure" data-bs-toggle="modal"
-                                class="btn btn-danger btn-sm">Back</button>
-                            <button type="submit" class="btn btn-success float-end btn-sm" name="">Save</button>
-                        </div>
-                </form>
-            </div> <!-- modal-body closing div -->
-
-        </div> <!-- modal-content closing div -->
-    </div> <!-- modal-dialog closing div -->
-</div> <!-- modal closing div -->
-<!-- allowed account list table end -->
-
+    </div>
+</div>
+</div>
 <!-- End open journal modal  -->
 
 
@@ -776,16 +773,15 @@
                         <button type="submit" class="btn btn-success float-end" name="">Save</button>
                     </div>
                 </form>
-            </div> <!-- modal-body closing div -->
+            </div>
 
-        </div> <!-- modal-content closing div -->
-    </div> <!-- modal-dialog closing div -->
-</div> <!-- modal closing div -->
-<!-- allowed account list table end -->
+        </div>
+    </div>
+</div>
 
 <!-- End open currency  -->
 
-<!-- allowed account type list table -->
+<!-- start allowed account type list table -->
 <div class="modal fade" id="allowedAccountsTypeTable" aria-hidden="true" aria-labelledby="createTaxesTitle"
     tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
@@ -819,12 +815,12 @@
                         </div>
                     </div>
                 </form>
-            </div> <!-- modal-body closing div -->
+            </div>
 
-        </div> <!-- modal-content closing div -->
-    </div> <!-- modal-dialog closing div -->
-</div> <!-- modal closing div -->
-<!-- allowed account type list table end -->
+        </div>
+    </div>
+</div>
+<!-- end allowed account type list table end -->
 
 <!-- allowed account list table -->
 <div class="modal fade" id="allowedAccountsTable" aria-hidden="true" aria-labelledby="createTaxesTitle" tabindex="-1">
@@ -868,14 +864,14 @@
                         </div>
                     </div>
                 </form>
-            </div> <!-- modal-body closing div -->
+            </div>
 
-        </div> <!-- modal-content closing div -->
-    </div> <!-- modal-dialog closing div -->
-</div> <!-- modal closing div -->
-<!-- allowed account list table end -->
+        </div>
+    </div>
+</div>
+<!-- end allowed account list table end -->
+
 <!-- creating account list  -->
-
 <div class="modal fade" id="createAccountList" tabindex="-1" role="dialog" aria-labelledby="addAccountList"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
@@ -949,14 +945,13 @@
                     </div>
 
                 </form>
-            </div> <!-- modal-body closing div -->
+            </div>
 
-        </div> <!-- modal-content closing div -->
-    </div> <!-- modal-dialog closing div -->
-</div> <!-- modal closing div -->
+        </div>
+    </div>
+</div>
 
 <!-- end creating account list -->
-
 
 <script>
 // this function for open journal internal link
