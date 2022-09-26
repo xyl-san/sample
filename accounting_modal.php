@@ -871,6 +871,7 @@
 </div>
 <!-- end allowed account list table end -->
 
+
 <!-- creating account list  -->
 <div class="modal fade" id="createAccountList" tabindex="-1" role="dialog" aria-labelledby="addAccountList"
     aria-hidden="true">
