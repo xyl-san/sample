@@ -719,89 +719,31 @@
                     <!-- Sales navigation tab -->
                     <div class="card" id="salesNavTab" style="border:none;" role="tabpanel"
                         aria-labelledby="journal-tab">
-                        <div class="form-group">
-
-                            <ul class="nav nav-tabs" id="salesTab" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link active btn" id="journal-tab" data-bs-toggle="tab"
-                                        data-bs-target="#salesJournalEntry" type="button" role="tab"
-                                        aria-controls="salesJournalEntry" aria-selected="true">Journal
-                                        Entries</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link btn" id="journal-tab" data-bs-toggle="tab"
-                                        data-bs-target="#salesAdvancedSetting" type="button" role="tab"
-                                        aria-controls="salesAdvancedSetting" aria-selected="false">Advanced
-                                        Settings</button>
-                                </li>
-                            </ul>
-
-                            <div>
-                                <form>
-                                    <div class="col tab-pane fade show active" styles="display: none"
-                                        id="salesJournalEntry">
-
-                                        <h6 class="opacity-75">Accounting Information</h6>
-                                    </div>
-                                    <div class="row g-3">
-
-                                        <div class="col-6">
-                                            <div class="input-group form-floating">
-                                                <select class="form-control incomeDefault" name="defaulIncomeSales"
-                                                    aria-label="Select account" id="salesIncomeDefault">
-                                                    <option value="cashDifference" class="salesIncomeDefault" selected>
-                                                        Cash
-                                                        Difference Gain</option>
-                                                    <option value="foreignExchange" class="salesAccount">Foreign
-                                                        Exchange
-                                                        Gain
-                                                    </option>
-                                                </select>
-                                                <a type="button"
-                                                    class="btn btn-outline-secondary input-group-text text-hover"
-                                                    title="Extenal Link" data-bs-target="#defaulIncomeSales"
-                                                    data-bs-toggle="modal" id="currencyInternalLink">
-                                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                                                </a>
-                                                <label for="Journal">Default Income Account</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="form-floating">
-                                                <input type="text" class="form-control text-uppercase shortCode"
-                                                    name="shortCode">
-                                                <label for="shortCode">Short Code</label>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="input-group form-floating">
-                                                <select class="form-control currencySales" name="currencySales"
-                                                    aria-label="Select account" id="currencySource">
-                                                    <option value="PHP" class="currencyId" selected>PHP</option>
-                                                    <option value="USD" class="currencyId">USD</option>
-                                                </select>
-                                                <label for="Journal">Currency</label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </form>
-                            </div>
-
-                            <form>
-                                <div class="col tab-pane fade show active" styles="display: none"
-                                    id="salesAdvancedSetting" role="tabpanel" aria-labelledby="journal-tab">
-                                    <label for="inputEmail4" class="form-label">
-                                        <h6 class="opacity-75">Control Access</h6>
-                                    </label>
-                                </div>
-                                <div class="row g-3">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="salesNavTabJournal" data-bs-toggle="tab"
+                                    data-bs-target="#salesJournalEntry" type="button" role="tab"
+                                    aria-controls="saleJournal-tab-pane" aria-selected="true">Journal Entries</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="salesNavTabAdvancedSetting" data-bs-toggle="tab"
+                                    data-bs-target="#salesAdvancedSetting" type="button" role="tab"
+                                    aria-controls="salesAdvancedSetting-tab-pane" aria-selected="false">Advanced
+                                    Settings</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="salesTabContent">
+                            <div class="tab-pane fade show active py-2" id="salesJournalEntry" role="tabpanel"
+                                aria-labelledby="home-tab" tabindex="0">
+                                <h6 class="opacity-75">Accounting Information</h6>
+                                <div class="row g-4">
 
                                     <div class="col-6">
                                         <div class="input-group form-floating">
                                             <select class="form-control incomeDefault" name="defaulIncomeSales"
                                                 aria-label="Select account" id="salesIncomeDefault">
-                                                <option value="cashDifference" class="salesIncomeDefault" selected>Cash
+                                                <option value="cashDifference" class="salesIncomeDefault" selected>
+                                                    Cash
                                                     Difference Gain</option>
                                                 <option value="foreignExchange" class="salesAccount">Foreign
                                                     Exchange
@@ -820,7 +762,7 @@
                                     <div class="col-6">
                                         <div class="form-floating">
                                             <input type="text" class="form-control text-uppercase shortCode"
-                                                name="shortCode">
+                                                name="shortCode" placeholder="MISC">
                                             <label for="shortCode">Short Code</label>
                                         </div>
                                     </div>
@@ -835,10 +777,78 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                            </form>
+                            <!-- for advance setting tab -->
+                            <div class="tab-pane fade" id="salesAdvancedSetting" role="tabpanel"
+                                aria-labelledby="profile-tab" tabindex="0">
+                                <div class="row g-4">
+                                    <div class="col-6 py-2">
+                                        <h6 class="opacity-75">Control Access</h6>
+                                        <p6 class="opacity-50">
+                                            Keep empty for no control
+                                        </p6>
+                                        <div class="col-md-12 form-floating">
+                                            <select class="form-control" name="allowedAccountType"
+                                                aria-label="Select account" id="allowedAccountType">
+                                                <option value="0" class="allowedAccountType" selected>
+                                                </option>
+                                                <option value="" class="allowedAccountType text-primary">
+                                                    Search More...
+                                                </option>
+                                                <?php allowedAccountType();?>
+                                            </select>
+                                            <label for="allowedAccount">Allowed account types</label>
+                                        </div><br>
+                                        <div class="col-md-12 form-floating">
+                                            <select class="form-control" name="allowedAccountType"
+                                                aria-label="Select account" id="allowedAccountType">
+                                                <option value="0" class="allowedAccountType" selected>
+                                                </option>
+                                                <option value="" class="allowedAccountType text-primary">
+                                                    Search More...
+                                                </option>
+                                                <?php allowedAccountType();?>
+                                            </select>
+                                            <label for="allowedAccount">Allowed account types</label>
+                                        </div><br>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="checkBoxEntry">
+                                            <label class="form-check-label" for="checkBoxEntry">
+                                                Lock Posted Entries with Hash
+                                            </label>
+                                        </div>
+
+                                        <div class="row form-floating g-3">
+
+                                            <div class="form-check col-6">
+                                                <h6 class="opacity-75">Electronic Data Interchange</h6>
+                                                <p6 class="opacity-50">
+                                                    Electronic invoicing
+                                                </p6>
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                    id="checkBoxEntry">
+                                                <label class="form-check-label" for="checkBoxEntry">
+                                                    Factur-X (FR)
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-6 py-2">
+                                        <h6 class="opacity-75">Create Invoices upon Emails</h6>
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control text-uppercase shortCode"
+                                                name="shortCode">
+                                            <label for="shortCode">Email Alias</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
+
                     <!-- End Sales navigation tab -->
                     <div class="mb-2">
                         <button type="button" data-bs-target="#newConfigure" data-bs-toggle="modal"
