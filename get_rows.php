@@ -93,5 +93,29 @@
 		$row = $query->fetch_assoc();
 
 		echo json_encode($row);
+		$conn->close();
+	}
+	//edit journal entry row
+	if(isset($_POST['ejeRow'])){
+        include 'includes/conn.php';
+		$journal_entries_id = $_POST['id'];
+		$sql = "SELECT journal_entries_id, date, journal_entries_code, partner, reference, journal_id, total, type, status FROM journal_entries WHERE journal_entries_id = '$journal_entries_id'";
+		$query = $conn->query($sql);
+		$row = $query->fetch_assoc();
+
+		echo json_encode($row);
+        $conn->close();
+	}
+
+	//edit ACCOUNT LIST row
+	if(isset($_POST['accountListRow'])){
+        include 'includes/conn.php';
+		$accountId = $_POST['id'];
+		$sql = "SELECT account_id, account_code, account_description, account_name, allow_reconciliation, debit, credit, opening_balance, default_taxes, tags, journal_id FROM account_list WHERE account_id = '$accountId'";
+		$query = $conn->query($sql);
+		$row = $query->fetch_assoc();
+
+		echo json_encode($row);
+        $conn->close();
 	}
 ?>

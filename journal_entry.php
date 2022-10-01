@@ -35,6 +35,7 @@
                                 <th>Reference</th>
                                 <th>Journal</th>
                                 <th>Total</th>
+                                <th>Type</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -44,12 +45,13 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Date</th>
+                            <th>Date</th>
                                 <th>Journal Code</th>
                                 <th>Partners</th>
                                 <th>Reference</th>
                                 <th>Journal</th>
                                 <th>Total</th>
+                                <th>Type</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -61,7 +63,8 @@
     </div>
 
     <?php include 'includes/scripts.php';?>
-    <?php include 'modals.php';?>
+    <?php include 'accounting_modal.php';?>
+
 
     <script type="text/javascript">
     $(document).ready(function() {
@@ -86,28 +89,56 @@
         });
     });
 
-    function getRow(id) {
+    // function getRow(id) {
+    //     $(document).ready(function() {
+    //         $.ajax({
+    //             type: 'POST',
+    //             url: 'journal_entry_row.php',
+    //             data: {
+    //                 id: id
+    //             },
+    //             dataType: 'json',
+    //             success: function(response) {
+    //                 $('.groupId').val(response.group_id);
+    //                 $('.groupName').val(response.name);
+    //                 $('.groupDescription').val(response.description);
+    //                 $('.groupTypeSelection').val(response.type);
+    //                 $('.groupStatusSelection').val(response.status);
+    //                 $('.deleteGroupName').html(response.name);
+
+    //             }
+    //         });
+
+    //     })
+    // }
+//get row for edit journal
+function getRow(id) {
         $(document).ready(function() {
             $.ajax({
                 type: 'POST',
-                url: 'joural_entry_row.php',
+                url: 'get_rows.php',
                 data: {
-                    id: id
+                    id: id,
+                    ejeRow: true,
                 },
                 dataType: 'json',
                 success: function(response) {
-                    $('.groupId').val(response.group_id);
-                    $('.groupName').val(response.name);
-                    $('.groupDescription').val(response.description);
-                    $('.groupTypeSelection').val(response.type);
-                    $('.groupStatusSelection').val(response.status);
-                    $('.deleteGroupName').html(response.name);
-
+                    $('.journal_entries_id').val(response.journal_entries_id);
+                    $('.date').val(response.date);
+                    $('.journalEntriesCode').val(response.journal_entries_code);
+                    $('.partner_id').val(response.partner);
+                    $('.referenceCode').val(response.reference);
+                    $('.journal_id').val(response.journal_id);
+                    $('.typeSelection').val(response.type);
+                    $('.totalAmount').val(response.total);
+                    $('.statusSelection').val(response.status);
+                    
                 }
             });
-
         })
     }
+
+
     </script>
 </body>
 

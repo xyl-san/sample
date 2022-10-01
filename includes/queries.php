@@ -772,52 +772,29 @@ function addToList(){
   }
   $conn->close();
 }
-// account list table queries
-function accountListTable(){
-  include 'conn.php';
-  $sql = "SELECT account_id, account_name, description, status, date_created FROM account_list";
-  $query = $conn->query($sql);
-  while($row = $query->fetch_assoc()){
-    $status = ($row['status'])?'<span class="badge text-bg-success pull-right">Active</span>':'<span class="badge text-bg-danger pull-right">Inactive</span>';
-    ?>
-<tr>
-    <td><?php echo $row['account_id']; ?></td>
-    <td><?php echo $row['date_created']; ?></td>
-    <td><?php echo $row['account_name']; ?></td>
-    <td><?php echo $row['description']; ?></td>
-    <td><?php echo $status; ?></td>
-    <td>
-        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['account_id']; ?>"><i
-                class="fa fa-edit"></i> Edit</button>
-        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['account_id']; ?>"><i
-                class="fa fa-trash"></i> Delete</button>
-    </td>
-</tr>
-<?php
-  }
-  $conn->close();
-}
+
 // Journal Entries Table queries
 function journalEntryTable(){
   include 'conn.php';
-  $sql = "SELECT j.journal_id, j.account_id, j.group_id, j.amount, j.date_created ,je.code,je.description, a.account_name, g.group_name,g.status, g.type FROM `journal_items` j inner join account_list a on j.journal_id = a.account_id inner join journal_entries je on j.journal_id = je.journal_id inner join group_list g on j.journal_id = g.group_id";
+  $sql = "SELECT journEntry.journal_entries_id, journEntry.journal_id, journEntry.date, journEntry.journal_entries_code, journEntry.partner, journEntry.reference, journEntry.total, journEntry.type, journEntry.status, journ.journal_id, journ.journal_name FROM journal_entries as journEntry INNER JOIN journal as journ ON journEntry.journal_id = journ.journal_id WHERE delete_flag = 0";
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
     $status = ($row['status'])?'<span class="badge text-bg-success pull-right">Active</span>':'<span class="badge text-bg-danger pull-right">Inactive</span>';
     $type = ($row['type'])?'<span class="badge text-bg-warning pull-right">Credit</span>':'<span class="badge text-bg-info pull-right">Debit</span>';
     ?>
 <tr>
-    <td><?php echo $row['date_created']; ?></td>
-    <td><?php echo $row['code']; ?></td>
-    <td><?php echo $row['account_name']; ?></td>
-    <td><?php echo $row['group_name']; ?></td>
-    <td><?php echo $row['description']; ?></td>
+    <td><?php echo $row['date']; ?></td>
+    <td><?php echo $row['journal_entries_code']; ?></td>
+    <td><?php echo $row['partner']; ?></td>
+    <td><?php echo $row['reference']; ?></td>
+    <td><?php echo $row['journal_name']; ?></td>
+    <td><?php echo $row['total']; ?></td>
     <td><?php echo $type; ?></td>
     <td><?php echo $status; ?></td>
     <td>
-        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['journal_id']; ?>"><i
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['journal_entries_id']; ?>"><i
                 class="fa fa-edit"></i> Edit</button>
-        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['journal_id']; ?>"><i
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['journal_entries_id']; ?>"><i
                 class="fa fa-trash"></i> Delete</button>
     </td>
 </tr>
@@ -952,50 +929,8 @@ function accountListAdd(){
 }
 // account list add new queries end
 
-// account list edit queries
-if (isset($_POST['editAccountList'])) {
-editAccountList();
-}
-  function editAccountList(){
-    include 'conn.php';
-    if(isset($_POST['editAccountList'])){
-      $account_id = $_POST['account_id'];
-      $accountName = $_POST['name'];
-      $accountDescription = $_POST['description'];
-      $accountStatusSelection = $_POST['status'];
-      $sql = "UPDATE account_list SET account_name = '$accountName', description = '$accountDescription', status = '$accountStatusSelection' WHERE account_id = '$account_id'";
-      if($conn->query($sql)){
-        echo "success";
-      }
-      else{
-        echo "error";
-      }
-    }
-    $conn->close();
-    header('location:../account_list.php');
-  }
-  // account list edit queries end
 
-  // account list delete queries
-  if(isset($_POST['deleteAccountList'])){
-    accountListDelete();
-  }
-  function accountListDelete(){
-    include 'conn.php';
-    if(isset($_POST['deleteAccountList'])){
-      $account_id = $_POST['account_id'];
-      $sql = "DELETE FROM account_list WHERE account_id = '$account_id'";
-    }
-    if($conn->query($sql)){
-      $_SESSION['success'] = 'Account list deleted successfully';
-    }
-    else{
-      $_SESSION['error'] = $conn->error;
-    }
-    $conn->close();
-    header('location: ../account_list.php');
-  }
-  // account list delete queries end
+ 
 
   // group list table queries
   function groupListTable(){
@@ -1607,23 +1542,303 @@ function accountListTypeTableInModal(){
 // allowed account list table
 function accountListTableInModal(){
   include 'conn.php';
-  $sql = "SELECT acct.account_id, acct.account_code, acct.account_description, acct.account_currency, acct.default_taxes, acct.tags, acct.allow_reconciliation, acct.deprecated, acct.allowed_journal, acctype.account_name FROM account_type_list acctype INNER JOIN account_list AS acct ON acctype.account_name = acct.account_name";
+  $sql = "SELECT acct.account_id, acct.account_code, acct.account_description, acct.default_taxes, acct.tags, acct.allow_reconciliation, acct.deprecated, acct.journal_id, acctype.account_name FROM account_type_list acctype INNER JOIN account_list AS acct ON acctype.account_name = acct.account_name";
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
+    $allowRelo = ($row['allow_reconciliation'])?'<span class="badge text-bg-success pull-right">YES</span>':'<span class="badge text-bg-danger pull-right">NO</span>';
+    
     ?>
 <tr>
     <td><?php echo $row['account_code']; ?></td>
     <td><?php echo $row['account_description']; ?></td>
     <td><?php echo $row['account_name']; ?></td>
-    <td><?php echo $row['allow_reconciliation']; ?></td>
+    <td><?php echo $allowRelo; ?></td>
     <td></td>
     <td><?php echo $row['default_taxes']; ?></td>
     <td><?php echo $row['tags']; ?></td>
-    <td><?php echo $row['allowed_journal']; ?></td>
-    <td><?php echo $row['account_currency']; ?></td>
+    <td><?php echo $row['journal_id']; ?></td>
 </tr>
 <?php
   }
 }
+
+// Add new journal Entry
+
+if(isset($_POST['createJournalEntry'])){
+  journalCreate();
+}
+  function journalCreate(){
+  include 'conn.php';
+  if(isset($_POST['createJournalEntry'])){
+    $journal_entries_id = $_POST['journal_entries_id'];
+    $date = $_POST['date'];
+    $journal_entries_code = $_POST['journal_entries_code'];
+    $partner = $_POST['partner'];
+    $reference = $_POST['reference'];
+    $journal_id = $_POST['journal'];
+    $type = $_POST['type'];
+    $total = $_POST['total'];
+    $status = $_POST['status'];
+    
+    $sql = "INSERT INTO `journal_entries` (`journal_entries_id`, `journal_id`, `date`, `journal_entries_code`, `partner`, `reference`, `total`, `status`, `type`) VALUES ('$journal_entries_id','$journal_id','$date','$journal_entries_code','$partner','$reference','$total','$status','$type')";
+  
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+  }
+$conn->close();
+header('location: ../journal_entry.php');
+}
+// EDIT Journal Entry
+if (isset($_POST['editJournalEntry'])) {
+  journalEntryEdit();
+}
+  function journalEntryEdit(){
+    include 'conn.php';
+    if(isset($_POST['editJournalEntry'])){
+      $journal_entries_id = $_POST['journal_entries_id'];
+      $date = $_POST['date'];
+      $journal_entries_code = $_POST['journal_entries_code'];
+      $partner = $_POST['partner'];
+      $reference = $_POST['reference'];
+      $journal_id = $_POST['journal'];
+      $total = $_POST['total'];
+      $type = $_POST['type'];
+      $status = $_POST['status'];
+     
+      $sql = "UPDATE journal_entries SET date = '$date', journal_entries_code = '$journal_entries_code', partner = '$partner', reference = '$reference', journal_id = '$journal_id', total = '$total', type = '$type', status = '$status' WHERE journal_entries_id = '$journal_entries_id'";
+      if($conn->query($sql)){
+        echo "success";
+      }
+      else{
+        echo "error";
+      }
+    }
+    $conn->close();
+    header('location: ../journal_entry.php');
+  }
+// DELETE Journal Entry
+
+if(isset($_POST['deleteJournalEntry'])){
+  journalEntryDelete();
+}
+function journalEntryDelete(){
+  include 'conn.php';
+  if(isset($_POST['deleteJournalEntry'])){
+    $journal_entries_id = $_POST['journal_entries_id'];
+    $sql = "UPDATE journal_entries SET delete_flag = 1 WHERE journal_entries_id = '$journal_entries_id'";
+  }
+  if($conn->query($sql)){
+    $_SESSION['success'] = 'Journal Deleted successfully';
+  }
+  else{
+    $_SESSION['error'] = $conn->error;
+  }
+  $conn->close();
+  header('location: ../journal_entry.php');
+}
+
+function journalList(){
+  include 'conn.php';
+  $sql = "SELECT journal_id, journal_name FROM journal";
+  $query = $conn->query($sql);
+  while($prow = $query->fetch_assoc()){
+      echo "
+      <option value='".$prow['journal_id']."'>".$prow['journal_name']."</option>
+      ";
+  }
+  $conn->close();
+}
+
+function journalListEntry(){
+  include 'conn.php';
+  $sql = "SELECT journal_id, journal_name FROM journal";
+  $query = $conn->query($sql);
+  while($prow = $query->fetch_assoc()){
+      echo "
+      <option value='".$prow['journal_name']."'>".$prow['journal_name']."</option>
+      ";
+  }
+  $conn->close();
+}
+
+function allowedJournalList(){
+  include 'conn.php';
+  $sql = "SELECT journal_id, journal_name FROM journal";
+  $query = $conn->query($sql);
+  while($prow = $query->fetch_assoc()){
+      echo "
+      <option value='".$prow['journal_id']."'>".$prow['journal_name']."</option>
+      ";
+  }
+  $conn->close();
+}
+// for JOURNAL LIST PERIODS
+if(isset($_POST['#'])){
+  journalEntryTableList();
+}
+function journalEntryTableList(){
+  include 'conn.php';
+  if(isset($_POST['#'])){
+    $journal_id = $_POST['journal'];
+    $sql = "SELECT journEntry.journal_entries_id, journEntry.journal_id, journEntry.date, journEntry.journal_entries_code, journEntry.partner, journEntry.reference, journEntry.total, journEntry.type, journEntry.status, journ.journal_name FROM journal_entries as journEntry INNER JOIN journal as journ ON journEntry.journal_id = journ.journal_id WHERE journEntry.journal_id='$journal_id' AND delete_flag = 0";
+    $query = $conn->query($sql);
+    while($row = $query->fetch_assoc()){
+    $status = ($row['status'])?'<span class="badge text-bg-success pull-right">Active</span>':'<span class="badge text-bg-danger pull-right">Inactive</span>';
+    $type = ($row['type'])?'<span class="badge text-bg-warning pull-right">Credit</span>':'<span class="badge text-bg-info pull-right">Debit</span>';
+    ?>
+<tr>
+    <td><?php echo $row['date']; ?></td>
+    <td><?php echo $row['journal_entries_code']; ?></td>
+    <td><?php echo $row['partner']; ?></td>
+    <td><?php echo $row['reference']; ?></td>
+    <td><?php echo $row['journal_name']; ?></td>
+    <td><?php echo $row['total']; ?></td>
+    <td><?php echo $type; ?></td>
+    <td><?php echo $status; ?></td>
+    <td>
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['journal_entries_id']; ?>"><i
+                class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['journal_entries_id']; ?>"><i
+                class="fa fa-trash"></i> Delete</button>
+    </td>
+</tr>
+<?php
+  }
+}
+  $conn->close();
+}
+
+// account list type selection in journal queries(Account name)
+function accountListTypeSelection(){
+  include 'conn.php';
+  $sql = "SELECT account_type_list_id, account_name FROM account_type_list";
+  $query = $conn->query($sql);
+  while($prow = $query->fetch_assoc()){
+      echo "
+      <option value='".$prow['account_name']."'>".$prow['account_name']."</option>
+      ";
+  }
+  $conn->close();
+}
+
+// Add new Account List
+
+if(isset($_POST['addNewAccountList'])){
+  accountListCreate();
+}
+  function accountListCreate(){
+  include 'conn.php';
+  if(isset($_POST['addNewAccountList'])){
+    $accountId = $_POST['account_id'];
+    $accountCode = $_POST['account_code'];
+    $accountDescript = $_POST['account_descript'];
+    $accountName = $_POST['account_name'];
+    $accountAllowRecon = $_POST['account_allowRecon'];
+    $accountDebit = $_POST['account_debit'];
+    $accountCredit = $_POST['account_credit'];
+    $accountBalance = $_POST['account_balance'];
+    $accountTax = $_POST['account_tax'];
+    $accountTag = $_POST['account_tag'];
+    $journalId = $_POST['journal'];
+    
+    $sql = "INSERT INTO `account_list`(`account_id`, `account_code`, `account_description`, `account_name`, `allow_reconciliation`, `debit`, `credit`, `opening_balance`, `default_taxes`, `tags`, `journal_id`) VALUES ('$accountId','$accountCode','$accountDescript','$accountName','$accountAllowRecon','$accountDebit','$accountCredit','$accountBalance','$accountTax','$accountTag','$journalId')";
+  
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+  }
+$conn->close();
+header('location: ../account_list.php');
+}
+
+//SHOW ACCOUNT LIST TABLE
+function accountListTable(){
+  include 'conn.php';
+  $sql = "SELECT acct.account_id, acct.account_code, acct.account_description, acct.debit, acct.credit, acct.opening_balance, acct.default_taxes, acct.tags, acct.allow_reconciliation, acct.journal_id, acctype.account_name, journ.journal_name, acct.delete_flag FROM account_type_list acctype INNER JOIN account_list AS acct ON acctype.account_name = acct.account_name INNER JOIN journal as journ ON journ.journal_id = acct.journal_id WHERE acct.delete_flag = 0;";
+
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    $allowRelo = ($row['allow_reconciliation'])?'<span class="badge text-bg-success pull-right">YES</span>':'<span class="badge text-bg-danger pull-right">NO</span>';
+    
+    ?>
+<tr>
+    <td><?php echo $row['account_code']; ?></td>
+    <td><?php echo $row['account_description']; ?></td>
+    <td><?php echo $row['account_name']; ?></td>
+    <td><?php echo $allowRelo; ?></td>
+    <td><?php echo $row['debit']; ?></td>
+    <td><?php echo $row['credit']; ?></td>
+    <td><?php echo $row['opening_balance']; ?></td>
+    <td><?php echo $row['default_taxes']; ?></td>
+    <td><?php echo $row['tags']; ?></td>
+    <td><?php echo $row['journal_name']; ?></td>
+    <td>
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['account_id']; ?>"><i
+                class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['account_id']; ?>"><i
+                class="fa fa-trash"></i> Delete</button>
+    </td>
+</tr>
+<?php
+  }
+}
+
+// EDIT ACCOUNT LIST
+if (isset($_POST['editAccountingList'])) {
+  accountEdit();
+}
+  function accountEdit(){
+    include 'conn.php';
+    if(isset($_POST['editAccountingList'])){
+      $accountId = $_POST['account_id'];
+      $accountCode = $_POST['account_code'];
+      $accountDescript = $_POST['account_descript'];
+      $accountName = $_POST['account_name'];
+      $accountAllowRecon = $_POST['account_allowRecon'];
+      $accountDebit = $_POST['account_debit'];
+      $accountCredit = $_POST['account_credit'];
+      $accountBalance = $_POST['account_balance'];
+      $accountTax = $_POST['account_tax'];
+      $accountTag = $_POST['account_tag'];
+      $journalId = $_POST['journal'];
+     
+      $sql = "UPDATE account_list SET account_code = '$accountCode', account_description = '$accountDescript', account_name ='$accountName', allow_reconciliation ='$accountAllowRecon', debit ='$accountDebit', credit ='$accountCredit', opening_balance ='$accountBalance', default_taxes ='$accountTax', tags ='$accountTag', journal_id = '$journalId' WHERE  account_id ='$accountId'";
+      if($conn->query($sql)){
+        echo "success";
+      }
+      else{
+        echo "error";
+      }
+    }
+    $conn->close();
+    header('location: ../account_list.php');
+  }
+
+  // DELETE ACCOUNT LIST
+  if(isset($_POST['deleteAccountList'])){
+    accountListDelete();
+  }
+  function accountListDelete(){
+    include 'conn.php';
+    if(isset($_POST['deleteAccountList'])){
+      $accountId = $_POST['account_id'];
+      $sql = "UPDATE account_list SET delete_flag = 1 WHERE account_id = '$accountId'";
+    }
+    if($conn->query($sql)){
+      $_SESSION['success'] = 'Employee deleted successfully';
+    }
+    else{
+      $_SESSION['error'] = $conn->error;
+    }
+    $conn->close();
+    header('location: ../account_list.php');
+  }
 
 ?>

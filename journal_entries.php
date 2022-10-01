@@ -1,6 +1,6 @@
 <?php include 'includes/queries.php';?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> 
 
 <head>
     <meta charset="UTF-8">
@@ -23,7 +23,7 @@
                 <div class="card-body">
                     <table id="example1" class="table">
                         <thead>
-                            <tr>
+                            <!-- <tr>
                                 <th>Date</th>
                                 <th>Number</th>
                                 <th>Partner</th>
@@ -34,13 +34,24 @@
                                 <th>Status</th>
                                 <th>To Check</th>
                                 <th>Tools</th>
+                            </tr> -->
+                            <tr>
+                                <th>Date</th>
+                                <th>Journal Code</th>
+                                <th>Partners</th>
+                                <th>Reference</th>
+                                <th>Journal</th>
+                                <th>Total</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php ?>
+                        <?php journalEntryTableList();?>
                         </tbody>
                         <tfoot>
-                            <tr>
+                            <!-- <tr>
                                 <th>Date</th>
                                 <th>Number</th>
                                 <th>Partner</th>
@@ -51,6 +62,17 @@
                                 <th>Status</th>
                                 <th>To Check</th>
                                 <th>Tools</th>
+                            </tr> -->
+                            <tr>
+                                <th>Date</th>
+                                <th>Journal Code</th>
+                                <th>Partners</th>
+                                <th>Reference</th>
+                                <th>Journal</th>
+                                <th>Total</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -58,6 +80,7 @@
             </div>
         </div>
     </div>
+    
     <?php include 'includes/scripts.php';?>
     <?php include 'accounting_modal.php';?>
 

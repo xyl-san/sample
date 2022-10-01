@@ -289,7 +289,7 @@
             </div>
 
             <div class="modal-body">
-                <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off" required>
+                <form class="row g-3" action="#" method="POST" autocomplete="off" required>
                     <div>
                         <h6>Fiscal Years</h6>
                     </div>
@@ -322,7 +322,7 @@
                     </div>
                     <div class="col-md-12 ">
 
-                        <label for="Journal">Journal</label>
+                        <!-- <label for="Journal">Journal</label>
                         <div class="input-group">
                             <select class="form-control journal" name="journal" aria-label="Select account"
                                 id="journalSource" required>
@@ -346,6 +346,19 @@
                                 <i class="fa-solid fa-arrow-up-right-from-square"></i>
                             </a>
 
+                        </div> -->
+                        <div class="input-group col-12 form-floating">
+                            <select class="form-control journal" name="journal" id="journalSource"
+                                aria-label="Select department" required>
+                                <option value="" selected>- Select -</option>
+                                <?php journalListEntry();?>
+                            </select>
+                            <a type="button" class="btn btn-outline-secondary input-group-text text-hover"
+                                title="Open Journal" data-bs-target="#newFiscal" data-bs-toggle="modal"
+                                id="openJournalInternalLink">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
+                            <label for="type">Journal</label>
                         </div>
 
                     </div>
@@ -1442,6 +1455,354 @@
 </div>
 
 <!-- end creating account list -->
+
+<!-- add new journal entry -->
+<div class="modal fade" id="newJournalEntry" tabindex="-1" role="dialog" aria-labelledby="addAccountList"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="journal_entries_id">Create: Journal Entry</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
+                    <div class="col-md-6 form-floating">
+                        <input type="datetime-local" class="form-control date" name="date" required>
+                        <label for="accountCode">Date</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control journal_entries_code" name="journal_entries_code"
+                            required>
+                        <label for="accountName">Journal Code</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control partner" name="partner" required>
+                        <label for="accountName">Partner</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control reference" name="reference" required>
+                        <label for="type">Reference</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <select class="form-control journal" name="journal" aria-label="Select department" required>
+                            <option value="" selected>- Select -</option>
+                            <?php journalList();?>
+                        </select>
+                        <label for="type">Journal</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <select class="form-control type" name="type" aria-label="Select account" id="type">
+                            <option value="0" class="type" selected>Debit</option>
+                            <option value="1" class="type">Credit</option>
+                        </select>
+                        <label for="currency">Type</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="number" step="0.01" class="form-control total" name="total" required>
+                        <label for="defaultTaxes">Total</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <select class="form-control status" name="status" aria-label="Select account" id="status">
+                            <option value="1" class="status" selected>Active</option>
+                            <option value="0" class="status">Inactive</option>
+                        </select>
+                        <label for="currency">Status</label>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-danger btn-sm">Back</button>
+                        <button type="submit" class="btn btn-success float-end" name="createJournalEntry">Save</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- END ADD NEW journal entry -->
+<!-- EDIT journal entry -->
+<div class="modal fade" id="editJournalEntry" tabindex="-1" role="dialog" aria-labelledby="addAccountList"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="">Edit: Journal Entry</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form class="row g-3" action="includes/queries.php" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" class="journal_entries_id" name="journal_entries_id">
+                    <div class="col-md-6 form-floating">
+                        <input type="datetime-local" class="form-control date" name="date" required>
+                        <label for="accountCode">Date</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control journalEntriesCode" name="journal_entries_code" required>
+                        <label for="accountName">Journal Code</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control partner_id" name="partner" required>
+                        <label for="accountName">Partner</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control referenceCode" name="reference" required>
+                        <label for="type">Reference</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <select class="form-control journal_id" name="journal" aria-label="Select department" required>
+                            <option value="" selected>- Select -</option>
+                            <?php journalList();?>
+                        </select>
+                        <label for="type">Journal</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <select class="form-control typeSelection" name="type" aria-label="Select account" id="type">
+                            <option value="1" class="currencyType" selected>CREDIT</option>
+                            <option value="0" class="currencyType">DEBIT</option>
+                        </select>
+                        <label for="currency">Type</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="number" step="0.01" class="form-control totalAmount" name="total" required>
+                        <label for="defaultTaxes">Total</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <select class="form-control statusSelection" name="status" aria-label="Select account"
+                            id="currency">
+                            <option value="1" class="currencyType" selected>Active</option>
+                            <option value="0" class="currencyType">Inactive</option>
+                        </select>
+                        <label for="currency">Status</label>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-danger btn-sm">Back</button>
+                        <button type="submit" class="btn btn-success float-end" name="editJournalEntry">Save</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- END EDIT journal entry -->
+<!-- Delete Journal Entry -->
+<div class="modal fade" id="deleteJournalEntry" tabindex="-1" role="dialog" aria-labelledby="employeeTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="employeeTitle">Delete Journal Entry</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="includes/queries.php" method="POST" enctype="multipart/form-data"
+                    autocomplete="off">
+                    <input type="hidden" class="journal_entries_id" name="journal_entries_id">
+                    <div class="text-center">
+                        <p>
+                            Delete Journal Entry?
+                        </p>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-danger float-end" name="deleteJournalEntry">Yes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Delete Journal Entry -->
+<!-- CHARTS ADD NEW ACCOUNT -->
+<div class="modal fade" id="addNewAccount" tabindex="-1" role="dialog" aria-labelledby="addAccountList"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="account_id">Create: New Account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
+                    <div class="col-12 form-floating">
+                        <input type="text" class="form-control accountCode" name="account_code"
+                            required>
+                        <label for="accountName">Code</label>
+                    </div>
+                    <div class="col-12 form-floating">
+                        <input type="text" class="form-control accountDescript" name="account_descript" required>
+                        <label for="accountName">Description</label>
+                    </div>
+                    <div class="col-12 form-floating">
+                        <select class="form-control accountName" name="account_name" aria-label="Select department" required>
+                            <option value="" selected>- Select -</option>
+                            <?php accountListTypeSelection();?>
+                        </select>
+                        <label for="Account name TYPE">Type</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <select class="form-control accountAllowRecon" name="account_allowRecon" aria-label="Select department" required>
+                            <option value="0" class="accountAllowRecon" selected>NO</option>
+                            <option value="1" class="accountAllowRecon" selected>YES</option>
+                        </select>
+                        <label for="type">Allow Reconciliation</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="number" step="0.01" class="form-control accountDebit" name="account_debit" required>
+                        <label for="type">Opening Debit</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="number" step="0.01" class="form-control accountCredit" name="account_credit" required>
+                        <label for="defaultTaxes">Opening Credit</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="number" step="0.01" class="form-control accountBalance" name="account_balance" required>
+                        <label for="accountBalance">Opening Balance</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control accountTax" name="account_tax" required>
+                        <label for="accountTax">Default Tax</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control accountTag" name="account_tag">
+                        <label for="accountTax">Tags</label>
+                    </div>
+                    <div class="col-12 form-floating">
+                        <select class="form-control journalId" name="journal" aria-label="Select department" required>
+                            <option value="" selected>- Select -</option>
+                            <?php allowedJournalList();?>
+                        </select>
+                        <label for="type">Allowed Journal</label>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-danger btn-sm">Back</button>
+                        <button type="submit" class="btn btn-success float-end" name="addNewAccountList">Save</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- END CHARTS ADD NEW ACCOUNT -->
+
+<!-- EDIT ACCOUNT LIST -->
+<div class="modal fade" id="editAccountingList" tabindex="-1" role="dialog" aria-labelledby="addAccountList"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="openCurrency">EDIT: ACCOUNTS</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+            <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
+             <input type="hidden" class="accountId" name="account_id">
+                    <div class="col-12 form-floating">
+                        <input type="text" class="form-control accountCode" name="account_code"
+                            required>
+                        <label for="accountName">Code</label>
+                    </div>
+                    <div class="col-12 form-floating">
+                        <input type="text" class="form-control accountDescript" name="account_descript" required>
+                        <label for="accountName">Description</label>
+                    </div>
+                    <div class="col-12 form-floating">
+                        <select class="form-control accountName" name="account_name" aria-label="Select department" required>
+                            <option value="" selected>- Select -</option>
+                            <?php accountListTypeSelection();?>
+                        </select>
+                        <label for="Account name TYPE">Type</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <select class="form-control accountAllowRecon" name="account_allowRecon" aria-label="Select department" required>
+                            <option value="0" class="accountAllowRecon" selected>NO</option>
+                            <option value="1" class="accountAllowRecon" selected>YES</option>
+                        </select>
+                        <label for="type">Allow Reconciliation</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="number" step="0.01" class="form-control accountDebit" name="account_debit" required>
+                        <label for="type">Opening Debit</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="number" step="0.01" class="form-control accountCredit" name="account_credit" required>
+                        <label for="defaultTaxes">Opening Credit</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="number" step="0.01" class="form-control accountBalance" name="account_balance" required>
+                        <label for="accountBalance">Opening Balance</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control accountTax" name="account_tax" required>
+                        <label for="accountTax">Default Tax</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control accountTag" name="account_tag">
+                        <label for="accountTax">Tags</label>
+                    </div>
+                    <div class="col-12 form-floating">
+                        <select class="form-control journalId" name="journal" aria-label="Select department" required>
+                            <option value="" selected>- Select -</option>
+                            <?php allowedJournalList();?>
+                        </select>
+                        <label for="journal">Allowed Journal</label>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-danger btn-sm">Back</button>
+                        <button type="submit" class="btn btn-success float-end" name="editAccountingList">Save</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- END EDIT ACCOUNT LIST -->
+<!-- Delete Journal Entry -->
+<div class="modal fade" id="deleteAccountList" tabindex="-1" role="dialog" aria-labelledby="employeeTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="accountListTitle">Delete Journal Entry</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="includes/queries.php" method="POST" enctype="multipart/form-data"
+                    autocomplete="off">
+                    <input type="hidden" class="accountId" name="account_id">
+                    <div class="text-center">
+                        <p>
+                            Delete Journal Entry?
+                        </p>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-danger float-end" name="deleteAccountList">Yes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Delete Journal Entry -->
+
+
 
 <script>
 // this function for open journal internal link
