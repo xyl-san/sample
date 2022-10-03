@@ -1840,5 +1840,31 @@ if (isset($_POST['editAccountingList'])) {
     $conn->close();
     header('location: ../account_list.php');
   }
+//SHOW TAXES TABLE
+function taxTable(){
+  include 'conn.php';
+  $sql = "SELECT `tax_id`, `tax_name`, `type`, `amount`, `scope`, `active`, `delete_flag` FROM `taxes` WHERE delete_flag=0";
+
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    $active = ($row['active'])?'<span class="badge text-bg-success pull-right">Active</span>':'<span class="badge text-bg-danger pull-right">Inactive</span>';
+    
+    ?>
+<tr>
+    <td><?php echo $row['tax_name']; ?></td>
+    <td><?php echo $row['type']; ?></td>
+    <td><?php echo $row['amount']; ?></td>
+    <td><?php echo $row['scope']; ?></td>
+    <td><?php echo $active; ?></td>
+    <td>
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['tax_id']; ?>"><i
+                class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['tax_id']; ?>"><i
+                class="fa fa-trash"></i> Delete</button>
+    </td>
+</tr>
+<?php
+  }
+}
 
 ?>

@@ -11,10 +11,11 @@
 </head>
 
 <body>
+<?php include 'header.php'; ?>
     <div class="wrapper">
         <?php include 'accounting_sidebar.php'; ?>
         <div id="content" class="w-100">
-            <?php include 'header.php'; ?>
+
             <div class="card">
                 <div class="card-header">
                     <button type="button" class="btn btn-primary btn-sm btn-flat mt-2" data-bs-toggle="modal"
@@ -41,32 +42,16 @@
                     <table id="example1" class="table" style="width:100%">
                         <thead>
                             <tr>
-                                <th></th>
                                 <th>Tax Name</th>
                                 <th>Tax Type</th>
                                 <th>Tax Scope</th>
                                 <th>Label on Invoices</th>
-                                <th class="country">Country</th>
                                 <th>Status</th>
-                                <th><div class="dropdown">
-                                        <button class="btn me-md-2" type="button" data-bs-toggle="dropdown"
-                                            aria-expanded="false">
-                                            <i class="fa-solid fa-ellipsis-vertical"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <div class="dropdown-item">
-                                                <div class="form-check"><input type="checkbox" class="form-check-input"
-                                                        name="country" role="menuitemcheckbox"><label
-                                                        class="custom-control-label"> Country</label>
-                                                </div>
-                                            </div>                 
-                                        </div>
-                                    </div>
-                                </th>
+                                <th>Active</th>
                             </tr>
                         </thead>
                         <tbody>
-                         
+                        <?php taxTable();?>
                         </tbody>
                     </table>
                 </div>
@@ -75,7 +60,7 @@
     </div>
 
     <?php include 'includes/scripts.php';?>
-    <?php include 'modals.php';?>
+    <?php include 'accounting_modal.php';?>
 
     <script type="text/javascript">
     $(document).ready(function() {

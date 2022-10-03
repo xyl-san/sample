@@ -11,10 +11,11 @@
 </head>
 
 <body>
+<?php include 'header.php'; ?>
     <div class="wrapper">
         <?php include 'accounting_sidebar.php'; ?>
         <div id="content" class="w-100">
-            <?php include 'header.php'; ?>
+            
             <div class="card">
                 <div class="card-header">
                     <button type="button" class="btn btn-primary btn-sm btn-flat mt-2" data-bs-toggle="modal"

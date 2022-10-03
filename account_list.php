@@ -13,10 +13,10 @@
 <!-- START BODY -->
 
 <body>
+<?php include 'header.php'; ?>
     <div class="wrapper">
         <?php include 'accounting_sidebar.php'; ?>
         <div id="content" class="w-100">
-            <?php include 'header.php'; ?>
             <div class="card">
                 <div class="card-header">
                     <h5>Chart of Accounts</h5>
