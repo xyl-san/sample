@@ -1,7 +1,4 @@
 <nav id="sidebar" class="flex-shrink-0 p-3" style="width: 280px;">
-    <div class="sidebar-header rounded">
-        <h3>The Dream System</h3>
-    </div>
     <ul class="list-unstyled components">
         <h5>Accounting</h5>
         <li>

@@ -69,7 +69,7 @@
                             <h5 class="card-title">Bank Account</h5>
                             <p class="card-text">Connect your financial accounts in seconds. </p>
                             <div class="col-md-12 text-center">
-                                <a href="#" class="btn btn-outline-secondary">Add Bank Account</a>
+                                <a href="bank_account.php" class="btn btn-outline-secondary">Add Bank Account</a>
                             </div>
                         </div>
                     </div>

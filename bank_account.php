@@ -11,7 +11,7 @@
 </head>
 
 <body>
-<?php include 'header.php'; ?>
+    <?php include 'header.php'; ?>
     <div class="wrapper">
         <?php include 'accounting_sidebar.php'; ?>
         <div id="content" class="w-100">
@@ -19,18 +19,19 @@
             <div class="card">
                 <div class="card-header">
                     <button type="button" class="btn btn-primary btn-sm btn-flat mt-2" data-bs-toggle="modal"
-                        data-bs-target="#newTaxes">
+                        data-bs-target="#newbankAccount">
                         <span>
                             <i class="fa-solid fa-pen-to-square"></i>
-                            Add New
+                            Add Bank Account
                         </span>
                     </button>
-                    <a href="Accounting.php"><button type="button" class="btn btn-success btn-sm btn-flat mt-2" data-bs-toggle="modal">
-                        <span>
-                        <i class="fa-solid fa-square-check"></i>
-                            Done
-                        </span>
-                    </button></a>
+                    <a href="Accounting.php"><button type="button" class="btn btn-success btn-sm btn-flat mt-2"
+                            data-bs-toggle="modal">
+                            <span>
+                                <i class="fa-solid fa-square-check"></i>
+                                Done
+                            </span>
+                        </button></a>
                     <nav aria-label="breadcrumb" class="float-end mt-2">
                         <ol class="breadcrumb ">
                             <li class="breadcrumb-item"><a href="home.php">Home</a></li>
@@ -42,16 +43,16 @@
                     <table id="example1" class="table" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Tax Name</th>
-                                <th>Tax Type</th>
-                                <th>Label on Invoices</th>
-                                <th>Tax Scope</th>
-                                <th>Status</th>
-                                <th>Active</th>
+                                <th>Account Number</th>
+                                <th>Account Holder</th>
+                                <th>Bank Name</th>
+                                <th>Type</th>
+                                <th>Currency</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <?php taxTable();?>
+                            <?php bankTable();?>
                         </tbody>
                     </table>
                 </div>
@@ -72,14 +73,14 @@
     $(function() {
         $('#example1').on('click', '.edit', function(e) {
             e.preventDefault();
-            $('#taxEditOption').modal('show');
+            $('#bankEditOption').modal('show');
             var id = $(this).data('id');
             getRow(id);
         });
 
         $('#example1').on('click', '.delete', function(e) {
             e.preventDefault();
-            $('#deleteTaxOption').modal('show');
+            $('#bankDeleteOption').modal('show');
             var id = $(this).data('id');
             getRow(id);
         });
@@ -92,22 +93,22 @@
                 url: 'get_rows.php',
                 data: {
                     id: id,
-                    taxListRow: true,
+                    bankRow: true,
                 },
                 dataType: 'json',
                 success: function(response) {
-                    $('.taxId').val(response.tax_id);
-                    $('.taxName').val(response.tax_name);
-                    $('.taxType').val(response.type);
-                    $('.taxAmount').val(response.amount);
-                    $('.taxScope').val(response.scope);
-                    $('.statusTax').val(response.active);  
+                    $('.bankId').val(response.bank_id);
+                    $('.accountNum').val(response.account_num);
+                    $('.accountOwner').val(response.account_holder);
+                    $('.bankName').val(response.bank_name);
+                    $('.bankType').val(response.type);
+                    $('.bankCurrency').val(response.currency);
                 }
             });
 
         })
     }
-    
+
     $("input:checkbox:not(:checked)").each(function() {
         var column = "table ." + $(this).attr("name");
         $(column).hide();
@@ -119,4 +120,5 @@
     });
     </script>
 </body>
+
 </html>

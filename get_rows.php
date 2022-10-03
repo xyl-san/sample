@@ -118,4 +118,26 @@
 		echo json_encode($row);
         $conn->close();
 	}
+	//edit Tax row
+	if(isset($_POST['taxListRow'])){
+        include 'includes/conn.php';
+		$taxId = $_POST['id'];
+		$sql = "SELECT `tax_id`, `tax_name`, `type`, `amount`, `scope`, `active`, `delete_flag` FROM `taxes` WHERE tax_id = '$taxId'";
+		$query = $conn->query($sql);
+		$row = $query->fetch_assoc();
+
+		echo json_encode($row);
+        $conn->close();
+	}
+	//edit bank row
+	if(isset($_POST['bankRow'])){
+        include 'includes/conn.php';
+		$bankId = $_POST['id'];
+		$sql = "SELECT `bank_id`, `account_num`, `account_holder`, `bank_name`, `type`, `currency` FROM `bank_account` WHERE bank_id = '$bankId'";
+		$query = $conn->query($sql);
+		$row = $query->fetch_assoc();
+
+		echo json_encode($row);
+        $conn->close();
+	}
 ?>

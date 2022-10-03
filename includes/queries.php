@@ -1832,7 +1832,7 @@ if (isset($_POST['editAccountingList'])) {
       $sql = "UPDATE account_list SET delete_flag = 1 WHERE account_id = '$accountId'";
     }
     if($conn->query($sql)){
-      $_SESSION['success'] = 'Employee deleted successfully';
+      $_SESSION['success'] = 'account deleted successfully';
     }
     else{
       $_SESSION['error'] = $conn->error;
@@ -1867,4 +1867,157 @@ function taxTable(){
   }
 }
 
+// Add Taxes Data
+
+if(isset($_POST['newTaxes'])){
+  taxAdd();
+}
+  function taxAdd(){
+  include 'conn.php';
+  if(isset($_POST['newTaxes'])){
+    $taxId = $_POST['tax_id'];
+    $taxName = $_POST['tax_name'];
+    $taxType = $_POST['tax_Type'];
+    $taxScope = $_POST['tax_scope'];
+    $taxAmount = $_POST['tax_amount '];
+    $statusTax = $_POST['status_tax'];
+
+    $sql = "INSERT INTO `taxes`(`tax_id`, `tax_name`, `type`, `amount`, `scope`, `active`) VALUES ('$taxId','$taxName','$taxType','$taxAmount','$taxScope','$statusTax')";
+  
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+  }
+$conn->close();
+header('location: ../tax_list.php');
+}
+
+// EDIT TAX
+if (isset($_POST['taxEditOption'])) {
+  taxEdit();
+}
+  function taxEdit(){
+    include 'conn.php';
+    if(isset($_POST['taxEditOption'])){
+      $taxId = $_POST['tax_id'];
+      $taxName = $_POST['tax_name'];
+      $taxType = $_POST['tax_Type'];
+      $taxAmount = $_POST['tax_amount'];
+      $taxScope = $_POST['tax_scope'];
+      $statusTax = $_POST['status_tax'];
+     
+      $sql = "UPDATE `taxes` SET `tax_name`='$taxName',`type`='$taxType',`amount`='$taxAmount',`scope`='$taxScope',`active`='$statusTax' WHERE `tax_id`='$taxId'";
+      if($conn->query($sql)){
+        echo "success";
+      }
+      else{
+        echo "error";
+      }
+    }
+    $conn->close();
+    header('location: ../tax_list.php');
+  }
+
+  // DELETE Tax
+  if(isset($_POST['deleteTaxOption'])){
+    taxDelete();
+  }
+  function taxDelete(){
+    include 'conn.php';
+    if(isset($_POST['deleteTaxOption'])){
+      $taxId = $_POST['tax_id'];
+      $taxName = $_POST['tax_name'];
+      $sql = "UPDATE taxes SET delete_flag = 1 WHERE tax_id = '$taxId'";
+    }
+    if($conn->query($sql)){
+      $_SESSION['success'] = 'account deleted successfully';
+    }
+    else{
+      $_SESSION['error'] = $conn->error;
+    }
+    $conn->close();
+    header('location: ../tax_list.php');
+  }
+
+//SHOW BANK ACCOUNT TABLE
+function bankTable(){
+  include 'conn.php';
+  $sql = "SELECT `bank_id`, `account_num`, `account_holder`, `bank_name`, `type`, `currency`, `delete_flag` FROM `bank_account` WHERE delete_flag=0";
+
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    // $active = ($row['active'])?'<span class="badge text-bg-success pull-right">Active</span>':'<span class="badge text-bg-danger pull-right">Inactive</span>';
+    ?>
+<tr>
+    <td><?php echo $row['account_num']; ?></td>
+    <td><?php echo $row['account_holder']; ?></td>
+    <td><?php echo $row['bank_name']; ?></td>
+    <td><?php echo $row['type']; ?></td>
+    <td><?php echo $row['currency']; ?></td>
+    <td>
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['bank_id']; ?>"><i
+                class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['bank_id']; ?>"><i
+                class="fa fa-trash"></i> Delete</button>
+    </td>
+</tr>
+<?php
+  }
+}
+
+  // Add Bank Account
+if(isset($_POST['newbankAccount'])){
+  bankAdd();
+}
+  function bankAdd(){
+  include 'conn.php';
+  if(isset($_POST['newbankAccount'])){
+    $bankId = $_POST['bank_id'];
+    $accountNum = $_POST['account_num'];
+    $accountOwner = $_POST['account_owner'];
+    $bankName = $_POST['bank_name'];
+    $bankType = $_POST['bank_type'];
+    $bankCurrency = $_POST['bank_currency'];
+
+    $sql = "INSERT INTO `bank_account`(`bank_id`, `account_num`, `account_holder`, `bank_name`, `type`, `currency`) VALUES ('$bankId','$accountNum','$accountOwner','$bankName','$bankType','$bankCurrency')";
+  
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+  }
+$conn->close();
+header('location: ../bank_account.php');
+}
+
+// EDIT BANK ACCOUNT
+if (isset($_POST['bankEditOption'])) {
+  bankEdit();
+}
+  function bankEdit(){
+    include 'conn.php';
+    if(isset($_POST['bankEditOption'])){
+      $bankId = $_POST['bank_id'];
+      $accountNum = $_POST['account_num'];
+      $accountOwner = $_POST['account_owner'];
+      $bankName = $_POST['bank_name'];
+      $bankType = $_POST['bank_type'];
+      $bankCurrency = $_POST['bank_currency'];
+     
+      $sql = "UPDATE bank_account SET account_num = '$accountNum', account_holder = '$accountOwner', bank_name = '$bankName', type ='$bankType', currency ='$bankCurrency' WHERE bank_id = '$bank_id'";
+      if($conn->query($sql)){
+        echo "success";
+      }
+      else{
+        echo "error";
+      }
+    }
+    $conn->close();
+    header('location: ../bank_account.php');
+  }
 ?>
