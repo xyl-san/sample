@@ -1,5 +1,5 @@
 <!-- edit customer invoice  -->
-<div class="modal fade" id="editInvoice" tabindex="-1" role="dialog" aria-labelledby="customerInvoiceTitle"
+<!-- <div class="modal fade" id="editInvoice" tabindex="-1" role="dialog" aria-labelledby="customerInvoiceTitle"
     aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-dialog-scrollable modal-xl">
         <div class="modal-content">
@@ -150,7 +150,7 @@
                                         <label for="total_amount" class="form-label">Total
                                             Amount</label>
                                         <input type="number" class="form-control total_amount" name="total_amount"
-                                            id="total_amount">
+                                            id="total_amount" oninput="invoice()">
                                     </div>
                                 </div>
                                 <div class="row justify-content-start">
@@ -240,7 +240,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- end customer invoice  -->
 
 <!--start delete customer invoice  -->
@@ -2085,8 +2085,8 @@
                     <div class="col-md-6 form-floating">
                         <select class="form-control bankCurrency" name="bank_currency" aria-label="Select department"
                             required>
-                            <option value="USD" selected>$ USD</option>
-                            <option value="PHP" selected>₱ PHP</option>
+                            <option value="USD" class="bankCurrency" selected>$ USD</option>
+                            <option value="PHP" class="bankCurrency " selected>₱ PHP</option>
                         </select>
                         <label for="type">CURRENCY</label>
                     </div>
@@ -2118,15 +2118,15 @@
                     <input type="hidden" class="bankId" name="bank_id">
                     <div class="col-12 form-floating">
                         <input type="number" class="form-control accountNum" name="account_num" required>
-                        <label for="accountName">Account Number</label>
+                        <label for="bankNumber">Account Number</label>
                     </div>
                     <div class="col-12 form-floating">
                         <input type="text" class="form-control accountOwner" name="account_owner" required>
-                        <label for="accountName">Account Owner</label>
+                        <label for="bankHolder">Account Owner</label>
                     </div>
                     <div class="col-12 form-floating">
                         <input type="text" class="form-control bankName" name="bank_name" required>
-                        <label for="accountName">Bank Name</label>
+                        <label for="bankName">Bank Name</label>
                     </div>
                     <div class="col-6 form-floating">
                         <select class="form-control bankType" name="bank_type" aria-label="Select department" required>
@@ -2155,6 +2155,314 @@
     </div>
 </div>
 <!-- END EDIT BANK ACCOUNT -->
+<!-- Delete BANK ACCOUNT -->
+<div class="modal fade" id="bankDeleteOption" tabindex="-1" role="dialog" aria-labelledby="employeeTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="accountListTitle">Delete BANK ACCOUNT</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="includes/queries.php" method="POST" enctype="multipart/form-data"
+                    autocomplete="off">
+                    <input type="hidden" class="bankId" name="bank_id">
+                    <div class="text-center">
+                        <p>
+                            Delete This BANK ACCOUNT?s
+                        </p>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-danger float-end" name="bankDeleteOption">Yes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Delete BANK ACCOUNT -->
+
+<!-- Create New Invoice -->
+
+<div class="modal fade" id="createNewCustomerInvoice" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addNewtax">Create Customer Invoice</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row border-0">
+                    <div class="card border-0" style="width:70rem;">
+                        <div class="card-body">
+                            <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
+                                <div class="col-md-10">
+                                    <div class="input-group">
+                                        <span class="input-group-text cusInvoiceID" name="cus_invoice_id">Customer Invoice Number</span>
+                                        <input type="text" class="form-control invoiceNum" name="invoice_num" required 
+                                            placeholder="CINV-2022-0012">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    
+                                    <label for="customer" class="form-label">Customer</label>
+                                    <select class="form-control customerId" name="customer_id" aria-label="Select customer"
+                                        id="customer" required>
+                                        <option value="" class="customerId" selected></option>
+                                        <?php customerInvoice();?>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="invoiceDate" class="form-label invoiceDate">Invoice Date</label>
+                                    <input type="date" class="form-control invoiceDate" id="invoice_date"
+                                        name="invoice_date" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="paymentReference" class="form-label">Payment Reference</label>
+                                    <input type="text" class="form-control text-uppercase paymentReference"
+                                        id="paymentReference" name="payment_reference">
+                                </div>  
+                                <div class="col-md-3">
+                                    <label for="dueDate" class="form-label">Due Date</label>
+                                    <input type="date" class="form-control dueDate" name="due_date" id="due_date">
+                                </div>
+                                <div class="col-md-1">
+                                    <h4 class="text-center" style="line-height:4;">or</h4>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="status" class="form-label">Terms</label>
+                                    <select class="form-control terms" name="terms" aria-label="Select termsType"
+                                        id="termsType">
+                                        <option value="15 Days" class="terms" selected>15 Days</option>
+                                        <option value="21 Days" class="terms" selected>21 Days</option>
+                                        <option value="30 Days" class="terms" selected>30 Days</option>
+                                        <option value="45 Days" class="terms" selected>45 Days</option>
+                                        <option value="1 Month" class="terms" selected>1 Month</option>
+                                        <option value="2 Months" class="terms" selected>2 Months</option>
+                                        <option value="0" class="terms" selected></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="salesPerson" class="form-label">Sales Person</label>
+                                    <select class="form-control salesPerson" name="sales_person" aria-label="Select salesPerson"
+                                        required id="salesPerson">
+                                        <option value="" class="salesPerson" selected></option>
+                                        <?php salesPerson();?>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="journal" class="form-label">Journal</label>
+                                    <input type="journal" class="form-control journal" name="journal" id="journal" value="Customer Invoice">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="invoiceDate" class="form-label">Currency</label>
+                                    <select class="form-control currencyType" name="currency"
+                                        aria-label="Select customer" id="currencyType" required>
+                                        <option value="PHP" class="currencyType" selected>PHP</option>
+                                        <option value="USD" class="currencyType" selected>USD</option>
+                                        <option value="" class="currencyType" selected></option>
+                                    </select>
+                                </div>
+                                <div class="col m-3" style="width:90%">
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="invoiceLines-tab" data-bs-toggle="tab"
+                                                data-bs-target="#invoiceLines-tab-pane" type="button" role="tab"
+                                                aria-controls="invoiceLines-tab-pane" aria-selected="true">Invoice
+                                                Lines</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="journalItems-tab" data-bs-toggle="tab"
+                                                data-bs-target="#journalItems-tab-pane" type="button" role="tab"
+                                                aria-controls="journalItems-tab-pane" aria-selected="false">Journal
+                                                Items</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="otherInfo-tab" data-bs-toggle="tab"
+                                                data-bs-target="#otherInfo-tab-pane" type="button" role="tab"
+                                                aria-controls="otherInfo-tab-pane" aria-selected="false">Other
+                                                Info</button>
+                                        </li>
+                                    </ul>
+
+                                    <div class="tab-content" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="invoiceLines-tab-pane"
+                                            role="tabpanel" aria-labelledby="invoiceLines-tab" tabindex="0">
+
+                                            <div class="row g-3 align-items-center " id="invoiceAdd">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Product</th>
+                                                            <th>Label</th>
+                                                            <th>Account</th>
+                                                            <th>Quantity</th>
+                                                            <th>Price</th>
+                                                            <th>Taxes</th>
+                                                            <th>Subtotal</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+
+                                                            <td><select class="form-control product" name="product_id" id="product"
+                                                                    required>
+                                                                    <option value="" class="product" selected></option>
+                                                                    <?php productInvoice();?>
+                                                                </select></td>
+                                                            <td><select class="form-control" name="label" id="label"
+                                                                    required>
+                                                                    <option value="" class="label" selected></option>
+                                                                    <?php productDescriptionInvoice();?>
+                                                                </select></td>
+                                                            <td><select class="form-control account" name="account_id" id="account"
+                                                                    required>
+                                                                    <option value="" class="account" selected></option>
+                                                                    <?php accountListInvoice();?>
+                                                                </select></td>
+                                                            <td><input class="form-control quantity" type="number"
+                                                                    name="quantity" id="quantity" oninput="invoice()">
+                                                            </td>
+                                                            <td><input class="form-control price" type="number"
+                                                                    name="price" id="price" oninput="invoice()"/>
+                                                            </td>
+                                                            <td><input class="form-control" type="number" name="taxes"
+                                                                    id="taxes" oninput="invoice()" readonly/>
+                                                            </td>
+                                                            <td><input class="form-control" type="number"
+                                                                    name="subtotal" id="subtotal" readonly/>
+                                                            </td>
+
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="row justify-content-end">
+                                                    <div class="col-md-4 py-2">
+                                                        <!-- <label for="total_amount" class="form-label">Total
+                                                            Amount</label>
+                                                        <input type="number" class="form-control total_amount"
+                                                            name="total_amount" id="total_amount" readonly> -->
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text">TOTAL AMOUNT</span>
+                                                            <input type="number" class="form-control totalAmount" name="total_amount"
+                                                                id="total_amount" aria-label="Total Amount"
+                                                                aria-describedby="basic-addon1" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row justify-content-start py-4">
+                                                    <div class="col-10">
+                                                        <input type="text" class="form-control  invoiceNotes"
+                                                            name="invoice_notes" id="invoiceNotes"
+                                                            placeholder="Add notes">
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <button type="submit" class="btn btn-success" name="createNewCustomerInvoice">Success</button>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="tab-pane fade" id="journalItems-tab-pane" role="tabpanel"
+                                            aria-labelledby="journalItems-tab" tabindex="0">
+                                            <div class="col-md-12 form-floating">
+                                                <div id="containerTable">
+                                                    <table class="table" id="journalItemsTable">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Account</th>
+                                                                <th>Label</th>
+                                                                <th>Due Date</th>
+                                                                <th>Terms</th>
+                                                                <th>Amount in Currency</th>
+                                                                <th>Taxes</th>
+                                                                <th>Debit</th>
+                                                                <th>Credit</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php journalItemsTable();?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <!-- <div class="tab-pane fade" id="otherInfo-tab-pane" role="tabpanel"
+                                            aria-labelledby="otherInfo-tab" tabindex="0">
+                                            <div class="row g-3 align-items-center">
+                                                <div class="header">
+                                                    <span>Invoice</span>
+                                                    <span class="d-inline-end text-truncate"
+                                                        style="max-width: 150px;">Invoice</span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="exampleFormControlInput1" class="form-label">Customer
+                                                        Reference</label>
+                                                    <input type="email" class="form-control"
+                                                        id="exampleFormControlInput1">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="exampleFormControlInput1"
+                                                        class="form-label">Incoterm</label>
+                                                    <input type="email" class="form-control"
+                                                        id="exampleFormControlInput1">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="exampleFormControlInput1"
+                                                        class="form-label">Salesperson</label>
+                                                    <input value="" type="email" class="form-control"
+                                                        id="exampleFormControlInput1">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="exampleFormControlInput1" class="form-label">Fiscal
+                                                        Position</label>
+                                                    <input type="email" class="form-control"
+                                                        id="exampleFormControlInput1">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="exampleFormControlInput1" class="form-label">Recipient
+                                                        Bank</label>
+                                                    <input type="email" class="form-control"
+                                                        id="exampleFormControlInput1">
+                                                </div>
+                                                <div class="form-check col-md-3">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="flexCheckDefault">
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                        Post Automatically
+                                                    </label>
+                                                </div>
+                                                <div class="form-check col-md-3">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="flexCheckDefault">
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                        To Check
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="mb-2">
+                                    <!-- <input class="btn btn-outline-success btn-sm" type="submit"
+                                        name="addCustomerInvoice" value="SAVE"> -->
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- END Create New Invoice -->
 
 
 <script>
@@ -2228,8 +2536,7 @@ $('#accountStatusOptions').on('change', function() {
         $("#purchaseNavTab").hide();
     }
 });
-cashNavTab
-//for Cash Tab
+
 $('#accountStatusOptions').on('change', function() {
     if ($(this).val() === "Cash") {
         $("#cashNavTab").show()
@@ -2237,5 +2544,5 @@ $('#accountStatusOptions').on('change', function() {
         $("#cashNavTab").hide();
     }
 });
-cashNavTab
+
 </script>

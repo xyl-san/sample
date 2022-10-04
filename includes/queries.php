@@ -890,7 +890,17 @@ function accountListSelection(){
   $conn->close();
 }
 // account list selection in journal end
-
+function accountListInvoice(){
+  include 'conn.php';
+  $sql = "SELECT account_id, account_name, account_description FROM account_list";
+  $query = $conn->query($sql);
+  while($prow = $query->fetch_assoc()){
+      echo "
+      <option value='".$prow['account_id']."'>".$prow['account_description']."</option>
+      ";
+  }
+  $conn->close();
+}
 // account list selection in journal queries
 function groupListSelection(){
   include 'conn.php';
@@ -1235,11 +1245,11 @@ function customerInvoiceAdd(){
     $taxes = $_POST['taxes'];
     $subtotal = $_POST['subtotal'];
     $total_amount = $_POST['total_amount'];
-    $invoiceDate = $_POST['invoiceDate'];
+    $invoiceDate = $_POST['invoice_date'];
     $invoiceCode = $_POST['invoiceCode'];
     $customer = $_POST['customer'];
     $currency = $_POST['currency'];
-    $dueDate = $_POST['dueDate'];
+    $dueDate = $_POST['due_date'];
     $terms = $_POST['terms'];
     $paymentReference = $_POST['paymentReference'];
     $salesPerson = $_POST['salesPerson'];
@@ -2009,7 +2019,7 @@ if (isset($_POST['bankEditOption'])) {
       $bankType = $_POST['bank_type'];
       $bankCurrency = $_POST['bank_currency'];
      
-      $sql = "UPDATE bank_account SET account_num = '$accountNum', account_holder = '$accountOwner', bank_name = '$bankName', type ='$bankType', currency ='$bankCurrency' WHERE bank_id = '$bank_id'";
+      $sql = "UPDATE `bank_account` SET `bank_id`='$bankId',`account_num`='$accountNum',`account_holder`='$accountOwner',`bank_name`='$bankName',`type`='$bankType',`currency`='$bankCurrency' WHERE bank_id = $bankId";
       if($conn->query($sql)){
         echo "success";
       }
@@ -2020,4 +2030,92 @@ if (isset($_POST['bankEditOption'])) {
     $conn->close();
     header('location: ../bank_account.php');
   }
+
+  // DELETE BANK ACCOUNT
+  if(isset($_POST['bankDeleteOption'])){
+    bankDelete();
+  }
+  function bankDelete(){
+    include 'conn.php';
+    if(isset($_POST['bankDeleteOption'])){
+      $bankId = $_POST['bank_id'];
+      $sql = "UPDATE bank_account SET delete_flag = 1 WHERE bank_id = '$bankId'";
+    }
+    if($conn->query($sql)){
+      $_SESSION['success'] = 'account deleted successfully';
+    }
+    else{
+      $_SESSION['error'] = $conn->error;
+    }
+    $conn->close();
+    header('location: ../bank_account.php');
+  }
+
+// Add Bank Account
+if(isset($_POST['createNewCustomerInvoice'])){
+  customerInvoiceAddNew();
+}
+  function customerInvoiceAddNew(){
+  include 'conn.php';
+  if(isset($_POST['createNewCustomerInvoice'])){
+    $cusInvoiceID = $_POST['cus_invoice_id'];
+    $invoiceNum = $_POST['invoice_num'];
+    $customerId = $_POST['customer_id'];
+    $invoiceDate = $_POST['invoice_date'];
+    $salesPerson = $_POST['sales_person'];
+    $paymentReference = $_POST['payment_reference'];
+    $dueDate = $_POST['due_date'];
+    $terms = $_POST['terms'];
+    $journal = $_POST['journal'];
+    $currencyType = $_POST['currency'];
+    $product = $_POST['product_id'];
+    $account = $_POST['account_id'];
+    $quantity = $_POST['quantity'];
+    $price = $_POST['price'];
+    $totalAmount = $_POST['total_amount'];
+    $invoiceNotes = $_POST['invoice_notes'];
+
+    $sql = "INSERT INTO `customer_invoice`(`cus_invoice_id`, `invoice_num`, `customer_id`, `invoice_date`, `employee_id`, `reference`, `due_date`, `terms`, `journal`, `currency`, `product_id`, `account_id`, `quantity`, `price`, `total`, `note`) VALUES ('$cusInvoiceID','$invoiceNum','$customerId','$invoiceDate','$salesPerson','$paymentReference','$dueDate','$terms','$journal','$currencyType','$product','$account','$quantity','$price','$totalAmount','$invoiceNotes')";
+  
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+  }
+$conn->close();
+header('location: ../invoices.php');
+}
+
+//SHOW CUSTOMER INVOICE TABLE
+function customerInvoiceTable(){
+  include 'conn.php';
+  $sql = "SELECT cusi.cus_invoice_id, cusi.invoice_num, cusi.customer_id, cusi.invoice_date, cusi.employee_id, cusi.reference, cusi.due_date, cusi.terms, cusi.journal, cusi.currency, cusi.product_id, cusi.account_id, cusi.quantity, cusi.price, cusi.total, cusi.note, ci.customer_id, ci.customer_firstname, ci.customer_lastname, emp.employee_id, emp.lastname FROM customer ci INNER JOIN customer_invoice AS cusi ON ci.customer_id = cusi.customer_id INNER JOIN employees AS emp ON emp.employee_id = cusi.employee_id WHERE cusi.delete_flag=0;";
+
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+
+    
+    ?>
+<tr>
+    <td><?php echo $row['invoice_num']; ?></td>
+    <td><?php echo $row['due_date']; ?></td>
+    <td><?php echo $row['terms']; ?></td>
+    <td><?php echo $row['customer_firstname'].", ". $row['customer_lastname']; ?></td>
+    <td><?php echo $row['reference']; ?></td>
+    <td><?php echo $row['total']; ?></td>
+    <td><?php echo $row['invoice_date']; ?></td>
+    <td><?php echo $row['terms']; ?></td>
+    <td><?php echo $row['lastname']; ?></td>
+    <td>
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['cus_invoice_id']; ?>"><i
+                class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['cus_invoice_id']; ?>"><i
+                class="fa fa-trash"></i> Delete</button>
+    </td>
+</tr>
+<?php
+  }
+}
 ?>

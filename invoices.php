@@ -9,6 +9,7 @@
     <?php include 'includes/styles.php'; ?>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+ 
 </head>
 
 <body>
@@ -53,8 +54,8 @@
             <div class="card">
                 <div class="card-header" style="background-color:#ffeccc;">
                     <h4>Invoices</h4>
-                    <a href="create_invoice.php" type="button"
-                        class="btn btn-outline-success btn-sm btn-flat mt-2">
+                    <a data-bs-target="#createNewCustomerInvoice" type="button" class="btn btn-outline-success btn-sm btn-flat mt-2"
+                        data-bs-toggle="modal">
                         <span>
                             <i class="fa-solid fa-file-signature"></i>
                             Create Invoices
@@ -69,28 +70,30 @@
                                 <th>Due Date</th>
                                 <th>Terms</th>
                                 <th>Customer</th>
-                                <th>Particulars</th>
-                                <th>Tax Encluded</th>
+                                <th>Reference</th>
+                                <!-- <th>Tax Encluded</th> -->
                                 <th>Total Amount</th>
                                 <th>Invoice Date</th>
                                 <th>Payment Terms</th>
+                                <th>Sales Person</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php invoicesTable();?>
+                            <?php customerInvoiceTable();?>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Invoice Number</th>
+                                <th>Invoice Number</th> 
                                 <th>Due Date</th>
                                 <th>Terms</th>
                                 <th>Customer</th>
-                                <th>Particulars</th>
-                                <th>Tax Encluded</th>
+                                <th>Reference</th>
+                                <!-- <th>Tax Encluded</th> -->
                                 <th>Total Amount</th>
                                 <th>Invoice Date</th>
                                 <th>Payment Terms</th>
+                                <th>Sales Person</th>
                                 <th>Actions</th>
                             </tr>
                             </tr>
@@ -123,8 +126,9 @@
             var id = $(this).data('id');
             getRow(id);
         });
-      
+
     });
+
     function getRow(id) {
         $(document).ready(function() {
             $.ajax({
@@ -137,11 +141,13 @@
                 success: function(response) {
                     $('.invoiceId').val(response.invoice_id);
                     $('.invoiceCode').val(response.invoice_code);
-                    $('.customerId').html(response.customer_firstname +', ' + response.customer_lastname);
+                    $('.customerId').html(response.customer_firstname + ', ' + response
+                        .customer_lastname);
                     $('.invoiceDate').val(response.invoice_date);
                     $('.dueDate').val(response.due_date);
-                    $('.employeeId').html(response.firstname +', ' + response.lastname);
-                    $('.salesPersonInvoiceOtherInfo').val(response.firstname+', ' + response.lastname   );
+                    $('.employeeId').html(response.firstname + ', ' + response.lastname);
+                    $('.salesPersonInvoiceOtherInfo').val(response.firstname + ', ' + response
+                        .lastname);
                     $('.currency').val(response.currency);
                     $('.terms').val(response.terms);
                     $('.paymentReference').val(response.payment_reference);
@@ -158,7 +164,6 @@
             });
         })
     }
-
     </script>
 
 </body>

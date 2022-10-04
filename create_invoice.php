@@ -1,4 +1,5 @@
 <?php include 'includes/queries.php';?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,38 +11,45 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- https://colorhunt.co/palette/effffdb8fff985f4ff42c2ff -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <?php include 'includes/scripts.php';?>
 </head>
 
 <body>
+<?php include 'header.php'; ?>
     <div class="wrapper">
         <?php include 'accounting_sidebar.php'; ?>
         <div id="content" class="w-100">
+
             <div class="row">
-                <div class="card" style="width:60rem;">
+                <div class="card" style="width:80rem;">
                     <div class="card-body">
                         <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
                             <div class="col-md-10">
                                 <div class="input-group">
                                     <span class="input-group-text">Customer Invoice Number</span>
-                                    <input type="text" name="invoiceCode" required
-                                        class="form-control invoiceCode" placeholder="CINV-2022-0012">
+                                    <input type="text" name="invoiceCode" required class="form-control invoiceCode"
+                                        placeholder="CINV-2022-0012">
                                 </div>
                             </div>
                             <div class="col-md-6">
+                            <input type="text" class="form-control text-uppercase customer"
+                                    id="paymentReference" name="customer">
                                 <label for="customer" class="form-label">Customer</label>
-                                <select class="form-control" name="customer" aria-label="Select customer" id="customer" required>
+                                <select class="form-control" name="customer" aria-label="Select customer" id="customer"
+                                    required>
                                     <option value="" class="customer" selected></option>
                                     <?php customerInvoice();?>
                                 </select>
                             </div>
                             <div class="col-md-6">
                                 <label for="invoiceDate" class="form-label invoiceDate">Invoice Date</label>
-                                <input type="date" class="form-control invoiceDate" id="invoiceDate" name="invoiceDate" required>
+                                <input type="date" class="form-control invoiceDate" id="invoiceDate" name="invoiceDate"
+                                    required>
                             </div>
                             <div class="col-md-6">
                                 <label for="paymentReference" class="form-label">Payment Reference</label>
                                 <input type="text" class="form-control text-uppercase paymentReference"
-                                    id="paymentReference" name="paymentReference" >
+                                    id="paymentReference" name="paymentReference">
                             </div>
                             <div class="col-md-3">
                                 <label for="dueDate" class="form-label">Due Date</label>
@@ -77,7 +85,8 @@
                             </div>
                             <div class="col-md-3">
                                 <label for="invoiceDate" class="form-label">Currency</label>
-                                <select class="form-control currencyType" name="currency" aria-label="Select customer"id="currencyType" required>
+                                <select class="form-control currencyType" name="currency" aria-label="Select customer"
+                                    id="currencyType" required>
                                     <option value="PHP" class="currencyType" selected>PHP</option>
                                     <option value="USD" class="currencyType" selected>USD</option>
                                     <option value="" class="currencyType" selected></option>
@@ -108,7 +117,7 @@
                                     <div class="tab-pane fade show active" id="invoiceLines-tab-pane" role="tabpanel"
                                         aria-labelledby="invoiceLines-tab" tabindex="0">
 
-                                        <div class="row g-3 align-items-center">
+                                        <div class="row g-3 align-items-center " id="invoiceAdd">
                                             <table>
                                                 <thead>
                                                     <tr>
@@ -123,22 +132,26 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td><select class="form-control" name="product" id="product" required>
+
+                                                        <td><select class="form-control" name="product" id="product"
+                                                                required>
                                                                 <option value="" class="product" selected></option>
                                                                 <?php productInvoice();?>
                                                             </select></td>
-                                                        <td><select class="form-control" name="label" id="label" required>
+                                                        <td><select class="form-control" name="label" id="label"
+                                                                required>
                                                                 <option value="" class="label" selected></option>
                                                                 <?php productDescriptionInvoice();?>
                                                             </select></td>
-                                                        <td><select class="form-control" name="account" id="account" required>
+                                                        <td><select class="form-control" name="account" id="account"
+                                                                required>
                                                                 <option value="" class="account" selected></option>
                                                                 <?php accountListSelection();?>
                                                             </select></td>
                                                         <td><input class="form-control" type="number" name="quantity"
                                                                 id="quantity" oninput="invoice()">
                                                         </td>
-                                                        <td><input class="form-control" type="number" name="price"
+                                                        <td><input class="form-control price" type="number" name="price"
                                                                 id="price" oninput="invoice()">
                                                         </td>
                                                         <td><input class="form-control" type="number" name="taxes"
@@ -147,6 +160,7 @@
                                                         <td><input class="form-control" type="number" name="subtotal"
                                                                 id="subtotal" readonly>
                                                         </td>
+
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -157,10 +171,14 @@
                                                         name="total_amount" id="total_amount" readonly>
                                                 </div>
                                             </div>
-                                            <div class="row justify-content-start">
-                                                <div class="col-md-6">
-                                                    <input type="text" class="form-control border-0 invoiceNotes"
+                                            <div class="row justify-content-start py-4">
+                                                <div class="col-10">
+                                                    <input type="text" class="form-control  invoiceNotes"
                                                         name="invoiceNotes" id="invoiceNotes" placeholder="Add notes">
+                                                </div>
+                                                <div class="col-2">
+                                                    <button type="submit" class="btn btn-success">Success</button>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -252,7 +270,6 @@
             </div>
         </div>
     </div>
-    <?php include 'includes/scripts.php';?>
     <?php include 'modals.php';?>
 
 </body>

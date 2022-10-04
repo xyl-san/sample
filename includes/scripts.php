@@ -249,7 +249,7 @@ function deleteRow(ele) {
     }
 }
 // for customer invoices computations
-function invoice() {
+function invoice(){
     var quantity = document.getElementById("quantity").value;
     var price = document.getElementById("price").value;
     var subtotal = quantity * price;
@@ -257,7 +257,7 @@ function invoice() {
     document.getElementById("taxes").value = parseFloat(tax).toFixed(2);
     var sub = subtotal - tax;
     document.getElementById("subtotal").value = parseFloat(sub).toFixed(2);
-
+    
     var total_amount = tax + subtotal;
     document.getElementById("total_amount").value = subtotal;
 }
