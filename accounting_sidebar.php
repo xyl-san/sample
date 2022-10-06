@@ -31,7 +31,7 @@
             </a>
             <ul class="collapse list-unstyled" id="vendorsSubmenu">
                 <li>
-                    <a href=""> Bills</a>
+                    <a href="bills.php"> Bills</a>
                     <a href=""> Refunds</a>
                     <a href=""> Payments</a>
                     <a href=""> Products</a>

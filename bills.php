@@ -9,7 +9,6 @@
     <?php include 'includes/styles.php'; ?>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-    
  
 </head>
 
@@ -54,12 +53,12 @@
             </div>
             <div class="card">
                 <div class="card-header" style="background-color:#ffeccc;">
-                    <h4>Invoices</h4>
+                    <h4>BILLS</h4>
                     <a data-bs-target="#createNewCustomerInvoice" type="button" class="btn btn-outline-success btn-sm btn-flat mt-2"
                         data-bs-toggle="modal">
                         <span>
                             <i class="fa-solid fa-file-signature"></i>
-                            Create Invoices
+                            Create Vendor Bills
                         </span>
                     </a>
                 </div>
@@ -67,14 +66,14 @@
                     <table id="example1" class="table" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Invoice Number</th>
+                                <th>Bill Number</th>
                                 <th>Due Date</th>
                                 <th>Terms</th>
                                 <th>Customer</th>
                                 <th>Reference</th>
                                 <!-- <th>Tax Encluded</th> -->
                                 <th>Total Amount</th>
-                                <th>Invoice Date</th>
+                                <th>Bill Date</th>
                                 <th>Payment Terms</th>
                                 <th>Sales Person</th>
                                 <th>Actions</th>
@@ -85,14 +84,14 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Invoice Number</th> 
+                                <th>Bill Number</th> 
                                 <th>Due Date</th>
                                 <th>Terms</th>
                                 <th>Customer</th>
                                 <th>Reference</th>
                                 <!-- <th>Tax Encluded</th> -->
                                 <th>Total Amount</th>
-                                <th>Invoice Date</th>
+                                <th>Bill Date</th>
                                 <th>Payment Terms</th>
                                 <th>Sales Person</th>
                                 <th>Actions</th>

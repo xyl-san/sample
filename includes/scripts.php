@@ -35,6 +35,8 @@
 <!-- Google chart -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
+
+
 <script>
 $(document).ready((function() {
     $.fn.dataTable.moment('MMM DD, YYYY');
@@ -61,6 +63,131 @@ $(document).ready((function() {
     });
 }))
 </script>
+<!-- function for dynamic inputfields -->
+<script type="text/javascript">  
+  
+    $(document).ready(function() {  
+  
+      $(".add-more").click(function(){   
+          var html = $(".copy").html();  
+          $(".after-add-more").after(html);  
+      });  
+  
+      $("body").on("click",".remove",function(){   
+          $(this).parents(".control-group").remove();  
+      });  
+  
+    });  
+  // remove product row
+  $('#invoice_table').on('click', ".delete-row", function(e) {
+    	e.preventDefault();
+       	$(this).closest('tr').remove();
+        calculateTotal();
+    });
+
+    // add new product row on invoice
+    var cloned = $('#invoice_table tr:last').clone();
+    $(".add-row").click(function(e) {
+        e.preventDefault();
+        cloned.clone().appendTo('#invoice_table'); 
+    });
+    //calculations of data
+    calculateTotal();
+    
+    $('#invoice_table').on('input', '.calculate', function () {
+	    updateTotals(this);
+	    calculateTotal();
+	});
+
+	$('#invoice_totals').on('input', '.calculate', function () {
+	    calculateTotal();
+	});
+
+	$('#invoice_product').on('input', '.calculate', function () {
+	    calculateTotal();
+	});
+
+	$('.remove_vat').on('change', function() {
+        calculateTotal();
+    });
+
+    function updateTotals(elem) {
+
+        var tr = $(elem).closest('tr'),
+            quantity = $('[name="invoice_product_qty[]"]', tr).val(),
+	        price = $('[name="invoice_product_price[]"]', tr).val(),
+            isPercent = $('[name="invoice_product_discount[]"]', tr).val().indexOf('%') > -1,
+            percent = $.trim($('[name="invoice_product_discount[]"]', tr).val().replace('%', '')),
+	        subtotal = parseInt(quantity) * parseFloat(price);
+
+        if(percent && $.isNumeric(percent) && percent !== 0) {
+            if(isPercent){
+                subtotal = subtotal - ((parseFloat(percent) / 100) * subtotal);
+            } else {
+                subtotal = subtotal - parseFloat(percent);
+            }
+        } else {
+            $('[name="invoice_product_discount[]"]', tr).val('');
+        }
+
+	    $('.calculate-sub', tr).val(subtotal.toFixed(2));
+	}
+    function calculateTotal() {
+	    
+	    var grandTotal = 0,
+	    	disc = 0,
+	    	c_ship = parseInt($('.calculate.shipping').val()) || 0;
+
+	    $('#invoice_table tbody tr').each(function() {
+            var c_sbt = $('.calculate-sub', this).val(),
+                quantity = $('[name="invoice_product_qty[]"]', this).val(),
+	            price = $('[name="invoice_product_price[]"]', this).val() || 0,
+                subtotal = parseInt(quantity) * parseFloat(price);
+            
+            grandTotal += parseFloat(c_sbt);
+            disc += subtotal - parseFloat(c_sbt);
+	    });
+
+        // VAT, DISCOUNT, SHIPPING, TOTAL, SUBTOTAL:
+	    var subT = parseFloat(grandTotal),
+	    	finalTotal = parseFloat(grandTotal + c_ship),
+	    	vat = parseInt($('.invoice-vat').attr('data-vat-rate'));
+
+	    $('.invoice-sub-total').text(subT.toFixed(2));
+	    $('#invoice_subtotal').val(subT.toFixed(2));
+        $('.invoice-discount').text(disc.toFixed(2));
+        $('#invoice_discount').val(disc.toFixed(2));
+
+        if($('.invoice-vat').attr('data-enable-vat') === '1') {
+
+	        if($('.invoice-vat').attr('data-vat-method') === '1') {
+		        $('.invoice-vat').text(((vat / 100) * finalTotal).toFixed(2));
+		        $('#invoice_vat').val(((vat / 100) * finalTotal).toFixed(2));
+	            $('.invoice-total').text((finalTotal).toFixed(2));
+	            $('#invoice_total').val((finalTotal).toFixed(2));
+	        } else {
+	            $('.invoice-vat').text(((vat / 100) * finalTotal).toFixed(2));
+	            $('#invoice_vat').val(((vat / 100) * finalTotal).toFixed(2));
+		        $('.invoice-total').text((finalTotal + ((vat / 100) * finalTotal)).toFixed(2));
+		        $('#invoice_total').val((finalTotal + ((vat / 100) * finalTotal)).toFixed(2));
+	        }
+		} else {
+			$('.invoice-total').text((finalTotal).toFixed(2));
+			$('#invoice_total').val((finalTotal).toFixed(2));
+		}
+
+		// remove vat
+    	if($('input.remove_vat').is(':checked')) {
+	        $('.invoice-vat').text("0.00");
+	        $('#invoice_vat').val("0.00");
+            $('.invoice-total').text((finalTotal).toFixed(2));
+            $('#invoice_total').val((finalTotal).toFixed(2));
+	    }
+
+	}
+</script> 
+
+<!-- function for dynamic inputfields -->
 
 
 <script type="text/javascript">
@@ -250,6 +377,18 @@ function deleteRow(ele) {
 }
 // for customer invoices computations
 function invoice(){
+    var quantity = document.getElementById("quantity").value;
+    var price = document.getElementById("price").value;
+    var subtotal = quantity * price;
+    var tax = subtotal / 1.12 * 0.12;
+    document.getElementById("taxes").value = parseFloat(tax).toFixed(2);
+    var sub = subtotal - tax;
+    document.getElementById("subtotal").value = parseFloat(sub).toFixed(2);
+    
+    var total_amount = tax + subtotal;
+    document.getElementById("total_amount").value = subtotal;
+}
+function invoices(){
     var quantity = document.getElementById("quantity").value;
     var price = document.getElementById("price").value;
     var subtotal = quantity * price;

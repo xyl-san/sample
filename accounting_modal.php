@@ -2203,16 +2203,17 @@
                             <form class="row g-3" action="includes/queries.php" method="POST" autocomplete="off">
                                 <div class="col-md-10">
                                     <div class="input-group">
-                                        <span class="input-group-text cusInvoiceID" name="cus_invoice_id">Customer Invoice Number</span>
-                                        <input type="text" class="form-control invoiceNum" name="invoice_num" required 
+                                        <span class="input-group-text cusInvoiceID" name="cus_invoice_id">Customer
+                                            Invoice Number</span>
+                                        <input type="text" class="form-control invoiceNum" name="invoice_num" required
                                             placeholder="CINV-2022-0012">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    
+
                                     <label for="customer" class="form-label">Customer</label>
-                                    <select class="form-control customerId" name="customer_id" aria-label="Select customer"
-                                        id="customer" required>
+                                    <select class="form-control customerId" name="customer_id"
+                                        aria-label="Select customer" id="customer" required>
                                         <option value="" class="customerId" selected></option>
                                         <?php customerInvoice();?>
                                     </select>
@@ -2226,7 +2227,7 @@
                                     <label for="paymentReference" class="form-label">Payment Reference</label>
                                     <input type="text" class="form-control text-uppercase paymentReference"
                                         id="paymentReference" name="payment_reference">
-                                </div>  
+                                </div>
                                 <div class="col-md-3">
                                     <label for="dueDate" class="form-label">Due Date</label>
                                     <input type="date" class="form-control dueDate" name="due_date" id="due_date">
@@ -2249,15 +2250,16 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="salesPerson" class="form-label">Sales Person</label>
-                                    <select class="form-control salesPerson" name="sales_person" aria-label="Select salesPerson"
-                                        required id="salesPerson">
+                                    <select class="form-control salesPerson" name="sales_person"
+                                        aria-label="Select salesPerson" required id="salesPerson">
                                         <option value="" class="salesPerson" selected></option>
                                         <?php salesPerson();?>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="journal" class="form-label">Journal</label>
-                                    <input type="journal" class="form-control journal" name="journal" id="journal" value="Customer Invoice">
+                                    <input type="journal" class="form-control journal" name="journal" id="journal"
+                                        value="Customer Invoice">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="invoiceDate" class="form-label">Currency</label>
@@ -2276,7 +2278,7 @@
                                                 aria-controls="invoiceLines-tab-pane" aria-selected="true">Invoice
                                                 Lines</button>
                                         </li>
-                                        <li class="nav-item" role="presentation">
+                                        <!-- <li class="nav-item" role="presentation">
                                             <button class="nav-link" id="journalItems-tab" data-bs-toggle="tab"
                                                 data-bs-target="#journalItems-tab-pane" type="button" role="tab"
                                                 aria-controls="journalItems-tab-pane" aria-selected="false">Journal
@@ -2287,166 +2289,135 @@
                                                 data-bs-target="#otherInfo-tab-pane" type="button" role="tab"
                                                 aria-controls="otherInfo-tab-pane" aria-selected="false">Other
                                                 Info</button>
-                                        </li>
+                                        </li> -->
                                     </ul>
 
                                     <div class="tab-content" id="myTabContent">
-                                        <div class="tab-pane fade show active" id="invoiceLines-tab-pane"
-                                            role="tabpanel" aria-labelledby="invoiceLines-tab" tabindex="0">
+                                        <form action="" method="post" enctype="">
 
-                                            <div class="row g-3 align-items-center " id="invoiceAdd">
-                                                <table>
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Product</th>
-                                                            <th>Label</th>
-                                                            <th>Account</th>
-                                                            <th>Quantity</th>
-                                                            <th>Price</th>
-                                                            <th>Taxes</th>
-                                                            <th>Subtotal</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-
-                                                            <td><select class="form-control product" name="product_id" id="product"
-                                                                    required>
-                                                                    <option value="" class="product" selected></option>
-                                                                    <?php productInvoice();?>
-                                                                </select></td>
-                                                            <td><select class="form-control" name="label" id="label"
-                                                                    required>
-                                                                    <option value="" class="label" selected></option>
-                                                                    <?php productDescriptionInvoice();?>
-                                                                </select></td>
-                                                            <td><select class="form-control account" name="account_id" id="account"
-                                                                    required>
-                                                                    <option value="" class="account" selected></option>
-                                                                    <?php accountListInvoice();?>
-                                                                </select></td>
-                                                            <td><input class="form-control quantity" type="number"
-                                                                    name="quantity" id="quantity" oninput="invoice()">
-                                                            </td>
-                                                            <td><input class="form-control price" type="number"
-                                                                    name="price" id="price" oninput="invoice()"/>
-                                                            </td>
-                                                            <td><input class="form-control" type="number" name="taxes"
-                                                                    id="taxes" oninput="invoice()" readonly/>
-                                                            </td>
-                                                            <td><input class="form-control" type="number"
-                                                                    name="subtotal" id="subtotal" readonly/>
-                                                            </td>
-
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                <div class="row justify-content-end">
-                                                    <div class="col-md-4 py-2">
-                                                        <!-- <label for="total_amount" class="form-label">Total
-                                                            Amount</label>
-                                                        <input type="number" class="form-control total_amount"
-                                                            name="total_amount" id="total_amount" readonly> -->
-                                                        <div class="input-group mb-3">
-                                                            <span class="input-group-text">TOTAL AMOUNT</span>
-                                                            <input type="number" class="form-control totalAmount" name="total_amount"
-                                                                id="total_amount" aria-label="Total Amount"
-                                                                aria-describedby="basic-addon1" readonly>
+                                            <fieldset>
+                                                <!-- for Label -->
+                                                <div class="container text-center">
+                                                    <div class="row align-items-start py-2">
+                                                        <div class="col">
+                                                            <label for="product"
+                                                                class="font-weight-bold form-label"><strong>Product</strong></label>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label for="product"
+                                                                class="font-weight-bold form-label"><strong>VON</strong></label>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label for="product"
+                                                                class="font-weight-bold form-label"><strong>BIS</strong></label>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label for="product"
+                                                                class="font-weight-bold form-label"><strong>Std</strong></label>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label for="product"
+                                                                class="font-weight-bold form-label"><strong>Product</strong></label>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label for="product"
+                                                                class="font-weight-bold form-label"><strong>label</strong></label>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label for="product"
+                                                                class="font-weight-bold form-label"><strong>Account</strong></label>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label for="product"
+                                                                class="font-weight-bold form-label"><strong>Action</strong></label>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row justify-content-start py-4">
-                                                    <div class="col-10">
-                                                        <input type="text" class="form-control  invoiceNotes"
-                                                            name="invoice_notes" id="invoiceNotes"
-                                                            placeholder="Add notes">
+                                                <!-- END for label -->
+                                                <div class="container text-center">
+                                                    <div class="row align-items-start py-2" id="dynamic_field">
+                                                        <div class="col">
+                                                            <!-- <input type="text" class="form-control"
+                                                                name="durchgefuhrte_arbeiten[]"
+                                                                placeholder="Durchgefuhrte Arbeiten"> -->
+                                                            <select class="form-control product" name="product_id[]"
+                                                                id="product" required>
+                                                                <option value="" class="product" selected></option>
+                                                                <?php productInvoice();?>
+                                                            </select>
+
+                                                        </div>
+                                                        <div class="col">
+                                                            <input type="text" class="form-control product"
+                                                                name="product_id[]" placeholder="VON">
+
+                                                        </div>
+                                                        <div class="col">
+                                                            <input type="text" class="form-control" name="bis[]"
+                                                                placeholder="BIS">
+                                                        </div>
+                                                        <div class="col">
+                                                            <input type="text" class="form-control" name="std[]"
+                                                                placeholder="std">
+                                                        </div>
+                                                        <div class="col">
+                                                            <input type="text" class="form-control" name="product[]"
+                                                                placeholder="product">
+                                                        </div>
+                                                        <div class="col">
+                                                            <input type="text" class="form-control" name="label[]"
+                                                                placeholder="label">
+                                                        </div>
+                                                        <div class="col">
+                                                            <input type="text" class="form-control" name="account[]"
+                                                                placeholder="account">
+                                                        </div>
+                                                        <div class="col">
+                                                            <button type="button" name="add" id="add"
+                                                                class="btn btn-success"><i
+                                                                    class="fa fa-plus"></i></button>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-2">
-                                                        <button type="submit" class="btn btn-success" name="createNewCustomerInvoice">Success</button>
-                                                        </button>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                        <div class="container">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"> Add More Field using the Bootstrap and
+                                                    Jquery </div>
+                                                <div class="panel-body">
+
+                                                    <form action="action.php">
+
+                                                        <div class="input-group control-group after-add-more">
+                                                            <input type="text" name="addmore[]" class="form-control"
+                                                                placeholder="Enter Name Here">
+                                                            <div class="input-group-btn">
+                                                                <button class="btn btn-success add-more"
+                                                                    type="button"><i
+                                                                        class="glyphicon glyphicon-plus"></i>
+                                                                    Add</button>
+                                                            </div>
+                                                        </div>
+
+                                                    </form>
+
+                                                    <!-- Copy Fields -->
+                                                    <div class="copy hide">
+                                                        <div class="control-group input-group" style="margin-top:10px">
+                                                            <input type="text" name="addmore[]" class="form-control"
+                                                                placeholder="Enter Name Here">
+                                                            <div class="input-group-btn">
+                                                                <button class="btn btn-danger remove" type="button"><i
+                                                                        class="glyphicon glyphicon-remove"></i>
+                                                                    Remove</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- <div class="tab-pane fade" id="journalItems-tab-pane" role="tabpanel"
-                                            aria-labelledby="journalItems-tab" tabindex="0">
-                                            <div class="col-md-12 form-floating">
-                                                <div id="containerTable">
-                                                    <table class="table" id="journalItemsTable">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Account</th>
-                                                                <th>Label</th>
-                                                                <th>Due Date</th>
-                                                                <th>Terms</th>
-                                                                <th>Amount in Currency</th>
-                                                                <th>Taxes</th>
-                                                                <th>Debit</th>
-                                                                <th>Credit</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <?php journalItemsTable();?>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div> -->
-                                        <!-- <div class="tab-pane fade" id="otherInfo-tab-pane" role="tabpanel"
-                                            aria-labelledby="otherInfo-tab" tabindex="0">
-                                            <div class="row g-3 align-items-center">
-                                                <div class="header">
-                                                    <span>Invoice</span>
-                                                    <span class="d-inline-end text-truncate"
-                                                        style="max-width: 150px;">Invoice</span>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label for="exampleFormControlInput1" class="form-label">Customer
-                                                        Reference</label>
-                                                    <input type="email" class="form-control"
-                                                        id="exampleFormControlInput1">
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label for="exampleFormControlInput1"
-                                                        class="form-label">Incoterm</label>
-                                                    <input type="email" class="form-control"
-                                                        id="exampleFormControlInput1">
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label for="exampleFormControlInput1"
-                                                        class="form-label">Salesperson</label>
-                                                    <input value="" type="email" class="form-control"
-                                                        id="exampleFormControlInput1">
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label for="exampleFormControlInput1" class="form-label">Fiscal
-                                                        Position</label>
-                                                    <input type="email" class="form-control"
-                                                        id="exampleFormControlInput1">
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label for="exampleFormControlInput1" class="form-label">Recipient
-                                                        Bank</label>
-                                                    <input type="email" class="form-control"
-                                                        id="exampleFormControlInput1">
-                                                </div>
-                                                <div class="form-check col-md-3">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        Post Automatically
-                                                    </label>
-                                                </div>
-                                                <div class="form-check col-md-3">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        To Check
-                                                    </label>
-                                                </div>
-
-                                            </div>
-                                        </div> -->
                                     </div>
                                 </div>
                                 <div class="mb-2">
@@ -2461,7 +2432,6 @@
         </div>
     </div>
 </div>
-
 <!-- END Create New Invoice -->
 
 
@@ -2544,5 +2514,4 @@ $('#accountStatusOptions').on('change', function() {
         $("#cashNavTab").hide();
     }
 });
-
 </script>
