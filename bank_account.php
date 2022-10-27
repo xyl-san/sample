@@ -1,4 +1,4 @@
-<?php include 'includes/queries.php';?>
+<?php include 'includes/sample.php';?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,23 +19,18 @@
             <div class="card">
                 <div class="card-header">
                     <button type="button" class="btn btn-primary btn-sm btn-flat mt-2" data-bs-toggle="modal"
-                        data-bs-target="#newbankAccount">
+                        data-bs-target="#addNewBankAccount">
                         <span>
                             <i class="fa-solid fa-pen-to-square"></i>
                             Add Bank Account
                         </span>
                     </button>
-                    <a href="Accounting.php"><button type="button" class="btn btn-success btn-sm btn-flat mt-2"
-                            data-bs-toggle="modal">
-                            <span>
-                                <i class="fa-solid fa-square-check"></i>
-                                Done
-                            </span>
-                        </button></a>
+                    
+                  
                     <nav aria-label="breadcrumb" class="float-end mt-2">
                         <ol class="breadcrumb ">
                             <li class="breadcrumb-item"><a href="home.php">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Group List</li>
+                            <li class="breadcrumb-item active" aria-current="page">Bank Account</li>
                         </ol>
                     </nav>
                 </div>
@@ -43,17 +38,29 @@
                     <table id="example1" class="table" style="width:100%">
                         <thead>
                             <tr>
+                                <th> </th> 
+                                <th>Bank</th>  
                                 <th>Account Number</th>
                                 <th>Account Holder</th>
-                                <th>Bank Name</th>
-                                <th>Type</th>
-                                <th>Currency</th>
+                                <th>Company</th>
+                                <th>Contact Info</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php bankTable();?>
                         </tbody>
+                        <tfoot>
+                        <tr>
+                                <th> </th> 
+                                <th>Bank</th>  
+                                <th>Account Number</th>
+                                <th>Account Holder</th>
+                                <th>Company</th>
+                                <th>Contact Info</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -61,7 +68,7 @@
     </div>
 
     <?php include 'includes/scripts.php';?>
-    <?php include 'accounting_modal.php';?>
+    <?php include 'accounting-modalv2.php';?>
 
     <script type="text/javascript">
     $(document).ready(function() {
@@ -73,14 +80,14 @@
     $(function() {
         $('#example1').on('click', '.edit', function(e) {
             e.preventDefault();
-            $('#bankEditOption').modal('show');
+            $('#editBankAccount').modal('show');
             var id = $(this).data('id');
             getRow(id);
         });
 
         $('#example1').on('click', '.delete', function(e) {
             e.preventDefault();
-            $('#bankDeleteOption').modal('show');
+            $('#deleteBankAccount').modal('show');
             var id = $(this).data('id');
             getRow(id);
         });
@@ -97,12 +104,17 @@
                 },
                 dataType: 'json',
                 success: function(response) {
-                    $('.bankId').val(response.bank_id);
-                    $('.accountNum').val(response.account_num);
-                    $('.accountOwner').val(response.account_holder);
+                    $('.bankAccountId').val(response.bank_account_id);
                     $('.bankName').val(response.bank_name);
-                    $('.bankType').val(response.type);
-                    $('.bankCurrency').val(response.currency);
+                    $('.accountName').val(response.bank_account_name);
+                    $('.accountNumber').val(response.bank_account_number);
+                    $('.company').val(response.bank_company);
+                    $('.email').val(response.bank_email);
+                    $('.contactInfo').val(response.bank_phone);
+                    $('.zipCode').val(response.bank_zip_code);
+                    $('.address').val(response.bank_address);
+                    $('.country').val(response.bank_country);
+                    $('.bankName').val(response.bank_id );
                 }
             });
 

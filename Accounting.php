@@ -1,4 +1,4 @@
-<?php include 'includes/queries.php';?>
+<?php include 'includes/sample.php';?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,10 +12,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     
+<!-- Google chart -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 </head>
-  
+
 <body>
-<?php include 'header.php'; ?>
+    <?php include 'header.php'; ?>
     <div class="wrapper">
         <?php include 'accounting_sidebar.php'; ?>
         <div id="content" class="w-100">
@@ -31,11 +34,11 @@
                 <div class="col px-3">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Accounting Periods</h5>
-                            <p class="card-text">Define your fiscal years and taxes returns periodicity.</p>
+                            <h5 class="card-title">Accounting Period</h5>
+                            <p class="card-text">Setup Journals</p><br>
                             <div class="col-md-12 text-center">
-                                <a data-bs-target="#newConfigure" class="btn btn-outline-secondary btn-sm btn-flat mt-2"
-                                    data-bs-toggle="modal">Configure
+                                <a href="journal_entry.php"
+                                    class="btn btn-outline-secondary btn-sm btn-flat mt-2">Configure
                                 </a>
                             </div>
                         </div>
@@ -76,223 +79,112 @@
                 </div>
             </div>
             <div class="row">
-                <div class="card col-3 px-2 m-2" id="cardbgcolor">
+                <div class="card col" id="cardbgcolor">
                     <div class="card-body">
-                        <a href="invoices.php"><button type="button" class="btn btn-secondary btn-sm"><i class="fa-solid fa-plus"></i> Add
-                            New</button></a>
+                        <a href="invoices.php"><button type="button" class="btn btn-secondary btn-sm"><i
+                                    class="fa-solid fa-plus"></i> Add
+                                New</button></a>
                         <button type="button" class="btn btn-sm float-end"><i class="fa-solid fa-ellipsis-vertical"></i>
                         </button>
                         <div class="dropdown">
 
                         </div>
-                        <canvas id="myChart1"></canvas>
-                    </div>
-                </div>
-                <div class="card col-3 px-2 m-2" id="cardbgcolor">
-                    <div class="card-body">
-                        <button type="button" class="btn btn-secondary btn-sm"><i class="fa-solid fa-upload"></i>
-                            Upload</button>
-                        <button type="button" class="btn btn-sm float-end"><i class="fa-solid fa-ellipsis-vertical"></i>
-                        </button>
-                        <canvas id="myChart2"></canvas>
-                    </div>
-                </div>
-                <div class="card col-3 px-2 m-2" id="cardbgcolor">
-                    <div class="card-body">
-                        <button type="button" class="btn btn-secondary btn-sm"><i class="fa-solid fa-plus"></i> New
-                            Entry</button>
-                        <button type="button" class="btn btn-sm float-end"><i class="fa-solid fa-ellipsis-vertical"></i>
-                        </button>
-                        <canvas id="myChart3"></canvas>
-                    </div>
-                </div>
-                <div class="card col-3 px-2 m-2" id="cardbgcolor">
-                    <div class="card-body">
-                        <button type="button" class="btn btn-secondary btn-sm"><i class="fa-solid fa-rotate"></i> Online
-                            Synchronization</button>
-                        <button type="button" class="btn btn-sm float-end"><i class="fa-solid fa-ellipsis-vertical"></i>
-                        </button>
-                        <canvas id="myChart4"></canvas>
-                    </div>
-                </div>
-                <div class="card col-3 px-2 m-2" id="cardbgcolor">
-                    <div class="card-body">
-                        <button type="button" class="btn btn-secondary btn-sm"><i class="fa-solid fa-plus"></i> New
-                            Transaction</button>
-                        <button type="button" class="btn btn-sm float-end"><i class="fa-solid fa-ellipsis-vertical"></i>
-                        </button>
-                        <canvas id="myChart5"></canvas>
+                        <div id="line_chart"></div>
                     </div>
                 </div>
             </div>
+
+
+
+
         </div>
-        <?php include 'includes/scripts.php';?>
-        <?php include 'accounting_modal.php';?>
-        <?php include 'modals.php';?>
+    </div>
+    <?php include 'includes/scripts.php';?>
+    <?php include 'accounting_modal.php';?>
+    <?php include 'modals.php';?>
+
+    <?php 
+        require_once 'includes/conn.php';
+        $query = "SELECT YEAR(je.journal_date) AS years, je.journal_entry_id, ji.amount, gl.group_id, gl.group_name FROM journal_entries AS je INNER JOIN journal_items as ji ON je.journal_entry_id=ji.journal_entry_id INNER JOIN group_list as gl ON ji.group_id = gl.group_id WHERE gl.group_name = 'assets'";
+        $result = mysqli_query($conn, $query);
+    ?>
+
+        
+    <script>
+    // for google chart
+    
+    
+          google.charts.load('current', {'packages':['corechart']});
+          google.charts.setOnLoadCallback(drawChart);
+    
+          function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+              ['Year', 'Sales'],
+              <?php
+                while($row = mysqli_fetch_array($result)){
+                    echo "['".$row["years"]."', ".$row["amount"]."],"; 
+                }
+              ?>
+    
+            ]);
+        
+            var options = {
+              title: 'Company Performance',
+              curveType: 'function',
+              legend: { position: 'bottom' }
+            };
+        
+            var chart = new google.visualization.LineChart(document.getElementById('line_chart'));
+        
+            chart.draw(data, options);
+          }
+    </script>
 
 
-        <script type="text/javascript">
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#sidebarCollapse').on('click', function() {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+
+    $(function() {
+        $('#example1').on('click', '.edit', function(e) {
+            e.preventDefault();
+            $('#editDepartment').modal('show');
+            var id = $(this).data('id');
+            getRow(id);
+        });
+
+        $('#example1').on('click', '.delete', function(e) {
+            e.preventDefault();
+            $('#deleteDepartment').modal('show');
+            var id = $(this).data('id');
+            getRow(id);
+        });
+    });
+
+    function getRow(id) {
         $(document).ready(function() {
-            $('#sidebarCollapse').on('click', function() {
-                $('#sidebar').toggleClass('active');
+            $.ajax({
+                type: 'POST',
+                url: 'journal_entry_row.php',
+                data: {
+                    id: id
+                },
+                dataType: 'json',
+                success: function(response) {
+                    $('.department_id').val(response.department_id);
+                    $('.department').val(response.department_name);
+                    $('.delete_department_name').html(response.department_name);
+
+                }
             });
-        });
 
-        $(function() {
-            $('#example1').on('click', '.edit', function(e) {
-                e.preventDefault();
-                $('#editDepartment').modal('show');
-                var id = $(this).data('id');
-                getRow(id);
-            });
-
-            $('#example1').on('click', '.delete', function(e) {
-                e.preventDefault();
-                $('#deleteDepartment').modal('show');
-                var id = $(this).data('id');
-                getRow(id);
-            });
-        });
-
-        function getRow(id) {
-            $(document).ready(function() {
-                $.ajax({
-                    type: 'POST',
-                    url: 'journal_entry_row.php',
-                    data: {
-                        id: id
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        $('.department_id').val(response.department_id);
-                        $('.department').val(response.department_name);
-                        $('.delete_department_name').html(response.department_name);
-
-                    }
-                });
-
-            })
-        }
-        </script>
-        <script>
-        var xValues = ["2018", "2019", "2020", "2021", "2022"];
-        var yValues = [15, 25, 50, 75, 100];
-        var barColors = ["red", "green", "blue", "orange", "brown"];
-
-        new Chart("myChart1", {
-            type: "bar",
-            data: {
-                labels: xValues,
-                datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues
-                }]
-            },
-            options: {
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: true,
-                    text: "Customer Invoices"
-                }
-            }
-        });
-        var xValues = ["2018    ", "2019", "2020", "2021", "2022"];
-        var yValues = [15, 25, 50, 75, 100];
-        var barColors = ["red", "green", "blue", "orange", "brown"];
-
-        new Chart("myChart2", {
-            type: "bar",
-            data: {
-                labels: xValues,
-                datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues
-                }]
-            },
-            options: {
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: true,
-                    text: "Vendor Bills"
-                }
-            }
-        });
-        var xValues = ["2018    ", "2019", "2020", "2021", "2022"];
-        var yValues = [15, 25, 50, 75, 100];
-        var barColors = ["red", "green", "blue", "orange", "brown"];
-
-        new Chart("myChart3", {
-            type: "bar",
-            data: {
-                labels: xValues,
-                datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues
-                }]
-            },
-            options: {
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: true,
-                    text: "Bank"
-                }
-            }
-        });
-        var xValues = ["2018    ", "2019", "2020", "2021", "2022"];
-        var yValues = [15, 25, 50, 75, 100];
-        var barColors = ["red", "green", "blue", "orange", "brown"];
-
-        new Chart("myChart4", {
-            type: "bar",
-            data: {
-                labels: xValues,
-                datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues
-                }]
-            },
-            options: {
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: true,
-                    text: "Cash"
-                }
-            }
-        });
-
-        var xValues = ["2018    ", "2019", "2020", "2021", "2022"];
-        var yValues = [15, 25, 50, 75, 100];
-        var barColors = ["red", "green", "blue", "orange", "brown"];
-
-        new Chart("myChart5", {
-            type: "bar",
-            data: {
-                labels: xValues,
-                datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues
-                }]
-            },
-            options: {
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: true,
-                    text: "Miscellaneous Operations"
-                }
-            }
-        });
-
-        </script>
+        })
+    }
+    </script>
+        
 </body>
 
 </html>

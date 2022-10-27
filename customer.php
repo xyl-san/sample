@@ -1,4 +1,4 @@
-<?php include 'includes/queries.php';?>
+<?php include 'includes/sample.php';?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,8 +13,9 @@
 </head>
 
 <body>
+<?php include 'header.php'; ?>
     <div class="wrapper">
-        <?php include 'accounting_sidebar.php'; ?>
+    <?php include 'accounting_sidebar.php'; ?>
         <div id="content" class="w-100">
             <div class="header">
                 <h4>Customer List</h4>
@@ -24,35 +25,29 @@
                     <table id="example1" class="table">
                         <thead>
                             <tr>
-                                <th></th>
-                                <th>Number</th>
+
                                 <th>Date</th>
                                 <th>Name</th>
                                 <th>Contact Info</th>
                                 <th>Address</th>
-                                <th>Vat</th>
-                                <th>Tax</th>
-                                <th>Total Amount</th>
-                                <th>Payment Method</th>
-                                <th>Sales Person</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                                <!-- <th>Payment Method</th>
+                                <th>Sales Person</th> -->
                             </tr>
                         </thead>
                         <tbody>
-                            <?php customerTable();?>
+                            
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th></th>
-                                <th>Number</th>
+
                                 <th>Date</th>
                                 <th>Name</th>
                                 <th>Contact Info</th>
                                 <th>Address</th>
-                                <th>Vat</th>
-                                <th>Tax</th>
-                                <th>Total Amount</th>
-                                <th>Payment Method</th>
-                                <th>Sales Person</th>
+                                <th>Email</th>
+                                <th>Action</th>
                             </tr>
                         </tfoot>
                     </table>

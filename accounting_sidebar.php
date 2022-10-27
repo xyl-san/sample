@@ -1,8 +1,8 @@
-<nav id="sidebar" class="flex-shrink-0 p-3" style="width: 280px;">
+<nav id="sidebar" class="flex-shrink-0 px-3" style="width: 280px;">
     <ul class="list-unstyled components">
         <h5>Accounting</h5>
         <li>
-            <a href="accounting.php">
+            <a href="accountingNew.php">
                 <i class="fa-solid fa-house"></i>
                 Dashboard
             </a>
@@ -48,24 +48,24 @@
             <ul class="collapse list-unstyled" id="accountingSubmenu">
                 <li>
                     <a class="nav-header"><b>Miscellaneous</b></a>
-                    <a href=""> Journal Entries</a>
+                    <a href="./journal_entry.php"> Journal Entries</a>
                     <a class="nav-header"><b>Journals</b></a>
-                    <a href=""> Sales</a>
-                    <a href=""> Purchases</a>
-                    <a href=""> Bank and Cash</a>
-                    <a href=""> Miscellaneous</a>
+                    <a href="./sales.php"> Sales</a>
+                    <a href="./purchases.php"> Purchases</a>
+                    <a href="./cash_bank.php"> Bank and Cash</a>
+                    <a href="./miscellaneous.php"> Miscellaneous</a>
                     <a class="nav-header"><b>Ledgers</b></a>
-                    <a href=""> General Ledger</a>
-                    <a href=""> Partner Ledger</a>
+                    <a href="./general_ledger.php"> General Ledger</a>
+                    <a href="./partner_ledger.php"> Partner Ledger</a>
                     <a class="nav-header"><b>Management</b></a>
                     <a href=""> Automatic Transaction</a>
                     <a href=""> Assets</a>
                     <a href=""> Vendors</a>
                     <a href=""> Deffered Revenues</a>
                     <a href=""> Deffered Expences</a>
-                    <a class="nav-header"><b>Actions</b></a>
+                    <!-- <a class="nav-header"><b>Actions</b></a>
                     <a href=""> Reconciliation</a>
-                    <a href=""> Lock Dates</a>
+                    <a href=""> Lock Dates</a> -->
                 </li>
             </ul>
         </li>
@@ -83,11 +83,11 @@
                     <a href=""> Profit and Loss</a>
                     <a href=""> Cash Flow Statements</a>
                     <a class="nav-header"><b>Partner Reports</b></a>
-                    <a href=""> Partner Ledger</a>
+                    <a href="./partner_ledger.php"> Partner Ledger</a>
                     <a href=""> Aged Receivable</a>
                     <a href=""> Partner Payable</a>
                     <a class="nav-header"><b>Audit Reports</b></a>
-                    <a href=""> General Ledger</a>
+                    <a href="./general_ledger.php"> General Ledger</a>
                     <a href=""> Trial Balance</a>
                     <a href=""> Consolidated Journals</a>
                     <a href=""> Cash Flow Statements</a>

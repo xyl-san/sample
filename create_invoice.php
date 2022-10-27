@@ -27,7 +27,7 @@
                             <div class="col-md-10">
                                 <div class="input-group">
                                     <span class="input-group-text">Customer Invoice Number</span>
-                                    <input type="text" name="invoiceCode" required class="form-control invoiceCode"
+                                    <input type="text" name="invoiceCode" required class="form-control invoiceCode "
                                         placeholder="CINV-2022-0012">
                                 </div>
                             </div>

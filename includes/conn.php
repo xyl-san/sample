@@ -1,5 +1,5 @@
 <?php
-	$conn = new mysqli('localhost', 'root', '', 'growth-with-relations');
+	$conn = new mysqli('localhost', 'root', '', 'accounting');
 
 	if ($conn->connect_error) {
 	    die("Connection failed: " . $conn->connect_error);

@@ -132,8 +132,8 @@
 	//edit bank row
 	if(isset($_POST['bankRow'])){
         include 'includes/conn.php';
-		$bankId = $_POST['id'];
-		$sql = "SELECT `bank_id`, `account_num`, `account_holder`, `bank_name`, `type`, `currency` FROM `bank_account` WHERE bank_id = '$bankId'";
+		$bank_account_id = $_POST['id'];
+		$sql = "SELECT `bank_account_id`, `bank_account_name`, `bank_account_number`, `bank_company`, `bank_email`, `bank_phone`, `bank_zip_code`, `bank_address`, `bank_country`, `bank_id` FROM `bank_account` WHERE bank_account_id = '$bank_account_id'";
 		$query = $conn->query($sql);
 		$row = $query->fetch_assoc();
 

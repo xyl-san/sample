@@ -1955,22 +1955,24 @@ if (isset($_POST['taxEditOption'])) {
 //SHOW BANK ACCOUNT TABLE
 function bankTable(){
   include 'conn.php';
-  $sql = "SELECT `bank_id`, `account_num`, `account_holder`, `bank_name`, `type`, `currency`, `delete_flag` FROM `bank_account` WHERE delete_flag=0";
+  $sql = "SELECT * FROM bank_account AS bankaccount INNER JOIN bank_meta_data AS bank_meta ON bankaccount.bank_id = bank_meta.bank_id";
 
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
-    // $active = ($row['active'])?'<span class="badge text-bg-success pull-right">Active</span>':'<span class="badge text-bg-danger pull-right">Inactive</span>';
+    
     ?>
 <tr>
-    <td><?php echo $row['account_num']; ?></td>
-    <td><?php echo $row['account_holder']; ?></td>
+    <td><img src="<?php echo (!empty($row['bank_image']))? './images/'.$row['bank_image']:'./images/securitybank.png'; ?>" width="100px"
+            height="30px"></td>
     <td><?php echo $row['bank_name']; ?></td>
-    <td><?php echo $row['type']; ?></td>
-    <td><?php echo $row['currency']; ?></td>
+    <td><?php echo $row['bank_account_number']; ?></td>
+    <td><?php echo $row['bank_account_name']; ?></td>
+    <td><?php echo $row['bank_company']; ?></td>
+    <td><?php echo $row['bank_phone']; ?></td>
     <td>
-        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['bank_id']; ?>"><i
+        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['bank_account_id']; ?>"><i
                 class="fa fa-edit"></i> Edit</button>
-        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['bank_id']; ?>"><i
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['bank_account_id']; ?>"><i
                 class="fa fa-trash"></i> Delete</button>
     </td>
 </tr>
@@ -1979,31 +1981,7 @@ function bankTable(){
 }
 
   // Add Bank Account
-if(isset($_POST['newbankAccount'])){
-  bankAdd();
-}
-  function bankAdd(){
-  include 'conn.php';
-  if(isset($_POST['newbankAccount'])){
-    $bankId = $_POST['bank_id'];
-    $accountNum = $_POST['account_num'];
-    $accountOwner = $_POST['account_owner'];
-    $bankName = $_POST['bank_name'];
-    $bankType = $_POST['bank_type'];
-    $bankCurrency = $_POST['bank_currency'];
 
-    $sql = "INSERT INTO `bank_account`(`bank_id`, `account_num`, `account_holder`, `bank_name`, `type`, `currency`) VALUES ('$bankId','$accountNum','$accountOwner','$bankName','$bankType','$bankCurrency')";
-  
-    if($conn->query($sql)){
-      echo "success";
-    }
-    else{
-      echo "error";
-    }
-  }
-$conn->close();
-header('location: ../bank_account.php');
-}
 
 // EDIT BANK ACCOUNT
 if (isset($_POST['bankEditOption'])) {
@@ -2091,7 +2069,7 @@ header('location: ../invoices.php');
 //SHOW CUSTOMER INVOICE TABLE
 function customerInvoiceTable(){
   include 'conn.php';
-  $sql = "SELECT cusi.cus_invoice_id, cusi.invoice_num, cusi.customer_id, cusi.invoice_date, cusi.employee_id, cusi.reference, cusi.due_date, cusi.terms, cusi.journal, cusi.currency, cusi.product_id, cusi.account_id, cusi.quantity, cusi.price, cusi.total, cusi.note, ci.customer_id, ci.customer_firstname, ci.customer_lastname, emp.employee_id, emp.lastname FROM customer ci INNER JOIN customer_invoice AS cusi ON ci.customer_id = cusi.customer_id INNER JOIN employees AS emp ON emp.employee_id = cusi.employee_id WHERE cusi.delete_flag=0;";
+  $sql = "SELECT *, cus.invoice_id, cus.customer_name FROM `invoice` AS inv INNER JOIN customer AS cus ON inv.invoice_id = cus.invoice_id;";
 
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
@@ -2099,15 +2077,16 @@ function customerInvoiceTable(){
     
     ?>
 <tr>
-    <td><?php echo $row['invoice_num']; ?></td>
-    <td><?php echo $row['due_date']; ?></td>
+    <td><?php echo $row['invoice_id']; ?></td>
+    <td><?php echo $row['invoice_duedate']; ?></td>
     <td><?php echo $row['terms']; ?></td>
-    <td><?php echo $row['customer_firstname'].", ". $row['customer_lastname']; ?></td>
-    <td><?php echo $row['reference']; ?></td>
-    <td><?php echo $row['total']; ?></td>
+    <td><?php echo $row['customer_name']; ?></td>
+    <td><?php echo $row['payment_reference']; ?></td>
+    <td><?php echo $row['discount']; ?></td>
+    <td><?php echo $row['grandtotal']; ?></td>
     <td><?php echo $row['invoice_date']; ?></td>
-    <td><?php echo $row['terms']; ?></td>
-    <td><?php echo $row['lastname']; ?></td>
+    <td><?php echo $row['sales_person']; ?></td>
+    
     <td>
         <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['cus_invoice_id']; ?>"><i
                 class="fa fa-edit"></i> Edit</button>
@@ -2117,8 +2096,12 @@ function customerInvoiceTable(){
 </tr>
 <?php
   }
+  $conn->close(); 
 }
+//SHOW journal table
+
 ?>
+
 <!-- sample config.php for invoice setup -->
 <?php
 // Debugging
@@ -2169,5 +2152,7 @@ define('FOOTER_NOTE', 'Invoice Management System');
 // CONNECT TO THE DATABASE
 $mysqli = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASS, DATABASE_NAME);
 
+
 ?>
+
 <!-- sample config.php for invoice setup -->

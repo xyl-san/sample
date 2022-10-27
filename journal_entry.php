@@ -1,4 +1,4 @@
-<?php include 'includes/queries.php';?>
+<?php include 'includes/sample.php';?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,49 +11,72 @@
 </head>
 
 <body>
-<?php include 'header.php'; ?>
+    <?php include 'header.php';?>
     <div class="wrapper">
         <?php include 'accounting_sidebar.php'; ?>
         <div id="content" class="w-100">
-            
+
             <div class="card">
+
                 <div class="card-header">
-                    <button type="button" class="btn btn-primary btn-sm btn-flat mt-2" data-bs-toggle="modal"
-                        data-bs-target="#newJournalEntry" >
+                    <h1 style="text-align:center; text-shadow: 2px 3px 8px #595959;">Journal Entry</h1>
+                    <button type="button" class="btn btn-success btn-sm btn-flat mt-2" data-bs-toggle="modal"
+                        data-bs-target="#newJournalEntry">
                         <span>
                             <i class="fa-solid fa-pen-to-square"></i>
-                            Add New
+                            Add New Journal Entry
                         </span>
                     </button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop"><i class="fa-regular fa-pen-to-square"></i>
+                        New Add Journal
+                    </button>
                 </div>
-                <div class="card-body">
-                    <table id="example1" class="table" style="width:100%">
+                <div class="card-body ">
+                    <table id="example1" class="table table-hover table-striped table-bordered">
+                        <colgroup>
+                            <col width="15%">
+                            <col width="10%">
+                            <col width="40%">
+                            <col width="20%">
+                            <col width="10%">
+                        </colgroup>
                         <thead>
                             <tr>
                                 <th>Date</th>
                                 <th>Journal Code</th>
-                                <th>Partners</th>
-                                <th>Reference</th>
-                                <th>Journal</th>
-                                <th>Total</th>
-                                <th>Type</th>
-                                <th>Status</th>
+                                <!-- <th>Partners</th> -->
+                                <th class="p-2">
+                                    <div class="d-flex w-100">
+                                        <div class="col-6 px-2 border">Description</div>
+                                        <div class="col-3 px-2 border">Debit</div>
+                                        <div class="col-3 px-2 border">Credit</div>
+                                    </div>
+                                </th>
+                                <!-- <th>Journal</th> -->
+                                <th>Added By</th>
+                                <!-- <th>Status</th> -->
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php journalEntryTable();?>
+                            <?php journaltable();?>
                         </tbody>
                         <tfoot>
                             <tr>
-                            <th>Date</th>
+                                <th>Date</th>
                                 <th>Journal Code</th>
-                                <th>Partners</th>
-                                <th>Reference</th>
-                                <th>Journal</th>
-                                <th>Total</th>
-                                <th>Type</th>
-                                <th>Status</th>
+                                <!-- <th>Partners</th> -->
+                                <th class="p-2">
+                                    <div class="d-flex w-100">
+                                        <div class="col-6 px-2 border">Description</div>
+                                        <div class="col-3 px-2 border">Debit</div>
+                                        <div class="col-3 px-2 border">Credit</div>
+                                    </div>
+                                </th>
+                                <!-- <th>Journal</th> -->
+                                <th>Added By</th>
+                                <!-- <th>Status</th> -->
                                 <th>Action</th>
                             </tr>
                         </tfoot>
@@ -64,7 +87,7 @@
     </div>
 
     <?php include 'includes/scripts.php';?>
-    <?php include 'accounting_modal.php';?>
+    <?php include 'accounting-modalv2.php';?>
 
 
     <script type="text/javascript">
@@ -112,8 +135,8 @@
 
     //     })
     // }
-//get row for edit journal
-function getRow(id) {
+    //get row for edit journal
+    function getRow(id) {
         $(document).ready(function() {
             $.ajax({
                 type: 'POST',
@@ -133,13 +156,11 @@ function getRow(id) {
                     $('.typeSelection').val(response.type);
                     $('.totalAmount').val(response.total);
                     $('.statusSelection').val(response.status);
-                    
+
                 }
             });
         })
     }
-
-
     </script>
 </body>
 
