@@ -20,7 +20,7 @@
                 <div class="card form-control" style="background-color:#ffeccc;">
                     <div class="card-header">
                         <h4>BILLS</h4>
-                        <button><span>
+                        <button class="btn"><span>
                                 <i class="fa-solid fa-file-signature"></i>
                                 Create Vendor Bills
                             </span></button>
@@ -55,7 +55,8 @@
                                 <div class="col-md-6">
                                     <label for="invoiceDate" class="form-label invoiceDate">Invoice Date</label>
                                     <input type="date" class="form-control invoiceDate" id="invoice_date"
-                                        name="invoice_date" required>
+                                        name="invoice_date" equired
+                                        value="<?php echo (new DateTime())->format('Y-m-d'); ?>">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="paymentReference" class="form-label">Payment Reference</label>
@@ -73,22 +74,21 @@
                                     <label for="status" class="form-label">Terms</label>
                                     <select class="form-control terms" name="terms" aria-label="Select termsType"
                                         id="termsType">
-                                        <option value="15 Days" class="terms" selected>15 Days</option>
+                                        <option value="7 Days" class="terms" selected>7 Days</option>
+                                        <option value="14 Days" class="terms" selected>14 Days</option>
                                         <option value="21 Days" class="terms" selected>21 Days</option>
-                                        <option value="30 Days" class="terms" selected>30 Days</option>
-                                        <option value="45 Days" class="terms" selected>45 Days</option>
-                                        <option value="1 Month" class="terms" selected>1 Month</option>
-                                        <option value="2 Months" class="terms" selected>2 Months</option>
                                         <option value="0" class="terms" selected></option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="salesPerson" class="form-label">Sales Person</label>
-                                    <select class="form-control salesPerson" name="sales_person"
+                                    <!-- <select class="form-control salesPerson" name="sales_person"
                                         aria-label="Select salesPerson" required id="salesPerson">
                                         <option value="" class="salesPerson" selected></option>
                                         <?php salesPerson();?>
-                                    </select>
+                                    </select> -->
+                                    <input type="text" class="form-control salesPerson" name="sales_person" id="salesPerson" required>
+                                    <p class="item-select">or <a href="#" class="btn btn-primary">Select Sales Person</a></p>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="journal" class="form-label">Journal</label>
@@ -100,14 +100,14 @@
                                     <select class="form-control currencyType" name="currency"
                                         aria-label="Select customer" id="currencyType" required>
                                         <option value="PHP" class="currencyType" selected>PHP</option>
-                                        <option value="USD" class="currencyType" selected>USD</option>
-                                        <option value="" class="currencyType" selected></option>
+                                        <option value="USD" class="currencyType">USD</option>
                                     </select>
                                 </div>
 
                                 <div class="mb-2">
                                     <!-- <input class="btn btn-outline-success btn-sm" type="submit"
                                         name="addCustomerInvoice" value="SAVE"> -->
+                                        
                                 </div>
                                 <!-- start of dynamic product content -->
                                 <div class="card">
@@ -216,7 +216,7 @@
                                                         <div class="form-group form-group-sm  no-margin-bottom">
                                                             <input type="text" class="form-control calculate"
                                                                 name="invoice_product_discount[]"
-                                                                placeholder="% or Amount">
+                                                                placeholder="% or Amount" maxlength="8">
                                                         </div>
                                                     </td>
                                                     <td class="text-right">
@@ -231,7 +231,7 @@
                                                                         class="form-control calculate-sub"
                                                                         name="invoice_product_sub[]"
                                                                         id="invoice_product_sub" value="0.00"
-                                                                        aria-describedby="sizing-addon1" disabled>
+                                                                        aria-describedby="sizing-addon1" readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -245,9 +245,10 @@
                                             <div class="row form-control py-2">
                                                 <strong>Sub Total:</strong><br>
                                                 <div class="col form-control">
-
+                                               
                                                     <?php echo CURRENCY ?>: <span class="invoice-sub-total">0.00</span>
-                                                    <input type="hidden" name="invoice_subtotal" id="invoice_subtotal">
+                                                    <input type="hidden" class="subtotal" name="invoice_subtotal" id="invoice_subtotal">
+                                                    
                                                 </div>
                                                 <div class="col">
                                                     <strong>Discount:</strong>
@@ -276,17 +277,17 @@
                                             </div>
 
                                             <!-- <div class="row form-control">
-                            <div class="col-xs-4 col-xs-offset-5">
-                                <strong class="shipping">Shipping:</strong>
-                            </div>
-                            <div class="col-xs-3">
-                                <div class="input-group input-group-sm">
-                                    <span class="input-group-addon"><?php echo CURRENCY ?></span>
-                                    <input type="text" class="form-control calculate shipping" name="invoice_shipping"
-                                        aria-describedby="sizing-addon1" placeholder="0.00">
-                                </div>
-                            </div>
-                        </div> -->
+                                                            <div class="col-xs-4 col-xs-offset-5">
+                                                            <strong class="shipping">Shipping:</strong>
+                                                                </div>
+                                                        <div class="col-xs-3">
+                                                            <div class="input-group input-group-sm">
+                                                                <span class="input-group-addon"><?php echo CURRENCY ?></span>
+                                                                <input type="text" class="form-control calculate shipping" name="invoice_shipping"
+                                                                    aria-describedby="sizing-addon1" placeholder="0.00">
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
 
                                             <div class="row form-control py-2">
                                                 <div class="col ">
@@ -294,7 +295,8 @@
                                                 </div>
                                                 <div class="col form-control py-2">
                                                     <?php echo CURRENCY ?>: <span class="invoice-total">0.00</span>
-                                                    <input type="hidden" name="invoice_total" id="invoice_total">
+                                                    <input type="hidden" class="total" name="invoice_total" id="invoice_total">
+                                                   
                                                 </div>
                                             </div>
                                         </div>
@@ -304,8 +306,9 @@
                                                     <label>
                                                         <h6>ADD NOTES</h6>
                                                     </label>
-                                                    <textarea class="form-group form-control" rows="2" cols="50"
-                                                        name="comment" form="usrform"> Add Notes...</textarea>
+                                                    <textarea class="form-group form-control" rows="1" cols="50"
+                                                        name="comment" form="usrform"
+                                                        placeholder="Add Notes"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col">
@@ -317,7 +320,7 @@
                                 <!-- end of dynamic product content -->
                                 <div class="mb-2">
                                     <input class="btn btn-outline-success btn-sm" type="submit"
-                                        name="addCustomerInvoice" value="SAVE">
+                                        name="createNewCustomerInvoice" value="SAVE">
                                 </div>
                             </form>
                         </div>
@@ -325,6 +328,23 @@
                 </div>
             </div>
             <!-- end of form invoice content -->
+            <div id="insert" class="modal fade">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Select Product</h4>
+		      </div>
+		      <div class="modal-body">
+				<?php popProductsList(); ?>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" data-dismiss="modal" class="btn btn-primary" id="selected">Add</button>
+				<button type="button" data-dismiss="modal" class="btn">Cancel</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 
         </div>
     </div>

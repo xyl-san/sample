@@ -15,7 +15,7 @@
 <body>
 <?php include 'header.php'; ?>
     <div class="wrapper">
-        <?php include 'accounting_sidebar.php'; ?>
+        <?php include 'sidebar.php'; ?>
         <div id="content" class="w-100">
             <div class="card">
                 <div class="card-header">

@@ -46,6 +46,7 @@ $(document).ready((function() {
     $('#accountType').DataTable();
     $('#accountList').DataTable();
     $('#studentList').DataTable();
+    $('#journalList').DataTable({bFilter: false, bInfo: false});
 }))
 
 $(document).ready((function() {
@@ -129,7 +130,9 @@ $(document).ready((function() {
         } else {
             $('[name="invoice_product_discount[]"]', tr).val('');
         }
-
+        if(subtotal<0){
+            subtotal=0;
+        }
 	    $('.calculate-sub', tr).val(subtotal.toFixed(2));
 	}
     function calculateTotal() {
@@ -146,6 +149,7 @@ $(document).ready((function() {
             
             grandTotal += parseFloat(c_sbt);
             disc += subtotal - parseFloat(c_sbt);
+            
 	    });
 
         // VAT, DISCOUNT, SHIPPING, TOTAL, SUBTOTAL:
@@ -187,7 +191,7 @@ $(document).ready((function() {
 	}
 </script> 
 
-<!-- function for dynamic inputfields -->
+<!--end function for dynamic inputfields -->
 
 
 <script type="text/javascript">
@@ -211,7 +215,7 @@ function drawChart() {
     var options = {
         title: 'Employees per Department',
         width: 400,
-        height: 240,
+        height: 400,
         is3D: true,
     };
     var chart = new google.visualization.PieChart(document.getElementById('departmentChart'));
@@ -311,6 +315,7 @@ function randomString() {
     document.randform.randomfield.value = randomstring;
 }
 </script>
+
 <script type="text/javascript">
 /* This function will add a new row for journal entry */
 function addNewRowTableJournal() {
@@ -413,5 +418,112 @@ function creditNotes() {
     var total_amount = tax + subtotal;
     document.getElementById("total_amountCreditNotes").value = subtotal;
 }
+
+// JOURNAL ENTRY MODAL FUNCTIONS
+// calculate journal Debit and Credit
+function calcuAmount() {
+    var debitAmount = 0;
+    var creditAmount = 0;
+    $('#tableJourn tbody tr').each(function() {
+        if ($(this).find('.debitAmounts').text() != "") {
+            debitAmount += parseFloat(($(this).find('.debitAmounts').text()).replace(/,/gi, ''));
+        }
+        if ($(this).find('.creditAmounts').text() != "") {
+            creditAmount += parseFloat(($(this).find('.creditAmounts').text()).replace(/,/gi, ''));
+        }
+    })
+    var totalamount = debitAmount - creditAmount;
+    $('#tableJourn').find('.totalDebit').text(parseFloat(debitAmount).toLocaleString('en-US', {
+        style: 'decimal'
+    }))
+    $('#tableJourn').find('.totalCredit').text(parseFloat(creditAmount).toLocaleString('en-US', {
+        style: 'decimal'
+    }))
+    document.getElementById('totalcatch').value = totalamount;
+
+    //for text color only
+    if (totalamount >= 0) {
+        $('#tableJourn').find('.totalBalanceJourn').text(parseFloat(totalamount).toLocaleString('en-US', {
+            style: 'decimal'
+        }))
+        document.getElementById("totalCol").style.color = "#196811"
+    } else if (totalamount < 0) {
+        $('#tableJourn').find('.totalBalanceJourn').text(parseFloat(totalamount).toLocaleString('en-US', {
+            style: 'decimal'
+        }))
+        document.getElementById("totalCol").style.color = "#9E1B18"
+    }
+
+}
+
+$('#myButton').click(function() {
+    var accountId = $('#accountListJourn').val()
+    var groupId = $('#groupListJourn').val()
+    var amountx = $('#amountJourn').val()
+    var type = $('#typeId').val()
+
+    document.getElementById("accountListJourn").value = "";
+    document.getElementById("groupListJourn").value = "";
+    document.getElementById("amountJourn").value = "";
+    document.getElementById("typeId").value = "";
+
+    var rows = $($('noscript#cloneThis').html()).clone().appendTo("tbody#bodys")
+    rows.find('input[name="account_ids[]"]').val(accountId) // add to input field
+    rows.find('input[name="group_ids[]"]').val(groupId)
+    rows.find('input[name="amounts[]"]').val(amountx)
+    rows.find('input[name="amountType[]"]').val(type)
+    rows.find('.accountsD').text(!!accountId ? accountId : "NO DATA")
+    rows.find('.groupsD').text(!!groupId ? groupId : "NO DATA")
+    if (type == '1'){
+        rows.find('.debitAmounts').text(parseFloat(amountx).toLocaleString('en-US', {
+            style: 'decimal'
+            
+        }))
+        
+    } if(type == '2') {
+        rows.find('.creditAmounts').text(parseFloat(amountx).toLocaleString('en-US', {
+            style: 'decimal'
+        }))
+       
+    }if(type== ''){
+        alert("NEED AMOUNT TYPE")
+        rows.find('.creditAmounts').text("NO VALUE")
+        rows.find('.debitAmounts').text("NO VALUE")
+        
+    }
+    calcuAmount()
+    $('#tableJourn').append(tr)
+
+})
+
+$('#tableJourn').on('click', ".delRow", function(e) {
+    e.preventDefault();
+    $(this).closest('tr').remove();
+    calcuAmount()
+});
+
+//catch 
+$('#journAdd').submit(function(e) {
+    var total = document.getElementById('totalcatch').value;
+    var _this = $(this)
+    $('.pop-msg').remove()
+    var el = $('<div>')
+    el.addClass("pop-msg alert")
+    el.hide()
+    if ($('#tableJourn tbody tr').length <= 0) {
+        el.addClass('alert-danger').text(" Account Table is empty.")
+        _this.prepend(el)
+        el.show('slow')
+        return false;
+    }
+    if (total != 0) {
+        el.addClass('alert-danger').text("Trial Balance is not Equal")
+        _this.prepend(el)
+        el.show('slow')
+        return false;
+    }
+});
+//catch
+// JOURNAL ENTRY MODAL FUNCTIONS end
 </script>
 

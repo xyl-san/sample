@@ -174,7 +174,7 @@
             })
         }
         </script>
-        <script>
+        <!-- <script>
         var xValues = ["2018", "2019", "2020", "2021", "2022"];
         var yValues = [15, 25, 50, 75, 100];
         var barColors = ["red", "green", "blue", "orange", "brown"];
@@ -292,7 +292,8 @@
             }
         });
 
-        </script>
+        </script> -->
+        
 </body>
 
 </html>
