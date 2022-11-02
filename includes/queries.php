@@ -2654,6 +2654,7 @@ function partnerTable(){
 }
 //BALANCE SHEET
 function balanceSheetDate(){
+  include 'conn.php';
   if(isset($_POST['searchBalSheet'])){
     $dateStart = date_create($_POST['date_start']);
     $dateEnd =  date_create($_POST['date_end']);
@@ -2696,6 +2697,7 @@ function balanceSheettableCurAsset(){
 }
 }
 function curAssetTotal(){
+  include 'conn.php';
   if(isset($_POST['searchBalSheet'])){
     $dateStart = $_POST['date_start'];
     $dateEnd = $_POST['date_end'];
@@ -2710,7 +2712,7 @@ function curAssetTotal(){
 $conn->close();
 }
 function balanceSheettableNonCurAsset(){
-
+  include 'conn.php';
   if(isset($_POST['searchBalSheet'])){
     $dateStart = $_POST['date_start'];
     $dateEnd = $_POST['date_end'];
@@ -2743,7 +2745,7 @@ function balanceSheettableNonCurAsset(){
 }
 }
 function nonCurAssetTotal(){
-
+  include 'conn.php';
   if(isset($_POST['searchBalSheet'])){
     $dateStart = $_POST['date_start'];
     $dateEnd = $_POST['date_end'];
@@ -2759,7 +2761,7 @@ function nonCurAssetTotal(){
 $conn->close();
 }
 function AssetTotal(){
-
+  include 'conn.php';
   if(isset($_POST['searchBalSheet'])){
     $dateStart = $_POST['date_start'];
     $dateEnd = $_POST['date_end'];
