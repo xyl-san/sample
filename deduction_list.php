@@ -11,41 +11,10 @@
 </head>
 
 <body>
+    <?php include 'header.php'; ?>
     <div class="wrapper">
-        <nav id="sidebar" class="flex-shrink-0 p-3" style="width: 280px;">
-            <div class="sidebar-header rounded">
-                <h3>Dream System</h3>
-                <strong>Boss Panda</strong>
-            </div>
-            <ul class="list-unstyled components">
-                <li>
-                    <a href="menu.php">
-                        <i class="fa-solid fa-house"></i>
-                        Dashboard
-                    </a>
-                </li>
-                <li>
-                    <a href="#employeeSubmenu" data-bs-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle text-wrap">
-                        <i class="fa-solid fa-users"></i>
-                        Human Resource
-                    </a>
-                    <ul class="collapse list-unstyled" id="employeeSubmenu">
-                        <li>
-                            <a href="employees_list.php"> Employees</a>
-                            <a href="attendance_list.php">Attendance</a>
-                            <a href="cashadvance_list.php">Cash Advance</a>
-                            <a href="schedule_list.php">Schedules</a>
-                            <a href="department_list.php"> Department</a>
-                            <a href="job_list.php"> Jobs</a>
-                            <a href="deduction_list.php">Deductions</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
+        <?php include 'sidebar.php'; ?>
         <div id="content" class="w-100">
-            <?php include 'header.php'; ?>
             <div class="card">
                 <div class="card-header">
                     <button type="button" class="btn btn-primary btn-sm btn-flat" data-bs-toggle="modal"
@@ -104,11 +73,13 @@
                             <label for="employeeSelection">Employee</label>
                         </div>
                         <div class="col-md-12 form-floating">
-                            <textarea class="form-control deductionDescription" name="description" placeholder="Elaborate on the deduction" required></textarea>
+                            <textarea class="form-control deductionDescription" name="description"
+                                placeholder="Elaborate on the deduction" required></textarea>
                             <label for="description">Description</label>
                         </div>
                         <div class="col-md-12 form-floating">
-                            <input type="number" class="form-control deductionAmount" name="amount" placeholder="123456789" required>
+                            <input type="number" class="form-control deductionAmount" name="amount"
+                                placeholder="123456789" required>
                             <label for="amount">Amount</label>
                         </div>
                         <div class="mb-2">
@@ -121,7 +92,8 @@
         </div>
     </div>
 
-    <div class="modal fade" id="editDeduction" tabindex="-1" role="dialog" aria-labelledby="deductTitle" aria-hidden="true">
+    <div class="modal fade" id="editDeduction" tabindex="-1" role="dialog" aria-labelledby="deductTitle"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
@@ -140,11 +112,13 @@
                             <label for="employeeSelection">Employee</label>
                         </div>
                         <div class="col-md-12 form-floating">
-                            <textarea class="form-control deductionDescription" name="description" placeholder="Elaborate on the deduction" required></textarea>
+                            <textarea class="form-control deductionDescription" name="description"
+                                placeholder="Elaborate on the deduction" required></textarea>
                             <label for="description">Description</label>
                         </div>
                         <div class="col-md-12 form-floating">
-                            <input type="number" class="form-control deductionAmount" name="amount" placeholder="123456789" required>
+                            <input type="number" class="form-control deductionAmount" name="amount"
+                                placeholder="123456789" required>
                             <label for="amount">Amount</label>
                         </div>
                         <div class="mb-2">
@@ -157,7 +131,8 @@
         </div>
     </div>
 
-    <div class="modal fade" id="deleteDeduction" tabindex="-1" role="dialog" aria-labelledby="deductTitle" aria-hidden="true">
+    <div class="modal fade" id="deleteDeduction" tabindex="-1" role="dialog" aria-labelledby="deductTitle"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
@@ -223,7 +198,8 @@
                     $('.deduction_id').val(response.deduction_id);
                     $('.deductionDescription').val(response.description);
                     $('.deductionAmount').val(response.amount);
-                    $('.employeeSelection').val(response.employee_id).html(response.firstname + ' ' + response.lastname);
+                    $('.employeeSelection').val(response.employee_id).html(response.firstname +
+                        ' ' + response.lastname);
                 }
             });
         })

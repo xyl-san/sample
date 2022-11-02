@@ -15,6 +15,7 @@
 </head>
   
 <body>
+<?php include 'header.php'; ?>
     <div class="wrapper">
         <?php include 'accounting_sidebar.php'; ?>
         <div id="content" class="w-100">
@@ -68,7 +69,7 @@
                             <h5 class="card-title">Bank Account</h5>
                             <p class="card-text">Connect your financial accounts in seconds. </p>
                             <div class="col-md-12 text-center">
-                                <a href="#" class="btn btn-outline-secondary">Add Bank Account</a>
+                                <a href="bank_account.php" class="btn btn-outline-secondary">Add Bank Account</a>
                             </div>
                         </div>
                     </div>
@@ -173,7 +174,7 @@
             })
         }
         </script>
-        <script>
+        <!-- <script>
         var xValues = ["2018", "2019", "2020", "2021", "2022"];
         var yValues = [15, 25, 50, 75, 100];
         var barColors = ["red", "green", "blue", "orange", "brown"];
@@ -291,7 +292,8 @@
             }
         });
 
-        </script>
+        </script> -->
+        
 </body>
 
 </html>

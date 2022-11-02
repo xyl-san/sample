@@ -11,45 +11,10 @@
 </head>
 
 <body>
+<?php include 'header.php'; ?>
     <div class="wrapper">
-        <nav id="sidebar" class="flex-shrink-0 p-3" style="width: 280px;">
-            <div class="sidebar-header rounded">
-                <h3>Growth</h3>
-                <strong>VPD</strong>
-            </div>
-            <ul class="list-unstyled components">
-                <h5>Manage</h5>
-                <li>
-                    <a href="home.php">
-                        <i class="fa-solid fa-house"></i>
-                        Home
-                    </a>
-                </li>
-                <li>
-                    <a href="#pmSystem" data-bs-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle text-wrap">
-                        <i class="fa-solid fa-warehouse"></i>
-                        Purchase Management
-                    </a>
-                    <ul class="collapse list-unstyled" id="pmSystem">
-                        <li>
-                            <a href="inventory_list.php"><i class="fa-solid fa-warehouse"></i> Warehouse</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa-solid fa-box-open"></i> Products</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa-solid fa-user-tag"></i> Supplier</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa-solid fa-envelope-open-text"></i> Purchase Order</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
+    <?php include 'sidebar.php'; ?>
         <div id="content" class="w-100">
-            <?php include 'header.php'; ?>
             <div class="card">
                 <div class="card-header">
                     <button type="button" class="btn btn-primary btn-sm btn-flat" data-bs-toggle="modal"

@@ -1,7 +1,4 @@
 <nav id="sidebar" class="flex-shrink-0 p-3" style="width: 280px;">
-    <div class="sidebar-header rounded">
-        <h3>The Dream System</h3>
-    </div>
     <ul class="list-unstyled components">
         <h5>Accounting</h5>
         <li>
@@ -34,7 +31,7 @@
             </a>
             <ul class="collapse list-unstyled" id="vendorsSubmenu">
                 <li>
-                    <a href=""> Bills</a>
+                    <a href="bills.php"> Bills</a>
                     <a href=""> Refunds</a>
                     <a href=""> Payments</a>
                     <a href=""> Products</a>

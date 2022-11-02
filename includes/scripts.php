@@ -35,6 +35,8 @@
 <!-- Google chart -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
+
+
 <script>
 $(document).ready((function() {
     $.fn.dataTable.moment('MMM DD, YYYY');
@@ -44,6 +46,7 @@ $(document).ready((function() {
     $('#accountType').DataTable();
     $('#accountList').DataTable();
     $('#studentList').DataTable();
+    $('#journalList').DataTable({bFilter: false, bInfo: false});
 }))
 
 $(document).ready((function() {
@@ -61,6 +64,134 @@ $(document).ready((function() {
     });
 }))
 </script>
+<!-- function for dynamic inputfields -->
+<script type="text/javascript">  
+  
+    $(document).ready(function() {  
+  
+      $(".add-more").click(function(){   
+          var html = $(".copy").html();  
+          $(".after-add-more").after(html);  
+      });  
+  
+      $("body").on("click",".remove",function(){   
+          $(this).parents(".control-group").remove();  
+      });  
+  
+    });  
+  // remove product row
+  $('#invoice_table').on('click', ".delete-row", function(e) {
+    	e.preventDefault();
+       	$(this).closest('tr').remove();
+        calculateTotal();
+    });
+
+    // add new product row on invoice
+    var cloned = $('#invoice_table tr:last').clone();
+    $(".add-row").click(function(e) {
+        e.preventDefault();
+        cloned.clone().appendTo('#invoice_table'); 
+    });
+    //calculations of data
+    calculateTotal();
+    
+    $('#invoice_table').on('input', '.calculate', function () {
+	    updateTotals(this);
+	    calculateTotal();
+	});
+
+	$('#invoice_totals').on('input', '.calculate', function () {
+	    calculateTotal();
+	});
+
+	$('#invoice_product').on('input', '.calculate', function () {
+	    calculateTotal();
+	});
+
+	$('.remove_vat').on('change', function() {
+        calculateTotal();
+    });
+
+    function updateTotals(elem) {
+
+        var tr = $(elem).closest('tr'),
+            quantity = $('[name="invoice_product_qty[]"]', tr).val(),
+	        price = $('[name="invoice_product_price[]"]', tr).val(),
+            isPercent = $('[name="invoice_product_discount[]"]', tr).val().indexOf('%') > -1,
+            percent = $.trim($('[name="invoice_product_discount[]"]', tr).val().replace('%', '')),
+	        subtotal = parseInt(quantity) * parseFloat(price);
+
+        if(percent && $.isNumeric(percent) && percent !== 0) {
+            if(isPercent){
+                subtotal = subtotal - ((parseFloat(percent) / 100) * subtotal);
+            } else {
+                subtotal = subtotal - parseFloat(percent);
+            }
+        } else {
+            $('[name="invoice_product_discount[]"]', tr).val('');
+        }
+        if(subtotal<0){
+            subtotal=0;
+        }
+	    $('.calculate-sub', tr).val(subtotal.toFixed(2));
+	}
+    function calculateTotal() {
+	    
+	    var grandTotal = 0,
+	    	disc = 0,
+	    	c_ship = parseInt($('.calculate.shipping').val()) || 0;
+
+	    $('#invoice_table tbody tr').each(function() {
+            var c_sbt = $('.calculate-sub', this).val(),
+                quantity = $('[name="invoice_product_qty[]"]', this).val(),
+	            price = $('[name="invoice_product_price[]"]', this).val() || 0,
+                subtotal = parseInt(quantity) * parseFloat(price);
+            
+            grandTotal += parseFloat(c_sbt);
+            disc += subtotal - parseFloat(c_sbt);
+            
+	    });
+
+        // VAT, DISCOUNT, SHIPPING, TOTAL, SUBTOTAL:
+	    var subT = parseFloat(grandTotal),
+	    	finalTotal = parseFloat(grandTotal + c_ship),
+	    	vat = parseInt($('.invoice-vat').attr('data-vat-rate'));
+
+	    $('.invoice-sub-total').text(subT.toFixed(2));
+	    $('#invoice_subtotal').val(subT.toFixed(2));
+        $('.invoice-discount').text(disc.toFixed(2));
+        $('#invoice_discount').val(disc.toFixed(2));
+
+        if($('.invoice-vat').attr('data-enable-vat') === '1') {
+
+	        if($('.invoice-vat').attr('data-vat-method') === '1') {
+		        $('.invoice-vat').text(((vat / 100) * finalTotal).toFixed(2));
+		        $('#invoice_vat').val(((vat / 100) * finalTotal).toFixed(2));
+	            $('.invoice-total').text((finalTotal).toFixed(2));
+	            $('#invoice_total').val((finalTotal).toFixed(2));
+	        } else {
+	            $('.invoice-vat').text(((vat / 100) * finalTotal).toFixed(2));
+	            $('#invoice_vat').val(((vat / 100) * finalTotal).toFixed(2));
+		        $('.invoice-total').text((finalTotal + ((vat / 100) * finalTotal)).toFixed(2));
+		        $('#invoice_total').val((finalTotal + ((vat / 100) * finalTotal)).toFixed(2));
+	        }
+		} else {
+			$('.invoice-total').text((finalTotal).toFixed(2));
+			$('#invoice_total').val((finalTotal).toFixed(2));
+		}
+
+		// remove vat
+    	if($('input.remove_vat').is(':checked')) {
+	        $('.invoice-vat').text("0.00");
+	        $('#invoice_vat').val("0.00");
+            $('.invoice-total').text((finalTotal).toFixed(2));
+            $('#invoice_total').val((finalTotal).toFixed(2));
+	    }
+
+	}
+</script> 
+
+<!--end function for dynamic inputfields -->
 
 
 <script type="text/javascript">
@@ -84,7 +215,7 @@ function drawChart() {
     var options = {
         title: 'Employees per Department',
         width: 400,
-        height: 240,
+        height: 400,
         is3D: true,
     };
     var chart = new google.visualization.PieChart(document.getElementById('departmentChart'));
@@ -184,6 +315,7 @@ function randomString() {
     document.randform.randomfield.value = randomstring;
 }
 </script>
+
 <script type="text/javascript">
 /* This function will add a new row for journal entry */
 function addNewRowTableJournal() {
@@ -249,7 +381,7 @@ function deleteRow(ele) {
     }
 }
 // for customer invoices computations
-function invoice() {
+function invoice(){
     var quantity = document.getElementById("quantity").value;
     var price = document.getElementById("price").value;
     var subtotal = quantity * price;
@@ -257,7 +389,19 @@ function invoice() {
     document.getElementById("taxes").value = parseFloat(tax).toFixed(2);
     var sub = subtotal - tax;
     document.getElementById("subtotal").value = parseFloat(sub).toFixed(2);
-
+    
+    var total_amount = tax + subtotal;
+    document.getElementById("total_amount").value = subtotal;
+}
+function invoices(){
+    var quantity = document.getElementById("quantity").value;
+    var price = document.getElementById("price").value;
+    var subtotal = quantity * price;
+    var tax = subtotal / 1.12 * 0.12;
+    document.getElementById("taxes").value = parseFloat(tax).toFixed(2);
+    var sub = subtotal - tax;
+    document.getElementById("subtotal").value = parseFloat(sub).toFixed(2);
+    
     var total_amount = tax + subtotal;
     document.getElementById("total_amount").value = subtotal;
 }
@@ -274,5 +418,112 @@ function creditNotes() {
     var total_amount = tax + subtotal;
     document.getElementById("total_amountCreditNotes").value = subtotal;
 }
+
+// JOURNAL ENTRY MODAL FUNCTIONS
+// calculate journal Debit and Credit
+function calcuAmount() {
+    var debitAmount = 0;
+    var creditAmount = 0;
+    $('#tableJourn tbody tr').each(function() {
+        if ($(this).find('.debitAmounts').text() != "") {
+            debitAmount += parseFloat(($(this).find('.debitAmounts').text()).replace(/,/gi, ''));
+        }
+        if ($(this).find('.creditAmounts').text() != "") {
+            creditAmount += parseFloat(($(this).find('.creditAmounts').text()).replace(/,/gi, ''));
+        }
+    })
+    var totalamount = debitAmount - creditAmount;
+    $('#tableJourn').find('.totalDebit').text(parseFloat(debitAmount).toLocaleString('en-US', {
+        style: 'decimal'
+    }))
+    $('#tableJourn').find('.totalCredit').text(parseFloat(creditAmount).toLocaleString('en-US', {
+        style: 'decimal'
+    }))
+    document.getElementById('totalcatch').value = totalamount;
+
+    //for text color only
+    if (totalamount >= 0) {
+        $('#tableJourn').find('.totalBalanceJourn').text(parseFloat(totalamount).toLocaleString('en-US', {
+            style: 'decimal'
+        }))
+        document.getElementById("totalCol").style.color = "#196811"
+    } else if (totalamount < 0) {
+        $('#tableJourn').find('.totalBalanceJourn').text(parseFloat(totalamount).toLocaleString('en-US', {
+            style: 'decimal'
+        }))
+        document.getElementById("totalCol").style.color = "#9E1B18"
+    }
+
+}
+
+$('#myButton').click(function() {
+    var accountId = $('#accountListJourn').val()
+    var groupId = $('#groupListJourn').val()
+    var amountx = $('#amountJourn').val()
+    var type = $('#typeId').val()
+
+    document.getElementById("accountListJourn").value = "";
+    document.getElementById("groupListJourn").value = "";
+    document.getElementById("amountJourn").value = "";
+    document.getElementById("typeId").value = "";
+
+    var rows = $($('noscript#cloneThis').html()).clone().appendTo("tbody#bodys")
+    rows.find('input[name="account_ids[]"]').val(accountId) // add to input field
+    rows.find('input[name="group_ids[]"]').val(groupId)
+    rows.find('input[name="amounts[]"]').val(amountx)
+    rows.find('input[name="amountType[]"]').val(type)
+    rows.find('.accountsD').text(!!accountId ? accountId : "NO DATA")
+    rows.find('.groupsD').text(!!groupId ? groupId : "NO DATA")
+    if (type == '1'){
+        rows.find('.debitAmounts').text(parseFloat(amountx).toLocaleString('en-US', {
+            style: 'decimal'
+            
+        }))
+        
+    } if(type == '2') {
+        rows.find('.creditAmounts').text(parseFloat(amountx).toLocaleString('en-US', {
+            style: 'decimal'
+        }))
+       
+    }if(type== ''){
+        alert("NEED AMOUNT TYPE")
+        rows.find('.creditAmounts').text("NO VALUE")
+        rows.find('.debitAmounts').text("NO VALUE")
+        
+    }
+    calcuAmount()
+    $('#tableJourn').append(tr)
+
+})
+
+$('#tableJourn').on('click', ".delRow", function(e) {
+    e.preventDefault();
+    $(this).closest('tr').remove();
+    calcuAmount()
+});
+
+//catch 
+$('#journAdd').submit(function(e) {
+    var total = document.getElementById('totalcatch').value;
+    var _this = $(this)
+    $('.pop-msg').remove()
+    var el = $('<div>')
+    el.addClass("pop-msg alert")
+    el.hide()
+    if ($('#tableJourn tbody tr').length <= 0) {
+        el.addClass('alert-danger').text(" Account Table is empty.")
+        _this.prepend(el)
+        el.show('slow')
+        return false;
+    }
+    if (total != 0) {
+        el.addClass('alert-danger').text("Trial Balance is not Equal")
+        _this.prepend(el)
+        el.show('slow')
+        return false;
+    }
+});
+//catch
+// JOURNAL ENTRY MODAL FUNCTIONS end
 </script>
 

@@ -762,159 +762,160 @@
     </div>
 </div>
 <!-- Schedules Modals -->
-
-<!-- Start Create Taxes  -->
-<div class="modal fade lg-4" id="newTaxes" tabindex="-1" role="dialog" aria-labelledby="createTaxesTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+<!-- modal New Journal Entry ADD-->
+<div class="modal fade w-80" id="journalEntryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createTaxesTitle">Create Taxes</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                </button>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel"><i class="fa-solid fa-book"></i> Create Journal
+                    Entry</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="includes/queries.php" method="POST" enctype="multipart/form-data"
-                    autocomplete="off">
-                    <div class="col-md-6 form-floating">
-                        <input type="text" class="form-control taxName" name="taxName">
-                        <label for="taxName">Tax Name</label>
-                    </div>
-                    <div class="col-md-6 form-floating">
-                        <select class="form-control taxScope" name="taxType" aria-label="Select taxType" id="taxType">
-                            <option value="Sales" class="taxType" selected>Sales</option>
-                            <option value="Purchased" class="taxType" selected>Purchased</option>
-                            <option value="None" class="taxType" selected>None</option>
-                            <option value="" class="taxType" selected></option>
-                        </select>
-                        <label for="taxType">Tax Type</label>
-                    </div>
-
-                    <div class="col-md-6 form-floating">
-                        <select class="form-control" name="taxComputation" aria-label="Select taxComputation"
-                            id="taxComputation">
-                            <option value="Group Taxes" class="taxComputation" selected>Group Taxes</option>
-                            <option value="Fixed" class="taxComputation" selected>Fixed</option>
-                            <option value="Percentage of Price" class="taxComputation" selected>Percentage of Price
-                            </option>
-                            <option value="Percentage of Price Tax Included" class="taxComputation" selected>Percentage
-                                of Price Tax Included</option>
-                            <option value="" class="taxComputation" selected></option>
-                        </select>
-                        <label for="taxComputation">Tax Computation</label>
-                    </div>
-                    <div class="col-md-6 form-floating">
-                        <select class="form-control taxScope" name="taxScope" aria-label="Select taxScope"
-                            id="taxScope">
-                            <option value="Sales" class="taxScope" selected>Services</option>
-                            <option value="Purchased" class="taxScope" selected>Goods</option>
-                            <option value="" class="taxScope" selected></option>
-                        </select>
-                        <label for="taxScope">Tax Scope</label>
-                    </div>
-                    <div class="col-md-6 form-floating">
-                        <select class="form-control statusTax" name="statusTax" aria-label="Select taxType"
-                            id="taxType">
-                            <option value="0" class="status" selected>Active</option>
-                            <option value="1" class="status" selected>Inactive</option>
-                            <option value="" class="status" selected></option>
-                        </select>
-                        <label for="status">Status</label>
-                    </div>
-                    <div class="col-md-6 form-floating">
-                        <input type="number" class="form-control taxName" name="taxName">
-                        <label for="taxName">Tax Name</label>
-                    </div>
-
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="taxDefinition-tab" data-bs-toggle="tab"
-                                data-bs-target="#taxDefinition" type="button" role="tab" aria-controls="taxDefinition"
-                                aria-selected="true">Definitions</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="advanceOptions-tab" data-bs-toggle="tab"
-                                data-bs-target="#advanceOptions" type="button" role="tab" aria-controls="advanceOptions"
-                                aria-selected="false">Advance Options</button>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="myTabContent">
-
-                        <div class="tab-pane fade show active" id="taxDefinition" role="tabpanel"
-                            aria-labelledby="taxDefinition-tab">
-                            <div>
-                                <div>
-                                    <p6>
-                                        Distribution for Invoices
-                                    </p6>
-                                </div><br>
-                                <div class="col-md-12 form-floating">
-                                    <div id="containerTable">
-                                        <table class="table" id="dynamicTableTax">
-                                            <thead>
-                                                <tr>
-                                                    <th>Amount</th>
-                                                    <th>Base On</th>
-                                                    <th>Account</th>
-                                                    <th>Tax Grids</th>
-                                                    <th>Tool</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                            </tbody>
-                                        </table>
-                                        <button type="button" class="btn btn-secondary  btn-sm"
-                                            onClick="addNewRowTableTax();">Add</button>
-                                    </div>
+                <form action="includes/queries.php" id="journAdd" method="POST">
+                    <div class="">
+                        <div class="row py-2 align-items-start">
+                            <div class="col input-group">
+                                <span class="input-group-text" id="basic-addon1">JOURNAL CODE</span>
+                                <input type="text" class="form-control code text-dark bg bg-white" name="code"
+                                    value="JRE-<?php echo (new DateTime())->format('mY'); ?>-00<?php journalEntryCode();?>"
+                                    style="--bs-text-opacity: .5;" readonly>
+                            </div>
+                            <div class="col input-group">
+                                <span class="input-group-text" id="basic-addon1">Date</span>
+                                <input type="date" class="form-control journDate" name="journal_date"
+                                    value="<?php echo (new DateTime())->format('Y-m-d'); ?>">
+                            </div>
+                        </div>
+                        <div class=" p-2 row align-items-start">
+                            <div class="col-6 g-2 py-2 row border rounded-1">
+                                <div class="form-floating">
+                                    <select class="form-control employee" name="employee_id">
+                                        <option value=""> </option>
+                                        <?php employeeSelection();?>
+                                    </select>
+                                    <label for="account" class="">Employee</label>
                                 </div>
+                                <div class="col-6 form-floating ">
+                                    <select class="form-control bg-info account" name="account" id="accountListJourn"
+                                        style="--bs-bg-opacity: .25;">
+                                        <option value=""> </option>
+                                        <?php accountListRow();?>
+                                    </select>
+                                    <label for="account" class="">Account</label>
+                                </div>
+                                <div class="col-6 form-floating">
+                                    <select class="form-control bg-warning group" name="group" id="groupListJourn"
+                                        style="--bs-bg-opacity: .25;">
+                                        <option value=""> </option>
+                                        <?php groupListRow();?>
+                                    </select>
+                                    <label for="account" class="">Group</label>
+                                </div>
+                                <div class="col-6 form-floating">
+                                    <input type="number" class="form-control amount bg-success" id="amountJourn"
+                                        onchange="this.value = Math.abs(this.value)" style="--bs-bg-opacity: .25;">
+                                    <label for="" class="">Amount</label>
+                                </div>
+
+                                <div class="col-3 form-floating">
+                                    <select class="form-control type" name="type" id="typeId"
+                                        style="--bs-bg-opacity: .25;">
+                                        <option value=""> </option>
+                                        <option value="1">DEBIT</option>
+                                        <option value="2">CREDIT</option>
+                                    </select>
+                                    <label for="" class="">TYPE</label>
+                                </div>
+                                <div class="col-3">
+                                    <button type="button" class=" btn btn-success p-3  amount form-control"
+                                        name="amount" id="myButton"><i class="fa-solid fa-file-circle-plus"></i>
+                                        ADD</button>
+                                </div>
+
+                            </div>
+                            <div class="col-6 px-4 py-2 g-2 row align-items-start">
+                                <div class=" form-floating">
+                                    <input type="text" class="description form-control" name="journal_entry_description"
+                                        style="text-transform:uppercase"
+                                        onkeyup="this.value = this.value.toUpperCase();" placeholder="Description"
+                                        required>
+                                    <label for="">Description</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input type="text" class="partner form-control" name="partner" placeholder="Partner"
+                                        required>
+                                    <label for="">Partner</label>
+                                </div>
+
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="advanceOptions" role="tabpanel"
-                            aria-labelledby="advanceOptions-tab">
-                            <div>
-                                <div class="col-md-6 form-floating">
-                                    <input type="text" class="form-control taxName" name="taxName">
-                                    <label for="taxName">Label on Invoices</label>
-                                </div><br>
+                        <table id="tableJourn" class="table table-stripped table-bordered gx-3">
+                            <colgroup>
 
-                                <div class="col-md-12 form-floating">
-                                    <select class="form-control" name="accountListDebit" aria-label="Select account"
-                                        id="account_id">
-                                        <option value="" class="accounListDebitSelection" selected>- Select -</option>
-                                        <?php accountListSelection();?>
-                                    </select>
-                                    <label for="accountDebit">Allowed account types</label>
-                                </div><br>
+                                <col width="30%">
+                                <col width="20%">
+                                <col width="20%">
+                                <col width="20%">
+                                <col width="5%">
+                            </colgroup>
+                            <thead>
+                                <tr class="bg-dark bg-gradient text-white">
+                                    <th>Account</th>
+                                    <th>Group</th>
+                                    <th>Debit</th>
+                                    <th>Credit</th>
+                                    <th>Tool</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bodys"></tbody>
+                            <tfoot>
+                                <tr class="bg-gradient-secondary">
+                                </tr>
+                                <tr class=" border">
+                                    <th></th>
+                                    <th class="text-center">Total</th>
+                                    <th class="text-right totalDebit">0.00</th>
+                                    <th class="text-right totalCredit">0.00</th>
+                                </tr>
 
-                                <div class="col-md-12 form-floating">
-                                    <select class="form-control" name="accountListDebit" aria-label="Select account"
-                                        id="account_id">
-                                        <option value="" class="accounListDebitSelection" selected>- Select -</option>
-                                        <?php accountListSelection();?>
-                                    </select>
-                                    <label for="accountDebit">Allowed account</label>
-                                </div><br>
+                                <tr class=" border">
+                                    <th colspan="2" class="text-center"></th>
+                                    <th colspan="2" class="text-center totalBalanceJourn" id="totalCol">0</th>
+                                </tr>
 
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="checkBoxEntry">
-                                    <label class="form-check-label" for="checkBoxEntry">
-                                        Lock Posted Entries with Hash
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div><br>
+                            </tfoot>
+                            <input type="hidden" name="totalcatch" id="totalcatch" readonly value="0">
+                        </table>
 
-                    <div class="mb-2">
-                        <button type="button" data-bs-dismiss="modal" class="btn btn-danger btn-primary">Cancel</button>
-                        <button type="submit" class="btn btn-success float-end" name="addJournalEntry">Save</button>
+                        <noscript id="cloneThis">
+                            <tr>
+                                <td class="">
+                                    <input type="hidden" class="accountName" name="account_ids[]" value="">
+                                    <input type="hidden" class="groupName" name="group_ids[]" value="">
+                                    <input type="hidden" class="amount" name="amounts[]" value="">
+                                    <input type="hidden" class="amountType" name="amountType[]" value="">
+                                    <span class="accountsD" id="accD"></span>
+                                </td>
+                                <td class="groupsD"></td>
+                                <td class="debitAmounts text-right"></td>
+                                <td class="creditAmounts text-right"></td>
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-outline btn-danger btn-flat delRow" id="deleteRow"
+                                        type="button"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </noscript>
                     </div>
-                </form>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" name="journAddnewEntry">SAVE</button>
+            </div>
+            </form>
         </div>
     </div>
 </div>
-<!-- End Create Taxes -->
-
+<!-- modal New Journal Entry END -->
