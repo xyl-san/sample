@@ -2082,7 +2082,7 @@ header('location: ../invoices.php');
 //SHOW CUSTOMER INVOICE TABLE
 function customerInvoiceTable(){
   include 'conn.php';
-  $sql = "SELECT cusi.cus_invoice_id, cusi.invoice_num, cusi.customer_id, cusi.invoice_date, cusi.employee_id, cusi.reference, cusi.due_date, cusi.terms, cusi.journal, cusi.currency, cusi.product_id, cusi.account_id, cusi.quantity, cusi.price, cusi.total, cusi.note, ci.customer_id, ci.customer_firstname, ci.customer_lastname, emp.employee_id, emp.lastname FROM customer ci INNER JOIN customer_invoice AS cusi ON ci.customer_id = cusi.customer_id INNER JOIN employees AS emp ON emp.employee_id = cusi.employee_id WHERE cusi.delete_flag=0;";
+  $sql = "SELECT *, cus.invoice_id, cus.customer_name FROM `invoice` AS inv INNER JOIN customer AS cus ON inv.invoice_id = cus.invoice_id;";
 
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
@@ -2090,15 +2090,18 @@ function customerInvoiceTable(){
     
     ?>
 <tr>
-    <td><?php echo $row['invoice_num']; ?></td>
-    <td><?php echo $row['due_date']; ?></td>
+    <td><?php echo $row['invoice_id']; ?></td>
+    <td><?php echo $row['invoice_duedate']; ?></td>
     <td><?php echo $row['terms']; ?></td>
-    <td><?php echo $row['customer_firstname'].", ". $row['customer_lastname']; ?></td>
-    <td><?php echo $row['reference']; ?></td>
-    <td><?php echo $row['total']; ?></td>
+    <td><?php echo $row['customer_name']; ?></td>
+    <td><?php echo $row['payment_reference']; ?></td>
+    <td><span class="px-2 border rounded-pill border-warning text-bg-warning"><?php echo $row['currency']; ?>:
+            <?php echo $row['discount']; ?></span></td>
+    <td> <span class="px-2 border rounded-pill border-info text-bg-info"><?php echo $row['currency']; ?>:
+            <?php echo $row['grandtotal']; ?></span></td>
     <td><?php echo $row['invoice_date']; ?></td>
-    <td><?php echo $row['terms']; ?></td>
-    <td><?php echo $row['lastname']; ?></td>
+    <td><?php echo $row['sales_person']; ?></td>
+
     <td>
         <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['cus_invoice_id']; ?>"><i
                 class="fa fa-edit"></i> Edit</button>
@@ -2108,7 +2111,7 @@ function customerInvoiceTable(){
 </tr>
 <?php
   }
-  $conn->close();
+  $conn->close(); 
 }
 
 //show journal entry table
@@ -2914,16 +2917,16 @@ function invoiceAdd(){
 //invoice, select customer
 function storeCustomer(){
   include 'conn.php';
-  $sql = "SELECT * FROM `store_customer` WHERE delete_flag =0";
+  $sql = "SELECT DISTINCT customer_name, customer_email, customer_contact, address FROM customer";
   $query = $conn->query($sql);
   if($query) {
     while($row = $query->fetch_assoc()) {
         echo '
           <tr>
-          <td>'.$row["store_name"].'</td>
-            <td>'.$row["store_email"].'</td>
-            <td>'.$row["store_contact"].'</td>
-            <td><button type="button" class="btn btn-success btn-sm" data-bs-dismiss="modal"><a href="#" class=" customer-select"  data-customer-name="'.$row['store_name'].'" data-customer-email="'.$row['store_email'].'" data-customer-phone="'.$row['store_contact'].'" data-customer-address-1="'.$row['store_address'].'">Select</a></button></td>
+          <td>'.$row["customer_name"].'</td>
+            <td>'.$row["customer_email"].'</td>
+            <td>'.$row["customer_contact"].'</td>
+            <td><button type="button" class="btn btn-success btn-sm" data-bs-dismiss="modal"><a href="#" class=" customer-select"  data-customer-name="'.$row['customer_name'].'" data-customer-email="'.$row['customer_email'].'" data-customer-phone="'.$row['customer_contact'].'" data-customer-address-1="'.$row['address'].'">Select</a></button></td>
           </tr>
         ';
     }

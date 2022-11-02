@@ -52,7 +52,7 @@
                     <a href="#"><i class="fa-solid fa-person"></i> Customer</a>
                 </li>
                 <li>
-                    <a href="create_invoice.php"><i class="fa-solid fa-file-invoice"></i> Invoice</a>
+                    <a href="invoices.php"><i class="fa-solid fa-file-invoice"></i> Invoice</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa-solid fa-file-invoice-dollar"></i> Credit Note</a>
