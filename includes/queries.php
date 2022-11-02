@@ -2911,6 +2911,54 @@ function invoiceAdd(){
   $conn->close();
   header('location: ../create_invoice.php');
 }
+//invoice, select customer
+function storeCustomer(){
+  include 'conn.php';
+  $sql = "SELECT * FROM `store_customer` WHERE delete_flag =0";
+  $query = $conn->query($sql);
+  if($query) {
+    while($row = $query->fetch_assoc()) {
+        echo '
+          <tr>
+          <td>'.$row["store_name"].'</td>
+            <td>'.$row["store_email"].'</td>
+            <td>'.$row["store_contact"].'</td>
+            <td><button type="button" class="btn btn-success btn-sm" data-bs-dismiss="modal"><a href="#" class=" customer-select"  data-customer-name="'.$row['store_name'].'" data-customer-email="'.$row['store_email'].'" data-customer-phone="'.$row['store_contact'].'" data-customer-address-1="'.$row['store_address'].'">Select</a></button></td>
+          </tr>
+        ';
+    }
+  } else {
+
+    echo "<p>There are no customers to display.</p>";
+
+  }
+  $conn->close();
+}
+//for invoice salesperson
+function salesPersonInvoice(){
+  include 'conn.php';
+  $sql = "SELECT `employee_id`, `firstname`, `lastname`, `address`, `contact_info` FROM `employees` WHERE delete_flag =0";
+  $query = $conn->query($sql);
+  if($query) {
+    while($row = $query->fetch_assoc()) {
+        echo '
+          <tr>
+          <td>'.$row["firstname"].' '.$row["lastname"].'</td>
+            
+            <td><button type="button" class="btn btn-success btn-sm" data-bs-dismiss="modal"><a href="#" class=" select-salesPerson"  data-salesPerson-firstname="'.$row['firstname'].'" data-salesPerson-lastname="'.$row['lastname'].'">Select</a></button></td>
+          </tr>
+        ';
+    }
+
+    
+
+  } else {
+
+    echo "<p>There are no customers to display.</p>";
+
+  }
+  $conn->close();
+}
 
 ?>
 <!-- sample config.php for invoice setup -->

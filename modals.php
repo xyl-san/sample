@@ -919,3 +919,74 @@
     </div>
 </div>
 <!-- modal New Journal Entry END -->
+<!-- Customer Data for Invoice modal -->
+<div class="modal fade" id="selectCustomer" tabindex="-1" aria-labelledby="selectCustomer" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="selectCustomer">Add Existing Customer</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table id="invoiceCustomerList">
+                    <colgroup>
+                        <col width="20%">
+                        <col width="15%">
+                        <col width="15%">
+                        <col width="5%">
+
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php storeCustomer();?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Customer Data for Invoice modal -->
+<!-- Sales Person for Invoice modal -->
+<div class="modal fade" id="selectSalesPerson" tabindex="-1" aria-labelledby="selectSalesPerson" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="selectSalesPerson">Select Employee</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table id="invoiceCustomerList">
+                    <colgroup>
+                        <col width="90%">
+                        <col width="10%">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php salesPersonInvoice();?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Sales Person for Invoice modal -->
