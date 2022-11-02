@@ -1338,6 +1338,7 @@ function journalItemsTable(){
 </tr>
 <?php
   }
+  
 }
 
 if(isset($_POST['deleteInvoice'])){
@@ -1398,32 +1399,6 @@ if (isset($_POST['editInvoice'])) {
 
 // end accounting invoices queries
 
-// Accounting credit notes queries
-function creditNotesTable(){
-  include 'conn.php';
-  $sql = "SELECT crd.credit_notes_id as credit_notes_id, crd.credit_notes_code, crd.invoice_date,crd.due_date, crd.label,crd.quantity, crd.price, crd.tax, crd.subtotal, crd.total_amount, crd.currency, crd.payment_status, prod.product_id, prod.product_name,prod.product_description, emp.employee_id, emp.firstname, emp.lastname, cust.customer_id, cust.customer_firstname, cust.customer_lastname FROM credit_notes crd INNER JOIN product AS prod ON crd.product_id = prod.product_id INNER JOIN employees AS emp ON crd.employee_id = emp.employee_id INNER JOIN customer AS cust ON crd.customer_id = cust.customer_id WHERE crd.delete_flag='0'";
-  $query = $conn->query($sql);
-  while($row = $query->fetch_assoc()){
-    ?>
-<tr>
-    <td><?php echo $row['credit_notes_code']; ?></td>
-    <td><?php echo $row['customer_firstname'].", ". $row['customer_lastname']; ?></td>
-    <td><?php echo $row['invoice_date']; ?></td>
-    <td><?php echo $row['due_date']; ?></td>
-    <td><?php echo $row['firstname'].", ". $row['lastname']; ?></td>
-    <td><?php echo $row['tax']; ?></td>
-    <td><?php echo $row['total_amount']; ?></td>
-    <td><?php echo $row['total_amount']; ?></td>
-    <td><?php echo $row['currency']; ?></td>
-    <td> <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['credit_notes_id']; ?>"><i
-                class="fa fa-edit"></i> Edit</button>
-        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['credit_notes_id']; ?>"><i
-                class="fa fa-trash"></i> Delete</button>
-    </td>
-</tr>
-<?php
-  }
-}
 
 if (isset($_POST['addCreditNotes'])) {
   creditNotesAdd();
@@ -2937,6 +2912,7 @@ function storeCustomer(){
   }
   $conn->close();
 }
+
 //for invoice salesperson
 function salesPersonInvoice(){
   include 'conn.php';
@@ -2953,12 +2929,65 @@ function salesPersonInvoice(){
         ';
     }
 
-    
-
   } else {
 
     echo "<p>There are no customers to display.</p>";
 
+  }
+  $conn->close();
+}
+
+function sumOfcreditNoteUnpaid(){
+  include 'conn.php';
+  $sql = "SELECT SUM(credit_grandtotal) FROM `credit_note` WHERE status = 0";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+      echo $row['SUM(credit_grandtotal)'];
+  }
+  $conn->close();
+}
+function totalOfcreditNoteUnpaid(){
+  include 'conn.php';
+  $sql = "SELECT COUNT(id) FROM `credit_note` WHERE status=0";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+      echo $row['COUNT(id)'];
+  }
+  $conn->close();
+}
+function totalOfcreditNotePaid(){
+  include 'conn.php';
+  $sql = "SELECT COUNT(id) FROM `credit_note` WHERE status=1";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+      echo $row['COUNT(id)'];
+  }
+  $conn->close();
+}
+function creditNotesTable(){
+  include 'conn.php';
+  $sql = "SELECT *, cus.credit_id, cus.customer_name FROM `credit_note` AS cred INNER JOIN customer AS cus ON cred.credit_id = cus.credit_id";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    $status = ($row['status'])?'<span class="badge text-bg-success pull-right px-2">&nbspPaid&nbsp</span>':'<span class="badge text-bg-warning pull-right">Unpaid</span>';
+    
+    ?>
+<tr>
+    <td><?php echo $row['credit_id']; ?></td>
+    <td><?php echo $row['customer_name']; ?></td>
+    <td><?php echo $row['credit_date']; ?></td>
+    <td><?php echo $row['credit_duedate']; ?></td>
+    <td><?php echo $row['credit_sales_person'];?></td>
+    <td><?php echo $row['credit_currency']; ?></td>
+    <td><?php echo $row['credit_grandtotal']; ?></td>
+    <td><?php echo $status; ?></td>
+    <td> <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['credit_notes_id']; ?>"><i
+                class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['credit_notes_id']; ?>"><i
+                class="fa fa-trash"></i> Delete</button>
+    </td>
+</tr>
+<?php
   }
   $conn->close();
 }

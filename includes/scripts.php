@@ -47,14 +47,14 @@ $(document).ready((function() {
     $('#accountList').DataTable();
     $('#studentList').DataTable();
     $('#journalList').DataTable({bFilter: false, bInfo: false});
-}))
+}));
 
 $(document).ready((function() {
     $('.datepicker').datepicker({
         autoclose: true,
         format: 'yyyy-mm-dd',
     });
-}))
+}));
 
 $(document).ready((function() {
     $('.timepicker').timepicker({
@@ -62,7 +62,7 @@ $(document).ready((function() {
         scrollbar: true,
         dropdown: true,
     });
-}))
+}));
 </script>
 
 

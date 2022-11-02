@@ -55,7 +55,7 @@
                     <a href="invoices.php"><i class="fa-solid fa-file-invoice"></i> Invoice</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa-solid fa-file-invoice-dollar"></i> Credit Note</a>
+                    <a href="credit_notes.php"><i class="fa-solid fa-file-invoice-dollar"></i> Credit Note</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa-solid fa-list"></i> Transactions</a>
