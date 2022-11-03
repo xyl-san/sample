@@ -40,13 +40,16 @@
 <script>
 $(document).ready((function() {
     $.fn.dataTable.moment('MMM DD, YYYY');
-    ('#example1, #invoiceCustomerList').DataTable();
+    $('#example1, #invoiceCustomerList').DataTable();
     $('#employeelist').DataTable();
     $('#empschedule').DataTable();
     $('#accountType').DataTable();
     $('#accountList').DataTable();
     $('#studentList').DataTable();
-    $('#journalList').DataTable({bFilter: false, bInfo: false});
+    $('#journalList').DataTable({
+        bFilter: false,
+        bInfo: false
+    });
 }));
 
 $(document).ready((function() {
@@ -198,15 +201,17 @@ function addNewRowTableJournal() {
     for (var i = 0; i < cellCount; i++) {
         var cell = row.insertCell(i);
         if (i < cellCount - 1) {
-            cell.innerHTML = '<input class="form-control form-control-sm" type="text" aria-label=".form-control-sm example">';
+            cell.innerHTML =
+                '<input class="form-control form-control-sm" type="text" aria-label=".form-control-sm example">';
         } else {
-            cell.innerHTML = '<button class="btn btn-danger btn-sm" onclick="deleteRowJournal(this)" style="border:none;"><i class ="fa fa-trash"></i></button>';
+            cell.innerHTML =
+                '<button class="btn btn-danger btn-sm" onclick="deleteRowJournal(this)" style="border:none;"><i class ="fa fa-trash"></i></button>';
         }
-      }
+    }
 }
 
 function deleteRowJournal(ele) {
-    var table = document.getElementById('dynamicTableJournalEntry');    
+    var table = document.getElementById('dynamicTableJournalEntry');
     var rowCount = table.rows.length;
     if (rowCount <= 1) {
         alert("There is no row available to delete!");
@@ -229,7 +234,8 @@ function addNewRowTableTax() {
     for (var i = 0; i < cellCount; i++) {
         var cell = row.insertCell(i);
         if (i < cellCount - 1) {
-            cell.innerHTML = '  <input class="form-control form-control-sm" type="text" aria-label=".form-control-sm example">';
+            cell.innerHTML =
+                '  <input class="form-control form-control-sm" type="text" aria-label=".form-control-sm example">';
         } else {
             cell.innerHTML =
                 '<button class="btn btn-danger btn-sm" onclick="deleteRow(this)" style="border: none;"><i class ="fa fa-trash"></i></button>';
@@ -253,7 +259,7 @@ function deleteRow(ele) {
     }
 }
 // for customer invoices computations
-function invoice(){
+function invoice() {
     var quantity = document.getElementById("quantity").value;
     var price = document.getElementById("price").value;
     var subtotal = quantity * price;
@@ -261,11 +267,12 @@ function invoice(){
     document.getElementById("taxes").value = parseFloat(tax).toFixed(2);
     var sub = subtotal - tax;
     document.getElementById("subtotal").value = parseFloat(sub).toFixed(2);
-    
+
     var total_amount = tax + subtotal;
     document.getElementById("total_amount").value = subtotal;
 }
-function invoices(){
+
+function invoices() {
     var quantity = document.getElementById("quantity").value;
     var price = document.getElementById("price").value;
     var subtotal = quantity * price;
@@ -273,7 +280,7 @@ function invoices(){
     document.getElementById("taxes").value = parseFloat(tax).toFixed(2);
     var sub = subtotal - tax;
     document.getElementById("subtotal").value = parseFloat(sub).toFixed(2);
-    
+
     var total_amount = tax + subtotal;
     document.getElementById("total_amount").value = subtotal;
 }
@@ -333,39 +340,42 @@ $('#myButton').click(function() {
     var groupId = $('#groupListJourn').val()
     var amountx = $('#amountJourn').val()
     var type = $('#typeId').val()
+    if (groupId == '' || accountId == '' || amountx == '' || type == '') {
+        $("#errorModalAccount").modal('show');
+    } else {
+        document.getElementById("accountListJourn").value = "";
+        document.getElementById("groupListJourn").value = "";
+        document.getElementById("amountJourn").value = "";
+        document.getElementById("typeId").value = "";
 
-    document.getElementById("accountListJourn").value = "";
-    document.getElementById("groupListJourn").value = "";
-    document.getElementById("amountJourn").value = "";
-    document.getElementById("typeId").value = "";
+        var rows = $($('noscript#cloneThis').html()).clone().appendTo("tbody#bodys")
+        rows.find('input[name="account_ids[]"]').val(accountId) // add to input field
+        rows.find('input[name="group_ids[]"]').val(groupId)
+        rows.find('input[name="amounts[]"]').val(amountx)
+        rows.find('input[name="amountType[]"]').val(type)
+        rows.find('.accountsD').text(!!accountId ? accountId : "NO DATA")
+        rows.find('.groupsD').text(!!groupId ? groupId : "NO DATA")
+        if (type == '1') {
+            rows.find('.debitAmounts').text(parseFloat(amountx).toLocaleString('en-US', {
+                style: 'decimal'
 
-    var rows = $($('noscript#cloneThis').html()).clone().appendTo("tbody#bodys")
-    rows.find('input[name="account_ids[]"]').val(accountId) // add to input field
-    rows.find('input[name="group_ids[]"]').val(groupId)
-    rows.find('input[name="amounts[]"]').val(amountx)
-    rows.find('input[name="amountType[]"]').val(type)
-    rows.find('.accountsD').text(!!accountId ? accountId : "NO DATA")
-    rows.find('.groupsD').text(!!groupId ? groupId : "NO DATA")
-    if (type == '1'){
-        rows.find('.debitAmounts').text(parseFloat(amountx).toLocaleString('en-US', {
-            style: 'decimal'
-            
-        }))
-        
-    } if(type == '2') {
-        rows.find('.creditAmounts').text(parseFloat(amountx).toLocaleString('en-US', {
-            style: 'decimal'
-        }))
-       
-    }if(type== ''){
-        alert("NEED AMOUNT TYPE")
-        rows.find('.creditAmounts').text("NO VALUE")
-        rows.find('.debitAmounts').text("NO VALUE")
-        
+            }))
+
+        }
+        if (type == '2') {
+            rows.find('.creditAmounts').text(parseFloat(amountx).toLocaleString('en-US', {
+                style: 'decimal'
+            }))
+
+        }
+        if (type == '') {
+            alert("NEED AMOUNT TYPE")
+            rows.find('.creditAmounts').text("NO VALUE")
+            rows.find('.debitAmounts').text("NO VALUE")
+        }
+        calcuAmount()
+        $('#tableJourn').append(tr)
     }
-    calcuAmount()
-    $('#tableJourn').append(tr)
-
 })
 
 $('#tableJourn').on('click', ".delRow", function(e) {
@@ -389,9 +399,7 @@ $('#journAdd').submit(function(e) {
         return false;
     }
     if (total != 0) {
-        el.addClass('alert-danger').text("Trial Balance is not Equal")
-        _this.prepend(el)
-        el.show('slow')
+        $("#errorModalTrial").modal('show');
         return false;
     }
 });
@@ -401,38 +409,38 @@ $('#journAdd').submit(function(e) {
 // for Customer Data--> Create Invoice
 $(document).ready(function() {
 
-$(document).on('click', ".customer-select", function(e) {
+    $(document).on('click', ".customer-select", function(e) {
 
-    var customer_name = $(this).attr('data-customer-name');
-    var customer_email = $(this).attr('data-customer-email');
-    var customer_phone = $(this).attr('data-customer-phone');
+        var customer_name = $(this).attr('data-customer-name');
+        var customer_email = $(this).attr('data-customer-email');
+        var customer_phone = $(this).attr('data-customer-phone');
 
-    var customer_address_1 = $(this).attr('data-customer-address-1');
+        var customer_address_1 = $(this).attr('data-customer-address-1');
 
 
-    $('#customer_name').val(customer_name);
-    $('#customer_email').val(customer_email);
-    $('#customer_phone').val(customer_phone);
+        $('#customer_name').val(customer_name);
+        $('#customer_email').val(customer_email);
+        $('#customer_phone').val(customer_phone);
 
-    $('#customer_address_1').val(customer_address_1);
+        $('#customer_address_1').val(customer_address_1);
 
-    $('#selectCustomer').modal('hide');
+        $('#selectCustomer').modal('hide');
 
-});
+    });
 });
 // for Sales Person Data--> Create Invoice
 $(document).ready(function() {
 
-$(document).on('click', ".select-salesPerson", function(e) {
+    $(document).on('click', ".select-salesPerson", function(e) {
 
-    var salesPerson_firstname = $(this).attr('data-salesPerson-firstname');
-    var salesPerson_lastname = $(this).attr('data-salesPerson-lastname');
-    var fullname = salesPerson_firstname.concat(' ' + salesPerson_lastname)
-    $('#salesPerson').val(fullname);
+        var salesPerson_firstname = $(this).attr('data-salesPerson-firstname');
+        var salesPerson_lastname = $(this).attr('data-salesPerson-lastname');
+        var fullname = salesPerson_firstname.concat(' ' + salesPerson_lastname)
+        $('#salesPerson').val(fullname);
 
-    $('#selectCustomer').modal('hide');
+        $('#selectCustomer').modal('hide');
 
-});
+    });
 });
 </script>
 

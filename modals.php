@@ -765,7 +765,7 @@
 <!-- modal New Journal Entry ADD-->
 <div class="modal fade w-80" id="journalEntryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel"><i class="fa-solid fa-book"></i> Create Journal
@@ -990,3 +990,236 @@
     </div>
 </div>
 <!-- Sales Person for Invoice modal -->
+
+<!-- ADD NEW BANK ACCOUNT -->
+<div class="modal fade w-90" id="addNewBankAccount" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel"><i class="fa-solid fa-money-check"></i>
+                    BANK ACCOUNT</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form class="row g-3" action="includes/queries.php" method="POST" enctype="multipart/form-data"
+                    autocomplete="off">
+                    <div class="col-6 form-floating">
+                        <select class="form-control bankName" name="bank_name" aria-label="Select bank" required>
+                            <option value="" selected>- Select -</option>
+                            <?php bankSelection(); ?>
+                        </select>
+                        <label for="jobSelection">Bank</label>
+
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control accountNumber" name="bank_account_number"
+                            placeholder="Account Number" minlength="10" maxlength="13" required>
+                        <label>Account Number</label>
+
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control accountName" name="bank_account_name"
+                            placeholder="Account Name" required>
+                        <label for="lastName">Account Name</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control company" name="bank_company" placeholder="Company"
+                            required>
+                        <label for="lastName">Company</label>
+                    </div>
+                    <div class="col form-floating">
+                        <textarea class="form-control tArea address" rows="2" name="bank_address" placeholder="Address"
+                            required></textarea>
+                        <label for="addressInfo">Address</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="email" class="form-control email" name="bank_email" placeholder="E-mail" required>
+                        <label>E-mail</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control contactInfo phonenum" name="bank_phone"
+                            placeholder="Phone Number" required>
+                        <script>
+                        document.querySelector('.phonenum').addEventListener('input', function(e) {
+                            var foo = this.value.split("-").join("");
+                            if (foo.length > 0) {
+                                foo = foo.match(new RegExp('.{1,4}', 'g')).join("-");
+                            }
+                            this.value = foo;
+                        });
+                        </script>
+                        <label for="contactInfo">Phone Number</label>
+                    </div>
+                    <div class="col-6 form-floating">
+                        <select class="form-control country" name="bank_country" aria-label="Select department"
+                            required>
+                            <option value="Philippines" selected>Philippines</option>
+                        </select>
+                        <label for="departmentSelection">Country</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="number" class="form-control zipCode" name="bank_zip_code" placeholder="Zip Code"
+                            required>
+                        <label>Zip Code</label>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end" name="addBank">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END ADD NEW BANK ACCOUNT -->
+
+<!--EDIT BANK ACCOUNT -->
+<div class="modal fade w-90" id="editBankAccount" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel"><i class="fa-solid fa-money-check"></i></i>
+                    UPDATE BANK ACCOUNT</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form class="row g-3" action="includes/queries.php" method="POST" enctype="multipart/form-data"
+                    autocomplete="off">
+                    <input type="hidden" class="bankAccountId" name="bank_account_id">
+                    <div class="col-6 form-floating">
+                        <select class="form-control bankName" name="bank_name" aria-label="Select bank" required>
+                            <option value="" selected>- Select -</option>
+                            <?php bankSelection(); ?>
+                        </select>
+                        <label for="jobSelection">Bank</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control accountNumber rege" name="bank_account_number"
+                            placeholder="Account Number" minlength="10" maxlength="13" required>
+                        <label>Account Number</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control accountName" name="bank_account_name"
+                            placeholder="Account Name" required>
+                        <label for="lastName">Account Name</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control company" name="bank_company" placeholder="Company"
+                            required>
+                        <label for="lastName">Company</label>
+                    </div>
+                    <div class="col form-floating">
+                        <textarea class="form-control tArea address" rows="2" name="bank_address" placeholder="Address"
+                            required></textarea>
+                        <label for="addressInfo">Address</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="email" class="form-control email" name="bank_email" placeholder="E-mail" required>
+                        <label>E-mail</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="text" class="form-control contactInfo phone" name="bank_phone"
+                            placeholder="Phone Number" required>
+                        <script>
+                        document.querySelector('.phone').addEventListener('input', function(e) {
+                            var foo = this.value.split("-").join("");
+                            if (foo.length > 0) {
+                                foo = foo.match(new RegExp('.{1,4}', 'g')).join("-");
+                            }
+                            this.value = foo;
+                        });
+                        </script>
+                        <label for="contactInfo">Phone Number</label>
+                    </div>
+                    <div class="col-6 form-floating">
+                        <select class="form-control country" name="bank_country" aria-label="Select department"
+                            required>
+                            <option value="1" selected>Philippines</option>
+                        </select>
+                        <label for="departmentSelection">Country</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="number" class="form-control zipCode" name="bank_zip_code" placeholder="Zip Code"
+                            required>
+                        <label>Zip Code</label>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-end" name="editBankAccount">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END EDIT BANK ACCOUNT -->
+<!-- Delete BANK ACCOUNT -->
+<div class="modal fade" id="deleteBankAccount" tabindex="-1" role="dialog" aria-labelledby="employeeTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="BankAccountDelete">Delete BANK ACCOUNT</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="includes/queries.php" method="POST" enctype="multipart/form-data"
+                    autocomplete="off">
+                    <input type="hidden" class="bankAccountId" name="bank_account_id">
+                    <div class="text-center">
+                        <p>
+                            Delete This BANK ACCOUNT?
+                        </p>
+                    </div>
+                    <div class="mb-2">
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-danger float-end" name="deleteBankAccount">Yes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Delete BANK ACCOUNT -->
+
+<!-- Start error modal -->
+<div class="modal fade" id="errorModalTrial" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:#b30000">ERROR!</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-danger p-2 text-white bg-opacity-75 text-center">
+            <h5>Trial Balance is not Equal!</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- error modal end -->
+<!-- Start error modal -->
+<div class="modal fade" id="errorModalAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:#b30000">ERROR!</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-danger p-2 text-white bg-opacity-75 text-center">
+            <h6>Please Insert Proper Input Data.</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- error modal end -->

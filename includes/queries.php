@@ -1917,107 +1917,8 @@ if (isset($_POST['taxEditOption'])) {
     header('location: ../tax_list.php');
   }
 
-//SHOW BANK ACCOUNT TABLE
-function bankTable(){
-  include 'conn.php';
-  $sql = "SELECT `bank_id`, `account_num`, `account_holder`, `bank_name`, `type`, `currency`, `delete_flag` FROM `bank_account` WHERE delete_flag=0";
 
-  $query = $conn->query($sql);
-  while($row = $query->fetch_assoc()){
-    // $active = ($row['active'])?'<span class="badge text-bg-success pull-right">Active</span>':'<span class="badge text-bg-danger pull-right">Inactive</span>';
-    ?>
-<tr>
-    <td><?php echo $row['account_num']; ?></td>
-    <td><?php echo $row['account_holder']; ?></td>
-    <td><?php echo $row['bank_name']; ?></td>
-    <td><?php echo $row['type']; ?></td>
-    <td><?php echo $row['currency']; ?></td>
-    <td>
-        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['bank_id']; ?>"><i
-                class="fa fa-edit"></i> Edit</button>
-        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['bank_id']; ?>"><i
-                class="fa fa-trash"></i> Delete</button>
-    </td>
-</tr>
-<?php
-  }
-  $conn->close();
-}
 
-  // Add Bank Account
-if(isset($_POST['newbankAccount'])){
-  bankAdd();
-}
-  function bankAdd(){
-  include 'conn.php';
-  if(isset($_POST['newbankAccount'])){
-    $bankId = $_POST['bank_id'];
-    $accountNum = $_POST['account_num'];
-    $accountOwner = $_POST['account_owner'];
-    $bankName = $_POST['bank_name'];
-    $bankType = $_POST['bank_type'];
-    $bankCurrency = $_POST['bank_currency'];
-
-    $sql = "INSERT INTO `bank_account`(`bank_id`, `account_num`, `account_holder`, `bank_name`, `type`, `currency`) VALUES ('$bankId','$accountNum','$accountOwner','$bankName','$bankType','$bankCurrency')";
-  
-    if($conn->query($sql)){
-      echo "success";
-    }
-    else{
-      echo "error";
-    }
-  }
-$conn->close();
-header('location: ../bank_account.php');
-}
-
-// EDIT BANK ACCOUNT
-if (isset($_POST['bankEditOption'])) {
-  bankEdit();
-}
-  function bankEdit(){
-    include 'conn.php';
-    if(isset($_POST['bankEditOption'])){
-      $bankId = $_POST['bank_id'];
-      $accountNum = $_POST['account_num'];
-      $accountOwner = $_POST['account_owner'];
-      $bankName = $_POST['bank_name'];
-      $bankType = $_POST['bank_type'];
-      $bankCurrency = $_POST['bank_currency'];
-     
-      $sql = "UPDATE `bank_account` SET `bank_id`='$bankId',`account_num`='$accountNum',`account_holder`='$accountOwner',`bank_name`='$bankName',`type`='$bankType',`currency`='$bankCurrency' WHERE bank_id = $bankId";
-      if($conn->query($sql)){
-        echo "success";
-      }
-      else{
-        echo "error";
-      }
-    }
-    $conn->close();
-    header('location: ../bank_account.php');
-  }
-
-  // DELETE BANK ACCOUNT
-  if(isset($_POST['bankDeleteOption'])){
-    bankDelete();
-  }
-  function bankDelete(){
-    include 'conn.php';
-    if(isset($_POST['bankDeleteOption'])){
-      $bankId = $_POST['bank_id'];
-      $sql = "UPDATE bank_account SET delete_flag = 1 WHERE bank_id = '$bankId'";
-    }
-    if($conn->query($sql)){
-      $_SESSION['success'] = 'account deleted successfully';
-    }
-    else{
-      $_SESSION['error'] = $conn->error;
-    }
-    $conn->close();
-    header('location: ../bank_account.php');
-  }
-
-// Add Bank Account
 if(isset($_POST['createNewCustomerInvoice'])){
   customerInvoiceAddNew();
 }
@@ -2053,6 +1954,128 @@ if(isset($_POST['createNewCustomerInvoice'])){
 $conn->close();
 header('location: ../invoices.php');
 }
+
+//bankaccount
+function bankTable(){
+  include 'conn.php';
+  $sql = "SELECT * FROM bank_account AS bankaccount INNER JOIN bank_meta_data AS bank_meta ON bankaccount.bank_id = bank_meta.bank_id WHERE delete_flag=0";
+
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    
+    ?>
+<tr>
+  <td><img src="<?php echo (!empty($row['bank_image']))? './images/'.$row['bank_image']:'./images/securitybank.png'; ?>"
+          width="80px" height="30px"></td>
+  <td><?php echo $row['bank_name']; ?></td>
+  <td><?php echo $row['bank_account_number']; ?></td>
+  <td><?php echo $row['bank_account_name']; ?></td>
+  <td><?php echo $row['bank_company']; ?></td>
+  <td><?php echo $row['bank_phone']; ?></td>
+  <td>
+      <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['bank_account_id']; ?>"><i
+              class="fa fa-edit"></i> Edit</button>
+      <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['bank_account_id']; ?>"><i
+              class="fa fa-trash"></i> Delete</button>
+  </td>
+</tr>
+<?php
+  }
+  $conn->close();
+}
+function bankSelection(){
+  include 'conn.php';
+  $sql = "SELECT bank_id, bank_image, bank_name FROM bank_meta_data";
+  $query = $conn->query($sql);
+  while($prow = $query->fetch_assoc()){
+      echo "
+      <option value='".$prow['bank_id']."'>".$prow['bank_name']."</option>
+      ";
+  }
+  $conn->close();
+}
+
+// Add Bank Account
+if(isset($_POST['addBank'])){
+  addNewBankAccount();
+}
+  function addNewBankAccount(){
+  include 'conn.php';
+  if(isset($_POST['addBank'])){
+    $bankId = $_POST['bank_name'];
+    $accountNumber = $_POST['bank_account_number'];
+    $accountName = $_POST['bank_account_name'];
+    $company = $_POST['bank_company'];
+    $address = $_POST['bank_address'];
+    $email = $_POST['bank_email'];
+    $contactInfo = $_POST['bank_phone'];
+    $country = $_POST['bank_country'];
+    $zipCode = $_POST['bank_zip_code'];
+    
+
+    $sql = "INSERT INTO `bank_account`(`bank_account_name`, `bank_account_number`, `bank_company`, `bank_email`, `bank_phone`, `bank_zip_code`, `bank_address`, `bank_country`, `bank_id`) VALUES ('$accountName',REPLACE('$accountNumber','-',''),'$company','$email',REPLACE('$contactInfo','-',''),'$zipCode','$address','$country','$bankId')";
+  
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+  }
+$conn->close();
+header('location: ../bank_account.php');
+}
+
+//edit bank account
+if (isset($_POST['editBankAccount'])) {
+bankAccountEdit();
+}
+function bankAccountEdit(){
+  include 'conn.php';
+  if(isset($_POST['editBankAccount'])){
+    $bankAccountId = $_POST['bank_account_id'];
+    $bankId = $_POST['bank_name'];
+    $accountNumber = $_POST['bank_account_number'];
+    $accountName = $_POST['bank_account_name'];
+    $company = $_POST['bank_company'];
+    $address = $_POST['bank_address'];
+    $email = $_POST['bank_email'];
+    $contactInfo = $_POST['bank_phone'];
+    $country = $_POST['bank_country'];
+    $zipCode = $_POST['bank_zip_code'];
+   
+    $sql = "UPDATE `bank_account` SET `bank_account_name`='$accountName',`bank_account_number`=REPLACE('$accountNumber','-',''),`bank_company`='$company',`bank_email`='$email',`bank_phone`=REPLACE('$contactInfo','-',''),`bank_zip_code`='$zipCode',`bank_address`='$address',`bank_country`='$country',`bank_id`='$bankId' WHERE bank_account_id = '$bankAccountId'";
+    if($conn->query($sql)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+  }
+  $conn->close();
+  header('location: ../bank_account.php');
+}
+
+//DELETE BANK ACCOUNT
+if(isset($_POST['deleteBankAccount'])){
+  bankAccountDelete();
+}
+function bankAccountDelete(){
+  include 'conn.php';
+  if(isset($_POST['deleteBankAccount'])){
+    $bankAccountId = $_POST['bank_account_id'];
+    $sql = "UPDATE bank_account SET delete_flag = 1 WHERE bank_account_id = '$bankAccountId'";
+  }
+  if($conn->query($sql)){
+    $_SESSION['success'] = 'Employee deleted successfully';
+  }
+  else{
+    $_SESSION['error'] = $conn->error;
+  }
+  $conn->close();
+  header('location: ../bank_account.php');
+}
+
 
 //SHOW CUSTOMER INVOICE TABLE
 function customerInvoiceTable(){
@@ -2161,6 +2184,92 @@ function journaltable(){
   $conn->close(); 
 }
 
+//Create Journal ENTRY  ------------------------------->
+if (isset($_POST['journAddnewEntry'])) {
+  journEntryAdd();
+}
+function journEntryAdd(){
+  mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+  include 'conn.php';
+  if(isset($_POST['journAddnewEntry'])){
+    //for Invoice table
+    $code = $_POST['code'];
+    $journDate = $_POST['journal_date'];
+    $description = $_POST['journal_entry_description'];
+    $partner = $_POST['partner'];
+    $employee = $_POST['employee_id'];
+
+  
+    $sql1 = "INSERT INTO `journal_entries`(`journal_entry_code`, `journal_date`, `journal_entry_description`, `employee_id`, `partner`) VALUES ('$code','$journDate','$description','$employee','$partner')";
+
+
+   
+      
+
+   
+      foreach($_POST['account_ids'] as $key => $value){
+      $accountName = $value;
+      $name = $_POST['account_ids'][$key];
+      $groupName = $_POST['group_ids'][$key];
+      $amount = $_POST['amounts'][$key];
+      $amountType = $_POST['amountType'][$key];
+
+      $sql5 = "SELECT * FROM `account_list` WHERE account_name = '$name'";
+          $query5 = $conn->query($sql5);
+          $row5 = $query5->fetch_assoc();
+          $accountId = $row5['account_id'];
+      
+        $sql4 = "SELECT * FROM `group_list` WHERE group_name = '$groupName'";
+          $query4 = $conn->query($sql4);
+          $row4 = $query4->fetch_assoc();
+          $groupId = $row4['group_id'];
+        
+        
+
+        
+        
+
+      $sql3 = "INSERT INTO `journal_items`(`journal_entry_code`, `account_id`, `group_id`, `amount`, `amount_type`, `account_name`, `group_name`) VALUES ('$code','$accountId','$groupId','$amount', '$amountType', '$accountName','$groupName')";
+ 
+      if($conn->query($sql3)){
+        echo "success";
+      }
+      else{
+        echo "error";
+      }
+      if($conn->query($sql4)){
+        echo "success";
+      }
+      else{
+        echo "error";
+      }
+      if($conn->query($sql5)){
+        echo "success";
+      }
+      else{
+        echo "error";
+      }
+    }
+
+    if($conn->query($sql1)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+    if($conn->query($sql2)){
+      echo "success";
+    }
+    else{
+      echo "error";
+    }
+    
+
+    
+  }
+  $conn->close();
+  header('location: ../journal_entry.php');
+}
 // for Journal entry modal--------------
 function journalEntryCode(){
   include 'conn.php';
@@ -2630,142 +2739,6 @@ function partnerTable(){
   }
   $conn->close(); 
 }
-//BALANCE SHEET
-function balanceSheetDate(){
-  include 'conn.php';
-  if(isset($_POST['searchBalSheet'])){
-    $dateStart = date_create($_POST['date_start']);
-    $dateEnd =  date_create($_POST['date_end']);
-    ?>
-<span><?=  date_format($dateStart, "F d Y") ?> - <?=  date_format($dateEnd, "F d Y") ?></span>
-<?php
-  }
-  $conn->close();
-}
-
-function balanceSheettableCurAsset(){
-  include 'conn.php';
-  if(isset($_POST['searchBalSheet'])){
-    $dateStart = $_POST['date_start'];
-    $dateEnd = $_POST['date_end'];
-  $sql = "SELECT DISTINCT(acc.account_name) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Current Assets' AND amount_type = 1) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd') ORDER BY acc.account_name ASC";
-
-  $query = $conn->query($sql);
-  while($row = $query->fetch_assoc()){
-  ?>
-<tr>
-    <td class="col-7 text-justify px-4"><?= $row['account_name']; ?></td>
-    <td class="col-5">
-        <div class="text-justify asd">
-            <?php
-              $sql2 = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Current Assets' AND amount_type = 1) AND acc.account_name = '". $row['account_name'] ."' AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
-              $query2 = $conn->query($sql2);
-              while ($row2 = $query2->fetch_assoc()){
-              ?>
-            Php <?= format_num($row2['SUM(items.amount)']); ?>
-
-            <?php } ?>
-        </div>
-    </td>
-
-</tr>
-<?php
-  }
-  $conn->close(); 
-}
-}
-function curAssetTotal(){
-  include 'conn.php';
-  if(isset($_POST['searchBalSheet'])){
-    $dateStart = $_POST['date_start'];
-    $dateEnd = $_POST['date_end'];
-  include 'conn.php';
-  $sql = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Current Assets' AND amount_type = 1) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
-  $query = $conn->query($sql);
-  while($row = $query->fetch_assoc()){
-        
-    ?> Php <?= format_num($row['SUM(items.amount)']);?> <?php
-  }
-}
-$conn->close();
-}
-function balanceSheettableNonCurAsset(){
-  include 'conn.php';
-  if(isset($_POST['searchBalSheet'])){
-    $dateStart = $_POST['date_start'];
-    $dateEnd = $_POST['date_end'];
-  include 'conn.php';
-  $sql = "SELECT DISTINCT(acc.account_name) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Non-current assets' AND amount_type = 1) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd') ORDER BY acc.account_name ASC";
-
-  $query = $conn->query($sql);
-  while($row = $query->fetch_assoc()){
-  ?>
-<tr>
-
-    <td class="col-7 text-justify px-5"><?= $row['account_name']; ?></td>
-    <td class="col-5">
-        <div class=" text-justify asd">
-            <?php
-          $sql2 = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Non-current assets' AND amount_type = 1) AND acc.account_name = '". $row['account_name'] ."' AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
-          $query2 = $conn->query($sql2);
-          while ($row2 = $query2->fetch_assoc()){
-          ?>
-            Php: <?= format_num($row2['SUM(items.amount)']); ?>
-            <?php } ?>
-        </div>
-
-    </td>
-
-</tr>
-<?php
-  }
-  $conn->close(); 
-}
-}
-function nonCurAssetTotal(){
-  include 'conn.php';
-  if(isset($_POST['searchBalSheet'])){
-    $dateStart = $_POST['date_start'];
-    $dateEnd = $_POST['date_end'];
-  include 'conn.php';
-  $sql = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Non-current assets' AND amount_type = 1) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd') ";
-  $query = $conn->query($sql);
-  while($row = $query->fetch_assoc()){
-    // $status = ($row['status'])?'<span class="badge text-bg-success pull-right">Paid</span>':'<span class="badge text-bg-warning pull-right">Unpaid</span>';
-    
-    ?><?php echo " Php ". format_num($row['SUM(items.amount)']); ?><?php
-  }
-}
-$conn->close();
-}
-function AssetTotal(){
-  include 'conn.php';
-  if(isset($_POST['searchBalSheet'])){
-    $dateStart = $_POST['date_start'];
-    $dateEnd = $_POST['date_end'];
-     $totalCurAsset = 0;
-     $totalNonCurAsset = 0;
-        include 'conn.php';
-        $sql = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Current Assets' AND amount_type = 1) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
-        $query = $conn->query($sql);
-        while($row = $query->fetch_assoc()){
-          
-          $totalCurAsset = $row['SUM(items.amount)'];
-        }
-
-        $sql1 = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Non-current assets' AND amount_type = 1) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd') ";
-        $query1 = $conn->query($sql1);
-        while($row1 = $query1->fetch_assoc()){
-          
-          $totalNonCurAsset = $row1['SUM(items.amount)'];
-        }
-        $totalAsset = $totalNonCurAsset + $totalCurAsset;
-        $twoDecNum = sprintf('%0.2f', round($totalAsset, 2));
-        ?><?php echo " Php ". $twoDecNum; ?><?php
-      }
-      $conn->close();
-}
-//END Balance Sheet
 
 // for invoice
 function invoiceCode(){
@@ -2991,6 +2964,262 @@ function creditNotesTable(){
   }
   $conn->close();
 }
+//BALANCE SHEET
+function balanceSheetDate(){
+  include 'conn.php';
+  if(isset($_POST['searchBalSheet'])){
+    $dateStart = date_create($_POST['date_start']);
+    $dateEnd =  date_create($_POST['date_end']);
+    ?>
+<span><?=  date_format($dateStart, "F d Y") ?> - <?=  date_format($dateEnd, "F d Y") ?></span>
+<?php
+  }
+  $conn->close();
+}
+
+function balanceSheettableCurAsset(){
+  include 'conn.php';
+  if(isset($_POST['searchBalSheet'])){
+    $dateStart = $_POST['date_start'];
+    $dateEnd = $_POST['date_end'];
+  $sql = "SELECT DISTINCT(acc.account_name) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Current Assets' AND amount_type = 1) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd') ORDER BY acc.account_name ASC";
+
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+  ?>
+<tr>
+    <td class="col-7 text-justify px-4"><?= $row['account_name']; ?></td>
+    <td class="col-5">
+        <div class="text-justify asd">
+            <?php
+              $sql2 = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Current Assets' AND amount_type = 1) AND acc.account_name = '". $row['account_name'] ."' AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
+              $query2 = $conn->query($sql2);
+              while ($row2 = $query2->fetch_assoc()){
+              ?>
+            Php <?= format_num($row2['SUM(items.amount)']); ?>
+
+            <?php } ?>
+        </div>
+    </td>
+
+</tr>
+<?php
+  }
+}
+$conn->close(); 
+}
+function curAssetTotal(){
+  include 'conn.php';
+  if(isset($_POST['searchBalSheet'])){
+    $dateStart = $_POST['date_start'];
+    $dateEnd = $_POST['date_end'];
+  include 'conn.php';
+  $sql = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Current Assets' AND amount_type = 1) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+        
+    ?> Php <?= format_num($row['SUM(items.amount)']);?> <?php
+  }
+}
+$conn->close();
+}
+function balanceSheettableNonCurAsset(){
+  include 'conn.php';
+  if(isset($_POST['searchBalSheet'])){
+    $dateStart = $_POST['date_start'];
+    $dateEnd = $_POST['date_end'];
+  include 'conn.php';
+  $sql = "SELECT DISTINCT(acc.account_name) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Non-current assets' AND amount_type = 1) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd') ORDER BY acc.account_name ASC";
+
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+  ?>
+<tr>
+
+    <td class="col-7 text-justify px-5"><?= $row['account_name']; ?></td>
+    <td class="col-5">
+        <div class=" text-justify asd">
+            <?php
+          $sql2 = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Non-current assets' AND amount_type = 1) AND acc.account_name = '". $row['account_name'] ."' AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
+          $query2 = $conn->query($sql2);
+          while ($row2 = $query2->fetch_assoc()){
+          ?>
+            Php: <?= format_num($row2['SUM(items.amount)']); ?>
+            <?php } ?>
+        </div>
+
+    </td>
+
+</tr>
+<?php
+  }
+  
+}
+$conn->close(); 
+}
+function nonCurAssetTotal(){
+  include 'conn.php';
+  if(isset($_POST['searchBalSheet'])){
+    $dateStart = $_POST['date_start'];
+    $dateEnd = $_POST['date_end'];
+  include 'conn.php';
+  $sql = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Non-current assets' AND amount_type = 1) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd') ";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+    // $status = ($row['status'])?'<span class="badge text-bg-success pull-right">Paid</span>':'<span class="badge text-bg-warning pull-right">Unpaid</span>';
+    
+    ?><?php echo " Php ". format_num($row['SUM(items.amount)']); ?><?php
+  }
+}
+$conn->close();
+}
+function AssetTotal(){
+  include 'conn.php';
+  if(isset($_POST['searchBalSheet'])){
+    $dateStart = $_POST['date_start'];
+    $dateEnd = $_POST['date_end'];
+     $totalCurAsset = 0;
+     $totalNonCurAsset = 0;
+        include 'conn.php';
+        $sql = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Current Assets' AND amount_type = 1) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
+        $query = $conn->query($sql);
+        while($row = $query->fetch_assoc()){
+          
+          $totalCurAsset = $row['SUM(items.amount)'];
+        }
+
+        $sql1 = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Non-current assets' AND amount_type = 1) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd') ";
+        $query1 = $conn->query($sql1);
+        while($row1 = $query1->fetch_assoc()){
+          
+          $totalNonCurAsset = $row1['SUM(items.amount)'];
+        }
+        $totalAsset = $totalNonCurAsset + $totalCurAsset;
+        $twoDecNum = sprintf('%0.2f', round($totalAsset, 2));
+        ?><?php echo " Php ". $twoDecNum; ?><?php
+      }
+      $conn->close();
+}
+function balanceSheettableCurLiab(){
+  include 'conn.php';
+  if(isset($_POST['searchBalSheet'])){
+    $dateStart = $_POST['date_start'];
+    $dateEnd = $_POST['date_end'];
+  $sql = "SELECT DISTINCT(acc.account_name) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Current liabilities' AND amount_type = 2) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd') ORDER BY acc.account_name ASC";
+
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+  ?>
+<tr>
+    <td class="col-7 text-justify px-4"><?= $row['account_name']; ?></td>
+    <td class="col-5">
+        <div class="text-justify asd">
+            <?php
+              $sql2 = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Current liabilities' AND amount_type = 2) AND acc.account_name = '". $row['account_name'] ."' AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
+              $query2 = $conn->query($sql2);
+              while ($row2 = $query2->fetch_assoc()){
+              ?>
+            Php <?= format_num($row2['SUM(items.amount)']); ?>
+
+            <?php } ?>
+        </div>
+    </td>
+
+</tr>
+<?php
+  }
+}
+$conn->close(); 
+}
+function curLiabTotal(){
+  include 'conn.php';
+  if(isset($_POST['searchBalSheet'])){
+    $dateStart = $_POST['date_start'];
+    $dateEnd = $_POST['date_end'];
+  include 'conn.php';
+  $sql = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Current liabilities' AND amount_type = 2) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+        
+    ?> Php <?= format_num($row['SUM(items.amount)']);?> <?php
+  }
+}
+$conn->close();
+}
+function balanceSheettableNonCurLiab(){
+  include 'conn.php';
+  if(isset($_POST['searchBalSheet'])){
+    $dateStart = $_POST['date_start'];
+    $dateEnd = $_POST['date_end'];
+  $sql = "SELECT DISTINCT(acc.account_name) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Non-current liabilities' AND amount_type = 2) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd') ORDER BY acc.account_name ASC";
+
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+  ?>
+<tr>
+    <td class="col-7 text-justify px-4"><?= $row['account_name']; ?></td>
+    <td class="col-5">
+        <div class="text-justify asd">
+            <?php
+              $sql2 = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Non-current liabilities' AND amount_type = 2) AND acc.account_name = '". $row['account_name'] ."' AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
+              $query2 = $conn->query($sql2);
+              while ($row2 = $query2->fetch_assoc()){
+              ?>
+            Php <?= format_num($row2['SUM(items.amount)']); ?>
+
+            <?php } ?>
+        </div>
+    </td>
+
+</tr>
+<?php
+  }
+}
+$conn->close(); 
+}
+function nonCurLiabTotal(){
+  include 'conn.php';
+  if(isset($_POST['searchBalSheet'])){
+    $dateStart = $_POST['date_start'];
+    $dateEnd = $_POST['date_end'];
+  include 'conn.php';
+  $sql = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Non-current liabilities' AND amount_type = 2) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+        
+    ?> Php <?= format_num($row['SUM(items.amount)']);?> <?php
+  }
+}
+$conn->close();
+}
+function liabTotal(){
+  include 'conn.php';
+  if(isset($_POST['searchBalSheet'])){
+    $dateStart = $_POST['date_start'];
+    $dateEnd = $_POST['date_end'];
+     $totalCurLiab = 0;
+     $totalNonCurLiab = 0;
+        include 'conn.php';
+        $sql = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Current liabilities' AND amount_type = 2) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
+        $query = $conn->query($sql);
+        while($row = $query->fetch_assoc()){
+          
+          $totalCurLiab = $row['SUM(items.amount)'];
+        }
+
+        $sql1 = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Non-current liabilities' AND amount_type = 2) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd') ";
+        $query1 = $conn->query($sql1);
+        while($row1 = $query1->fetch_assoc()){
+          
+          $totalNonCurLiab = $row1['SUM(items.amount)'];
+        }
+        $totalLiab = $totalNonCurLiab + $totalCurLiab;
+        $twoDecNum = sprintf('%0.2f', round($totalLiab, 2));
+        ?><?php echo " Php ". $twoDecNum; ?><?php
+      }
+      $conn->close();
+}
+//END Balance Sheet
 
 ?>
 <!-- sample config.php for invoice setup -->

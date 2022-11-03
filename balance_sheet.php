@@ -102,10 +102,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php balanceSheettableCurAsset() ?>
+                                    <?php balanceSheettableCurLiab() ?>
                                     <tr>
                                         <th class="col-5 px-5">Total Current Liabilities:</th>
-                                        <th class="col-7 text-justify"> <?php curAssetTotal() ?></th>
+                                        <th class="col-7 text-justify"> <?php curLiabTotal() ?></th>
                                     </tr>
                                 </tbody>
 
@@ -115,16 +115,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php balanceSheettableNonCurAsset() ?>
+                                    <?php balanceSheettableNonCurLiab() ?>
                                     <tr>
                                         <th class="col-6 px-5">Total Non-Current Liabilities:</th>
-                                        <th class="col-6 text-justify"> <?php nonCurAssetTotal() ?></th>
+                                        <th class="col-6 text-justify"> <?php nonCurLiabTotal() ?></th>
                                     </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th class="col-6">TOTAL ASSETS:</th>
-                                        <th class="col-6 text-justify"><?php AssetTotal() ?></th>
+                                        <th class="col-6">TOTAL LIABILITIES:</th>
+                                        <th class="col-6 text-justify"><?php liabTotal() ?></th>
                                     </tr>
                                 </tfoot>
                             </table>

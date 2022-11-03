@@ -181,9 +181,6 @@
             </div>
         </div>
     </div>
-
-
-
     <?php include 'includes/scripts.php';?>
     <?php include 'modals.php';?>
 
