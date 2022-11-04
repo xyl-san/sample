@@ -8,7 +8,6 @@
     <title>Document</title>
     <?php include 'includes/styles.php'; ?>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    
 </head>
 
 <body>
@@ -20,14 +19,14 @@
                 <div class="card-header">
 
                     <div class="row justify-content-center">
-                        <h1 style="text-align:center; text-shadow: 2px 3px 8px #A1E14D;">BALANCE SHEET</h1>
+                        <h1 style="text-align:center; text-shadow: 2px 3px 8px #A1E14D;">EQUITY</h1>
                     </div>
                 </div>
                 <div class="card-body">
                     <form class="" name="formBal" id="formBalTable" method="POST" action="#">
                         <div class="row" style="width:40%; margin:auto;">
                             <div class="col-5 g-2 form-floating">
-                                <input type="date" class="form-control dateStart" placeholder="Start" name="date_start" 
+                                <input type="date" class="form-control dateStart" placeholder="Start" name="date_start"
                                     value="<?php 
                                                 $a_date = (new DateTime())->format('Y-m-d');
                                                 $date = new DateTime($a_date);
@@ -53,79 +52,47 @@
                         <div class="card-body form-control" style="width:70%; margin:auto;">
                             <div class="py-4 text-center">
                                 <h3>VPD BUSINESS SOLUTIONS INC.</h3>
-                                <h4>Balance Sheet</h4>
-                                <h6><?php filterDate() ?></h6>
+                                <h4>Statement Of Changes in Equity</h4>
+                                <h6><?php filterDate(); ?></h6>
                             </div>
                             <table id="" class="table table-responsive-sm assetTable" style="width:70%; margin: auto;">
-                                <div class="text-center">
-                                    <h4>ASSETS</h4>
-                                </div>
                                 <thead>
                                     <tr>
-                                        <th class="">CURRENT ASSETS</th>
+                                        <th class="">EQUITY</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php balanceSheettableCurAsset() ?>
+                                    <?php equityList(); ?>
+                                    <tr class="border-top border-2">
+                                        <td class="col-5 px-4" style="font-weight: 500;">Total:</td>
+                                        <td class="col-7 text-justify px-5" style="font-weight: 500;"> <?php subEquityTotal(); ?></td>
+                                    </tr>
                                     <tr>
-                                        <th class="col-5 px-5">Total Current Asset:</th>
-                                        <th class="col-7 text-justify"> <?php curAssetTotal() ?></th>
+                                        <td class="col-5 px-4">Profit:</td>
+                                        <td class="col-7 text-justify"> <?php profitTotal(); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-5 px-5" style="font-weight: 600;">Total Equity:</td>
+                                        <td class="col-7 text-justify px-5" style="font-weight: 600;"> <?php equityTotal(); ?></td>
                                     </tr>
                                 </tbody>
 
                                 <thead>
                                     <tr>
-                                        <th class="">NON-CURRENT ASSETS</th>
+                                        <th class="">LESS: Withdrawals</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php balanceSheettableNonCurAsset() ?>
+                                    <?php withdrawalsList(); ?>
                                     <tr>
-                                        <th class="col-6 px-5">Total Non-Current Asset:</th>
-                                        <th class="col-6 text-justify"> <?php nonCurAssetTotal() ?></th>
+                                        <td class="col-6 px-5">Total Withdrawals:</td>
+                                        <td class="col-6 text-justify"> <?php withdrawalsTotal(); ?></td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th class="col-6">TOTAL ASSETS:</th>
-                                        <th class="col-6 text-justify"><?php AssetTotal() ?></th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                            <br>
-                            <table id="" class=" table table-responsive-sm assetTable" style="width:70%; margin: auto;">
-                                <div class=" text-center">
-                                    <h4>LIABILITIES</h4>
-                                </div>
-                                <thead>
-                                    <tr>
-                                        <th class="">CURRENT LIABILITIES</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php balanceSheettableCurLiab() ?>
-                                    <tr>
-                                        <th class="col-5 px-5">Total Current Liabilities:</th>
-                                        <th class="col-7 text-justify"> <?php curLiabTotal() ?></th>
-                                    </tr>
-                                </tbody>
-
-                                <thead>
-                                    <tr>
-                                        <th class="">NON-CURRENT LIABILITIES</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php balanceSheettableNonCurLiab() ?>
-                                    <tr>
-                                        <th class="col-6 px-5">Total Non-Current Liabilities:</th>
-                                        <th class="col-6 text-justify"> <?php nonCurLiabTotal() ?></th>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th class="col-6">TOTAL LIABILITIES:</th>
-                                        <th class="col-6 text-justify"><?php liabTotal() ?></th>
+                                        <th class="col-6">Owner's Equity:</th>
+                                        <th class="col-6 text-justify px-5"><?php equityGrandTotal(); ?></th>
                                     </tr>
                                 </tfoot>
                             </table>

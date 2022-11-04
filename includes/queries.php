@@ -3248,7 +3248,7 @@ function incomeStateTableRevenue(){
               $query2 = $conn->query($sql2);
               while ($row2 = $query2->fetch_assoc()){
               ?>
-             <?= format_num($row2['SUM(items.amount)']); ?>
+             Php <?= format_num($row2['SUM(items.amount)']); ?>
 
             <?php } ?>
         </div>
@@ -3328,7 +3328,7 @@ function profitTotal(){
     $dateEnd = $_POST['date_end'];
      $totalRevenue = 0;
      $totalExpenses = 0;
-        include 'conn.php';
+        
         $sql = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Revenue' AND amount_type = 2) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
         $query = $conn->query($sql);
         while($row = $query->fetch_assoc()){
@@ -3348,7 +3348,182 @@ function profitTotal(){
       }
       $conn->close();
 }
+
 //END INCOME STATEMENT
+
+//EQUITY STATEMENT-----------------
+function equityList(){
+  include 'conn.php';
+  if(isset($_POST['searchFilter'])){
+    $dateStart = $_POST['date_start'];
+    $dateEnd = $_POST['date_end'];
+  $sql = "SELECT DISTINCT(acc.account_name) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Equity' AND amount_type = 2) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd') ORDER BY acc.account_name ASC";
+
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+  ?>
+<tr>
+    <td class="col-5 text-justify px-4"><?= $row['account_name']; ?></td>
+    <td class="col-7 px-5">
+        <div class="text-justify asd">
+            <?php
+              $sql2 = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Equity' AND amount_type = 2) AND acc.account_name = '". $row['account_name'] ."' AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
+              $query2 = $conn->query($sql2);
+              while ($row2 = $query2->fetch_assoc()){
+              ?>
+             Php <?= format_num($row2['SUM(items.amount)']); ?>
+
+            <?php } ?>
+        </div>
+    </td>
+
+</tr>
+<?php
+  }
+}
+$conn->close(); 
+}
+function subEquityTotal(){
+  include 'conn.php';
+  if(isset($_POST['searchFilter'])){
+    $dateStart = $_POST['date_start'];
+    $dateEnd = $_POST['date_end'];
+  include 'conn.php';
+  $sql = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Equity' AND amount_type = 2) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+        
+    ?> Php <?= format_num($row['SUM(items.amount)']);?> <?php
+  }
+}
+$conn->close();
+}
+function withdrawalsList(){
+  include 'conn.php';
+  if(isset($_POST['searchFilter'])){
+    $dateStart = $_POST['date_start'];
+    $dateEnd = $_POST['date_end'];
+  $sql = "SELECT DISTINCT(acc.account_name) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Withdrawals' AND amount_type = 1) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd') ORDER BY acc.account_name ASC";
+
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+  ?>
+<tr>
+    <td class="col-7 text-justify px-4"><?= $row['account_name']; ?></td>
+    <td class="col-5">
+        <div class="text-justify asd">
+            <?php
+              $sql2 = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Withdrawals' AND amount_type = 1) AND acc.account_name = '". $row['account_name'] ."' AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
+              $query2 = $conn->query($sql2);
+              while ($row2 = $query2->fetch_assoc()){
+              ?>
+            Php <?= format_num($row2['SUM(items.amount)']); ?>
+
+            <?php } ?>
+        </div>
+    </td>
+
+</tr>
+<?php
+  }
+}
+$conn->close(); 
+}
+function withdrawalsTotal(){
+  include 'conn.php';
+  if(isset($_POST['searchFilter'])){
+    $dateStart = $_POST['date_start'];
+    $dateEnd = $_POST['date_end'];
+  include 'conn.php';
+  $sql = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Withdrawals' AND amount_type = 1) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
+  $query = $conn->query($sql);
+  while($row = $query->fetch_assoc()){
+        
+    ?> Php <?= format_num($row['SUM(items.amount)']);?> <?php
+  }
+}
+$conn->close();
+}
+function equityTotal(){
+  include 'conn.php';
+  if(isset($_POST['searchFilter'])){
+    $dateStart = $_POST['date_start'];
+    $dateEnd = $_POST['date_end'];
+     $equity = 0;
+      
+        $sql = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Equity' AND amount_type = 2) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
+        $query = $conn->query($sql);
+        while($row = $query->fetch_assoc()){
+          
+          $equity = $row['SUM(items.amount)'];
+        }
+        //profit
+        $sql2 = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Revenue' AND amount_type = 2) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
+        $query2 = $conn->query($sql2);
+        while($row2 = $query2->fetch_assoc()){
+          
+          $totalRevenue = $row2['SUM(items.amount)'];
+        }
+
+        $sql3 = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Expenses' AND amount_type = 1) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
+        $query3 = $conn->query($sql3);
+        while($row3 = $query3->fetch_assoc()){
+          
+          $totalExpenses = $row3['SUM(items.amount)'];
+        }
+        $profit = $totalRevenue - $totalExpenses;
+        
+        $totalEquity = $profit + $equity;
+        $twoDecNum = sprintf('%0.2f', round($totalEquity, 2));
+        ?><?php echo " Php ". format_num($twoDecNum); ?><?php
+      }
+      $conn->close();
+}
+function equityGrandTotal(){
+  include 'conn.php';
+  if(isset($_POST['searchFilter'])){
+    $dateStart = $_POST['date_start'];
+    $dateEnd = $_POST['date_end'];
+     $equity = 0;
+     $totalWithdrawals = 0;
+      
+        $sql = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Equity' AND amount_type = 2) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
+        $query = $conn->query($sql);
+        while($row = $query->fetch_assoc()){
+          
+          $equity = $row['SUM(items.amount)'];
+        }
+
+        $sql1 = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Withdrawals' AND amount_type = 1) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
+        $query1 = $conn->query($sql1);
+        while($row1 = $query1->fetch_assoc()){
+          
+          $totalWithdrawals = $row1['SUM(items.amount)'];
+        }
+        //profit
+        $sql2 = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Revenue' AND amount_type = 2) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
+        $query2 = $conn->query($sql2);
+        while($row2 = $query2->fetch_assoc()){
+          
+          $totalRevenue = $row2['SUM(items.amount)'];
+        }
+
+        $sql3 = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Expenses' AND amount_type = 1) AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
+        $query3 = $conn->query($sql3);
+        while($row3 = $query3->fetch_assoc()){
+          
+          $totalExpenses = $row3['SUM(items.amount)'];
+        }
+        $profit = $totalRevenue - $totalExpenses;
+        
+        $totalEquity = ($profit + $equity) - $totalWithdrawals;
+        $twoDecNum = sprintf('%0.2f', round($totalEquity, 2));
+        ?><?php echo " Php ". format_num($twoDecNum); ?><?php
+      }
+      $conn->close();
+}
+
+//END OF EQUITY STATEMENT----------
 
 ?>
 <!-- sample config.php for invoice setup -->
