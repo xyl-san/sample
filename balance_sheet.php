@@ -8,7 +8,7 @@
     <title>Document</title>
     <?php include 'includes/styles.php'; ?>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    
+
 </head>
 
 <body>
@@ -27,7 +27,7 @@
                     <form class="" name="formBal" id="formBalTable" method="POST" action="#">
                         <div class="row" style="width:40%; margin:auto;">
                             <div class="col-5 g-2 form-floating">
-                                <input type="date" class="form-control dateStart" placeholder="Start" name="date_start" 
+                                <input type="date" class="form-control dateStart" placeholder="Start" name="date_start"
                                     value="<?php 
                                                 $a_date = (new DateTime())->format('Y-m-d');
                                                 $date = new DateTime($a_date);
@@ -68,8 +68,8 @@
                                 <tbody>
                                     <?php balanceSheettableCurAsset() ?>
                                     <tr>
-                                        <th class="col-5 px-5">Total Current Asset:</th>
-                                        <th class="col-7 text-justify"> <?php curAssetTotal() ?></th>
+                                        <td class="col-5 px-5" style="font-weight: 500;">Total Current Asset:</td>
+                                        <td class="col-7 text-justify" style="font-weight: 500;"> <?php curAssetTotal() ?></td>
                                     </tr>
                                 </tbody>
 
@@ -81,8 +81,8 @@
                                 <tbody>
                                     <?php balanceSheettableNonCurAsset() ?>
                                     <tr>
-                                        <th class="col-6 px-5">Total Non-Current Asset:</th>
-                                        <th class="col-6 text-justify"> <?php nonCurAssetTotal() ?></th>
+                                        <td class="col-6 px-5"style="font-weight: 500;">Total Non-Current Asset:</td>
+                                        <td class="col-6 text-justify"style="font-weight: 500;"> <?php nonCurAssetTotal() ?></td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
@@ -105,8 +105,8 @@
                                 <tbody>
                                     <?php balanceSheettableCurLiab() ?>
                                     <tr>
-                                        <th class="col-5 px-5">Total Current Liabilities:</th>
-                                        <th class="col-7 text-justify"> <?php curLiabTotal() ?></th>
+                                        <td class="col-5 px-5" style="font-weight: 500;">Total Current Liabilities:</td>
+                                        <td class="col-7 text-justify" style="font-weight: 500;"> <?php curLiabTotal() ?></td>
                                     </tr>
                                 </tbody>
 
@@ -118,8 +118,8 @@
                                 <tbody>
                                     <?php balanceSheettableNonCurLiab() ?>
                                     <tr>
-                                        <th class="col-6 px-5">Total Non-Current Liabilities:</th>
-                                        <th class="col-6 text-justify"> <?php nonCurLiabTotal() ?></th>
+                                        <td class="col-6 px-5" style="font-weight: 500;">Total Non-Current Liabilities:</td>
+                                        <td class="col-6 text-justify" style="font-weight: 500;"> <?php nonCurLiabTotal() ?></td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
@@ -129,6 +129,30 @@
                                     </tr>
                                 </tfoot>
                             </table>
+                            <table id="" class=" table table-responsive-sm assetTable" style="width:70%; margin: auto;">
+                                <div class=" text-center py-3">
+                                    <h4>EQUITY</h4>
+                                </div>
+                                <thead>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="col-7 text-justify px-4">Owner's Equity:</td>
+                                        <td class="col-5">
+                                            <div class="text-justify">
+                                                <?php equityGrandTotal() ?>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th class="col-6 ">TOTAL LIABILITIES and OWNER'S EQUITY:</th>
+                                        <th class="col-6 text-justify"><?php liabAndEquityTotal() ?></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <br>
                         </div>
                     </form>
                 </div>
@@ -137,7 +161,7 @@
     </div>
     <?php include 'modals.php';?>
     <?php include 'includes/scripts.php';?>
-   
+
 
 
     <script type="text/javascript">
@@ -162,6 +186,7 @@
             getRow(id);
         });
     });
+
     function getRow(id) {
         $(document).ready(function() {
             $.ajax({
