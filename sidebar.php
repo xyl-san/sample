@@ -49,7 +49,7 @@
             </button>
             <ul class="collapse list-unstyled" id="cmSystem">
                 <li>
-                    <a href="#"><i class="fa-solid fa-person"></i> Customer</a>
+                    <a href="customer.php"><i class="fa-solid fa-person"></i> Customer</a>
                 </li>
                 <li>
                     <a href="invoices.php"><i class="fa-solid fa-file-invoice"></i> Invoice</a>

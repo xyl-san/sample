@@ -1198,22 +1198,20 @@ function inventoryTable(){
 // accounting invoices queries
 function customerTable(){
   include 'conn.php';
-  $sql = "SELECT c.customer_id,  c.customer_firstname,  c.customer_lastname,  c.customer_contact_info,  c.customer_address,  c.created_on,  c.updated_on, e.firstname, e.lastname FROM customer c INNER JOIN employees AS e ON c.employee_id = e.employee_id WHERE c.delete_flag='0'";
+  $sql = "SELECT DISTINCT(customer_name), customer_email, customer_contact, address FROM customer WHERE delete_flag = 0;";
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
     ?>
 <tr>
-    <td></td>
-    <td><?php echo $row['customer_id']; ?></td>
-    <td><?php echo $row['created_on']; ?></td>
-    <td><?php echo $row['customer_firstname'].", ". $row['customer_lastname']; ?></td>
-    <td><?php echo $row['customer_contact_info']; ?></td>
-    <td><?php echo $row['customer_address']; ?></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td><?php echo $row['firstname'].", ". $row['lastname'];; ?></td>
+    <td><?php echo $row['customer_name']; ?></td>
+    <td><?php echo $row['customer_contact']; ?></td>
+    <td><?php echo $row['address']; ?></td>
+    <td><?php echo $row['customer_email']; ?></td>
+    <td><button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['inventory_id']; ?>"><i
+                class="fa fa-edit"></i> Edit</button>
+        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['inventory_id']; ?>"><i
+                class="fa fa-trash"></i> Delete</button>
+    </td>
 </tr>
 <?php
   }
@@ -3264,11 +3262,11 @@ function balanceSheettableNonCurLiab(){
       $query = $conn->query($sql);
       while($row = $query->fetch_assoc()){
       ?>
-      <tr>
-        <td class="col-7 text-justify px-4"><?= $row['account_name']; ?></td>
-        <td class="col-5">
-            <div class="text-justify asd">
-                <?php
+<tr>
+    <td class="col-7 text-justify px-4"><?= $row['account_name']; ?></td>
+    <td class="col-5">
+        <div class="text-justify asd">
+            <?php
                   $sql2 = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Non-current liabilities' AND amount_type = 2) AND acc.account_name = '". $row['account_name'] ."' AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
                   $query2 = $conn->query($sql2);
                   while ($row2 = $query2->fetch_assoc()){
@@ -3277,8 +3275,8 @@ function balanceSheettableNonCurLiab(){
                     }
                   ?>
 
-                <!-- deduction Current liability -->
-                <?php
+            <!-- deduction Current liability -->
+            <?php
                   $sql2c = "SELECT SUM(items.amount) FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE (gl.group_name = 'Non-current liabilities' AND amount_type = 1) AND acc.account_name = '". $row['account_name'] ."' AND (ent.journal_date BETWEEN '$dateStart' AND '$dateEnd')";
                   $query2c = $conn->query($sql2c);
                   while ($row2c = $query2c->fetch_assoc()){
@@ -3290,11 +3288,11 @@ function balanceSheettableNonCurLiab(){
                     $twoDecNum = sprintf('%0.2f', round($totalCurLiab, 2));
                       ?><?php echo " Php ". format_num($twoDecNum); ?><?php
                   ?>
-            </div>
-        </td>
+        </div>
+    </td>
 
-      </tr>
-      <?php
+</tr>
+<?php
       }
       }
 $conn->close(); 

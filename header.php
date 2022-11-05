@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light">
         <div class="col sidebar-header ms-2">
             <img src="assets/logo.png" alt="" id="dslogo">
-            <span class="fs-4 mt-2 p-2">Dream System</span>
+            <span class="fs-4 mt-2 p-2">Reality System</span>
         </div>
         <div class="col-10 container-fluid">
             <div type="button" id="sidebarCollapse" class="btn btn-light">
