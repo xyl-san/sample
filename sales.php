@@ -35,7 +35,7 @@
                         </div>
                         <?php 
                                         require_once 'includes/conn.php';
-                                        $query = "SELECT MONTHNAME(journal_date), SUM(amount), item.*, ent.journal_entry_id, ent.journal_entry_code, acc.account_id, gl.group_id, gl.type FROM `journal_items` AS item INNER JOIN journal_entries AS ent ON item.journal_entry_code = ent.journal_entry_code INNER JOIN account_list AS acc ON item.account_id = acc.account_id INNER JOIN group_list AS gl ON item.group_id = gl.group_id WHERE (item.account_id = 1 AND gl.type = 1) OR gl.group_id =2 GROUP BY YEAR(journal_date), MONTH(journal_date)";
+                                        $query = "SELECT MONTHNAME(journal_date), SUM(amount), item.*, ent.journal_entry_id, ent.journal_entry_code, acc.account_id, gl.group_id, gl.type FROM `journal_items` AS item INNER JOIN journal_entries AS ent ON item.journal_entry_code = ent.journal_entry_code INNER JOIN account_list AS acc ON item.account_id = acc.account_id INNER JOIN group_list AS gl ON item.group_id = gl.group_id WHERE (gl.group_id =2 AND gl.type = 2) GROUP BY YEAR(journal_date), MONTH(journal_date)";
                                         $result = mysqli_query($conn, $query);
                                         
                                         ?>

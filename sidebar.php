@@ -100,8 +100,10 @@
                 </li>
                 <li class="nav-header">Reports</li>
                 <li>
-                    <a href=""><i class="fa-solid fa-book"></i> Working Trial Balance</a>
+                    <a href="trial_balance.php"><i class="fa-solid fa-book"></i> Trial Balance</a>
                     <a href="balance_sheet.php"><i class="fa-solid fa-file-invoice"></i></i> Balance Sheet</a>
+                    <a href="equity_statement.php"><i class="fa-solid fa-file-invoice"></i></i> Statement of Changes in Equity</a>
+                    <a href="income_statement.php"><i class="fa-solid fa-file-invoice"></i></i> Income Statement</a>
                 </li>
             </ul>
         </li>

@@ -44,8 +44,7 @@
                             </div>
                             <div class="col-2">
                                 <br>
-                                <button type="submit" class=" btn btn-primary btn-sm " name="searchFilter"><i
-                                        class="fa-regular fa-calendar"></i> Filter</button>
+                                <button type="submit" class=" btn btn-primary btn-sm " name="searchFilter"><i class="fa-solid fa-filter"></i> Filter</button>
                             </div>
                         </div>
                         <br>

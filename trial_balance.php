@@ -7,84 +7,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <?php include 'includes/styles.php'; ?>
-    <!-- https://colorhunt.co/palette/effffdb8fff985f4ff42c2ff -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 
 <body>
+    <?php include 'header.php'; ?>
     <div class="wrapper">
         <?php include 'sidebar.php'; ?>
         <div id="content" class="w-100">
-            <?php include 'header.php'; ?>
             <div class="card">
                 <div class="card-header">
-                    <nav aria-label="breadcrumb" class="float-end mt-2">
-                        <ol class="breadcrumb ">
-                            <li class="breadcrumb-item"><a href="home.php">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Group List</li>
-                        </ol>
-                    </nav>
+
+                    <div class="row justify-content-center">
+                        <h1 style="text-align:center; text-shadow: 2px 3px 8px #A1E14D;">Trial Balance</h1>
+                    </div>
                 </div>
                 <div class="card-body">
-                    <div class="row g-3 align-items-center callout border-primary shadow rounded-0 ">
-                        <h4 class="text-muted">Filter Date</h4>
-                        <form class="row g-6" action="" id="filter">
-                            <div class="row align-items-end">
-                                <div class="col-md-4 form-group">
-                                    <label for="from" class="control-label">Date From</label>
-                                    <input type="date" id="from" name="from" value="2022-08-29"
-                                        class="form-control form-control-sm rounded-0">
-                                </div>
-                                <div class="col-md-4 form-group">
-                                    <label for="to" class="control-label">Date To</label>
-                                    <input type="date" id="to" name="to" value="2022-09-05"
-                                        class="form-control form-control-sm rounded-0">
-                                </div>
-                                <div class="col-md-4 form-group">
-                                    <button class="btn btn-default bg-gradient-navy btn-flat btn-sm"><i
-                                            class="fa fa-filter"></i> Filter</button>
-                                    <button class="btn btn-default border btn-flat btn-sm" id="print" type="button"><i
-                                            class="fa fa-print"></i> Print</button>
-                                </div>
+                    <form class="" name="formBal" id="formBalTable" method="POST" action="#">
+                        <div class="row" style="width:40%; margin:auto;">
+                            <div class="col-5 g-2 form-floating">
+                                <input type="date" class="form-control dateStart" placeholder="Start" name="date_start"
+                                    value="<?php 
+                                                $a_date = (new DateTime())->format('Y-m-d');
+                                                $date = new DateTime($a_date);
+                                                $date->modify('first day of this month');
+                                                echo $date->format('Y-m-d');?>" />
+                                <label>From</label>
                             </div>
-                        </form>
-                    </div> <br>
-                    <h3 class="text-center"><b>Accounting Journal Management System</b></h3>
-                    <h4 class="text-center"><b>Trial Balance</b></h4>
-                    <p class="m-0 text-center">
-                        <?php
-                            $date = date("F j, Y H:i:s - A");
-                            echo $date;
-                        ?></p>
-                    <table id="example1" class="table" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Journal Code</th>
-                                <th>Description</th>
-                                <th>Debit</th>
-                                <th>Credit</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php trialBalanceTable();?>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Date</th>
-                                <th>Journal Code</th>
-                                <th>Description</th>
-                                <th>Debit</th>
-                                <th>Credit</th>
-                            </tr>
-                        </tfoot>
-                    </table>
+                            <div class="col-5 g-2 form-floating">
+                                <input type="date" class="form-control dateEnd" placeholder="End" name="date_end" value="<?php 
+                                                $a_date = (new DateTime())->format('Y-m-d');
+                                                $date = new DateTime($a_date);
+                                                $date->modify('last day of this month');
+                                                echo $date->format('Y-m-d');?>" />
+                                <label>To</label>
+                            </div>
+                            <div class="col-2">
+                                <br>
+                                <button type="submit" class=" btn btn-primary btn-sm " name="searchFilter"><i
+                                        class="fa-regular fa-calendar"></i> Filter</button>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="card-body form-control" style="width:70%; margin:auto;">
+                            <div class="py-4 text-center">
+                                <h3>VPD BUSINESS SOLUTIONS INC.</h3>
+                                <h4>Trial Balance</h4>
+                                <h6><?php filterDate(); ?></h6>
+                            </div>
+                            <table id="" class="table border" style="width:70%; margin: auto;">
+                                <colgroup>
+                                    <col width="50%">
+                                    <col width="25%">
+                                    <col width="25%">
+
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th class="">Account Titles</th>
+                                        <th class="">Debit</th>
+                                        <th class="">Credit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php trialBal();?>
+                                </tbody>
+                                <tfoot>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-
-    <?php include 'includes/scripts.php';?>
     <?php include 'modals.php';?>
+    <?php include 'includes/scripts.php';?>
+
+
 
     <script type="text/javascript">
     $(document).ready(function() {
@@ -113,23 +113,29 @@
         $(document).ready(function() {
             $.ajax({
                 type: 'POST',
-                url: 'joural_entry_row.php',
+                url: 'get_rows.php',
                 data: {
-                    id: id
+                    id: id,
+                    ejeRow: true,
                 },
                 dataType: 'json',
                 success: function(response) {
-                    $('.groupId').val(response.group_id);
-                    $('.groupName').val(response.name);
-                    $('.groupDescription').val(response.description);
-                    $('.groupTypeSelection').val(response.type);
-                    $('.groupStatusSelection').val(response.status);
-                    $('.deleteGroupName').html(response.name);
+                    $('.journal_entries_id').val(response.journal_entries_id);
+                    $('.date').val(response.date);
+                    $('.journalEntriesCode').val(response.journal_entries_code);
+                    $('.partner_id').val(response.partner);
+                    $('.referenceCode').val(response.reference);
+                    $('.journal_id').val(response.journal_id);
+                    $('.typeSelection').val(response.type);
+                    $('.totalAmount').val(response.total);
+                    $('.statusSelection').val(response.status);
 
                 }
             });
-
         })
+    }
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
     }
     </script>
 </body>
