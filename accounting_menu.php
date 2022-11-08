@@ -96,7 +96,6 @@
                                         require_once 'includes/conn.php';
                                         $query = "SELECT MONTHNAME(journal_date), (SUM(amount)-(SELECT SUM(amount)FROM journal_entries AS je INNER JOIN journal_items as ji ON je.journal_entry_code=ji.journal_entry_code INNER JOIN group_list as gl ON ji.group_id = gl.group_id WHERE (gl.group_name = 'Current Assets' AND ji.amount_type = 2) OR (gl.group_name = 'Non-current assets' AND ji.amount_type = 2)GROUP BY MONTH(journal_date))) FROM journal_entries AS je INNER JOIN journal_items as ji ON je.journal_entry_code=ji.journal_entry_code INNER JOIN group_list as gl ON ji.group_id = gl.group_id WHERE (gl.group_name = 'Current Assets' AND ji.amount_type = 1) OR (gl.group_name = 'Non-current assets' AND ji.amount_type = 1) GROUP BY MONTH(journal_date)";
                                         $result = mysqli_query($conn, $query);
-                                        
                                         ?>
 
                                     <script>

@@ -6,7 +6,7 @@ session_start();
 
 function format_num($number){
 	$decimals = 0;
-	$num_ex = explode('.',$number);
+	$num_ex = explode('.',$number ?? '');
 	$decimals = isset($num_ex[1]) ? strlen($num_ex[1]) : 0 ;
 	return number_format($number,$decimals);
 }
@@ -2500,14 +2500,17 @@ function genLedgertable(){
                   $sql2 = "SELECT * FROM journal_items AS items INNER JOIN account_list AS acc ON acc.account_id = items.account_id INNER JOIN journal_entries AS ent ON items.journal_entry_code = ent.journal_entry_code INNER JOIN group_list AS gl ON items.group_id = gl.group_id WHERE acc.account_id  = '". $row['account_id'] ."' ORDER BY ent.journal_date ASC";
                   $query2 = $conn->query($sql2);
                   while ($row2 = $query2->fetch_assoc()){
-  
+                    $type1 = 0;
+                    $type2 = 0;
                       if($row2['amount_type'] == 1){
-                          $type1 = "Php: ". format_num($row2['amount']);
+                        $type1 = "Php ". number_format($row2['amount'],2,".",",");
                       }else{
                           $type1 = '';
                       }  
                       if($row2['amount_type'] == 2){
-                          $type2 = "Php: ". format_num($row2['amount']);
+                          
+                        $type2 = "Php ". number_format($row2['amount'],2,".",",");
+
                       }else{
                           $type2 = '';
                       }
@@ -2524,11 +2527,13 @@ function genLedgertable(){
                 <span class=""><?= $row2['journal_entry_description'] ?> </span>
             </div>
             <div class="col-2 px-2 border text-end">
-                <?= $type1
+               
+                  <?php echo $type1;
                   ?>
             </div>
             <div class="col-2 px-2 border text-end">
-                <?= $type2
+                
+            <?php echo $type2;
                   ?>
             </div>
             <div class="col-2 px-2 border text-end">
@@ -2557,9 +2562,14 @@ function genLedgertable(){
               $query3 = $conn->query($sql3);
               while ($row3 = $query3->fetch_assoc()){
                 $deb = $row3['SUM(amount)'];
-                $typedebit = "Php: ". format_num($row3['SUM(amount)']);
+                $typeDebit = $row3['SUM(amount)']; 
+
+                if($typeDebit == ''){
+                  $typeDebit = 0;
+                }
+                $typeDebit = "Php ". number_format($typeDebit,2,".",",");
                   ?>
-                <b><?= $typedebit ?></b>
+                <b><?php echo $typeDebit ?></b>
                 <?php 
                   }
                  ?>
@@ -2570,9 +2580,14 @@ function genLedgertable(){
               $query4 = $conn->query($sql4);
               while ($row4 = $query4->fetch_assoc()){
                 $cred = $row4['SUM(amount)'];
-                $typecredit = "Php: ". format_num($row4['SUM(amount)']);
+                $typecredit = $row4['SUM(amount)']; 
+
+                if($typecredit == ''){
+                  $typecredit = 0;
+                }
+                $typecredit = "Php ". number_format($typecredit,2,".",",");
                   ?>
-                <b><?=  $typecredit ?></b>
+                <b><?php echo $typecredit ?></b>
                 <?php 
                   }
                  ?>
@@ -2614,8 +2629,8 @@ function genLedgerTotalDebit(){
   $query = $conn->query($sql);
   while($row = $query->fetch_assoc()){
     // $status = ($row['status'])?'<span class="badge text-bg-success pull-right">Paid</span>':'<span class="badge text-bg-warning pull-right">Unpaid</span>';
-    
-    ?><?php echo "Php: ". format_num($row['SUM(amount)']); ?><?php
+      $total = $row['SUM(amount)'];
+    ?><?php echo "Php: ". number_format($total,2,".",","); ?><?php
     
   }
   $conn->close();
@@ -3932,7 +3947,7 @@ ini_set('error_reporting', E_ALL);
 
 // DATABASE INFORMATION
 define('DATABASE_HOST', getenv('IP'));
-define('DATABASE_NAME', 'invoicemgsys');
+define('DATABASE_NAME', 'growth-with-relations');
 define('DATABASE_USER', 'root');
 define('DATABASE_PASS', '');
 
